@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MinerthalSalesApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Clients="clr-namespace:MinerthalSalesApp.Views.Clients"
+    xmlns:OrdersPages="clr-namespace:MinerthalSalesApp.Views.Orders"
+    xmlns:Products="clr-namespace:MinerthalSalesApp.Views.Products"
+    xmlns:RankingPages="clr-namespace:MinerthalSalesApp.Views.Ranking"
+    xmlns:SharingPages="clr-namespace:MinerthalSalesApp.Views.Shared"
+    xmlns:configs="clr-namespace:MinerthalSalesApp.Views.Configuration"
+    xmlns:dashboard="clr-namespace:MinerthalSalesApp.Views.Dashboard"
+    xmlns:local="clr-namespace:MinerthalSalesApp"
+    xmlns:models="clr-namespace:MinerthalSalesApp.Models"
+    xmlns:pesquisa="clr-namespace:MinerthalSalesApp.Views.Pesquisa"
+    xmlns:startupPages="clr-namespace:MinerthalSalesApp.Views.Startup"
+    x:Name="app_shell"
+    Shell.TabBarIsVisible="False">
+
+
+    <ShellContent
+        ContentTemplate="{DataTemplate startupPages:LoadingPage}"
+        FlyoutItemIsVisible="False"
+        Route="LoadingPage"
+        Shell.FlyoutBehavior="Disabled" />
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate dashboard:AdminDashboardPage}"
+        FlyoutItemIsVisible="False"
+        Route="AdminDashboardPage"
+        Shell.FlyoutBehavior="Flyout" />
+
+    <ShellContent
+        Title="Login Page"
+        ContentTemplate="{DataTemplate startupPages:LoginPage}"
+        FlyoutItemIsVisible="False"
+        Route="LoginPage"
+        Shell.FlyoutBehavior="Disabled" />
+
+
+    <ShellContent
+        Title="Login Page"
+        ContentTemplate="{DataTemplate startupPages:AtualizacaoPage}"
+        FlyoutItemIsVisible="False"
+        Route="AtualizacaoPage"
+        Shell.FlyoutBehavior="Disabled" />
+
+    <ShellContent
+        Title="Ranking Page"
+        ContentTemplate="{DataTemplate RankingPages:RankingPage}"
+        FlyoutItemIsVisible="False"
+        Route="RankingPage"
+        Shell.FlyoutBehavior="Flyout" />
+
+    <ShellContent
+        Title="Loading"
+        ContentTemplate="{DataTemplate SharingPages:SharedLoadingPage}"
+        FlyoutItemIsVisible="False"
+        Route="SharedLoadingPage"
+        Shell.FlyoutBehavior="Disabled" />
+
+    <ShellContent
+        Title="Clients Page"
+        ContentTemplate="{DataTemplate Clients:ClientsPage}"
+        FlyoutItemIsVisible="False"
+        Route="ClientsPage"
+        Shell.FlyoutBehavior="Flyout" />
+
+    <ShellContent
+        Title="Client Detail"
+        ContentTemplate="{DataTemplate Clients:ClientsPageDetail}"
+        FlyoutItemIsVisible="False"
+        Route="ClientsPageDetail"
+        Shell.FlyoutBehavior="Disabled" />
+
+    <ShellContent
+        Title="Histórico"
+        ContentTemplate="{DataTemplate Clients:HistoricoPage}"
+        FlyoutItemIsVisible="False"
+        Route="HistoricoPage"
+        Shell.FlyoutBehavior="Disabled" />
+
+
+    <ShellContent
+        Title="Títulos do cliente"
+        ContentTemplate="{DataTemplate Clients:ClienteTituloPage}"
+        FlyoutItemIsVisible="False"
+        Route="ClienteTituloPage"
+        Shell.FlyoutBehavior="Disabled" />
+
+
+    <ShellContent
+        Title="Produtos"
+        ContentTemplate="{DataTemplate Products:ProdutosPage}"
+        FlyoutItemIsVisible="False"
+        Route="ProdutosPage"
+        Shell.FlyoutBehavior="Flyout" />
+
+    <ShellContent
+        Title="Meus Pedidos"
+        ContentTemplate="{DataTemplate OrdersPages:MeusPedidosPage}"
+        FlyoutItemIsVisible="False"
+        Route="MeusPedidosPage"
+        Shell.FlyoutBehavior="Flyout" />
+
+    <ShellContent
+        Title="Pedidos"
+        ContentTemplate="{DataTemplate OrdersPages:PedidoPage}"
+        FlyoutItemIsVisible="False"
+        Route="PedidoPage"
+        Shell.FlyoutBehavior="Flyout" />
+
+    <ShellContent
+        Title="Pedidos"
+        ContentTemplate="{DataTemplate OrdersPages:ProdutosPedidoPage}"
+        FlyoutItemIsVisible="False"
+        Route="ProdutosPedidoPage"
+        Shell.FlyoutBehavior="Flyout" />
+
+    <ShellContent
+        Title="Detalhe Pedido"
+        ContentTemplate="{DataTemplate OrdersPages:DetalhePedidoPage}"
+        FlyoutItemIsVisible="False"
+        Route="DetalhePedidoPage"
+        Shell.FlyoutBehavior="Flyout" />
+
+
+    <ShellContent
+        Title="Configurações"
+        ContentTemplate="{DataTemplate configs:ConfigurationPage}"
+        FlyoutItemIsVisible="False"
+        Route="ConfigurationPage"
+        Shell.FlyoutBehavior="Flyout" />
+
+    <ShellContent
+        Title="Dados Clientes"
+        ContentTemplate="{DataTemplate Clients:ClientsPageDetail}"
+        FlyoutItemIsVisible="False"
+        Route="ClientesDetails"
+        Shell.FlyoutBehavior="Flyout" />
+
+
+    <ShellContent
+        Title="Login Page"
+        ContentTemplate="{DataTemplate OrdersPages:ResumoPedidoDetalhePage}"
+        FlyoutItemIsVisible="False"
+        Route="ResumoPedidoDetalhePage"
+        Shell.FlyoutBehavior="Disabled" />
+
+
+    <ShellContent
+        Title="Pesquisa"
+        ContentTemplate="{DataTemplate pesquisa:PesquisaPage}"
+        FlyoutItemIsVisible="False"
+        Route="PesquisaPage"
+        Shell.FlyoutBehavior="Disabled" />
+
+
+
+
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Command="{Binding SignOutCommand}" Text="Sign Out" />
+            <Label
+                Margin="0,10,0,0"
+                FontSize="12"
+                HorizontalTextAlignment="Center"
+                Text="Versão 59.0.0"
+                TextColor="{AppThemeBinding Light=blue,
+                                            Dark=white}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
+
+
+</Shell>
+
