@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Orders.CarrinhoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Carrinho"
+    NavigationPage.HasBackButton="False"
+    Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout Margin="10">
+        <VerticalStackLayout Margin="0,30,0,0">
+            <Grid Padding="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="15" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border
+                    Margin="0,25,0,5"
+                    Padding="5,10,5,10"
+                    BackgroundColor="Transparent"
+                    HeightRequest="45"
+                    Stroke="#ccc"
+                    StrokeShape="RoundRectangle 3,3,3,3">
+
+                    <Image
+                        Grid.RowSpan="2"
+                        Aspect="AspectFill"
+                        HeightRequest="40"
+                        Source="{Binding ItemDeCalculoCarrinho.Produto.ImagemProduto}"
+                        WidthRequest="40" />
+                </Border>
+                <Label
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    FontAttributes="Bold"
+                    Text="{Binding ItemDeCalculoCarrinho.Produto.CodigoProduto}" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    FontAttributes="Italic"
+                    FontSize="11"
+                    Text="{Binding ItemDeCalculoCarrinho.Produto.ProdutoPesp}"
+                    VerticalOptions="End" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="10,0,0,0"
+                    FontAttributes="Italic"
+                    FontSize="11"
+                    Text="{Binding ItemDeCalculoCarrinho.Produto.PrecTab, StringFormat='Valor R$ {0:N2}'}"
+                    VerticalOptions="End" />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    FontAttributes="Italic"
+                    FontSize="11"
+                    HeightRequest="50"
+                    Text="{Binding ItemDeCalculoCarrinho.FreteUnidade, StringFormat='Frete unidade R$ {0:N2}'}"
+                    VerticalOptions="StartAndExpand" />
+
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="3"
+                    Margin="10,0,0,0"
+                    FontAttributes="Italic"
+                    FontSize="11"
+                    HeightRequest="50"
+                    Text="{Binding PlanoPadraoCliente.TxPerFin, StringFormat='taxa {0}%'}"
+                    VerticalOptions="StartAndExpand" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <Grid Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+            </Grid.ColumnDefinitions>
+
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Padding="5,10,0,0"
+                FontAttributes="Bold"
+                FontSize="12"
+                Text="Quantidade" />
+            <Entry
+                x:Name="Quantidade"
+                Grid.Row="0"
+                Grid.Column="3"
+                Grid.ColumnSpan="3"
+                HorizontalTextAlignment="End"
+                Keyboard="Numeric"
+                Text="1"
+                TextChanged="EntryQuantidade_TextChanged"
+                Unfocused="Quantidade_Unfocused" />
+            <Button
+                x:Name="RemoveQuantidade"
+                Grid.Row="0"
+                Grid.Column="6"
+                Grid.ColumnSpan="3"
+                Clicked="RemoveQuantidade_Clicked"
+                HeightRequest="30"
+                ImageSource="edit_remove_mini.png"
+                WidthRequest="80" />
+            <Button
+                x:Name="AddQuantidade"
+                Grid.Row="0"
+                Grid.Column="9"
+                Grid.ColumnSpan="3"
+                Clicked="AddQuantidade_Clicked"
+                HeightRequest="30"
+                ImageSource="edit_add_mini.png"
+                WidthRequest="80" />
+
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Padding="5,10,0,0"
+                FontAttributes="Bold"
+                Text="Valor" />
+            <Entry
+                x:Name="ValorCombinado"
+                Grid.Row="1"
+                Grid.Column="3"
+                Grid.ColumnSpan="3"
+                HorizontalTextAlignment="End"
+                Keyboard="Numeric"
+                TextChanged="EntryValor_TextChanged"
+                Unfocused="ValorCombinado_Unfocused" />
+            <Button
+                x:Name="RemoveValor"
+                Grid.Row="1"
+                Grid.Column="6"
+                Grid.ColumnSpan="3"
+                Clicked="RemoveValor_Clicked"
+                HeightRequest="30"
+                ImageSource="edit_remove_mini.png"
+                WidthRequest="80" />
+            <Button
+                x:Name="AddValor"
+                Grid.Row="1"
+                Grid.Column="9"
+                Grid.ColumnSpan="3"
+                Clicked="AddValor_Clicked"
+                HeightRequest="30"
+                ImageSource="edit_add_mini.png"
+                WidthRequest="80" />
+
+
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Padding="5,10,0,0"
+                FontAttributes="Bold"
+                Text="Frete" />
+            <Entry
+                x:Name="Frete"
+                Grid.Row="5"
+                Grid.Column="3"
+                Grid.ColumnSpan="9"
+                HorizontalTextAlignment="End"
+                Keyboard="Numeric" />
+
+
+            <Label
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Padding="5,10,0,0"
+                FontAttributes="Bold"
+                Text="SubTotal" />
+            <Entry
+                x:Name="SubTotal"
+                Grid.Row="6"
+                Grid.Column="3"
+                Grid.ColumnSpan="9"
+                HorizontalTextAlignment="End"
+                IsReadOnly="True"
+                Keyboard="Numeric" />
+
+            <Label
+                Grid.Row="7"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Padding="5,10,0,0"
+                FontAttributes="Bold"
+                Text="Encargos" />
+            <Entry
+                x:Name="Encargos"
+                Grid.Row="7"
+                Grid.Column="3"
+                Grid.ColumnSpan="9"
+                HorizontalTextAlignment="End"
+                Keyboard="Numeric"
+                TextChanged="CalcularValorDoProduto" />
+
+
+            <Label
+                Grid.Row="8"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Padding="5,10,0,0"
+                FontAttributes="Bold"
+                Text="Descontos" />
+            <Entry
+                x:Name="Descontos"
+                Grid.Row="8"
+                Grid.Column="3"
+                Grid.ColumnSpan="9"
+                HorizontalTextAlignment="End"
+                IsReadOnly="True"
+                Keyboard="Numeric" />
+
+            <Label
+                Grid.Row="9"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Padding="5,10,0,0"
+                FontAttributes="Bold"
+                Text="Total" />
+            <Entry
+                x:Name="Total"
+                Grid.Row="9"
+                Grid.Column="3"
+                Grid.ColumnSpan="9"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalTextAlignment="End"
+                IsReadOnly="True"
+                Keyboard="Numeric" />
+
+
+            <ImageButton
+                x:Name="ComissaoVisible"
+                Grid.Row="10"
+                Grid.Column="10"
+                ClassId="invisible"
+                Clicked="ComissaoVisible_Clicked"
+                Source="invisible_eye.png" />
+
+            <Label
+                x:Name="comVibleLabel1"
+                Grid.Row="11"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Padding="5,10,0,0"
+                FontAttributes="Bold"
+                IsVisible="False"
+                Text="% Comissão" />
+            <Entry
+                x:Name="Comissao"
+                Grid.Row="11"
+                Grid.Column="3"
+                Grid.ColumnSpan="9"
+                FontAttributes="Italic"
+                HorizontalTextAlignment="End"
+                IsReadOnly="True"
+                IsVisible="False"
+                Keyboard="Numeric" />
+
+
+            <Label
+                x:Name="comVibleLabel2"
+                Grid.Row="12"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Padding="5,10,0,0"
+                FontAttributes="Bold"
+                IsVisible="False"
+                Text="Comissão" />
+            <Entry
+                x:Name="ValComissao"
+                Grid.Row="12"
+                Grid.Column="3"
+                Grid.ColumnSpan="9"
+                FontAttributes="Italic"
+                HorizontalTextAlignment="End"
+                IsReadOnly="True"
+                IsVisible="False"
+                Keyboard="Text" />
+
+
+            <Button
+                Grid.Row="14"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Margin="0,50,0,0"
+                Padding="5,5,5,5"
+                BackgroundColor="{AppThemeBinding Light=#254866,
+                                                  Dark=blue}"
+                Clicked="AdicionarItensDopedido"
+                ImageSource="edit_add_mini.png"
+                Text="Produtos"
+                TextColor="{AppThemeBinding Light=White,
+                                            Dark=white}" />
+
+            <Button
+                Grid.Row="14"
+                Grid.Column="4"
+                Grid.ColumnSpan="3"
+                Margin="0,50,0,0"
+                Padding="5,5,5,5"
+                BackgroundColor="#046624"
+                Clicked="ConcluirItensDopedido"
+                ImageSource="button_ok_mini.png"
+                Text="Concluir"
+                TextColor="{AppThemeBinding Light=White,
+                                            Dark=white}" />
+
+            <Button
+                x:Name="BtnVoltar"
+                Grid.Row="14"
+                Grid.Column="8"
+                Grid.ColumnSpan="3"
+                Margin="0,50,0,0"
+                Padding="5,5,5,5"
+                BackgroundColor="#6875D9"
+                Clicked="BtnVoltar_Clicked"
+                ImageSource="icons_back_mini.png"
+                Text="Voltar"
+                TextColor="{AppThemeBinding Light=White,
+                                            Dark=white}" />
+
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

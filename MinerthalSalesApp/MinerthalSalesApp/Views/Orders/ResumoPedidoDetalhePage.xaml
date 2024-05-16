@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Orders.ResumoPedidoDetalhePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Detalhes do pedido">
+    <VerticalStackLayout VerticalOptions="FillAndExpand">
+        <Grid ColumnDefinitions="100,*" RowDefinitions="*">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontSize="10"
+                HorizontalTextAlignment="Center"
+                Text="Nº Pedido" />
+
+            <Label
+                x:Name="NumPedido"
+                Grid.Row="0"
+                Grid.Column="1"
+                FontAttributes="Bold" />
+        </Grid>
+
+        <ListView
+            x:Name="LstViewResumoPedido"
+            Margin="0,0,0,0"
+            HeightRequest="700"
+            RowHeight="150"
+            SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid
+                            Margin="0,-20,0,0"
+                            Padding="2"
+                            ColumnDefinitions="70,*,*,*,*"
+                            RowDefinitions="25,25,25,25,25,25">
+                            <Image
+                                Grid.Row="1"
+                                Grid.RowSpan="3"
+                                Grid.Column="0"
+                                Aspect="AspectFill"
+                                HeightRequest="40"
+                                Source="{Binding ImagemProduto}"
+                                WidthRequest="40" />
+
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="5"
+                                BackgroundColor="#254866"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"
+                                TextColor="#FFFFFF"
+                                VerticalTextAlignment="Center">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}  Produto {0} - {1}">
+                                        <Binding Path="CdProduto" />
+                                        <Binding Path="DsProduto" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Padding="3"
+                                FontSize="12"
+                                Text="Quantidade" />
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Grid.ColumnSpan="2"
+                                Padding="3,3,20,3"
+                                FontSize="12"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding QtAtend}" />
+
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Padding="3"
+                                BackgroundColor="#ccc"
+                                FontSize="12"
+                                Text="Valor Unitário" />
+
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="3"
+                                Grid.ColumnSpan="2"
+                                Padding="3,3,20,3"
+                                BackgroundColor="#ccc"
+                                FontSize="12"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding VlUnitExtenso}" />
+
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Padding="3"
+                                FontSize="12"
+                                Text="Valor Frete" />
+
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="3"
+                                Grid.ColumnSpan="2"
+                                Padding="3,3,20,3"
+                                FontSize="12"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding VlFreteExtenso}" />
+
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Padding="3"
+                                BackgroundColor="#ccc"
+                                FontSize="12"
+                                Text="Percentural Comissão" />
+
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="3"
+                                Grid.ColumnSpan="2"
+                                Padding="3,3,20,3"
+                                BackgroundColor="#ccc"
+                                FontSize="12"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding CdPercComiss, StringFormat='{0}%'}" />
+                            <!--<Label
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Padding="3"
+                                BackgroundColor="#ccc"
+                                FontSize="12"
+                                Text="Valor Venda" />
+
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="3"
+                                Grid.ColumnSpan="2"
+                                Padding="3"
+                                BackgroundColor="#ccc"
+                                FontSize="12"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding VlVendaExtenso}" />-->
+
+
+
+
+
+
+
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

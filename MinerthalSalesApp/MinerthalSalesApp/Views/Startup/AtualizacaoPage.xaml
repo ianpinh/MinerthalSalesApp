@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Startup.AtualizacaoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="Appthal">
+    <VerticalStackLayout>
+        <Image
+            Margin="10,50,10,10"
+            Source="logo_aniversario_minertal.png"
+            WidthRequest="150" />
+
+        <Label
+            Margin="10,50,10,10"
+            Padding="5,5,5,5"
+            HorizontalTextAlignment="Center"
+            Text="{Binding MessageUpdate}"
+            TextColor="{AppThemeBinding Light=black,
+                                        Dark=White}" />
+
+        <ActivityIndicator
+            HeightRequest="40"
+            HorizontalOptions="Center"
+            IsRunning="True"
+            VerticalOptions="Center"
+            WidthRequest="150"
+            Color="#254866" />
+
+        <Label
+            Margin="0,20"
+            Padding="0,0,0,0"
+            FontSize="13"
+            HorizontalTextAlignment="Center">
+            <Label.Text>
+                <MultiBinding Mode="TwoWay" StringFormat="{}verificado {0} de {1}">
+                    <Binding Path="TotalAtualizacoesRealizadas" />
+                    <Binding Path="TotalAtualizacoes" />
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+
+
+        <Label
+            Margin="10,50,10,10"
+            FontAttributes="Bold"
+            FontSize="11"
+            HorizontalTextAlignment="Center"
+            Text="{Binding TotalAtualizadoPercentual, StringFormat='{0}'}"
+            TextColor="{AppThemeBinding Light=black,
+                                        Dark=White}"
+            VerticalTextAlignment="Center" />
+
+
+        <ProgressBar ProgressColor="#254866" WidthRequest="350">
+            <ProgressBar.Behaviors>
+                <toolkit:ProgressBarAnimationBehavior
+                    x:Name="ProgressBarAnimationBehavior"
+                    Length="250"
+                    Progress="{Binding TotalAtualizado}" />
+            </ProgressBar.Behaviors>
+        </ProgressBar>
+
+
+    </VerticalStackLayout>
+</ContentPage>
+
+
+

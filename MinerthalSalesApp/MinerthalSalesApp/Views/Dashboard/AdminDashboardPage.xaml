@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Dashboard.AdminDashboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:MinerthalSalesApp.Handlers"
+    Title="APPTHAL">
+
+    <ScrollView>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ContentView VerticalOptions="StartAndExpand">
+                <AbsoluteLayout
+                    Margin="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="StartAndExpand">
+                    <Image
+                        Margin="0,25,0,0"
+                        Aspect="AspectFill"
+                        HorizontalOptions="Center"
+                        MaximumHeightRequest="120"
+                        Source="Resources/Images/logo_aniversario_minertal.png"
+                        VerticalOptions="CenterAndExpand">
+                        <Image.Shadow>
+                            <Shadow
+                                Brush="#787ad1"
+                                Opacity="0.5"
+                                Radius="100"
+                                Offset="50,50" />
+                        </Image.Shadow>
+                    </Image>
+                </AbsoluteLayout>
+            </ContentView>
+
+            <ContentView VerticalOptions="StartAndExpand">
+                <AbsoluteLayout HorizontalOptions="Center" VerticalOptions="StartAndExpand">
+                    <Grid ColumnSpacing="15" RowSpacing="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="140" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="-10,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HorizontalOptions="Start"
+                            MaximumHeightRequest="90"
+                            Stroke="#284763"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                x:Name="Btn_Configuration"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="0,0,0,0"
+                                Aspect="AspectFit"
+                                Command="{Binding CarregarTelaDeConfiguracaoCommand}"
+                                HorizontalOptions="FillAndExpand"
+                                MaximumHeightRequest="70"
+                                MaximumWidthRequest="200"
+                                Source="Resources/Images/exec.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="115" />
+                        </Border>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,110,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="Atualização"
+                            VerticalOptions="Center" />
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HorizontalOptions="Center"
+                            MaximumHeightRequest="90"
+                            Stroke="#284763"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                x:Name="BtnClientes"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="0,0,0,0"
+                                Aspect="AspectFit"
+                                BackgroundColor="#dddddd"
+                                Command="{Binding CarregarTelaDeClientesCommand}"
+                                HorizontalOptions="Center"
+                                MaximumHeightRequest="70"
+                                MaximumWidthRequest="200"
+                                Source="Resources/Images/clientes_icon.png"
+                                VerticalOptions="Center"
+                                WidthRequest="115" />
+                        </Border>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="5,110,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="Clientes"
+                            VerticalOptions="Center" />
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HorizontalOptions="Center"
+                            MaximumHeightRequest="90"
+                            Stroke="#284763"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Margin="0,0,0,0"
+                                Aspect="AspectFit"
+                                Command="{Binding CarregarTelaDeProdutosCommand}"
+                                HorizontalOptions="FillAndExpand"
+                                MaximumHeightRequest="70"
+                                MaximumWidthRequest="200"
+                                Source="Resources/Images/miscellaneous.png"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="115" />
+                        </Border>
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="0,110,0,0"
+                            Padding="0,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="Produtos"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </AbsoluteLayout>
+            </ContentView>
+
+            <ContentView VerticalOptions="StartAndExpand">
+                <AbsoluteLayout HorizontalOptions="Center" VerticalOptions="StartAndExpand">
+                    <Grid ColumnSpacing="15" RowSpacing="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="140" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="10,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HorizontalOptions="Center"
+                            MaximumHeightRequest="90"
+                            Stroke="#284763"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                x:Name="BtnMeusPedidos"
+                                Grid.Row="2"
+                                Grid.ColumnSpan="3"
+                                Margin="0,0,0,0"
+                                Aspect="AspectFit"
+                                Command="{Binding CarregarTelaDePedidosCommand}"
+                                HorizontalOptions="FillAndExpand"
+                                MaximumHeightRequest="70"
+                                MaximumWidthRequest="200"
+                                Source="Resources/Images/lists.png"
+                                VerticalOptions="Center" />
+                        </Border>
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,110,0,0"
+                            Padding="0,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="Pedidos"
+                            VerticalOptions="Center" />
+
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="30,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HorizontalOptions="Center"
+                            MaximumHeightRequest="90"
+                            Stroke="#284763"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Margin="0,0,0,0"
+                                Aspect="AspectFit"
+                                Command="{Binding CarregarTelaDeRankingCommand}"
+                                HorizontalOptions="CenterAndExpand"
+                                MaximumHeightRequest="70"
+                                MaximumWidthRequest="200"
+                                Source="Resources/Images/ranking_ico.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="120" />
+                        </Border>
+
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Margin="40,110,0,0"
+                            Padding="0,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="Ranking"
+                            VerticalOptions="Center" />
+
+                    </Grid>
+                </AbsoluteLayout>
+            </ContentView>
+
+            <ContentView VerticalOptions="StartAndExpand">
+                <AbsoluteLayout HorizontalOptions="Center" VerticalOptions="StartAndExpand">
+                    <Grid ColumnSpacing="15" RowSpacing="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="140" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HorizontalOptions="Center"
+                            MaximumHeightRequest="90"
+                            Stroke="#284763"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Aspect="AspectFit"
+                                Command="{Binding CarregarTelaDePesquisaCommand}"
+                                HeightRequest="65"
+                                HorizontalOptions="FillAndExpand"
+                                MaximumHeightRequest="70"
+                                MaximumWidthRequest="200"
+                                Source="Resources/Images/kfind.png"
+                                VerticalOptions="FillAndExpand" />
+                        </Border>
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Margin="0,110,0,0"
+                            Padding="0,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="Pesquisa"
+                            VerticalOptions="Center" />
+
+                    </Grid>
+                </AbsoluteLayout>
+            </ContentView>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

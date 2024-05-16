@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Ranking.RankingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:MinerthalSalesApp.Handlers"
+    Title="MINERTHAL">
+    <RefreshView Command="{Binding UpdateRankingCommand}" RefreshColor="Purple">
+        <ScrollView
+            HorizontalOptions="FillAndExpand"
+            HorizontalScrollBarVisibility="Always"
+            Orientation="Vertical"
+            VerticalOptions="FillAndExpand">
+            <VerticalStackLayout Padding="5,5,5,5">
+                <Border
+                    BackgroundColor="#000000"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand">
+                    <Label
+                        x:Name="RankingCampanha"
+                        FontAttributes="Bold"
+                        FontSize="25"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="RANKING CAMPANHA"
+                        TextColor="AliceBlue"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center" />
+                </Border>
+                <Label
+                    x:Name="DataAtual"
+                    FontSize="18"
+                    HorizontalOptions="Start"
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Data Atualização:   " />
+                            <Span Text="{Binding DataAtual}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    x:Name="PosicaoAtual"
+                    FontSize="18"
+                    HorizontalOptions="Start"
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Posição Atual:  " />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="{Binding PosicaoAtual, Mode=TwoWay}"
+                                TextColor="{AppThemeBinding Dark=Yellow,
+                                                            Light=Blue}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Grid ColumnDefinitions="*,50,105" RowDefinitions="30">
+                    <Label
+                        Grid.Column="0"
+                        Margin="1,0,0,0"
+                        Padding="0,5,0,0"
+                        BackgroundColor="{AppThemeBinding Dark=White,
+                                                          Light=Black}"
+                        FontAttributes="Bold"
+                        FontSize="11"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="NOME"
+                        TextColor="{AppThemeBinding Light=AliceBlue,
+                                                    Dark=Black}"
+                        VerticalOptions="FillAndExpand" />
+                    <Label
+                        Grid.Column="1"
+                        Margin="1,0,0,0"
+                        Padding="0,5,0,0"
+                        BackgroundColor="{AppThemeBinding Dark=White,
+                                                          Light=Black}"
+                        FontAttributes="Bold"
+                        FontSize="11"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="RANK"
+                        TextColor="{AppThemeBinding Light=AliceBlue,
+                                                    Dark=Black}"
+                        VerticalOptions="FillAndExpand" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="1,0,0,0"
+                        Padding="0,5,0,0"
+                        BackgroundColor="{AppThemeBinding Dark=White,
+                                                          Light=Black}"
+                        FontAttributes="Bold"
+                        FontSize="11"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="RANKING"
+                        TextColor="{AppThemeBinding Light=AliceBlue,
+                                                    Dark=Black}"
+                        VerticalOptions="FillAndExpand" />
+                </Grid>
+                <CollectionView x:Name="MainListView" ItemsSource="{Binding Items}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,50,105" RowDefinitions="30">
+                                <Border
+                                    Grid.Column="0"
+                                    Padding="5"
+                                    Background="#FFFFFF"
+                                    BackgroundColor="Green">
+                                    <Label
+                                        Grid.Column="0"
+                                        FontAttributes="Bold"
+                                        FontSize="12"
+                                        Text="{Binding NomeRC}"
+                                        TextColor="{AppThemeBinding Light=Black,
+                                                                    Dark=Black}" />
+
+                                </Border>
+                                <Border
+                                    Grid.Column="1"
+                                    Padding="5"
+                                    Background="#FFFFFF"
+                                    BackgroundColor="Green">
+                                    <Label
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="12"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Rank}"
+                                        TextColor="{AppThemeBinding Light=Black,
+                                                                    Dark=Black}" />
+                                </Border>
+                                <Border Grid.Column="2" Padding="5">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="1,0">
+                                            <GradientStop Offset="{Binding PercentRanking}" Color="#83acf5" />
+                                            <GradientStop Offset="{Binding PercentRanking}" Color="#ffffff" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Label
+                                        Grid.Column="2"
+                                        FontAttributes="Bold"
+                                        FontSize="12"
+                                        HorizontalOptions="End"
+                                        Text="{Binding PositionFormatada}"
+                                        TextColor="{AppThemeBinding Light=Black,
+                                                                    Dark=Black}" />
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!--  FOOTER  -->
+                <Border
+                    Padding="0,10,0,10"
+                    BackgroundColor="#000000"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand">
+                    <Label
+                        x:Name="CriteriosParaSubir"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="CRITÉRIOS PARA SUBIR"
+                        TextColor="AliceBlue"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="End" />
+                </Border>
+
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontAttributes="Bold"
+                                Text="Volume "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                            <Span Text="= " TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                            <Span
+                                FontAttributes="Bold"
+                                Text="30 "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                            <Span Text="pontos por tonelada vendida " TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontAttributes="Bold"
+                                Text="Produtos "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                            <Span Text="= " TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                            <Span Text="Pontos definidos para cada " TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                            <Span
+                                FontAttributes="Bold"
+                                Text="produto "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontAttributes="Bold"
+                                Text="Clientes atendidos "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                            <Span Text="= " TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                            <Span
+                                FontAttributes="Bold"
+                                Text="30 "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                            <Span Text="pontos por cliente " TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontAttributes="Bold"
+                                Text="Clientes novos "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                            <Span Text="= " TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                            <Span
+                                FontAttributes="Bold"
+                                Text="200 "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                            <Span Text="pontos por cliente" TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontAttributes="Bold"
+                                Text="Clientes recuperados "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                            <Span Text="= " TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                            <Span
+                                FontAttributes="Bold"
+                                Text="180 "
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
+                            <Span Text="pontos por cliente" TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <!--<Label x:Name="Volume" Text="Volume = 30 pontos por tonelada vendida" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="16" Margin="0,8,0,0"></Label>
+            <Label x:Name="Produto" Text="Produtos = Pontos definidos para cada produto" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="16" Margin="0,8,0,0"></Label>
+            <Label x:Name="ClientesAtendidos" Text="Clientes atendidos = 30 pontos por cliente" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="16" Margin="0,8,0,0"></Label>
+            <Label x:Name="ClientesNovos" Text="Clientes novos = 200 pontos por cliente" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="16" Margin="0,8,0,0"></Label>
+            <Label x:Name="ClientesRecuperados" Text="Clientes recuperados = 180 pontos por cliente" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="16" Margin="0,8,0,0"></Label>-->
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

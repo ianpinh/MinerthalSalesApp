@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Orders.MeusPedidosPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Meus Pedidos">
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid Margin="0,-5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <BoxView
+                Grid.Row="0"
+                Grid.Column="0"
+                HeightRequest="75"
+                HorizontalOptions="End"
+                WidthRequest="1.5"
+                Color="#eeeeee" />
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                FontFamily="MontSerratBold"
+                HorizontalTextAlignment="Center"
+                Text="Enviados"
+                TextColor="{DynamicResource PrimaryDarkColor}"
+                VerticalOptions="End"
+                VerticalTextAlignment="End" />
+            <Button
+                x:Name="BtnPedidosEnviados"
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                Padding="0,0,0,0"
+                BackgroundColor="Transparent"
+                Clicked="BtnPedidosEnviados_Clicked"
+                ContentLayout="left, 20"
+                HeightRequest="70"
+                HorizontalOptions="Center"
+                ImageSource="database.png"
+                TextColor="{AppThemeBinding Light=black,
+                                            Dark=white}"
+                VerticalOptions="Center"
+                WidthRequest="130" />
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                FontFamily="MontSerratBold"
+                HorizontalTextAlignment="Center"
+                Text="Não enviados"
+                TextColor="{DynamicResource PrimaryDarkColor}"
+                VerticalOptions="End"
+                VerticalTextAlignment="End" />
+            <Button
+                x:Name="BtnPedidosNaoEnviados"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                Padding="0,0,0,0"
+                BackgroundColor="Transparent"
+                Clicked="BtnPedidosNaoEnviados_Clicked"
+                ContentLayout="left, 20"
+                HeightRequest="70"
+                HorizontalOptions="Center"
+                ImageSource="db_comit.png"
+                TextColor="{AppThemeBinding Light=black,
+                                            Dark=white}"
+                VerticalOptions="Center"
+                WidthRequest="130" />
+        </Grid>
+
+        <ContentView x:Name="MeusPedidosContent" IsVisible="true">
+            <AbsoluteLayout Margin="15">
+                <Grid
+                    x:Name="GridLoading"
+                    Margin="0,20,0,0"
+                    Padding="5"
+                    ColumnDefinitions="*,*"
+                    IsVisible="false"
+                    RowDefinitions="40">
+
+                    <Image
+                        x:Name="loadingImage"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,10,15,0"
+                        IsAnimationPlaying="True"
+                        Source="loading.gif" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,40,0,0"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="Carregando histórico de pedidos" />
+
+
+                </Grid>
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="550" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="#2b4661">
+                        <Label
+                            Padding="0,5,0,0"
+                            HeightRequest="30"
+                            HorizontalTextAlignment="Center"
+                            Text="HISTÓRICO DE PEDIDOS"
+                            TextColor="#FFFFFF"
+                            WidthRequest="365" />
+                    </Border>
+
+                    <ScrollView
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        WidthRequest="365">
+                        <ListView
+                            x:Name="LW_HistoricoPedido"
+                            ItemsSource="{Binding HistoricoPedido}"
+                            RowHeight="280"
+                            SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="0,0,0,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="10" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="3"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                HorizontalTextAlignment="Start">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}Cliente  {0} - {1}">
+                                                        <Binding Path="ClienteCodigo" />
+                                                        <Binding Path="NomeCliente" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="3"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="{Binding Loja, StringFormat=' Loja: {0}'}" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Nº Pedido:" />
+
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding NrPedido}"
+                                                TextColor="#FF0000" />
+
+
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="2"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Nº Nota:" />
+
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="3"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding NrNota}" />
+
+
+
+                                            <Label
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Valor Total:" />
+
+                                            <Label
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding VlTotalExtenso}" />
+
+
+                                            <Label
+                                                Grid.Row="2"
+                                                Grid.Column="2"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Valor Final:" />
+
+                                            <Label
+                                                Grid.Row="2"
+                                                Grid.Column="3"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding VlFinalExtenso}" />
+
+
+                                            <Label
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Data Pedido:" />
+
+                                            <Label
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding DtPedido}" />
+
+                                            <Label
+                                                Grid.Row="3"
+                                                Grid.Column="2"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Data Emissão:" />
+
+                                            <Label
+                                                Grid.Row="3"
+                                                Grid.Column="3"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding DtEmissao}" />
+
+
+                                            <Label
+                                                Grid.Row="4"
+                                                Grid.Column="0"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Plano:" />
+
+                                            <Label
+                                                Grid.Row="4"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding DsPlano}" />
+
+
+                                            <Label
+                                                Grid.Row="5"
+                                                Grid.Column="0"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Tipo Cobrança:" />
+
+                                            <Label
+                                                Grid.Row="5"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding NomeTipoCobranca}" />
+
+
+                                            <Label
+                                                Grid.Row="10"
+                                                Grid.Column="0"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Transportador:" />
+
+                                            <Label
+                                                Grid.Row="10"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding Transportador}" />
+
+                                            <Label
+                                                Grid.Row="11"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Data saida Mercadoria:" />
+
+                                            <Label
+                                                Grid.Row="11"
+                                                Grid.Column="2"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Bold"
+                                                FontSize="11"
+                                                Text="{Binding DtSaidaMerc}" />
+
+                                            <Label
+                                                Grid.Row="12"
+                                                Grid.Column="0"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="Observação:" />
+
+                                            <Label
+                                                Grid.Row="12"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="4"
+                                                Margin="0,0,0,0"
+                                                FontSize="11"
+                                                Text="{Binding TxObs1}" />
+
+                                            <Button
+                                                x:Name="VisualizarPedido"
+                                                Grid.Row="16"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,10,0,10"
+                                                Clicked="VisualizarPedido_Clicked"
+                                                CommandParameter="{Binding NrPedido}"
+                                                HeightRequest="40"
+                                                Text="Ver pedido" />
+
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollView>
+
+                </Grid>
+            </AbsoluteLayout>
+        </ContentView>
+
+
+        <ContentView x:Name="PedidosPendentesContent" IsVisible="false">
+            <AbsoluteLayout Margin="15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="450" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="#2b4661">
+                        <Label
+                            Padding="0,5,0,0"
+                            HeightRequest="30"
+                            HorizontalTextAlignment="Center"
+                            Text="PEDIDOS PENDENTES DE ENVIO"
+                            TextColor="#FFFFFF"
+                            WidthRequest="365" />
+                    </Border>
+                    <Image
+                        x:Name="loadingImagePendentes"
+                        Margin="-50,0,0,0"
+                        IsAnimationPlaying="True"
+                        IsVisible="false"
+                        Source="loading.gif"
+                        WidthRequest="20" />
+                    <ScrollView
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        WidthRequest="365">
+                        <ListView
+                            x:Name="ListaPedidos"
+                            ItemsSource="{Binding PedidosPendentes}"
+                            RefreshCommand="{Binding AtualizarListaDePedidosPendentes}"
+                            SelectionMode="Single">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="0,0,0,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="200" />
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="10" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button
+                                                x:Name="BtnSelectedPedido"
+                                                Grid.Row="0"
+                                                Grid.RowSpan="3"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="4"
+                                                BackgroundColor="Transparent"
+                                                Clicked="BtnSelectedPedido_Clicked"
+                                                CommandParameter="{Binding Id}"
+                                                VerticalOptions="FillAndExpand"
+                                                ZIndex="5" />
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                FontAttributes="Bold"
+                                                FontSize="12"
+                                                Text="{Binding Cliente.A1Cod}" />
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Italic"
+                                                FontSize="12"
+                                                Text="{Binding Cliente.A1Nome}" />
+
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                FontSize="12"
+                                                Text="{Binding Pedido.FilialMinerthal, StringFormat='Filial: {0}'}" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0,0,0,0"
+                                                FontAttributes="Italic"
+                                                FontSize="12"
+                                                Text="{Binding Pedido.PlanoPagamento, StringFormat='Plano: {0}'}" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="2"
+                                                Margin="-30,0,0,0"
+                                                FontAttributes="Italic"
+                                                FontSize="12"
+                                                Text="{Binding Pedido.TotalPedido, StringFormat='Total: R$  {0:N2}'}"
+                                                VerticalOptions="End" />
+                                            <Image
+                                                Grid.Row="0"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="4"
+                                                Aspect="Center"
+                                                HorizontalOptions="End"
+                                                Source="chevron_right.png" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollView>
+
+
+                    <Button
+                        x:Name="BtnReenviarPedidos"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,0,0"
+                        Padding="0,0,0,0"
+                        BackgroundColor="{AppThemeBinding Light=#EEEEEE,
+                                                          Dark=blue}"
+                        BorderColor="#2b4661"
+                        BorderWidth="1"
+                        Clicked="BtnReenviarPedidos_Clicked"
+                        ContentLayout="left, 20"
+                        HorizontalOptions="Center"
+                        ImageSource="db_comit.png"
+                        Text="Enviar todos pedidos"
+                        TextColor="{AppThemeBinding Light=black,
+                                                    Dark=white}"
+                        VerticalOptions="Center"
+                        WidthRequest="180" />
+
+
+                </Grid>
+
+
+            </AbsoluteLayout>
+        </ContentView>
+
+    </StackLayout>
+</ContentPage>

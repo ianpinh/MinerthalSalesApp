@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Products.ProdutosPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:MinerthalSalesApp.Handlers"
+    Title="Produtos">
+    <ContentView>
+        <AbsoluteLayout Margin="5" VerticalOptions="StartAndExpand">
+            <CollectionView
+                x:Name="ListaProdutos"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                ItemsSource="{Binding Items}"
+                SelectionMode="None">
+                <CollectionView.Header>
+                    <StackLayout>
+                        <Border
+                            Margin="-5,-3,-10,0"
+                            Padding="10,10,10,10"
+                            BackgroundColor="#000000"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            VerticalOptions="StartAndExpand">
+                            <Label
+                                x:Name="LblTotalProdutos"
+                                Margin="25,0,0,0"
+                                FontAttributes="Bold"
+                                FontSize="11"
+                                Text="{Binding Total, StringFormat='Produtos encontrados: {0}'}"
+                                TextColor="#FFFFFF"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center" />
+                        </Border>
+                        <Border
+                            Margin="0,-2.5,0,5"
+                            Padding="0,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            VerticalOptions="StartAndExpand">
+                            <SearchBar
+                                x:Name="FiltroProduto"
+                                Margin="0,0,0,0"
+                                BackgroundColor="AliceBlue"
+                                CancelButtonColor="#000000"
+                                FontAttributes="Bold"
+                                Placeholder="Pesquisar produto"
+                                TextChanged="FiltroProduto_TextChanged"
+                                TextColor="#000000"
+                                VerticalOptions="Start"
+                                WidthRequest="390" />
+                        </Border>
+                    </StackLayout>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="15" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border
+                                    Margin="-10,45,0,0"
+                                    Padding="1,1,1,1"
+                                    BackgroundColor="Transparent"
+                                    HeightRequest="70"
+                                    Stroke="#ccc"
+                                    StrokeShape="RoundRectangle 3,3,3,3">
+
+                                    <Image
+                                        Grid.RowSpan="4"
+                                        Grid.Column="0"
+                                        Margin="3,3,3,3"
+                                        Aspect="AspectFill"
+                                        HeightRequest="40"
+                                        Source="{Binding ImagemProduto}"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="40" />
+                                </Border>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Margin="6,0,0,0"
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    HeightRequest="50"
+                                    Text="{Binding CodigoProduto}"
+                                    VerticalOptions="StartAndExpand" />
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="6,5,0,5"
+                                    FontAttributes="Italic"
+                                    FontSize="11"
+                                    HeightRequest="50"
+                                    Text="{Binding ProdutoPesp}"
+                                    VerticalOptions="StartAndExpand" />
+
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Margin="6,5,0,5"
+                                    FontAttributes="Italic"
+                                    FontSize="11"
+                                    HeightRequest="50"
+                                    Text="{Binding PrecTab, StringFormat='R$ {0}'}"
+                                    VerticalOptions="StartAndExpand" />
+
+
+
+                            </Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal" />
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#a5a2a2" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </AbsoluteLayout>
+    </ContentView>
+</ContentPage>

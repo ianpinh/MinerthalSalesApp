@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Configuration.ConfigurationPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Atualizar Tabelas">
+
+    <ScrollView>
+        <StackLayout Padding="10">
+            <ContentView VerticalOptions="FillAndExpand">
+                <AbsoluteLayout Margin="0,-80,0,0">
+                    <Grid
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        ColumnSpacing="2"
+                        RowSpacing="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="75" />
+                        </Grid.RowDefinitions>
+
+                        <Border
+                            Grid.Row="1"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HeightRequest="60"
+                            Stroke="#284763"
+                            StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="1"
+                                Margin="-280,0,0,0"
+                                Padding="6,6,6,6"
+                                Aspect="AspectFit"
+                                Clicked="AtualizarBaseDeDadosMinerthal_Clicked"
+                                CommandParameter="1"
+                                HorizontalOptions="FillAndExpand"
+                                Source="Resources/Images/db_update.png"
+                                VerticalOptions="Start" />
+                        </Border>
+                        <Label
+                            Grid.Row="1"
+                            Margin="-40,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Text="Atualizar Todos"
+                            TextColor="#000"
+                            VerticalOptions="Center" />
+
+                        <Border
+                            Grid.Row="2"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HeightRequest="60"
+                            Stroke="#284763"
+                            StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="2"
+                                Margin="-280,0,0,0"
+                                Padding="6,6,6,6"
+                                Aspect="AspectFit"
+                                Clicked="AtualizarBaseDeDadosMinerthal_Clicked"
+                                CommandParameter="2"
+                                HorizontalOptions="FillAndExpand"
+                                Source="Resources/Images/clientes_icon.png"
+                                VerticalOptions="Start" />
+                        </Border>
+                        <Label
+                            x:Name="LblPClientes"
+                            Grid.Row="2"
+                            Margin="-40,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="{Binding TotalClientes, StringFormat='Atualizar Clientes -  {0}'}"
+                            TextColor="#000"
+                            VerticalOptions="Center" />
+
+                        <Border
+                            Grid.Row="3"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HeightRequest="60"
+                            Stroke="#284763"
+                            StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="4"
+                                Margin="-280,0,0,0"
+                                Padding="6,6,6,6"
+                                Aspect="AspectFit"
+                                Clicked="AtualizarBaseDeDadosMinerthal_Clicked"
+                                CommandParameter="3"
+                                HorizontalOptions="FillAndExpand"
+                                Source="Resources/Images/miscellaneous.png"
+                                VerticalOptions="Start" />
+                        </Border>
+                        <Label
+                            x:Name="LblProdutos"
+                            Grid.Row="3"
+                            Margin="-40,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="{Binding TotalProdutos, StringFormat='Atualizar Produtos -  {0}'}"
+                            TextColor="#000"
+                            VerticalOptions="Center" />
+
+                        <Border
+                            Grid.Row="4"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HeightRequest="60"
+                            Stroke="#284763"
+                            StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="4"
+                                Margin="-280,0,0,0"
+                                Padding="6,6,6,6"
+                                Aspect="AspectFit"
+                                Clicked="AtualizarBaseDeDadosMinerthal_Clicked"
+                                CommandParameter="4"
+                                HorizontalOptions="FillAndExpand"
+                                Source="Resources/Images/ranking_ico.png" />
+                        </Border>
+                        <Label
+                            x:Name="LblRanking"
+                            Grid.Row="4"
+                            Margin="-40,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="{Binding TotalRanking, StringFormat='Atualizar Ranking -  {0}'}"
+                            TextColor="#000"
+                            VerticalOptions="Center" />
+
+                        <Border
+                            Grid.Row="5"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HeightRequest="60"
+                            Stroke="#284763"
+                            StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="5"
+                                Margin="-280,0,0,0"
+                                Padding="6,6,6,6"
+                                Aspect="AspectFit"
+                                Clicked="AtualizarBaseDeDadosMinerthal_Clicked"
+                                CommandParameter="5"
+                                HorizontalOptions="FillAndExpand"
+                                Source="Resources/Images/branch.png"
+                                VerticalOptions="Start" />
+                        </Border>
+                        <Label
+                            x:Name="LblFiliais"
+                            Grid.Row="5"
+                            Margin="-40,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="{Binding TotalFiliais, StringFormat='Atualizar Filiais -  {0}'}"
+                            TextColor="#000"
+                            VerticalOptions="Center" />
+
+
+                        <Border
+                            Grid.Row="6"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HeightRequest="60"
+                            Stroke="#284763"
+                            StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="6"
+                                Margin="-280,0,0,0"
+                                Padding="6,6,6,6"
+                                Aspect="AspectFit"
+                                Clicked="AtualizarBaseDeDadosMinerthal_Clicked"
+                                CommandParameter="6"
+                                HorizontalOptions="FillAndExpand"
+                                Source="Resources/Images/follow_up.png"
+                                VerticalOptions="Start" />
+                        </Border>
+                        <Label
+                            Grid.Row="6"
+                            Margin="-40,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="Atualizar Meus Pedidos"
+                            TextColor="#000"
+                            VerticalOptions="Center" />
+
+                        <Border
+                            Grid.Row="7"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HeightRequest="60"
+                            Stroke="#284763"
+                            StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="7"
+                                Margin="-280,0,0,0"
+                                Padding="6,6,6,6"
+                                Aspect="AspectFit"
+                                Clicked="AtualizarBaseDeDadosMinerthal_Clicked"
+                                CommandParameter="7"
+                                HorizontalOptions="FillAndExpand"
+                                Source="Resources/Images/data_table.png"
+                                VerticalOptions="Start" />
+                        </Border>
+                        <Label
+                            x:Name="LblTabelaPrecos"
+                            Grid.Row="7"
+                            Margin="-40,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="{Binding TotalTabelaDePrecos, StringFormat='Atualizar Tabela de Preços -  {0}'}"
+                            TextColor="#000"
+                            VerticalOptions="Center" />
+
+                        <Border
+                            Grid.Row="8"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HeightRequest="60"
+                            Stroke="#284763"
+                            StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="8"
+                                Margin="-280,0,0,0"
+                                Padding="6,6,6,6"
+                                Aspect="AspectFit"
+                                Clicked="AtualizarBaseDeDadosMinerthal_Clicked"
+                                CommandParameter="8"
+                                HorizontalOptions="FillAndExpand"
+                                Source="Resources/Images/folder_documents.png"
+                                VerticalOptions="Start" />
+                        </Border>
+                        <Label
+                            x:Name="LblPlanos"
+                            Grid.Row="8"
+                            Margin="-40,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="{Binding TotalPlanos, StringFormat='Atualizar Planos -  {0}'}"
+                            TextColor="#000"
+                            VerticalOptions="Center" />
+
+
+                        <Border
+                            Grid.Row="9"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HeightRequest="60"
+                            Stroke="#284763"
+                            StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="9"
+                                Margin="-280,0,0,0"
+                                Padding="6,6,6,6"
+                                Aspect="AspectFit"
+                                Clicked="AtualizarBaseDeDadosMinerthal_Clicked"
+                                CommandParameter="9"
+                                HorizontalOptions="FillAndExpand"
+                                Source="Resources/Images/bank.png"
+                                VerticalOptions="Start" />
+                        </Border>
+                        <Label
+                            x:Name="LblBanco"
+                            Grid.Row="9"
+                            Margin="-40,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="{Binding TotalBancos, StringFormat='Atualizar Bancos -  {0}', Mode=TwoWay}"
+                            TextColor="#000"
+                            VerticalOptions="Center" />
+
+                    </Grid>
+                </AbsoluteLayout>
+            </ContentView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

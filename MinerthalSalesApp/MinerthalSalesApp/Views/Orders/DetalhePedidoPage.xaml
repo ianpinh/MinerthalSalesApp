@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Orders.DetalhePedidoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Detalhe do pedido">
+    <VerticalStackLayout VerticalOptions="FillAndExpand">
+
+        <Grid ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="*,*,*,*,*,*">
+            <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="6"
+                BackgroundColor="#2b4661">
+                <Label
+                    Padding="0,5,0,0"
+                    FontAttributes="Bold"
+                    HeightRequest="30"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Pedido.Id, StringFormat='Pedido nº {0}'}"
+                    TextColor="#FFFFFF"
+                    TextTransform="Uppercase" />
+            </Border>
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Padding="5"
+                FontSize="13"
+                Text="Cliente" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="5"
+                Padding="5"
+                FontSize="13">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}{0} - {1}">
+                        <Binding Path="Cliente.A1Cod" />
+                        <Binding Path="Cliente.A1Nome" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Padding="5"
+                FontSize="13"
+                Text="Tipo" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                Padding="5"
+                Text="{Binding Pedido.NomeTipo}" />
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="5"
+                FontSize="13"
+                Text="Plano" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="4"
+                Padding="5"
+                FontSize="13"
+                Text="{Binding Pedido.NomePlanoPagamento}" />
+
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="3"
+                FontSize="13"
+                Text="Cobrança" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="2"
+                Grid.ColumnSpan="4"
+                Padding="5"
+                FontSize="13"
+                Text="{Binding Pedido.NomeTipoCobranca}" />
+
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="3"
+                FontSize="13"
+                Text="Observações" />
+            <Border
+                Grid.Row="5"
+                Grid.Column="2"
+                Grid.ColumnSpan="5">
+
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="3"
+                    Padding="5"
+                    FontSize="10"
+                    HeightRequest="100"
+                    Text="{Binding Pedido.Observacao}" />
+            </Border>
+        </Grid>
+
+
+        <!--  itens do pedido  -->
+        <Grid ColumnDefinitions="*" RowDefinitions="*,*">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                Padding="5,5,5,5"
+                BackgroundColor="#254866"
+                FontSize="15"
+                HorizontalTextAlignment="Center"
+                Text="ITENS DO PEDIDO"
+                TextColor="{AppThemeBinding Light=white,
+                                            Dark=white}" />
+            <CollectionView
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                HeightRequest="280"
+                ItemsSource="{Binding Pedido.ItensPedido}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Grid Padding="10,5,3,5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="55" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Grid.Row="0"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="0"
+                                    Margin="-5,0,0,0"
+                                    Padding="3,12,3,3"
+                                    BackgroundColor="Transparent"
+                                    Stroke="#ccc"
+                                    StrokeShape="RoundRectangle 3,3,3,3"
+                                    VerticalOptions="Start">
+
+                                    <Image
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Aspect="AspectFill"
+                                        HeightRequest="35"
+                                        Source="{Binding ImagemProduto}"
+                                        WidthRequest="35" />
+                                </Border>
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="6"
+                                    Padding="3,3,3,3"
+                                    BackgroundColor="{AppThemeBinding Light=black,
+                                                                      Dark=#254866}"
+                                    FontAttributes="Bold"
+                                    Text="{Binding CodigoNomeProduto}"
+                                    TextColor="{AppThemeBinding Light=white,
+                                                                Dark=#254866}" />
+
+
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Padding="3,3,3,3"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="Center"
+                                    Text="VL. UN." />
+
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,5,3"
+                                    BackgroundColor="{AppThemeBinding Light=#eee,
+                                                                      Dark=white}"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding ValorCombinadoString}"
+                                    TextColor="{AppThemeBinding Light=Black,
+                                                                Dark=Black}" />
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="4"
+                                    Padding="3,3,3,3"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="Center"
+                                    Text="FR UN." />
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,5,3"
+                                    BackgroundColor="{AppThemeBinding Light=#eee,
+                                                                      Dark=black}"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding FreteUnidadeString}" />
+
+
+                                <BoxView
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="6"
+                                    Margin="1,72,1,1"
+                                    HeightRequest="2"
+                                    Color="#254866" />
+
+
+                                <Border
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="6"
+                                    Margin="-10,-6,0,0"
+                                    BackgroundColor="Transparent"
+                                    HeightRequest="195"
+                                    HorizontalOptions="StartAndExpand"
+                                    Stroke="#254866"
+                                    StrokeThickness="2"
+                                    VerticalOptions="StartAndExpand"
+                                    WidthRequest="392"
+                                    ZIndex="100" />
+
+
+
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="3"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    BackgroundColor="{AppThemeBinding Light=#eee,
+                                                                      Dark=white}"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="Start"
+                                    Text="Total Produto"
+                                    TextColor="{AppThemeBinding Light=Black,
+                                                                Dark=Black}" />
+
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    BackgroundColor="{AppThemeBinding Light=#eee,
+                                                                      Dark=white}"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding ValorTotalProduToString}"
+                                    TextColor="{AppThemeBinding Light=Black,
+                                                                Dark=Black}" />
+
+
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.Column="3"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="Start"
+                                    Text="Total Frete" />
+
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding ValorTotalFreteString}" />
+
+
+                                <Label
+                                    Grid.Row="4"
+                                    Grid.Column="3"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    BackgroundColor="{AppThemeBinding Light=#eee,
+                                                                      Dark=white}"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="Start"
+                                    Text="Subtotal"
+                                    TextColor="{AppThemeBinding Light=Black,
+                                                                Dark=Black}" />
+
+                                <Label
+                                    Grid.Row="4"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    BackgroundColor="{AppThemeBinding Light=#eee,
+                                                                      Dark=white}"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding SubtotalString}"
+                                    TextColor="{AppThemeBinding Light=Black,
+                                                                Dark=Black}" />
+
+
+                                <Label
+                                    Grid.Row="5"
+                                    Grid.Column="3"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="Start"
+                                    Text="Encargos/taxas" />
+
+                                <Label
+                                    Grid.Row="5"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding ValorTaxaPlanoString}" />
+
+
+                                <Label
+                                    Grid.Row="6"
+                                    Grid.Column="3"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    BackgroundColor="{AppThemeBinding Light=#eee,
+                                                                      Dark=white}"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="Start"
+                                    Text="Descontos"
+                                    TextColor="{AppThemeBinding Light=Black,
+                                                                Dark=Black}" />
+
+                                <Label
+                                    Grid.Row="6"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    BackgroundColor="{AppThemeBinding Light=#eee,
+                                                                      Dark=white}"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding ValorDesconToString}"
+                                    TextColor="{AppThemeBinding Light=Black,
+                                                                Dark=Black}" />
+
+
+                                <Label
+                                    Grid.Row="7"
+                                    Grid.Column="3"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    BackgroundColor="#254866"
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    HorizontalTextAlignment="Center"
+                                    Text="TOTAL"
+                                    TextColor="#ffffff" />
+
+                                <Label
+                                    Grid.Row="7"
+                                    Grid.Column="5"
+                                    Grid.ColumnSpan="2"
+                                    Padding="3,3,3,3"
+                                    BackgroundColor="#254866"
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding ValorTotalString}"
+                                    TextColor="#ffffff" />
+
+
+                            </Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal" />
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#a5a2a2" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+
+        <!--  Botões de acão  -->
+        <Grid
+            Margin="0,0,0,0"
+            ColumnDefinitions="*,*"
+            RowDefinitions="*">
+            <Button
+                x:Name="BtnReenviarPedido"
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                Padding="0,0,0,0"
+                BackgroundColor="{AppThemeBinding Light=Transparent,
+                                                  Dark=blue}"
+                Clicked="BtnReenviarPedido_Clicked"
+                CommandParameter="{Binding Pedido.Id}"
+                FontSize="13"
+                HeightRequest="50"
+                ImageSource="db_comit.png"
+                Text="Enviar"
+                TextColor="{AppThemeBinding Light=black,
+                                            Dark=white}"
+                VerticalOptions="Center"
+                WidthRequest="150" />
+
+            <Button
+                x:Name="BtnExcluirPedido"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                Padding="0,0,0,0"
+                BackgroundColor="{AppThemeBinding Light=Transparent,
+                                                  Dark=red}"
+                Clicked="BtnExcluirPedido_Clicked"
+                CommandParameter="{Binding Pedido}"
+                FontSize="13"
+                HeightRequest="50"
+                ImageSource="db_remove.png"
+                Text="Excluir"
+                TextColor="{AppThemeBinding Light=black,
+                                            Dark=white}"
+                VerticalOptions="Center"
+                WidthRequest="150" />
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>

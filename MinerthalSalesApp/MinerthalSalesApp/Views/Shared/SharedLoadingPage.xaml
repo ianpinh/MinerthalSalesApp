@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MinerthalSalesApp.Views.Shared.SharedLoadingPage"
+             Title="SharedLoadingPage">
+    
+    <StackLayout Padding="50,50,50,50">
+        <Image Source="logo_aniversario_minertal.png" HeightRequest="200" WidthRequest="180">
+            <Image.Shadow>
+                <Shadow Brush="{AppThemeBinding Light=Black,Dark=Gray }" Offset="20,20" Radius="40" Opacity="0.8"></Shadow>
+            </Image.Shadow>
+        </Image>
+        
+        <ActivityIndicator IsRunning="True" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center"/>
+      
+        <Label Text="{Binding MessageRanking}" HorizontalOptions="Center"></Label>
+
+    </StackLayout>
+</ContentPage>

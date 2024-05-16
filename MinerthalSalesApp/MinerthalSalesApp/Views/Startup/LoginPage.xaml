@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Startup.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:MinerthalSalesApp.Handlers"
+    Title="LoginPage"
+    Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout
+        Padding="30,0"
+        Spacing="25"
+        VerticalOptions="Center">
+
+        <Image
+            HeightRequest="200"
+            Source="logo_aniversario_minertal.png"
+            WidthRequest="180">
+            <Image.Shadow>
+                <Shadow
+                    Brush="{AppThemeBinding Light=Black,
+                                            Dark=White}"
+                    Opacity="0.8"
+                    Radius="40"
+                    Offset="20,20" />
+            </Image.Shadow>
+        </Image>
+
+        <VerticalStackLayout Spacing="5">
+            <Label
+                FontAutoScalingEnabled="False"
+                FontSize="28"
+                HorizontalTextAlignment="Center"
+                Text="BEM VINDO!"
+                TextColor="Gray" />
+            <!--<Label Text="Login to your account" FontSize="18" TextColor="Gray" HorizontalTextAlignment="Center" />-->
+        </VerticalStackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Frame
+                BorderColor="White"
+                CornerRadius="28"
+                HasShadow="True"
+                HeightRequest="56"
+                WidthRequest="56"
+                ZIndex="1">
+                <Image
+                    HeightRequest="20"
+                    Source="user.png"
+                    WidthRequest="20" />
+            </Frame>
+            <Frame
+                Margin="-20,0,0,0"
+                Padding="0"
+                BorderColor="White"
+                HasShadow="True"
+                HeightRequest="45"
+                HorizontalOptions="FillAndExpand">
+                <handlers:BorderlessEntry
+                    Margin="20,0,0,0"
+                    Keyboard="Text"
+                    Placeholder="User Name"
+                    Text="{Binding Codigo}"
+                    TextColor="{AppThemeBinding Light=Black,
+                                                Dark=Black}"
+                    VerticalOptions="Center">
+                    <handlers:BorderlessEntry.PlaceholderColor>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="iOS" Value="#2b4661" />
+                            <On Platform="Android" Value="#2b4661" />
+                        </OnPlatform>
+                    </handlers:BorderlessEntry.PlaceholderColor>
+                </handlers:BorderlessEntry>
+            </Frame>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Frame
+                BorderColor="White"
+                CornerRadius="28"
+                HasShadow="True"
+                HeightRequest="56"
+                WidthRequest="56"
+                ZIndex="1">
+                <Image
+                    HeightRequest="20"
+                    Source="lock.png"
+                    WidthRequest="20" />
+            </Frame>
+            <Frame
+                Margin="-20,0,0,0"
+                Padding="0"
+                BorderColor="White"
+                HasShadow="True"
+                HeightRequest="45"
+                HorizontalOptions="FillAndExpand">
+                <handlers:BorderlessEntry
+                    Margin="20,0,0,0"
+                    IsPassword="True"
+                    Placeholder="Password"
+                    Text="{Binding Password}"
+                    TextColor="{AppThemeBinding Light=Black,
+                                                Dark=Black}"
+                    VerticalOptions="Center">
+                    <handlers:BorderlessEntry.PlaceholderColor>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="iOS" Value="#2b4661" />
+                            <On Platform="Android" Value="#2b4661" />
+                        </OnPlatform>
+                    </handlers:BorderlessEntry.PlaceholderColor>
+                </handlers:BorderlessEntry>
+            </Frame>
+        </StackLayout>
+
+        <Button
+            BackgroundColor="#2b4661"
+            Command="{Binding LoginCommand}"
+            CornerRadius="20"
+            HorizontalOptions="Center"
+            Text="Entrar"
+            TextColor="White"
+            WidthRequest="100" />
+
+        <StackLayout
+            HorizontalOptions="Center"
+            Orientation="Horizontal"
+            Spacing="5">
+            <Label Text="Esqueci a senha" TextColor="#50b3f2" />
+        </StackLayout>
+
+        <ContentView Margin="0,15,0,0" IsVisible="false">
+            <AbsoluteLayout Margin="10">
+                <ActivityIndicator
+                    Margin="0,-45,0,0"
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    IsRunning="True"
+                    WidthRequest="40" />
+                <Label
+                    Margin="0,20,0,0"
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    HeightRequest="20"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding UpdateMessage, Mode=TwoWay}"
+                    TextColor="{AppThemeBinding Light=Black,
+                                                Dark=Black}" />
+            </AbsoluteLayout>
+        </ContentView>
+    </VerticalStackLayout>
+
+</ContentPage>

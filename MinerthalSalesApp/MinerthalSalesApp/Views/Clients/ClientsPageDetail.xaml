@@ -1,0 +1,1985 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Clients.ClientsPageDetail"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:MinerthalSalesApp.Handlers"
+    xmlns:views="clr-namespace:MinerthalSalesApp.Views.Clients"
+    Title="Dados do cliente">
+    <!--<Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" IconOverride="button_ok_mini.png" />
+    </Shell.BackButtonBehavior>-->
+    <ScrollView>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Grid.Column="0"
+                    Margin="0,50,0,32"
+                    FontFamily="MontSerratBold"
+                    HorizontalTextAlignment="Center"
+                    Text="Gerais"
+                    TextColor="{DynamicResource PrimaryDarkColor}"
+                    VerticalOptions="End"
+                    VerticalTextAlignment="End" />
+                <Button
+                    x:Name="BtnGerais"
+                    Grid.Column="0"
+                    Margin="5,-30,5,0"
+                    Padding="0,-12,0,0"
+                    BackgroundColor="Transparent"
+                    BorderColor="#5d5d5d"
+                    BorderWidth="4"
+                    Clicked="BtnGerais_Clicked"
+                    ContentLayout="left, 0"
+                    HeightRequest="70"
+                    HorizontalOptions="Center"
+                    ImageSource="documentation.png"
+                    TextColor="{AppThemeBinding Light=black,
+                                                Dark=white}"
+                    VerticalOptions="Center"
+                    WidthRequest="95" />
+
+                <Label
+                    Grid.Column="1"
+                    Margin="0,10,0,32"
+                    FontFamily="MontSerratBold"
+                    HorizontalTextAlignment="Center"
+                    Text="Outros"
+                    TextColor="{DynamicResource PrimaryDarkColor}"
+                    VerticalOptions="End"
+                    VerticalTextAlignment="Start" />
+                <Button
+                    x:Name="BtnOutros"
+                    Grid.Column="1"
+                    Margin="5,-30,5,0"
+                    Padding="0,-12,0,0"
+                    BackgroundColor="Transparent"
+                    BorderColor="#eee"
+                    BorderWidth="1"
+                    Clicked="BtnOutros_Clicked"
+                    ContentLayout="left, 0"
+                    CornerRadius="10"
+                    HeightRequest="70"
+                    HorizontalOptions="Center"
+                    ImageSource="financial.png"
+                    TextColor="{AppThemeBinding Light=black,
+                                                Dark=white}"
+                    VerticalOptions="Center"
+                    WidthRequest="95" />
+
+                <Label
+                    Grid.Column="2"
+                    Margin="0,10,0,32"
+                    FontFamily="MontSerratBold"
+                    HorizontalTextAlignment="Center"
+                    Text="Financeiro"
+                    TextColor="{DynamicResource PrimaryDarkColor}"
+                    VerticalOptions="End"
+                    VerticalTextAlignment="Start" />
+                <Button
+                    x:Name="BtnFinanceiro"
+                    Grid.Column="2"
+                    Margin="5,-30,5,0"
+                    Padding="0,-12,0,0"
+                    BackgroundColor="Transparent"
+                    BorderColor="#eee"
+                    BorderWidth="1"
+                    Clicked="BtnFinanceiro_Clicked"
+                    ContentLayout="left, 0"
+                    HeightRequest="70"
+                    HorizontalOptions="Center"
+                    ImageSource="investment.png"
+                    TextColor="{AppThemeBinding Light=black,
+                                                Dark=white}"
+                    VerticalOptions="Center"
+                    WidthRequest="95" />
+
+
+                <Label
+                    Grid.Column="3"
+                    Margin="0,10,0,32"
+                    FontFamily="MontSerratBold"
+                    HorizontalTextAlignment="Center"
+                    Text="Títulos"
+                    TextColor="{DynamicResource PrimaryDarkColor}"
+                    VerticalOptions="End"
+                    VerticalTextAlignment="Start" />
+                <Button
+                    x:Name="BtnTitulo"
+                    Grid.Column="3"
+                    Margin="5,-30,5,0"
+                    Padding="0,-12,0,0"
+                    BackgroundColor="Transparent"
+                    BorderColor="#eee"
+                    BorderWidth="1"
+                    Clicked="BtnTitulo_Clicked"
+                    ContentLayout="left, 0"
+                    HeightRequest="70"
+                    HorizontalOptions="Center"
+                    ImageSource="privacy_policy.png"
+                    TextColor="{AppThemeBinding Light=black,
+                                                Dark=white}"
+                    VerticalOptions="Center"
+                    WidthRequest="95" />
+            </Grid>
+            <ContentView
+                x:Name="detailsview"
+                IsVisible="true"
+                VerticalOptions="StartAndExpand">
+                <AbsoluteLayout Margin="20" VerticalOptions="StartAndExpand">
+                    <BoxView AbsoluteLayout.LayoutBounds="-10, -48, 80, 2" Color="Silver" />
+                    <Grid Margin="1,-35,1,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!--  CÓDIGO  -->
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,0,10"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Código" />
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ddd"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="5,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.A1Cod}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  RAZÃO SOCIAL  -->
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Razão Social" />
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.A1Nome}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  NOME FANTASIA  -->
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Nome Fantasia"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.A1Nreduz}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  BLOQUEADO  -->
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Bloqueado"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  PLANO PAGAMENTO  -->
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Plano Pagto"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  TIPO COBRANÇA  -->
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Tipo Cobrança"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  FISICA / JURIDICA  -->
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Física / Jurídica"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.Tipo}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  CPF/ CNPJ  -->
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="CPF / CNPJ"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.CNPJFormatado}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  INSCRIÇÃO ESTADUAL  -->
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Insc. Estadual"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3" />
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Padding="2,5,0,5"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="{Binding Cliente.A1Inscr}"
+                            TextColor="{AppThemeBinding Dark=White,
+                                                        Light=Black}"
+                            WidthRequest="265" />
+
+
+                        <!--  OBSERVAÇÕES  -->
+                        <Label
+                            Grid.Row="9"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Observações"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="9"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="9"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                HeightRequest="150"
+                                Text="{Binding Cliente.A1Observ}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  BOTTOM BUTTONS  -->
+
+                        <Label
+                            Grid.Row="11"
+                            Grid.Column="0"
+                            Margin="-6,110,0,32"
+                            FontFamily="MontSerratBold"
+                            FontSize="12"
+                            HorizontalOptions="Start"
+                            HorizontalTextAlignment="Center"
+                            Text="Novo Pedido"
+                            TextColor="{DynamicResource PrimaryDarkColor}"
+                            VerticalTextAlignment="End" />
+                        <Button
+                            x:Name="BtnNovoPedido"
+                            Grid.Row="11"
+                            Grid.Column="0"
+                            Margin="-11,30,5,0"
+                            Padding="0,-12,0,0"
+                            BackgroundColor="Transparent"
+                            BorderColor="#eee"
+                            BorderWidth="1"
+                            Clicked="BtnNovoPedido_clicked"
+                            CommandParameter="{Binding Cliente.A1Cod}"
+                            ContentLayout="left, 0"
+                            HeightRequest="70"
+                            HorizontalOptions="Start"
+                            ImageSource="neworder.png"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            VerticalOptions="Center"
+                            WidthRequest="80" />
+
+                        <Label
+                            Grid.Row="11"
+                            Grid.Column="1"
+                            Margin="-30,110,0,32"
+                            FontFamily="MontSerratBold"
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="Visitas"
+                            TextColor="{DynamicResource PrimaryDarkColor}"
+                            VerticalOptions="End"
+                            VerticalTextAlignment="End" />
+                        <Button
+                            x:Name="BtnVisitas"
+                            Grid.Row="11"
+                            Grid.Column="1"
+                            Margin="-13,30,5,0"
+                            Padding="0,-12,0,0"
+                            BackgroundColor="Transparent"
+                            BorderColor="#eee"
+                            BorderWidth="1"
+                            Clicked="BtnVisitas_Clicked"
+                            ContentLayout="left, 0"
+                            HeightRequest="70"
+                            HorizontalOptions="Start"
+                            ImageSource="visitas.png"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            VerticalOptions="Center"
+                            WidthRequest="80" />
+
+                        <Label
+                            Grid.Row="11"
+                            Grid.Column="2"
+                            Margin="-15,110,0,32"
+                            FontFamily="MontSerratBold"
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="Checklist"
+                            TextColor="{DynamicResource PrimaryDarkColor}"
+                            VerticalOptions="End"
+                            VerticalTextAlignment="End" />
+                        <Button
+                            x:Name="BtnCheckList"
+                            Grid.Row="11"
+                            Grid.Column="2"
+                            Margin="-6,30,5,0"
+                            Padding="0,-12,0,0"
+                            BackgroundColor="Transparent"
+                            BorderColor="#eee"
+                            BorderWidth="1"
+                            ContentLayout="left, 0"
+                            HeightRequest="70"
+                            HorizontalOptions="Start"
+                            ImageSource="checklist.png"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            VerticalOptions="Center"
+                            WidthRequest="80" />
+
+                        <Label
+                            Grid.Row="11"
+                            Grid.Column="3"
+                            Margin="-10,100,0,30"
+                            FontFamily="MontSerratBold"
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="Histórico"
+                            TextColor="{DynamicResource PrimaryDarkColor}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                        <Button
+                            x:Name="BtnHistorico"
+                            Grid.Row="11"
+                            Grid.Column="3"
+                            Margin="0,30,5,0"
+                            Padding="0,-12,0,0"
+                            BackgroundColor="Transparent"
+                            BorderColor="#eee"
+                            BorderWidth="1"
+                            Clicked="BtnHistorico_Clicked"
+                            CommandParameter="{Binding Cliente.NumCodLoja}"
+                            ContentLayout="left, 0"
+                            HeightRequest="70"
+                            HorizontalOptions="Start"
+                            ImageSource="historico.png"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            VerticalOptions="Center"
+                            WidthRequest="80" />
+
+
+
+                    </Grid>
+                </AbsoluteLayout>
+            </ContentView>
+            <ContentView x:Name="historyview" IsVisible="false">
+                <AbsoluteLayout Margin="20">
+                    <BoxView AbsoluteLayout.LayoutBounds="87, -48, 80, 2" Color="Silver" />
+                    <Grid Margin="1,-35,1,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!--  TELEFONE  -->
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,0,10"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Telefone"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}" />
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.Telefone}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  CELULAR  -->
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Celular"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}" />
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  EMAIL  -->
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="E-mail"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.A1Email}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  CIDADE  -->
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Cidade"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.A1Mune}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  ENDEREÇO  -->
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Endereço"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.A1Endent}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  BAIRRO  -->
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Bairro"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.A1Bairroe}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  TIPO REBANHO  -->
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Tipo Rebanho"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  TIPO CRIAÇÃO  -->
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Tipo Criação"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  REBANHO CORTE  -->
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Rebanho Corte"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="8"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  REBANHO LEITE  -->
+                        <Label
+                            Grid.Row="9"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Rebanho Leite"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="9"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="9"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+
+                        <!--  QUANTIDADE LEITE  -->
+                        <Label
+                            Grid.Row="10"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Qtd. Leite"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="10"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="10"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  COMPRADOR  -->
+                        <Label
+                            Grid.Row="11"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Comprador"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="11"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="11"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+
+                        <!--  TELEFONE COMPRADOR  -->
+                        <Label
+                            Grid.Row="12"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Tel. Comprador"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="12"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="12"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+                    </Grid>
+
+                </AbsoluteLayout>
+            </ContentView>
+            <ContentView x:Name="Filesview" IsVisible="false">
+                <AbsoluteLayout Margin="20">
+                    <BoxView AbsoluteLayout.LayoutBounds="185, -48, 80, 2" Color="Silver" />
+                    <Grid Margin="1,-35,1,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!--  DATA DA ÚLTIMA COMPRA  -->
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,0,10"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Dt. Ult. Compra" />
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.UltimaAtualizacao}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+                        <!--  LIMITE DE CRÉDITO  -->
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Limite Crédito"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}" />
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.LimiteCredito}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  VALOR DISPONIVEL  -->
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Valor Disponível"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.LimiteDisponivel}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  A VENCER  -->
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="A Vencer"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.ValorAVencer}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  VALOR VENCIDO  -->
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Vl. Vencido"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding Cliente.ValorVencido}"
+                                TextColor="{Binding Cliente.CorCliente}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  COMPRA MÊS  -->
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Compras Mês"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+
+                        <Border
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  COMPRAS 3 ULTIMOS MESES  -->
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Compras (3 Ult)"
+                            TextColor="{AppThemeBinding Light=black,
+                                                        Dark=white}"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  MÉDIA MENSAL  -->
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Média Men(3 ult)"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text=""
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+                    </Grid>
+                </AbsoluteLayout>
+
+            </ContentView>
+            <ContentView x:Name="titulosview" IsVisible="false">
+                <AbsoluteLayout
+                    Margin="0,-20,0,0"
+                    HeightRequest="700"
+                    VerticalOptions="StartAndExpand"
+                    WidthRequest="390">
+                    <BoxView AbsoluteLayout.LayoutBounds="302, -8, 80, 2" Color="Silver" />
+
+                    <ScrollView
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalScrollBarVisibility="Always"
+                        Orientation="Vertical"
+                        VerticalOptions="FillAndExpand">
+                        <VerticalStackLayout Padding="5,5,5,5">
+                            <ListView
+                                x:Name="InvoicingList"
+                                Margin="0,0,1,0"
+                                RowHeight="150"
+                                SelectionMode="None"
+                                VerticalOptions="StartAndExpand"
+                                WidthRequest="390">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid Padding="2,2,2,2">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="5" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <BoxView
+                                                    Grid.Row="0"
+                                                    Grid.ColumnSpan="11"
+                                                    Margin="0,-27,0,0"
+                                                    HeightRequest="2"
+                                                    Color="#284764" />
+
+                                                <BoxView
+                                                    Grid.Row="4"
+                                                    Grid.ColumnSpan="11"
+                                                    Margin="0,37,0,0"
+                                                    HeightRequest="2"
+                                                    Color="#284764" />
+
+                                                <BoxView
+                                                    Grid.RowSpan="5"
+                                                    Grid.Column="11"
+                                                    Margin="0,0,0,0"
+                                                    HeightRequest="136"
+                                                    HorizontalOptions="End"
+                                                    WidthRequest="2"
+                                                    Color="#284764" />
+
+                                                <BoxView
+                                                    Grid.RowSpan="5"
+                                                    Grid.Column="0"
+                                                    Margin="-6,0,0,0"
+                                                    HeightRequest="139"
+                                                    WidthRequest="2"
+                                                    Color="#284764" />
+
+
+                                                <Image
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="4"
+                                                    Margin="0,2,0,0"
+                                                    HeightRequest="25"
+                                                    HorizontalOptions="Start"
+                                                    Source="playlist.png"
+                                                    VerticalOptions="Start"
+                                                    WidthRequest="25" />
+
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="10"
+                                                    Margin="25,-12,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontSize="11"
+                                                    HeightRequest="20"
+                                                    Text="Número Documento"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="6"
+                                                    Margin="28,20,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="14"
+                                                    HeightRequest="25"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}">
+
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} - {1}">
+                                                            <Binding Path="NrDocum" />
+                                                            <Binding Path="TpCobran" />
+                                                        </MultiBinding>
+                                                    </Label.Text>
+
+                                                </Label>
+
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="9"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,20,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="14"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding NrParcel}"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+
+                                                <BoxView
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="4"
+                                                    Margin="4,40,0,0"
+                                                    AbsoluteLayout.LayoutBounds="2,2,2,2"
+                                                    HeightRequest="1.5"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    WidthRequest="350"
+                                                    Color="#ddd" />
+
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Emissão:" />
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="3"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding DataEmissao, StringFormat='{0:dd/MM/yyyy}'}"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="6"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Vencimento:"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="8"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,20,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding DtVenc}"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+                                                <Label
+                                                    Grid.Row="2"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="1"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Valor:"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+
+                                                <Label
+                                                    Grid.Row="2"
+                                                    Grid.Column="2"
+                                                    Grid.ColumnSpan="3"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="13"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding ValorDocumento, StringFormat='R$ {0}'}" />
+
+
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="Atraso:"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="3"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="13"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding QtDiaatr, StringFormat='{0:} dias'}" />
+
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="6"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Juros:"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="7"
+                                                    Grid.ColumnSpan="3"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="13"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding ValorJuros, StringFormat='R$ {0}'}"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+
+                                                <Label
+                                                    Grid.Row="4"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Valor Total: "
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+
+                                                <Label
+                                                    Grid.Row="4"
+                                                    Grid.Column="3"
+                                                    Grid.ColumnSpan="3"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="{Binding ValorTotal, StringFormat='R$ {0}'}"
+                                                    TextColor="{AppThemeBinding Light=black,
+                                                                                Dark=white}" />
+
+
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </AbsoluteLayout>
+            </ContentView>
+            <ContentView x:Name="visitasview" IsVisible="false">
+                <AbsoluteLayout
+                    Margin="0,-20,0,0"
+                    HeightRequest="700"
+                    VerticalOptions="StartAndExpand"
+                    WidthRequest="390">
+                    <BoxView AbsoluteLayout.LayoutBounds="302, -8, 80, 2" Color="Silver" />
+                    <ScrollView
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalScrollBarVisibility="Always"
+                        Orientation="Vertical"
+                        VerticalOptions="FillAndExpand">
+                        <VerticalStackLayout Padding="5,5,5,5">
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="4"
+                                Margin="-3,0,-2,1"
+                                Padding="0,2,2,0"
+                                BackgroundColor="#254866"
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                HeightRequest="25"
+                                HorizontalTextAlignment="Center"
+                                Text="VISITAS"
+                                TextColor="White" />
+                            <ListView
+                                x:Name="ListaVisitas"
+                                Margin="0,0,1,0"
+                                RowHeight="180"
+                                SelectionMode="None"
+                                VerticalOptions="StartAndExpand"
+                                WidthRequest="390">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid Padding="2,2,2,2">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                    <RowDefinition Height="25" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="5" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <BoxView
+                                                    Grid.Row="0"
+                                                    Grid.ColumnSpan="7"
+                                                    Margin="0,-27,0,0"
+                                                    HeightRequest="2"
+                                                    Color="#284764" />
+
+                                                <BoxView
+                                                    Grid.Row="4"
+                                                    Grid.ColumnSpan="7"
+                                                    Margin="0,90,0,0"
+                                                    HeightRequest="2"
+                                                    Color="#284764" />
+
+                                                <BoxView
+                                                    Grid.RowSpan="5"
+                                                    Grid.Column="6"
+                                                    Margin="0,0,0,0"
+                                                    HeightRequest="190"
+                                                    HorizontalOptions="End"
+                                                    WidthRequest="2"
+                                                    Color="#284764" />
+
+
+                                                <BoxView
+                                                    Grid.RowSpan="6"
+                                                    Grid.Column="0"
+                                                    Margin="-3,0,0,0"
+                                                    HeightRequest="167"
+                                                    WidthRequest="2"
+                                                    Color="#284764" />
+
+                                                <!--<Border
+                                                    Grid.RowSpan="6"
+                                                    Grid.Column="0"
+                                                    Margin="-3,0,0,0"
+                                                    Padding="10,0,0,0"
+                                                    BackgroundColor="#284764"
+                                                    HeightRequest="169"
+                                                    VerticalOptions="FillAndExpand"
+                                                    WidthRequest="6" />-->
+
+                                                <Image
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="4"
+                                                    Margin="0,2,0,0"
+                                                    HeightRequest="25"
+                                                    HorizontalOptions="Start"
+                                                    Source="playlist.png"
+                                                    VerticalOptions="Start"
+                                                    WidthRequest="25" />
+
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="4"
+                                                    Margin="25,-12,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontSize="11"
+                                                    HeightRequest="20"
+                                                    Text="Cliente" />
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="7"
+                                                    Margin="28,20,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12.5"
+                                                    HeightRequest="25"
+                                                    Text="{Binding NmCliente}" />
+
+
+                                                <BoxView
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="4"
+                                                    Margin="4,40,0,0"
+                                                    AbsoluteLayout.LayoutBounds="2,2,2,2"
+                                                    HeightRequest="1.5"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    WidthRequest="350"
+                                                    Color="#ddd" />
+
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="1"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Data:" />
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="2"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding DataVisitaFormatada}" />
+
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="4"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Cliente Novo:" />
+
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="6"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding IsClienteNovo}" />
+
+                                                <Label
+                                                    Grid.Row="2"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="11,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Próx. Visita:"
+                                                    WidthRequest="75" />
+                                                <Label
+                                                    Grid.Row="2"
+                                                    Grid.Column="3"
+                                                    Grid.ColumnSpan="4"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding DtVenc}"
+                                                    TextColor="{Binding ProximaVisita}" />
+
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="1"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Cidade:" />
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="2"
+                                                    Grid.ColumnSpan="3"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="11"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding Cidade}" />
+
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="5"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="UF:" />
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="6"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="13"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding Uf}" />
+
+
+                                                <Label
+                                                    Grid.Row="4"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,18,0,0"
+                                                    Padding="2,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HeightRequest="25"
+                                                    Text="Ocorrência:" />
+
+
+
+                                                <Label
+                                                    Grid.Row="5"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="7"
+                                                    Margin="0,18,0,0"
+                                                    Padding="5,2,2,2"
+                                                    FontAttributes="Bold"
+                                                    FontSize="13"
+                                                    HeightRequest="25"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding Ocorrencia}" />
+
+
+
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </AbsoluteLayout>
+            </ContentView>
+        </StackLayout>
+
+    </ScrollView>
+</ContentPage>

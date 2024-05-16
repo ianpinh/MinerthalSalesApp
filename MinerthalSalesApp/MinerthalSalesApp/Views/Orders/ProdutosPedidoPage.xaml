@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Orders.ProdutosPedidoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Selecione o produto">
+    <ContentPage.Resources>
+        <Style TargetType="ListView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Yellow" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="StartAndExpand">
+
+        <Grid
+            x:Name="GridLoading"
+            Padding="5"
+            IsVisible="false">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center"
+                Text="Carregando produtos" />
+
+            <Image
+                x:Name="ImgUserLoading"
+                Grid.Row="1"
+                Grid.Column="2"
+                IsAnimationPlaying="True"
+                Source="loading.gif"
+                WidthRequest="35" />
+        </Grid>
+        <ListView
+            x:Name="ListaProdutos"
+            Grid.Row="0"
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True"
+            ItemsSource="{Binding ListaProdutos}"
+            RowHeight="100"
+            SelectionMode="None"
+            SeparatorColor="#254866"
+            VerticalOptions="FillAndExpand">
+
+            <ListView.Header>
+                <StackLayout Margin="0,0,0,10">
+                    <Border
+                        Margin="0,0,0,0"
+                        Padding="0,0,0,0"
+                        BackgroundColor="#000000"
+                        Stroke="#ccc"
+                        StrokeShape="RoundRectangle 3,3,3,3">
+                        <Label
+                            x:Name="LblTotalProdutos"
+                            Margin="10,5,0,5"
+                            FontAttributes="Bold"
+                            FontSize="13"
+                            HeightRequest="30"
+                            Text="{Binding TotalProdutos, StringFormat='Produtos encontrados: {0}'}"
+                            TextColor="#FFFFFF"
+                            VerticalTextAlignment="Center" />
+                    </Border>
+                    <Border>
+                        <SearchBar
+                            x:Name="FiltroProduto"
+                            Margin="0,0,0,0"
+                            BackgroundColor="AliceBlue"
+                            Placeholder="Pesquisar produto"
+                            TextChanged="FiltroProduto_TextChanged_1"
+                            TextColor="black"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="390" />
+                    </Border>
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid
+                            Padding="5"
+                            ColumnDefinitions="80,*,5"
+                            RowDefinitions="Auto,Auto,Auto">
+                            <Button
+                                x:Name="BtnSelectedProduto"
+                                Grid.Row="0"
+                                Grid.RowSpan="3"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="Transparent"
+                                Clicked="BtnSelectedProduto_Clicked"
+                                CommandParameter="{Binding CdProduto}"
+                                ZIndex="5" />
+                            <Border
+                                Grid.Row="0"
+                                Grid.RowSpan="3"
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                Padding="5"
+                                BackgroundColor="Transparent"
+                                HeightRequest="45"
+                                Stroke="#ccc"
+                                StrokeShape="RoundRectangle 3,3,3,3">
+
+                                <Image
+                                    Grid.Row="0"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="0"
+                                    Aspect="AspectFill"
+                                    HeightRequest="40"
+                                    Source="{Binding ImagemProduto}"
+                                    WidthRequest="40" />
+                            </Border>
+
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Padding="0,0,0,0"
+                                FontSize="13">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} - {1}">
+                                        <Binding Path="CdProduto" />
+                                        <Binding Path="DsProduto" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                BackgroundColor="{AppThemeBinding Light=White,
+                                                                  Dark=black}"
+                                FontAttributes="Italic"
+                                FontSize="12">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} - {1} Kg">
+                                        <Binding Path="NmEmbalag" />
+                                        <Binding Path="VlPeso" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                BackgroundColor="{AppThemeBinding Light=White,
+                                                                  Dark=black}"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                Text="{Binding PrecTab, StringFormat='R$ {0}'}" />
+                            <Image
+                                Grid.Row="0"
+                                Grid.RowSpan="3"
+                                Grid.Column="2"
+                                Aspect="AspectFit"
+                                Source="edit_add.png" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
