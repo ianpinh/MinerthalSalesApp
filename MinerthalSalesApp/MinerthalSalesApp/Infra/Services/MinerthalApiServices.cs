@@ -289,7 +289,11 @@ tryAgain:
                             ? JsonConvert.DeserializeObject<List<DictionaryDto>>(item.Parcelas)
                             : new List<DictionaryDto>();
 
-                        var valorPedido = carrinho.Sum(x => (x.Quantidade * x.ValorCombinado) + totalFrete);
+                        var valorPedido = carrinho.Sum(x =>
+                            (x.Quantidade * x.ValorCombinado) +
+                            ((x.Quantidade * x.ValorCombinado) * x.TaxaEncargos/100) +
+                            totalFrete
+);
                         var sbParcelas = new StringBuilder();
                         var SbValores = new StringBuilder();
                         if (_parcelas.Any())
