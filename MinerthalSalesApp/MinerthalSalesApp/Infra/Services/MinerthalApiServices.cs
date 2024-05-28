@@ -291,9 +291,9 @@ tryAgain:
 
                         var valorPedido = carrinho.Sum(x =>
                             (x.Quantidade * x.ValorCombinado) +
-                            ((x.Quantidade * x.ValorCombinado) * x.TaxaEncargos/100) +
-                            totalFrete
-);
+                            ((x.Quantidade * x.ValorCombinado) * (x.TaxaEncargos == 0 ? 0 : x.TaxaEncargos / 100)) +
+                            totalFrete);
+
                         var sbParcelas = new StringBuilder();
                         var SbValores = new StringBuilder();
                         if (_parcelas.Any())
@@ -321,7 +321,7 @@ tryAgain:
                             itensPedido = carrinho.Select(x => new TADDPEDIDODET
                             {
                                 PERCCOMISSAO = x.Comissao.ToString(),
-                                PRECOUNITARIO=x.ValorCombinado.ToString(),
+                                PRECOUNITARIO = x.ValorCombinado.ToString().Replace(',', '.'),
                                 QUANTIDADEPRODUTO=x.Quantidade.ToString(),
                                 PRODUTOPEDIDO =x.CodProduto
                             }).ToArray();
