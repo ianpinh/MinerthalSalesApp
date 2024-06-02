@@ -134,12 +134,12 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
     //INCLUIR NOVO PEDIDO
     private async void BtnNovoPedido_clicked(object sender, EventArgs e)
     {
-        if (_model.Cliente.A1Atr>0)
+        /*if (_model.Cliente.A1Atr>0)
         {
             await DisplayAlert("Novo Pedido","O cliente possui pendências","Ok");
         }
         else
-        {
+        {*/
             var _popupModel = new PopupViewModel { PopupMessage = "Carregando novo pedido..." };
             var pop = new PopupPage(_popupModel);
 
@@ -164,7 +164,7 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
             {
                 _popupAppService.ClosePopup(pop);
             }
-        }
+        //}
     }
 
     private void SetSelectedBorder()

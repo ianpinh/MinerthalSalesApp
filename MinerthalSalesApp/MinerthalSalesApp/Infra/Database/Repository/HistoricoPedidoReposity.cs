@@ -442,7 +442,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public IEnumerable<HistoricoDePedidos> GetAllFromClient(string codigoCliente)
         {
-            var command = $@"SELECT * FROM HistoricoDePedidos WHERE CdCliente = '{codigoCliente}';";
+            var command = $@"SELECT * FROM HistoricoDePedidos WHERE CdCliente = '{codigoCliente}' ORDER BY Id DESC;";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
