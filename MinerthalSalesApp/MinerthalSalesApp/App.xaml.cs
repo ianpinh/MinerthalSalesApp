@@ -133,7 +133,7 @@ public partial class App : Application
 
     private void UpdateDatabase()
     {
-        var aTimer = new System.Timers.Timer(60 * 60 * 1000); //UMA HORA
+        var aTimer = new System.Timers.Timer(20 * 60 * 1000); //20 MINUTOS
         aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
         aTimer.Start();
     }

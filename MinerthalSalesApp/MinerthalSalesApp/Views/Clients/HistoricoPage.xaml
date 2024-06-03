@@ -272,7 +272,7 @@
                                                 Margin="0,5,0,0"
                                                 Padding="5,0,5,5"
                                                 ColumnDefinitions="*,*,*,*,*,*,*,*,*,*"
-                                                RowDefinitions="20,20,20,20">
+                                                RowDefinitions="20,20,20,20,20">
 
                                                 <Label
                                                     Grid.Row="0"
@@ -412,7 +412,7 @@
                                                     Margin="0,0,0,0"
                                                     Padding="0"
                                                     FontSize="11"
-                                                    Text="% Comissão:"
+                                                    Text="VL. UNIT.:"
                                                     TextColor="{AppThemeBinding Light=Black,
                                                                                 Dark=White}" />
 
@@ -423,10 +423,31 @@
                                                     Margin="10,0,0,0"
                                                     FontAttributes="Bold"
                                                     FontSize="11"
-                                                    Text="{Binding CdPercComiss, StringFormat='{0:N2}%'}"
+                                                    Text="{Binding VlUnit, StringFormat='R$ {0:N2}'}"
                                                     TextColor="{AppThemeBinding Light=Black,
                                                                                 Dark=White}" />
 
+                                                <Label
+                                                    Grid.Row="4" 
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="0,0,0,0"
+                                                    Padding="0"
+                                                    FontSize="11"
+                                                    Text="% Comissão:"
+                                                    TextColor="{AppThemeBinding Light=Black,
+                                                                                Dark=White}" />
+
+                                                <Label
+                                                    Grid.Row="4" 
+                                                    Grid.Column="2"
+                                                    Grid.ColumnSpan="2"
+                                                    Margin="10,0,0,0"
+                                                    FontAttributes="Bold"
+                                                    FontSize="11"
+                                                    Text="{Binding CdPercComiss, StringFormat='{0:N2}%'}"
+                                                    TextColor="{AppThemeBinding Light=Black,
+                                                                                Dark=White}" />
 
 
                                             </Grid>
