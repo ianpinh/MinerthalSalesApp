@@ -129,7 +129,8 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                     foreach (var item in users)
                     {
-                        var exists = users!=null && usersCadastrados.FirstOrDefault(x => x.SellerCode.Equals(item.SellerCode))!=null;
+                        var existingUser = usersCadastrados.FirstOrDefault(x => x.SellerCode.Equals(item.SellerCode));
+                        var exists = existingUser != null;
 
                         if (!exists)
                         {
@@ -147,6 +148,16 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                         ,'{item.SellerPassword}'
                                                         ,'{item.SellerNickName}');";
                             scriptCommand.AppendLine(commandInsert);
+                        }
+                        else
+                        {
+                            if (existingUser.SellerPassword != item.SellerPassword)
+                            {
+                                var commandUpdate = $@"UPDATE [Usuario] 
+                                   SET SellerPassword = '{item.SellerPassword}' 
+                                   WHERE SellerCode = '{item.SellerCode}';";
+                                scriptCommand.AppendLine(commandUpdate);
+                            }
                         }
                     }
                     var command = scriptCommand.ToString();
