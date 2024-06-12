@@ -149,12 +149,15 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
             try
             {
                 var btn = sender as Button;
-                var codCliente = btn.CommandParameter.ToString();
-                var order = new Models.Dtos.OrderDto {Id=Guid.NewGuid(), CodigoCliente=codCliente };
-                var pedidoViewModel = new PedidoViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases, order);
-                Microsoft.Maui.Storage.Preferences.Set("pedidoViewModel", JsonConvert.SerializeObject(pedidoViewModel));
-                await Navigation.PushAsync(new PedidoPage(pedidoViewModel));
-                //Navigation.RemovePage(this);
+            //var codCliente = btn.CommandParameter.ToString();
+            var codigo = $"{_model.Cliente.A1Cod}{_model.Cliente.A1Loja}";
+            var codCliente = codigo.Substring(0, 6);
+            var codLoja = codigo.Substring(codigo.Length - 2);
+            var order = new Models.Dtos.OrderDto {Id=Guid.NewGuid(), CodigoCliente=codCliente };
+            var pedidoViewModel = new PedidoViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases, order);
+            Microsoft.Maui.Storage.Preferences.Set("pedidoViewModel", JsonConvert.SerializeObject(pedidoViewModel));
+            await Navigation.PushAsync(new PedidoPage(pedidoViewModel));
+            //Navigation.RemovePage(this);
             }
             catch (Exception ex)
             {

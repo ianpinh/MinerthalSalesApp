@@ -9,8 +9,9 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
          Cliente GetByCpf(string cpf);
 
          Cliente GetByCodigo(string codCliente);
+        Cliente GetByCodigoeLoja(string codCliente, string codLoja);
 
-         void SaveClientes(List<Cliente> clientes);
+        void SaveClientes(List<Cliente> clientes);
 
          void Add(Cliente cliente);
 

@@ -194,6 +194,51 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             }
         }
 
+        public Cliente GetByCodigoeLoja(string codCliente, string codLoja)
+        {
+            try
+            {
+                var command = $@"SELECT * FROM Cliente WHERE A1Cod  = '{codCliente}' and A1Loja = '{codLoja}';";
+                var retorno = _context.ExcecutarSelectFirstOrDefault(command);
+
+                if (retorno == null)
+                    return default;
+
+                return new Cliente
+                {
+                    A1Cgc = retorno.A1Cgc.ToString(),
+                    A1Cod = retorno.A1Cod.ToString(),
+                    A1Loja = retorno.A1Loja.ToString(),
+                    A1Nome = retorno.A1Nome.ToString(),
+                    A1Nreduz = retorno.A1Nreduz.ToString(),
+                    A1Nomprp1 = retorno.A1Nomprp1.ToString(),
+                    A1Nomprp2 = retorno.A1Nomprp2.ToString(),
+                    A1Tipo = retorno.A1Tipo.ToString(),
+                    A1Pessoa = retorno.A1Pessoa.ToString(),
+                    A1Msblql = retorno.A1Msblql.ToString(),
+                    A1Condpag = retorno.A1Condpag.ToString(),
+                    A1Inscr = retorno.A1Inscr.ToString(),
+                    A1Observ = retorno.A1Observ.ToString(),
+                    A1Ddd = retorno.A1Ddd.ToString(),
+                    A1Telex = retorno.A1Telex.ToString(),
+                    A1Email = retorno.A1Email.ToString(),
+                    A1Este = retorno.A1Este.ToString(),
+                    A1Mune = retorno.A1Mune.ToString(),
+                    A1Bairroe = retorno.A1Bairroe.ToString(),
+                    A1Endent = retorno.A1Endent.ToString(),
+                    A1Ultcom = retorno.A1Ultcom.ToString(),
+                    A1Lc = retorno.A1Lc != null ? (decimal)retorno.A1Lc : 0M,
+                    LcDisponivel = retorno.LcDisponivel != null ? (decimal)retorno.LcDisponivel : 0M,
+                    AVencer = retorno.AVencer != null ? (decimal)retorno.AVencer : 0M,
+                    A1Atr = retorno.A1Atr != null ? (decimal)retorno.A1Atr : 0M
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void SaveClientes(List<Cliente> clientes)
         {
             try

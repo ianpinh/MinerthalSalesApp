@@ -650,7 +650,7 @@
                                 FontFamily="MontSerratBold"
                                 FontSize="12"
                                 HorizontalTextAlignment="Center"
-                                Text="Carinho"
+                                Text="Carrinho"
                                 TextColor="{DynamicResource PrimaryDarkColor}"
                                 VerticalOptions="End"
                                 VerticalTextAlignment="End" />

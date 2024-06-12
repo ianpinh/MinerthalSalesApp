@@ -147,8 +147,20 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
             var btn = sender as Button;
             btn.BorderColor= Color.FromArgb("#2b4661");
 
-            var codCliente = btn.CommandParameter.ToString();
-            var model = App.ClienteRepository.GetByCodigo(codCliente);
+            //var codCliente = btn.CommandParameter.ToString();
+
+            // Extrair os parâmetros concatenados
+            var parametrosConcatenados = btn.CommandParameter.ToString();
+            var parametrosSeparados = parametrosConcatenados.Split('-');
+
+            if (parametrosSeparados.Length != 2)
+            {
+                throw new InvalidOperationException("Parâmetros inválidos no CommandParameter.");
+            }
+
+            var codCliente = parametrosSeparados[0].Trim();
+            var lojaCliente = parametrosSeparados[1].Trim();
+            var model = App.ClienteRepository.GetByCodigoeLoja(codCliente, lojaCliente);
             var viewModel = new ClientsPageDetailViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases, model);
             await Navigation.PushAsync(new ClientsPageDetail(viewModel));
         }

@@ -92,8 +92,14 @@
                                 Grid.ColumnSpan="2"
                                 BackgroundColor="Transparent"
                                 Clicked="BtnSelectedCliente_Clicked"
-                                CommandParameter="{Binding A1Cod}"
-                                ZIndex="5" />
+                                ZIndex="5">
+                                <Button.CommandParameter>
+                                    <MultiBinding StringFormat="{}{0}-{1}">
+                                        <Binding Path="A1Cod" />
+                                        <Binding Path="A1Loja" />
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
                             <Label
                                 Grid.Row="0"
                                 Grid.Column="0"
