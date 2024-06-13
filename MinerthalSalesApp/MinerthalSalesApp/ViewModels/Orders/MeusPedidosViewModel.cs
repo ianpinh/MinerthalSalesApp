@@ -89,12 +89,13 @@ namespace MinerthalSalesApp.ViewModels.Orders
                     foreach (var item in pedidos)
                     {
                         var carrinho = App.CartRepository.GetByOrderId(item.Id);
-                        var cliente = App.ClienteRepository.GetByCodigo(item.CodigoCliente);
+                        var cliente = App.ClienteRepository.GetByCodigo(item.CodigoCliente+item.CodigoLoja);
 
                         var order = new OrderDto
                         {
                             Id=item.Id,
                             CodigoCliente = item.CodigoCliente,
+                            CodigoLoja = item.CodigoLoja,
                             FilialMinerthal=item.FilialMinerthal,
                             TipoCobranca = item.TipoCobranca,
                             TipoVenda=item.TipoVenda,
@@ -159,7 +160,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
                 {
                     foreach (var item in pedidos)
                     {
-                        var cdCliente = item.CdCliente.Substring(0, item.CdCliente.Length-2);
+                        var cdCliente = item.CdCliente;
                         var cliente = App.ClienteRepository.GetByCodigo(cdCliente);
                         var tpCobranca = App.BancoRepository.RecuperarNomeTipoCobranca(item.CdTipocob);
                         var _resumoPedido = App.ResumoPedidoRepository.GetByNumPedido(item.NrPedido);

@@ -38,6 +38,7 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
         _model = viewmodel;
         BindingContext = _model;
         InitializeComponent();
+        Cliente.Text = $"{_model.Cliente.A1Cod}-{_model.Cliente.A1Loja}";
 
 
         Initialization = InitializeAsync();
@@ -316,6 +317,7 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
             var _pedido = new Pedido
             {
                 CodigoCliente = _model.Cliente.A1Cod,
+                CodigoLoja = _model.Cliente.A1Loja,
                 FilialMinerthal = _model.Pedido.FilialMinerthal,
                 PlanoPagamento = _model.Pedido.PlanoPagamento,
                 TipoCobranca = _model.Pedido.TipoCobranca,

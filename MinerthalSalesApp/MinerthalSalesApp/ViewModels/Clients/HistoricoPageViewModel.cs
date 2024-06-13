@@ -41,7 +41,7 @@ namespace MinerthalSalesApp.ViewModels.Clients
                 {
                     foreach (var item in pedidos)
                     {
-                        var cdCliente = item.CdCliente.Substring(0, item.CdCliente.Length-2);
+                        var cdCliente = item.CdCliente;
                         
                         var cliente =  App.ClienteRepository.GetByCodigo(cdCliente);
                         var tpCobranca =  App.BancoRepository.RecuperarNomeTipoCobranca(item.CdTipocob);

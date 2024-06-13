@@ -25,7 +25,8 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
         _popupAppService=App.PopupAppService;
         InitializeComponent();
         BindingContext = _model;
-        var codigo = $"{_model.Cliente.A1Cod}{_model.Cliente.A1Loja}";
+        var codigo = $"{_model.Cliente.A1Cod}-{_model.Cliente.A1Loja}";
+        Cliente.Text = codigo;
         Initialize(codigo);
       
         
@@ -153,7 +154,7 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
             var codigo = $"{_model.Cliente.A1Cod}{_model.Cliente.A1Loja}";
             var codCliente = codigo.Substring(0, 6);
             var codLoja = codigo.Substring(codigo.Length - 2);
-            var order = new Models.Dtos.OrderDto {Id=Guid.NewGuid(), CodigoCliente=codCliente };
+            var order = new Models.Dtos.OrderDto {Id=Guid.NewGuid(), CodigoCliente=codigo };
             var pedidoViewModel = new PedidoViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases, order);
             Microsoft.Maui.Storage.Preferences.Set("pedidoViewModel", JsonConvert.SerializeObject(pedidoViewModel));
             await Navigation.PushAsync(new PedidoPage(pedidoViewModel));

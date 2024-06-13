@@ -137,6 +137,7 @@
 
                         <!--  FIELDS  -->
                         <Label
+                            x:Name="Cliente"
                             Grid.Row="0"
                             Grid.Column="0"
                             Margin="0,-5,0,0"

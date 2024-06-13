@@ -14,6 +14,9 @@ namespace MinerthalSalesApp.Infra.Database.Tables
         [Column("CodigoCliente")]
         public string CodigoCliente { get; set; }
 
+        [Column("CodigoLoja")]
+        public string CodigoLoja { get; set; }
+
         [Column("Filial")]
         public string FilialMinerthal { get; set; }
 

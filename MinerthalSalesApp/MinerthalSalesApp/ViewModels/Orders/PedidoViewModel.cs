@@ -27,7 +27,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
             _alertService = alertService ?? throw new ArgumentNullException(nameof(alertService));
             _servicoDeCarregamentoDasBases=servicoDeCarregamentoDasBases;
             Pedido= pedido;
-            CarregarCliente(pedido.CodigoCliente);
+            CarregarCliente(pedido.CodigoCliente+pedido.CodigoLoja);
             CarregarListagens();
         }
 

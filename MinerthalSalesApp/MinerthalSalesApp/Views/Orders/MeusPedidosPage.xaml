@@ -467,8 +467,12 @@
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 FontAttributes="Bold"
-                                                FontSize="12"
-                                                Text="{Binding Cliente.A1Cod}" />
+                                                FontSize="12">
+                                                <MultiBinding StringFormat="{}{0}-{1}">
+                                                    <Binding Path="Cliente.A1Cod" />
+                                                    <Binding Path="Cliente.A1Loja" />
+                                                </MultiBinding>
+                                            </Label>
                                             <Label
                                                 Grid.Row="0"
                                                 Grid.Column="1"

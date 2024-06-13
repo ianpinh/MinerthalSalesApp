@@ -20,6 +20,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var command = $@"CREATE TABLE IF NOT EXISTS Pedido(
                                                   Id UNIQUEIDENTIFIER PRIMARY KEY  NOT NULL
                                                  ,CodigoCliente VARCHAR(20)
+                                                 ,CodigoLoja VARCHAR(20)
                                                  ,FilialMinerthal VARCHAR(20)
                                                  ,TipoPedido VARCHAR(20)
                                                  ,TipoVenda VARCHAR(20)
@@ -58,6 +59,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 {
                     Id=item.Id!=null ? Guid.Parse(item.Id) : Guid.Empty,
                     CodigoCliente=item.CodigoCliente.ToString(),
+                    CodigoLoja=item.CodigoLoja.ToString(),
                     FilialMinerthal=item.FilialMinerthal.ToString(),
                     TipoPedido=item.TipoPedido.ToString(),
                     TipoVenda=item.TipoVenda.ToString(),
@@ -95,6 +97,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 sb.AppendLine($@"INSERT INTO [Pedido](
                                                      Id
                                                     ,CodigoCliente
+                                                    ,CodigoLoja
                                                     ,FilialMinerthal
                                                     ,TipoPedido
                                                     ,TipoVenda
@@ -117,6 +120,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                             VALUES (
                                                      '{pedido.Id}'
                                                     ,'{pedido.CodigoCliente}'
+                                                    ,'{pedido.CodigoLoja}'
                                                     ,'{pedido.FilialMinerthal}'
                                                     ,'{pedido.TipoPedido}'
                                                     ,'{pedido.TipoVenda}'
@@ -189,6 +193,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     
                     var commandInsert = $@"INSERT INTO [Pedido](Id
                                                     ,CodigoCliente
+                                                    ,CodigoLoja
                                                     ,FilialMinerthal
                                                     ,TipoPedido
                                                     ,TipoVenda
@@ -211,6 +216,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                             VALUES (
                                                      '{item.Id}'
                                                     ,'{item.CodigoCliente}'
+                                                    ,'{item.CodigoLoja}'
                                                     ,'{item.FilialMinerthal}'
                                                     ,'{item.TipoPedido}'
                                                     ,'{item.TipoVenda}'
@@ -286,6 +292,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 Id=retorno.Id!=null ? Guid.Parse(retorno.Id) : Guid.Empty,
                 CodigoCliente=retorno.CodigoCliente.ToString(),
+                CodigoLoja=retorno.CodigoLoja.ToString(),
                 FilialMinerthal=retorno.FilialMinerthal.ToString(),
                 TipoPedido=retorno.TipoPedido.ToString(),
                 TipoVenda=retorno.TipoVenda.ToString(),
@@ -336,6 +343,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 Id=retorno.Id!=null ? Guid.Parse(retorno.Id) : Guid.Empty,
                 CodigoCliente=retorno.CodigoCliente.ToString(),
+                CodigoLoja=retorno.CodigoLoja.ToString(),
                 FilialMinerthal=retorno.FilialMinerthal.ToString(),
                 TipoPedido=retorno.TipoPedido.ToString(),
                 TipoVenda=retorno.TipoVenda.ToString(),
@@ -389,6 +397,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     
                     var commandInsert = $@"INSERT INTO [Pedido](Id,
                                                      CodigoCliente
+                                                    ,CodigoLoja
                                                     ,FilialMinerthal
                                                     ,TipoPedido
                                                     ,TipoVenda
@@ -411,6 +420,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                             VALUES (
                                                      '{item.Id}'
                                                     ,'{item.CodigoCliente}'
+                                                    ,'{item.CodigoLoja}'
                                                     ,'{item.FilialMinerthal}'
                                                     ,'{item.TipoPedido}'
                                                     ,'{item.TipoVenda}'

@@ -8,6 +8,7 @@ namespace MinerthalSalesApp.Models.Dtos
     {
         public Guid Id { get; set; }
         public string CodigoCliente { get; set; }
+        public string CodigoLoja { get; set; }
         public string FilialMinerthal { get; set; }
         public string TipoPedido { get; set; }
         public string TipoVenda { get; set; }

@@ -177,6 +177,7 @@
                             Stroke="#ddd"
                             StrokeShape="RoundRectangle 3,3,3,3">
                             <Label
+                                x:Name="Cliente"
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 Grid.ColumnSpan="3"

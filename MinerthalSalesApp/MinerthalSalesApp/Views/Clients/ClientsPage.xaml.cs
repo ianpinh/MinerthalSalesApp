@@ -160,7 +160,7 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
 
             var codCliente = parametrosSeparados[0].Trim();
             var lojaCliente = parametrosSeparados[1].Trim();
-            var model = App.ClienteRepository.GetByCodigoeLoja(codCliente, lojaCliente);
+            var model = App.ClienteRepository.GetByCodigo(codCliente+lojaCliente);
             var viewModel = new ClientsPageDetailViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases, model);
             await Navigation.PushAsync(new ClientsPageDetail(viewModel));
         }

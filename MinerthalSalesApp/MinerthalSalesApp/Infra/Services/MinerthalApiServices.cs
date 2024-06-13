@@ -273,7 +273,7 @@ tryAgain:
                     foreach (var item in listaPedidos)
                     {
                         var carrinho = App.CartRepository.GetByOrderId(item.Id);
-                        var cliente = App.ClienteRepository.GetByCodigo(item.CodigoCliente);
+                        var cliente = App.ClienteRepository.GetByCodigo(item.CodigoCliente+item.CodigoLoja);
                         var totalFrete = carrinho.Sum(x => x.Frete * x.Quantidade);
 
                         var pesoTotal = 0M;
@@ -403,7 +403,7 @@ tryAgain:
                 {
 
                     var carrinho = App.CartRepository.GetByOrderId(pedido.Id);
-                    var cliente = App.ClienteRepository.GetByCodigo(pedido.CodigoCliente);
+                    var cliente = App.ClienteRepository.GetByCodigo(pedido.CodigoCliente+pedido.CodigoLoja);
                     var totalFrete = carrinho.Sum(x => x.Frete * x.Quantidade);
 
                     var pesoTotal = 0M;
