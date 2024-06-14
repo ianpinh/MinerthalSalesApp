@@ -290,7 +290,7 @@ tryAgain:
                             : new List<DictionaryDto>();
 
                         var valorPedido = carrinho.Sum(x =>
-                            (x.Quantidade * x.ValorCombinado) +
+                            ((x.Quantidade * x.ValorCombinado) / (1 + (x.Desconto/100))) +
                             ((x.Quantidade * x.ValorCombinado) * (x.TaxaEncargos == 0 ? 0 : x.TaxaEncargos / 100)) +
                             totalFrete);
 
@@ -321,7 +321,7 @@ tryAgain:
                             itensPedido = carrinho.Select(x => new TADDPEDIDODET
                             {
                                 PERCCOMISSAO = x.Comissao.ToString(),
-                                PRECOUNITARIO = x.ValorCombinado.ToString().Replace(',', '.'),
+                                PRECOUNITARIO = (x.ValorCombinado/(1+(x.Desconto/100))).ToString().Replace(',', '.'),
                                 QUANTIDADEPRODUTO=x.Quantidade.ToString(),
                                 PRODUTOPEDIDO =x.CodProduto
                             }).ToArray();

@@ -166,7 +166,7 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
                             totalEncargos = ((subtotal +subtotalFrete)* (_model.PlanoPadraoCliente.TxPerFin/100));
 
                         if (_model.PlanoPadraoCliente.VlDescpl>0)
-                            totalDescontos = ((subtotal +subtotalFrete)* (_model.PlanoPadraoCliente.VlDescpl/100));
+                            totalDescontos = (subtotal + subtotalFrete) - ((subtotal +subtotalFrete) / (1 +(_model.PlanoPadraoCliente.VlDescpl/100)));
                     }
 
 

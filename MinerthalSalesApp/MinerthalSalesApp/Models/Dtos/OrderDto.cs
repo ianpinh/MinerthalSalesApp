@@ -53,6 +53,7 @@ namespace MinerthalSalesApp.Models.Dtos
         public decimal Comissao { get; set; }
         public decimal TaxaPlano { get; set; } = 0M;
         public decimal Desconto { get; set; }
+        public decimal TaxaDesconto { get; set; }
         public string ImagemProduto { get; set; }
         public decimal ValorDescontoMaximo { get; set; } = 0M;
         public decimal ValorDescontoMinimo { get; set; } = 0M;
@@ -99,12 +100,12 @@ namespace MinerthalSalesApp.Models.Dtos
 
         private decimal CalcularValorTotal()
         {
-            var valorTotal = (Quantidade * ValorCombinado)+(Quantidade * FreteUnidade);
+            var valorTotal = (Quantidade * ValorCombinado) + (Quantidade * FreteUnidade);
             if (TaxaPlano>0)
                 valorTotal+=(valorTotal*(TaxaPlano/100));
             else if (Desconto >0)
-                valorTotal -= (valorTotal*(Desconto/100));
-
+                valorTotal = (valorTotal/(1+(Desconto/100)));
+     
             return valorTotal;
         }
 
@@ -117,7 +118,7 @@ namespace MinerthalSalesApp.Models.Dtos
         private decimal CalculoDesconto()
         {
             var _valorTotal = (Quantidade * ValorCombinado)+(Quantidade * FreteUnidade);
-            return Desconto >0 ? _valorTotal*(Desconto/100) : 0M;
+            return Desconto >0 ? _valorTotal - _valorTotal / (1 + (Desconto / 100)) : 0M;
         }
 
         public List<TabelaPreco> TbPrecosProduto { get; set; } = new List<TabelaPreco>();
@@ -125,9 +126,10 @@ namespace MinerthalSalesApp.Models.Dtos
         public void CalcularComissaoTotal()
         {
             var faixaComissao = 0M;
-            var totalDescontos = ValorBrutoProduto - ValorCombinado;
+            var totalDescontos = 100 * (1 - (((ValorCombinado) / ValorBrutoProduto)));
+            
 
-            foreach (var item in TbPrecosProduto)
+                foreach (var item in TbPrecosProduto)
             {
                 if ((totalDescontos >=  item.PerMin) && (totalDescontos <=item.PerMax))
                 {

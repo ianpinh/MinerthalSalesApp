@@ -118,11 +118,15 @@ public partial class CarrinhoPage : ContentPage
 
     private void AddValor_Clicked(object sender, EventArgs e)
     {
-
         var valorCombinado = ConvertValueToDecimal(ValorCombinado.Text);
         _ = int.TryParse(Quantidade.Text, out int quantidade);
 
-        valorCombinado+=0.01M;
+        if (model.PlanoPadraoCliente.VlDescpl > 0)
+        {
+            valorCombinado = ConvertValueToDecimal(Total.Text);
+        }
+
+        valorCombinado +=0.01M;
         ValorCombinado.Text = valorCombinado.ToString("N2", cultureInfo);
         SalvarItemCarrinho();
         CalcularItem();
@@ -157,13 +161,15 @@ public partial class CarrinhoPage : ContentPage
         if (model.PlanoPadraoCliente.TxPerFin>0)
             totalEncargos = subtotal * (model.PlanoPadraoCliente.TxPerFin/100);
 
-        if (model.PlanoPadraoCliente.VlDescpl>0)
-            totalDescontos = subtotal * (model.PlanoPadraoCliente.VlDescpl/100);
+        if (model.PlanoPadraoCliente.VlDescpl > 0)
+            totalDescontos = subtotal - (subtotal / (1 + (model.PlanoPadraoCliente.VlDescpl / 100)));
+                //subtotal * (model.PlanoPadraoCliente.VlDescpl/100);
 
-        var totalGeral = (subtotal+totalEncargos)-totalDescontos;
+        //var totalGeral = (subtotal+totalEncargos)-totalDescontos;
+        var totalGeral = ((subtotal / (1+(model.PlanoPadraoCliente.VlDescpl / 100))) + totalEncargos);
         var valorComissao = 0M;
         if (faixaComissao>0)
-            valorComissao = subTotalProduto*(faixaComissao/100);
+            valorComissao = totalGeral * (faixaComissao/100);
 
         Frete.Text = subtotalFrete.ToString("c", cultureInfo);
         SubTotal.Text = subtotal.ToString("c", cultureInfo);
@@ -261,10 +267,16 @@ public partial class CarrinhoPage : ContentPage
     private void SalvarItemCarrinho()
     {
         var valorCombinado = ConvertValueToDecimal(ValorCombinado.Text);
-        _=int.TryParse(Quantidade.Text.Replace(",", "").Replace(".", ""), out int quantidade);
+        decimal desc;
+        _ =int.TryParse(Quantidade.Text.Replace(",", "").Replace(".", ""), out int quantidade);
 
 
         var totalFrete = quantidade * model.ItemDeCalculoCarrinho.FreteUnidade;
+
+        if (model.PlanoPadraoCliente.VlDescpl > 0)
+        {
+            model.ItemDeCalculoCarrinho.TaxaDesconto = model.PlanoPadraoCliente.VlDescpl;
+        }
 
         model.ItemDeCalculoCarrinho.Quantidade=quantidade;
         model.ItemDeCalculoCarrinho.ValorCombinado= valorCombinado;
@@ -361,6 +373,7 @@ public partial class CarrinhoPage : ContentPage
         var valido = true;
         var quantidade = model.ItemDeCalculoCarrinho.Quantidade;
         var valorombinado = model.ItemDeCalculoCarrinho.ValorCombinado;
+        
 
 
         //QUANTIDADE
