@@ -162,11 +162,11 @@ public partial class CarrinhoPage : ContentPage
             totalEncargos = subtotal * (model.PlanoPadraoCliente.TxPerFin/100);
 
         if (model.PlanoPadraoCliente.VlDescpl > 0)
-            totalDescontos = subtotal - (subtotal / (1 + (model.PlanoPadraoCliente.VlDescpl / 100)));
+            totalDescontos = subTotalProduto - (subTotalProduto / (1 + (model.PlanoPadraoCliente.VlDescpl / 100)));
                 //subtotal * (model.PlanoPadraoCliente.VlDescpl/100);
 
         //var totalGeral = (subtotal+totalEncargos)-totalDescontos;
-        var totalGeral = ((subtotal / (1+(model.PlanoPadraoCliente.VlDescpl / 100))) + totalEncargos);
+        var totalGeral = ((subTotalProduto / (1+(model.PlanoPadraoCliente.VlDescpl / 100))) + totalEncargos + subtotalFrete);
         var valorComissao = 0M;
         if (faixaComissao>0)
             valorComissao = totalGeral * (faixaComissao/100);

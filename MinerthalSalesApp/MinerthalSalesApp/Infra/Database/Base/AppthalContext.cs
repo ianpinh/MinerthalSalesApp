@@ -72,6 +72,32 @@ namespace MinerthalSalesApp.Infra.Database.Base
                 throw;
             }
         }
+        public List<Dictionary<string, object>> ExecutarComandoConsulta(string query)
+        {
+            var results = new List<Dictionary<string, object>>();
+
+            using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
+            {
+                connection.Open();
+                using (var command = new SqliteCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var row = new Dictionary<string, object>();
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                row[reader.GetName(i)] = reader.GetValue(i);
+                            }
+                            results.Add(row);
+                        }
+                    }
+                }
+            }
+
+            return results;
+        }
 
         public dynamic ExcecutarSelectFirstOrDefault(string command)
         {

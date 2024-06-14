@@ -100,12 +100,13 @@ namespace MinerthalSalesApp.Models.Dtos
 
         private decimal CalcularValorTotal()
         {
-            var valorTotal = (Quantidade * ValorCombinado) + (Quantidade * FreteUnidade);
+            var valorTotal = (Quantidade * ValorCombinado);
+            if (Desconto > 0)
+                valorTotal = (valorTotal / (1 + (Desconto / 100)));
             if (TaxaPlano>0)
                 valorTotal+=(valorTotal*(TaxaPlano/100));
-            else if (Desconto >0)
-                valorTotal = (valorTotal/(1+(Desconto/100)));
-     
+
+            valorTotal += (Quantidade * FreteUnidade);
             return valorTotal;
         }
 
@@ -117,8 +118,8 @@ namespace MinerthalSalesApp.Models.Dtos
 
         private decimal CalculoDesconto()
         {
-            var _valorTotal = (Quantidade * ValorCombinado)+(Quantidade * FreteUnidade);
-            return Desconto >0 ? _valorTotal - _valorTotal / (1 + (Desconto / 100)) : 0M;
+            var _valorTotal = (Quantidade * ValorCombinado);
+            return Desconto >0 ? _valorTotal  - _valorTotal / (1 + (Desconto / 100)) : 0M;
         }
 
         public List<TabelaPreco> TbPrecosProduto { get; set; } = new List<TabelaPreco>();

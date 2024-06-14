@@ -200,7 +200,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
                 totalEncargos = subtotal * (pedido.PercentualJuros/100);
 
             if (pedido.PercentualDesconto>0)
-                totalDescontos = subtotal - (subtotal / (1 + (pedido.PercentualDesconto/100)));
+                totalDescontos = subTotalProduto - (subTotalProduto / (1 + (pedido.PercentualDesconto/100)));
 
             var totalGeral = (subtotal+totalEncargos)-totalDescontos;
 

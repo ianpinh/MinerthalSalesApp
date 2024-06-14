@@ -1,7 +1,9 @@
-﻿using MinerthalSalesApp.Customs.CustomHelpers;
+﻿using Microsoft.Data.Sqlite;
+using MinerthalSalesApp.Customs.CustomHelpers;
 using MinerthalSalesApp.Infra.Database.Base;
 using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Database.Tables;
+using System.Data.Common;
 using System.Text;
 
 namespace MinerthalSalesApp.Infra.Database.Repository
@@ -41,6 +43,27 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                  ,ValorParcelas DECIMAL(7,2)
                                                  ,ValorFrete30 DECIMAL(7,2));";
             _context.ExcecutarComandoCrud(command);
+
+
+            var checkColumnCommand = "PRAGMA table_info(Pedido);";
+            var columns = _context.ExecutarComandoConsulta(checkColumnCommand);
+
+            bool columnExists = false;
+            foreach (var column in columns)
+            {
+                if (column["name"].ToString() == "CodigoLoja")
+                {
+                    columnExists = true;
+                    break;
+                }
+            }
+
+            // Adicionar a coluna se ela não existir
+            if (!columnExists)
+            {
+                var addColumnCommand = "ALTER TABLE Pedido ADD COLUMN CodigoLoja VARCHAR(20);";
+                _context.ExcecutarComandoCrud(addColumnCommand);
+            }
         }
 
         public List<Pedido> GetAll()
