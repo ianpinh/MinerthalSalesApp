@@ -169,7 +169,7 @@ public partial class CarrinhoPage : ContentPage
         var totalGeral = ((subTotalProduto / (1+(model.PlanoPadraoCliente.VlDescpl / 100))) + totalEncargos + subtotalFrete);
         var valorComissao = 0M;
         if (faixaComissao>0)
-            valorComissao = totalGeral * (faixaComissao/100);
+            valorComissao = (subTotalProduto / (1 + (model.PlanoPadraoCliente.VlDescpl / 100))) * (faixaComissao/100);
 
         Frete.Text = subtotalFrete.ToString("c", cultureInfo);
         SubTotal.Text = subtotal.ToString("c", cultureInfo);
@@ -267,7 +267,6 @@ public partial class CarrinhoPage : ContentPage
     private void SalvarItemCarrinho()
     {
         var valorCombinado = ConvertValueToDecimal(ValorCombinado.Text);
-        decimal desc;
         _ =int.TryParse(Quantidade.Text.Replace(",", "").Replace(".", ""), out int quantidade);
 
 

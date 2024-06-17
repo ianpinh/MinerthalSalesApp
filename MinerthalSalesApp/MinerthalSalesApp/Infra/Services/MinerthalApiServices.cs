@@ -447,7 +447,7 @@ tryAgain:
                         itensPedido = carrinho.Select(x => new TADDPEDIDODET
                         {
                             PERCCOMISSAO = x.Comissao.ToString(),
-                            PRECOUNITARIO=x.ValorCombinado.ToString(),
+                            PRECOUNITARIO= (x.ValorCombinado / (1 + (x.Desconto / 100))).ToString().Replace(',', '.'),
                             QUANTIDADEPRODUTO=x.Quantidade.ToString(),
                             PRODUTOPEDIDO =x.CodProduto
                         }).ToList();
