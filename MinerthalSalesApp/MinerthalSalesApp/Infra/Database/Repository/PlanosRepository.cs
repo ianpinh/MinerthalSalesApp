@@ -67,7 +67,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     plano.NrItmin=item.NrItmin!=null ? item.NrItmin.ToString() : "";
                     plano.TpVenda=item.TpVenda!=null ? item.TpVenda.ToString() : "";
                     plano.CdRcaxxx= item.CdRcaxxx!=null ? Convert.ToInt32(item.CdRcaxxx) : 0;
-                    plano.TxPerFin= item.TxPerFin!=null ? Convert.ToInt32(item.TxPerFin) : 0M;
+                    plano.TxPerFin= item.TxPerFin!=null ? (decimal)item.TxPerFin : 0M;
                     plano.VlMinped= item.VlMinped!=null ? Convert.ToInt32(item.VlMinped) : 0M;
                     plano.VlDescpl= item.VlDescpl!=null ? Convert.ToInt32(item.VlDescpl) : 0M;
                     plano.TxPerfinProd=item.TxPerfinProd!=null ? Convert.ToInt32(item.TxPerfinProd) : 0M;
@@ -268,7 +268,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 NrItmin=retorno.NrItmin.ToString(),
                 TpVenda=retorno.TpVenda.ToString(),
                 CdRcaxxx=retorno.CdRcaxxx!=null ? Convert.ToInt32(retorno.CdRcaxxx) : 0,
-                TxPerFin=retorno.TxPerFin!=null ? Convert.ToInt32(retorno.TxPerFin) : 0M,
+                TxPerFin=retorno.TxPerFin!=null ? (decimal)retorno.TxPerFin : 0M,
                 VlMinped=retorno.VlMinped!=null ? Convert.ToInt32(retorno.VlMinped) : 0M,
                 VlDescpl=retorno.VlDescpl!=null ? Convert.ToInt32(retorno.VlDescpl) : 0M,
                 TxPerfinProd=retorno.TxPerfinProd!=null ? Convert.ToInt32(retorno.TxPerfinProd) : 0M,
