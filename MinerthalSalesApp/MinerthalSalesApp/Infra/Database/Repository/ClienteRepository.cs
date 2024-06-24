@@ -57,7 +57,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                var command = $@"SELECT * FROM Cliente";
+                var command = $@"SELECT * FROM Cliente ORDER BY A1Nome";
                 var retorno = _context.ExcecutarSelect(command);
 
                 if (retorno == null)

@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Detalhes do pedido">
+
     <VerticalStackLayout VerticalOptions="FillAndExpand">
         <Grid ColumnDefinitions="100,*" RowDefinitions="*">
             <Label
@@ -34,7 +35,8 @@
                             Margin="0,-20,0,0"
                             Padding="2"
                             ColumnDefinitions="70,*,*,*,*"
-                            RowDefinitions="25,25,25,25,25,25">
+                            RowDefinitions="25,25,25,25,25,25,25">
+
                             <Image
                                 Grid.Row="1"
                                 Grid.RowSpan="3"
@@ -44,11 +46,10 @@
                                 Source="{Binding ImagemProduto}"
                                 WidthRequest="40" />
 
-
                             <Label
                                 Grid.Row="1"
                                 Grid.Column="1"
-                                Grid.ColumnSpan="5"
+                                Grid.ColumnSpan="4"
                                 BackgroundColor="#254866"
                                 FontAttributes="Bold"
                                 FontSize="12"
@@ -63,7 +64,6 @@
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
-
 
                             <Label
                                 Grid.Row="2"
@@ -87,7 +87,6 @@
                                 Grid.Column="1"
                                 Grid.ColumnSpan="2"
                                 Padding="3"
-                                BackgroundColor="#ccc"
                                 FontSize="12"
                                 Text="Valor Unitário" />
 
@@ -96,7 +95,6 @@
                                 Grid.Column="3"
                                 Grid.ColumnSpan="2"
                                 Padding="3,3,20,3"
-                                BackgroundColor="#ccc"
                                 FontSize="12"
                                 HorizontalTextAlignment="End"
                                 Text="{Binding VlUnitExtenso}" />
@@ -123,7 +121,6 @@
                                 Grid.Column="1"
                                 Grid.ColumnSpan="2"
                                 Padding="3"
-                                BackgroundColor="#ccc"
                                 FontSize="12"
                                 Text="Percentural Comissão" />
 
@@ -132,35 +129,26 @@
                                 Grid.Column="3"
                                 Grid.ColumnSpan="2"
                                 Padding="3,3,20,3"
-                                BackgroundColor="#ccc"
                                 FontSize="12"
                                 HorizontalTextAlignment="End"
                                 Text="{Binding CdPercComiss, StringFormat='{0}%'}" />
-                            <!--<Label
-                                Grid.Row="4"
+
+                            <Label
+                                Grid.Row="6"
                                 Grid.Column="1"
                                 Grid.ColumnSpan="2"
                                 Padding="3"
-                                BackgroundColor="#ccc"
                                 FontSize="12"
                                 Text="Valor Venda" />
 
                             <Label
-                                Grid.Row="4"
+                                Grid.Row="6"
                                 Grid.Column="3"
                                 Grid.ColumnSpan="2"
-                                Padding="3"
-                                BackgroundColor="#ccc"
+                                Padding="3,3,20,3"
                                 FontSize="12"
-                                HorizontalTextAlignment="Center"
-                                Text="{Binding VlVendaExtenso}" />-->
-
-
-
-
-
-
-
+                                HorizontalTextAlignment="End"
+                                Text="{Binding VlVendaExtenso}" />
 
                         </Grid>
                     </ViewCell>

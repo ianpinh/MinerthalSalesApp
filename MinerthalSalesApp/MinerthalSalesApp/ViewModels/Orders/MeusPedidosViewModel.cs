@@ -211,7 +211,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
 
         {
             var pedidoTransmisao = await _servicoDeCarregamentoDasBases.TransmitirPedidos();
-            await _alertService.ShowAlertAsync("Enviar Pedido", $"Status: {pedidoTransmisao.sucesso}.  Menssagem retorno: {pedidoTransmisao.Mensagem}", "Ok");
+            await _alertService.ShowAlertAsync("Enviar Pedido", $"Status: {pedidoTransmisao.Mensagem}. ", "Ok");
             return pedidoTransmisao.sucesso=="Sucesso";
 
             //if (pedidoTransmisao.sucesso=="Sucesso")

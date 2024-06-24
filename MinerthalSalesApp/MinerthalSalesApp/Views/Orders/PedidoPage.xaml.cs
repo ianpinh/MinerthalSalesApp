@@ -155,7 +155,7 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
 
                 if (_model.Pedido.ItensPedido.Any())
                 {
-                    QtdProdutos.Text = _model.Pedido.ItensPedido.Count.ToString();
+                    QtdProdutos.Text = _model.Pedido.ItensPedido.Sum(x => (x.Quantidade)).ToString();
                     var subtotal = _model.Pedido.ItensPedido.Sum(x => (x.Quantidade * x.ValorCombinado));
                     var subtotalFrete = _model.Pedido.ItensPedido.Sum(x => (x.Quantidade * x.FreteUnidade));
                     var totalEncargos = 0M;
