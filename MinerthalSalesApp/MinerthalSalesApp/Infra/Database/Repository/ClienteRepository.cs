@@ -207,6 +207,8 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     {
                         var a1Nreduz = item.A1Nreduz.Contains("'") ? item.A1Nreduz.Replace("'", "''") : item.A1Nreduz;
                         var a1Endent = item.A1Endent.Contains("'") ? item.A1Endent.Replace("'", "''") : item.A1Endent;
+                        var a1Bairroe = item.A1Bairroe.Contains("'") ? item.A1Bairroe.Replace("'", "''") : item.A1Bairroe;
+                        var a1Mune = item.A1Mune.Contains("'") ? item.A1Mune.Replace("'", "''") : item.A1Mune;
 
                         var commandInsert = $@"INSERT INTO [Cliente](
                                                          A1Cgc 
@@ -252,8 +254,8 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                         ,'{item.A1Telex}'
                                                         ,'{item.A1Email}'
                                                         ,'{item.A1Este}'
-                                                        ,'{item.A1Mune}'
-                                                        ,'{item.A1Bairroe}'
+                                                        ,'{a1Mune}'
+                                                        ,'{a1Bairroe}'
                                                         ,'{a1Endent}'
                                                         ,'{item.A1Ultcom}'
                                                         , {item.A1Lc.ToStringInvariant("0.00")}
