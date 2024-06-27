@@ -80,7 +80,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public List<HistoricoDePedidos> GetAll()
         {
-            var command = $@"SELECT * FROM HistoricoDePedidos;";
+            var command = $@"SELECT * FROM HistoricoDePedidos Order by Id Desc;";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -177,7 +177,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var mesAnterior = DateTime.Today.AddMonths(-1);
             var lista = GetAll();
             var historico = lista.Where(x => x.DataPedido.Value >= mesAnterior).ToList();
-            return lista!=null && lista.Any() ? lista.OrderByDescending(x => x.DataPedido).Take(10).ToList() : new List<HistoricoDePedidos>();
+            return lista!=null && lista.Any() ? lista.OrderByDescending(x => x.DataPedido).Take(20).ToList() : new List<HistoricoDePedidos>();
         }
 
         public void Add(HistoricoDePedidos historico)

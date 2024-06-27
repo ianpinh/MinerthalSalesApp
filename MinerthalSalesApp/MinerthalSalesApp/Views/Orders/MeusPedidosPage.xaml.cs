@@ -31,13 +31,13 @@ public partial class MeusPedidosPage : ContentPage
         loadingImage.IsAnimationPlaying = true;
 
 
-
-        Loaded+=(s, e) =>
+        ListarPedidosViewModel();
+        /*Loaded +=(s, e) =>
         {
             SetInvisibelContent();
             MeusPedidosContent.IsVisible=true;
             //  FecharLoading();
-        };
+        };*/
     }
 
 
