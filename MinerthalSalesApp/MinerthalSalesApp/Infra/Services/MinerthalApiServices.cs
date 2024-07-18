@@ -279,7 +279,7 @@ tryAgain:
                         var pesoTotal = 0M;
                         foreach (var cart in carrinho)
                         {
-                            var produto = App.ProdutosRepository.GetById(cart.ProdutoId);
+                            var produto = App.ProdutosRepository.GetByCodProduto(cart.CodProduto);
                             pesoTotal +=produto.VlPeso * cart.Quantidade;
                         }
                         var precFreteLiquido = totalFrete/pesoTotal;
@@ -321,8 +321,8 @@ tryAgain:
                             itensPedido = carrinho.Select(x => new TADDPEDIDODET
                             {
                                 PERCCOMISSAO = x.Comissao.ToString(),
-                                PRECOUNITARIO = (x.ValorCombinado/(1+(x.Desconto/100))).ToString().Replace(',', '.'),
-                                QUANTIDADEPRODUTO=x.Quantidade.ToString(),
+                                PRECOUNITARIO = (x.ValorCombinado / (1 + (x.Desconto / 100))).ToString("F2").Replace(',', '.'),
+                                QUANTIDADEPRODUTO =x.Quantidade.ToString(),
                                 PRODUTOPEDIDO =x.CodProduto
                             }).ToArray();
 
@@ -409,7 +409,7 @@ tryAgain:
                     var pesoTotal = 0M;
                     foreach (var cart in carrinho)
                     {
-                        var produto = App.ProdutosRepository.GetById(cart.ProdutoId);
+                        var produto = App.ProdutosRepository.GetByCodProduto(cart.CodProduto);
                         pesoTotal +=produto.VlPeso * cart.Quantidade;
                     }
                     var precFreteLiquido = totalFrete/pesoTotal;
@@ -447,7 +447,7 @@ tryAgain:
                         itensPedido = carrinho.Select(x => new TADDPEDIDODET
                         {
                             PERCCOMISSAO = x.Comissao.ToString(),
-                            PRECOUNITARIO= (x.ValorCombinado / (1 + (x.Desconto / 100))).ToString().Replace(',', '.'),
+                            PRECOUNITARIO= (x.ValorCombinado / (1 + (x.Desconto/100))).ToString("F2").Replace(',', '.'),
                             QUANTIDADEPRODUTO=x.Quantidade.ToString(),
                             PRODUTOPEDIDO =x.CodProduto
                         }).ToList();
