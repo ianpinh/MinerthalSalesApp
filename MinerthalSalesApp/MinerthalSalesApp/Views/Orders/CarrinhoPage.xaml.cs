@@ -299,8 +299,8 @@ public partial class CarrinhoPage : ContentPage
     {
         var valido = true;
         //VALOR
-        var valorMaximo = model.ItemDeCalculoCarrinho.ValorBrutoProduto / (1 + (model.ItemDeCalculoCarrinho.ValorDescontoMinimo / 100));
-        var valorMinimo = model.ItemDeCalculoCarrinho.ValorBrutoProduto / (1 + (model.ItemDeCalculoCarrinho.ValorDescontoMaximo / 100));
+        var valorMaximo = model.ItemDeCalculoCarrinho.ValorBrutoProduto - (model.ItemDeCalculoCarrinho.ValorBrutoProduto * (model.ItemDeCalculoCarrinho.ValorDescontoMinimo / 100));
+        var valorMinimo = model.ItemDeCalculoCarrinho.ValorBrutoProduto - (model.ItemDeCalculoCarrinho.ValorBrutoProduto * (model.ItemDeCalculoCarrinho.ValorDescontoMaximo / 100));
 
         if (valorCombinado>valorMaximo)
         {
@@ -339,8 +339,8 @@ public partial class CarrinhoPage : ContentPage
         }
 
         //VALOR
-        var valorMaximo = model.ItemDeCalculoCarrinho.ValorBrutoProduto / (1 + (model.ItemDeCalculoCarrinho.ValorDescontoMinimo / 100));
-        var valorMinimo = model.ItemDeCalculoCarrinho.ValorBrutoProduto / (1 + (model.ItemDeCalculoCarrinho.ValorDescontoMaximo / 100));
+        var valorMaximo = model.ItemDeCalculoCarrinho.ValorBrutoProduto - (model.ItemDeCalculoCarrinho.ValorBrutoProduto * (model.ItemDeCalculoCarrinho.ValorDescontoMinimo / 100));
+        var valorMinimo = model.ItemDeCalculoCarrinho.ValorBrutoProduto - (model.ItemDeCalculoCarrinho.ValorBrutoProduto * (model.ItemDeCalculoCarrinho.ValorDescontoMaximo / 100));
 
 
 
@@ -390,8 +390,8 @@ public partial class CarrinhoPage : ContentPage
         }
 
         //VALOR
-        var valorMaximo = model.ItemDeCalculoCarrinho.ValorBrutoProduto / (1 + (model.ItemDeCalculoCarrinho.ValorDescontoMinimo / 100));
-        var valorMinimo = model.ItemDeCalculoCarrinho.ValorBrutoProduto / (1 + (model.ItemDeCalculoCarrinho.ValorDescontoMaximo / 100));
+        var valorMaximo = model.ItemDeCalculoCarrinho.ValorBrutoProduto - (model.ItemDeCalculoCarrinho.ValorBrutoProduto * (model.ItemDeCalculoCarrinho.ValorDescontoMinimo / 100));
+        var valorMinimo = model.ItemDeCalculoCarrinho.ValorBrutoProduto - (model.ItemDeCalculoCarrinho.ValorBrutoProduto * (model.ItemDeCalculoCarrinho.ValorDescontoMaximo / 100));
 
 
 
