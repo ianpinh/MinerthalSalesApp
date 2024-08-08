@@ -270,6 +270,7 @@ tryAgain:
                 var listaPedidos = App.PedidoRepository.GetAll();
                 if (listaPedidos!=null && listaPedidos.Any())
                 {
+                    var semaphore = new SemaphoreSlim(1,1);
                     foreach (var item in listaPedidos)
                     {
                         var carrinho = App.CartRepository.GetByOrderId(item.Id);
@@ -345,6 +346,8 @@ tryAgain:
                         using WSPEDIDOSERVICEPECASOAPClient client = new WSPEDIDOSERVICEPECASOAPClient();
                         var codCliente = $"{cliente.A1Cod}{cliente.A1Loja}";
                         var xml = SerializeToXml(_order);
+
+                        await semaphore.WaitAsync(); // Aguardando o acesso ao semáforo
                         try
                         {
                             totalEnviados+=1;
@@ -370,6 +373,10 @@ tryAgain:
                             {
                                 throw;
                             }
+                        }
+                        finally
+                        {
+                            semaphore.Release(); // liberando semaforo.
                         }
                     }
 

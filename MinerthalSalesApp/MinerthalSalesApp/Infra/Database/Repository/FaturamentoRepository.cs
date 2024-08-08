@@ -272,7 +272,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 return new List<Faturamento>();
 
             var hoje = DateTime.Today;
-            var titulosAvencer = titulos.Where(x => x.DataDeVencimento>=hoje && x.DataDeVencimento.Value.Month==hoje.Month).ToList();
+            var titulosAvencer = titulos.Where(x => x.DataDeVencimento>=hoje/* && x.DataDeVencimento.Value.Month==hoje.Month*/).ToList();
 
             return titulosAvencer;
 

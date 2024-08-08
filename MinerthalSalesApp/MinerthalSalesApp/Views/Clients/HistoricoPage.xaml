@@ -9,7 +9,7 @@
         <ListView
             x:Name="LW_HistoricoPedido"
             ItemsSource="{Binding HistoricoPedido}"
-            RowHeight="500"
+            RowHeight="700"
             SelectionMode="None"
             SeparatorColor="#254866">
             <ListView.ItemTemplate>
@@ -311,7 +311,7 @@
                                                 <Label
                                                     Grid.Row="0"
                                                     Grid.Column="4"
-                                                    Grid.ColumnSpan="4"
+                                                    Grid.ColumnSpan="6"
                                                     Margin="0,0,0,0"
                                                     Padding="0,0,5,0"
                                                     FontSize="11"
@@ -375,7 +375,7 @@
                                                 <Label
                                                     Grid.Row="2"
                                                     Grid.Column="2"
-                                                    Grid.ColumnSpan="2"
+                                                    Grid.ColumnSpan="3"
                                                     Margin="10,0,0,0"
                                                     FontAttributes="Bold"
                                                     FontSize="11"
@@ -385,7 +385,7 @@
 
                                                 <Label
                                                     Grid.Row="2"
-                                                    Grid.Column="4"
+                                                    Grid.Column="5"
                                                     Grid.ColumnSpan="2"
                                                     Margin="0,0,0,0"
                                                     Padding="0"

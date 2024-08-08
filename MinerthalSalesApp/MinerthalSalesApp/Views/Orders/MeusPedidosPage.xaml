@@ -466,21 +466,15 @@
                                             <Label
                                                 Grid.Row="0"
                                                 Grid.Column="0"
+                                                Grid.ColumnSpan="2"
                                                 FontAttributes="Bold"
                                                 FontSize="12">
-                                                <MultiBinding StringFormat="{}{0}-{1}">
+                                                <MultiBinding StringFormat="{}{0}-{1} {2}">
                                                     <Binding Path="Cliente.A1Cod" />
                                                     <Binding Path="Cliente.A1Loja" />
+                                                    <Binding Path="Cliente.A1Nome" />
                                                 </MultiBinding>
                                             </Label>
-                                            <Label
-                                                Grid.Row="0"
-                                                Grid.Column="1"
-                                                Grid.ColumnSpan="2"
-                                                Margin="0,0,0,0"
-                                                FontAttributes="Italic"
-                                                FontSize="12"
-                                                Text="{Binding Cliente.A1Nome}" />
 
                                             <Label
                                                 Grid.Row="1"
