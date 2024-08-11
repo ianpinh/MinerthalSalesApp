@@ -9,7 +9,7 @@
         <ListView
             x:Name="LW_HistoricoPedido"
             ItemsSource="{Binding HistoricoPedido}"
-            RowHeight="700"
+            RowHeight="500"
             SelectionMode="None"
             SeparatorColor="#254866">
             <ListView.ItemTemplate>
@@ -259,6 +259,7 @@
                                 Grid.Row="11"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="5"
+                                HeightRequest="200"
                                 Margin="-4,7,0,0"
                                 BackgroundColor="{AppThemeBinding Light=AliceBlue,
                                                                   Dark=Black}"

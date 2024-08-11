@@ -399,6 +399,7 @@
                                     TextColor="#ffffff" />
 
                                 <Label
+                                    x:Name="total"
                                     Grid.Row="7"
                                     Grid.Column="5"
                                     Grid.ColumnSpan="2"
@@ -407,7 +408,7 @@
                                     FontAttributes="Bold"
                                     FontSize="12"
                                     HorizontalTextAlignment="End"
-                                    Text="{Binding ValorTotalString}"
+                                    Text="{Binding ValorTotalDetalheString}"
                                     TextColor="#ffffff" />
 
 

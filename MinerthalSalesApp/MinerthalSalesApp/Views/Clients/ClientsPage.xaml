@@ -23,7 +23,8 @@
         </Style>
     </ContentPage.Resources>
 
-    <StackLayout VerticalOptions="StartAndExpand">
+    <StackLayout VerticalOptions="StartAndExpand"
+                 HorizontalOptions="FillAndExpand">
 
         <Grid
             x:Name="GridLoading"

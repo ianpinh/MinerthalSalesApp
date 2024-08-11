@@ -101,7 +101,8 @@
             <ContentView
                 x:Name="geralview"
                 IsVisible="true"
-                VerticalOptions="StartAndExpand">
+                VerticalOptions="StartAndExpand"
+                HorizontalOptions="FillAndExpand">
                 <AbsoluteLayout Margin="20" VerticalOptions="StartAndExpand">
                     <BoxView AbsoluteLayout.LayoutBounds="8, -48, 80, 2" />
                     <Grid

@@ -75,6 +75,7 @@ namespace MinerthalSalesApp.Models.Dtos
         public string ValorTotalProduToString => ValorTotalProduto.ToString("c", _culture);
         public string ValorTotalFreteString => ValorTotalFrete.ToString("c", _culture);
         public string ValorTotalString => ValorTotal.ToString("c", _culture);
+        public string ValorTotalDetalheString => (Subtotal + ValorTaxaPlano).ToString("c", _culture);
         public string DesconToString => Desconto.ToString("c", _culture);
         public string FreteUnidadeString => FreteUnidade.ToString("c", _culture);
         public string ValorBrutoProduToString => ValorBrutoProduto.ToString("c", _culture);
