@@ -43,7 +43,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                var command = $@"SELECT F.* ,(SELECT C.A1Nome FROM Cliente C WHERE C.A1Cod = (SELECT substr(F.CdCliente,0,7))) AS NomeCliente FROM Faturamento F;";
+                var command = $@"SELECT F.* ,(SELECT C.A1Nome FROM Cliente C WHERE C.A1Loja = (SELECT substr(F.CdCliente,7,2)) AND C.A1Cod = (SELECT substr(F.CdCliente,0,7))) AS NomeCliente FROM Faturamento F;";
                 //var command = $@"SELECT * FROM Faturamento";
                 var retorno = _context.ExcecutarSelect(command);
 

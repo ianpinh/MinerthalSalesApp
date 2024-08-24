@@ -18,6 +18,7 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
     private ClientsPageDetailViewModel _model;
     private readonly AppTheme theme;
     IPopupAppService _popupAppService;
+    private string codigoCli = "";
     public Task Initialization { get; private set; }
     public ClientsPageDetail(ClientsPageDetailViewModel model)
     {
@@ -27,6 +28,7 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
         BindingContext = _model;
         var codigo = $"{_model.Cliente.A1Cod}-{_model.Cliente.A1Loja}";
         Cliente.Text = codigo;
+        codigoCli = codigo;
         Initialize(codigo);
       
         
@@ -112,9 +114,6 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
         visitasview.IsVisible = false;
         BtnTitulo.BorderColor = Color.FromArgb("#5d5d5d");
         BtnTitulo.BorderWidth = 4;
-
-        //InvoicingList.ItemsSource = Teste.Testes;
-
     }
 
     private void BtnVisitas_Clicked(object sender, EventArgs e)
@@ -191,7 +190,8 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
     {
         var lst = new List<Faturamento>();
         var theme = Application.Current.RequestedTheme;
-        var lista = App.FaturamentoRepository.GetByCodigo(codigo);
+        string[] a = codigo.Split('-');
+        var lista = App.FaturamentoRepository.GetByCodigo(a[0] + a[1]);
         if (lista != null && lista.Any())
         {
             lista=lista.Select(c => { c.StatusVencimento = CorStatusVencimento(c.DtVenc); return c; }).OrderBy(x=>x.DataDeVencimento).ToList();
@@ -202,7 +202,8 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
 
     private void ListaDeVisitacoes(string codigo)
     {
-        var lista = App.VisitasRepository.RecuperarTodasVisitasDoCliente(codigo);
+        string[] a = codigo.Split('-');
+        var lista = App.VisitasRepository.RecuperarTodasVisitasDoCliente(a[0] + a[1]);
         if (lista != null && lista.Any())
         {
             var lst = lista.OrderByDescending(x => x.DataReg).Take(10).ToList();
