@@ -166,7 +166,7 @@
                 Margin="0,10,0,0"
                 FontSize="12"
                 HorizontalTextAlignment="Center"
-                Text="Versão 82.0.0"
+                Text="Versão 83.0.0"
                 TextColor="{AppThemeBinding Light=blue,
                                             Dark=white}" />
         </StackLayout>

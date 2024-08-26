@@ -270,7 +270,6 @@ tryAgain:
                 var listaPedidos = App.PedidoRepository.GetAll();
                 if (listaPedidos!=null && listaPedidos.Any())
                 {
-                    var semaphore = new SemaphoreSlim(1,1);
                     foreach (var item in listaPedidos)
                     {
                         var carrinho = App.CartRepository.GetByOrderId(item.Id);
@@ -347,11 +346,10 @@ tryAgain:
                         var codCliente = $"{cliente.A1Cod}{cliente.A1Loja}";
                         var xml = SerializeToXml(_order);
 
-                        await semaphore.WaitAsync(); // Aguardando o acesso ao semáforo
                         try
                         {
                             totalEnviados+=1;
-                            var _retorno = await client.ADDPEDIDOPECAAsync(codCliente, item.FilialMinerthal, Guid.NewGuid().ToString(), _order);
+                            var _retorno = await client.ADDPEDIDOPECAAsync(codCliente, item.FilialMinerthal, item.Id.ToString(), _order);
                             totalPedidos.Add(_retorno.ADDPEDIDOPECARESULT);
 
                             if (_retorno.ADDPEDIDOPECARESULT=="Sucesso")
@@ -373,10 +371,6 @@ tryAgain:
                             {
                                 throw;
                             }
-                        }
-                        finally
-                        {
-                            semaphore.Release(); // liberando semaforo.
                         }
                     }
 
