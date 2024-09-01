@@ -2,15 +2,14 @@ using CommunityToolkit.Maui.Views;
 using MinerthalSalesApp.Customs.Exceptions;
 using MinerthalSalesApp.Infra.Database.Tables;
 using MinerthalSalesApp.Infra.Services;
+using MinerthalSalesApp.Models;
 using MinerthalSalesApp.Models.Dtos;
-using MinerthalSalesApp.ViewModels;
 using MinerthalSalesApp.ViewModels.Orders;
 using MinerthalSalesApp.ViewModels.Shared;
 using MinerthalSalesApp.Views.Clients;
 using MinerthalSalesApp.Views.Dashboard;
 using MinerthalSalesApp.Views.Ranking;
 using Newtonsoft.Json;
-using MinerthalSalesApp.Models;
 using System.Globalization;
 
 
@@ -24,9 +23,9 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
 
     public PedidoPage(PedidoViewModel viewmodel)
     {
-        if (viewmodel==null)
+        if (viewmodel == null)
         {
-            if (App.PedidoModel!=null)
+            if (App.PedidoModel != null)
                 viewmodel = App.PedidoModel;
 
         }
@@ -54,19 +53,19 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
     {
         base.OnAppearing();
 
-        if (_model.ListaFiliais==null || _model.ListaFiliais.Count<=0)
+        if (_model.ListaFiliais == null || _model.ListaFiliais.Count <= 0)
             if (_model.AtualizarBaseDeDadosPedido(ApiQueriesIdsEnum.FiliaisMinerthal))
                 _model.CarregarListagens();
 
-        if (_model.ListaTipoCobranca==null || _model.ListaTipoCobranca.Count<=0)
+        if (_model.ListaTipoCobranca == null || _model.ListaTipoCobranca.Count <= 0)
             if (_model.AtualizarBaseDeDadosPedido(ApiQueriesIdsEnum.Bancos))
                 _model.CarregarListagens();
 
-        if (_model.ListaPlanoPagamento==null || _model.ListaPlanoPagamento.Count<=0)
+        if (_model.ListaPlanoPagamento == null || _model.ListaPlanoPagamento.Count <= 0)
             if (_model.AtualizarBaseDeDadosPedido(ApiQueriesIdsEnum.FvPlano))
                 _model.CarregarListagens();
 
-       
+
     }
 
     private bool _backPressed;
@@ -98,7 +97,7 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
                 if (!string.IsNullOrWhiteSpace(_model.Pedido.FilialMinerthal))
                     Filial.SelectedItem = ((List<DictionaryDto>)Filial.ItemsSource).FirstOrDefault(c => c.Key == _model.Pedido.FilialMinerthal.ToString());
                 else
-                    Filial.SelectedItem = ((List<DictionaryDto>)Filial.ItemsSource).FirstOrDefault(c => c.Key =="02");
+                    Filial.SelectedItem = ((List<DictionaryDto>)Filial.ItemsSource).FirstOrDefault(c => c.Key == "02");
 
                 if (!string.IsNullOrWhiteSpace(_model.Pedido.TipoPedido))
                     TipoPedido.SelectedItem = ((List<DictionaryDto>)TipoPedido.ItemsSource).FirstOrDefault(c => c.Key == _model.Pedido.TipoPedido);
@@ -113,7 +112,7 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
                 if (!string.IsNullOrWhiteSpace(_model.Pedido.PlanoPagamento))
                     PlanoPagamento.SelectedItem = ((List<DictionaryDto>)PlanoPagamento.ItemsSource).FirstOrDefault(c => c.Key == _model.Pedido.PlanoPagamento);
                 else
-                    PlanoPagamento.SelectedItem = ((List<DictionaryDto>)PlanoPagamento.ItemsSource).FirstOrDefault(c => c.Key =="001");
+                    PlanoPagamento.SelectedItem = ((List<DictionaryDto>)PlanoPagamento.ItemsSource).FirstOrDefault(c => c.Key == "001");
 
                 if (!string.IsNullOrWhiteSpace(_model.Pedido.TipoCobranca))
                     TipoCobranca.SelectedItem = ((List<DictionaryDto>)TipoCobranca.ItemsSource).FirstOrDefault(c => c.Key == _model.Pedido.TipoCobranca);
@@ -123,16 +122,16 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
 
 
 
-                if (_model.PlanoPadraoCliente!=null)
+                if (_model.PlanoPadraoCliente != null)
                 {
-                    _model.Pedido.PercentualTaxaPlano =_model.PlanoPadraoCliente.TxPerFin;
-                    _model.Pedido.PercentualDesconto =_model.PlanoPadraoCliente.VlDescpl;
+                    _model.Pedido.PercentualTaxaPlano = _model.PlanoPadraoCliente.TxPerFin;
+                    _model.Pedido.PercentualDesconto = _model.PlanoPadraoCliente.VlDescpl;
                     if (_model.Pedido.ItensPedido.Any())
                     {
                         _model.Pedido.ItensPedido.Select(c =>
                         {
-                            c.TaxaPlano= _model.PlanoPadraoCliente.TxPerFin;
-                            c.Desconto= _model.PlanoPadraoCliente.VlDescpl;
+                            c.TaxaPlano = _model.PlanoPadraoCliente.TxPerFin;
+                            c.Desconto = _model.PlanoPadraoCliente.VlDescpl;
                             return c;
                         }).ToList();
                     }
@@ -143,12 +142,12 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
                     TxtObservacao.Text = _model.Pedido.Observacao;
 
 
-                if (_model.Pedido.ValorFrete25>0)
+                if (_model.Pedido.ValorFrete25 > 0)
                     VlFreteSc25k.Text = _model.Pedido.ValorFrete25.ToString(cultureInfo);
                 else
                     VlFreteSc25k.Text = "0,00";
 
-                if (_model.Pedido.ValorFrete30>0)
+                if (_model.Pedido.ValorFrete30 > 0)
                     VlFreteSc30k.Text = _model.Pedido.ValorFrete30.ToString(cultureInfo);
                 else
                     VlFreteSc30k.Text = "0,00";
@@ -160,35 +159,35 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
                     var subtotalFrete = _model.Pedido.ItensPedido.Sum(x => (x.Quantidade * x.FreteUnidade));
                     var totalEncargos = 0M;
                     var totalDescontos = 0M;
-                    if (_model.PlanoPadraoCliente!=null)
+                    if (_model.PlanoPadraoCliente != null)
                     {
-                        if (_model.PlanoPadraoCliente.TxPerFin>0)
-                            totalEncargos = ((subtotal +subtotalFrete)* (_model.PlanoPadraoCliente.TxPerFin/100));
+                        if (_model.PlanoPadraoCliente.TxPerFin > 0)
+                            totalEncargos = ((subtotal + subtotalFrete) * (_model.PlanoPadraoCliente.TxPerFin / 100));
 
-                        if (_model.PlanoPadraoCliente.VlDescpl>0)
-                            totalDescontos = (subtotal) - ((subtotal) / (1 +(_model.PlanoPadraoCliente.VlDescpl/100)));
+                        if (_model.PlanoPadraoCliente.VlDescpl > 0)
+                            totalDescontos = (subtotal) - ((subtotal) / (1 + (_model.PlanoPadraoCliente.VlDescpl / 100)));
                     }
 
 
                     Subtotal.Text = subtotal.ToString("c", cultureInfo);
-                    TotalFrete.Text =subtotalFrete.ToString("c", cultureInfo);
-                    TotalEncargos.Text =totalEncargos.ToString("c", cultureInfo);
+                    TotalFrete.Text = subtotalFrete.ToString("c", cultureInfo);
+                    TotalEncargos.Text = totalEncargos.ToString("c", cultureInfo);
                     TotalDescontos.Text = totalDescontos.ToString("c", cultureInfo);
-                    TotalPedido.Text =(subtotal+subtotalFrete+totalEncargos-totalDescontos).ToString("c", cultureInfo);
+                    TotalPedido.Text = (subtotal + subtotalFrete + totalEncargos - totalDescontos).ToString("c", cultureInfo);
 
                     if (Filial.SelectedIndex >= 0)
                     {
                         var _filial = (DictionaryDto)Filial.ItemsSource[Filial.SelectedIndex];
-                        FilialEntry.Text =  _filial.Value;
-                        FilialEntry.IsVisible=true;
+                        FilialEntry.Text = _filial.Value;
+                        FilialEntry.IsVisible = true;
                         Filial.IsVisible = false;
                     }
 
                     if (TipoPedido.SelectedIndex >= 0)
                     {
                         var _tipo = (DictionaryDto)TipoPedido.ItemsSource[TipoPedido.SelectedIndex];
-                        TipoPedidoEntry.Text =  _tipo.Value;
-                        TipoPedidoEntry.IsVisible=true;
+                        TipoPedidoEntry.Text = _tipo.Value;
+                        TipoPedidoEntry.IsVisible = true;
                         TipoPedido.IsVisible = false;
                     }
 
@@ -196,24 +195,24 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
                     if (TipoVenda.SelectedIndex >= 0)
                     {
                         var _tipo = (DictionaryDto)TipoVenda.ItemsSource[TipoVenda.SelectedIndex];
-                        TipoVendaEntry.Text =  _tipo.Value;
-                        TipoVendaEntry.IsVisible=true;
+                        TipoVendaEntry.Text = _tipo.Value;
+                        TipoVendaEntry.IsVisible = true;
                         TipoVenda.IsVisible = false;
                     }
 
                     if (TipoCobranca.SelectedIndex >= 0)
                     {
                         var _tipo = (DictionaryDto)TipoCobranca.ItemsSource[TipoCobranca.SelectedIndex];
-                        TipoCobrancaEntry.Text =  _tipo.Value;
-                        TipoCobrancaEntry.IsVisible=true;
+                        TipoCobrancaEntry.Text = _tipo.Value;
+                        TipoCobrancaEntry.IsVisible = true;
                         TipoCobranca.IsVisible = false;
                     }
 
                     if (PlanoPagamento.SelectedIndex >= 0)
                     {
                         var _tipo = (DictionaryDto)PlanoPagamento.ItemsSource[PlanoPagamento.SelectedIndex];
-                        PlanoPagamentoEntry.Text =  _tipo.Value;
-                        PlanoPagamentoEntry.IsVisible=true;
+                        PlanoPagamentoEntry.Text = _tipo.Value;
+                        PlanoPagamentoEntry.IsVisible = true;
                         PlanoPagamento.IsVisible = false;
                     }
 
@@ -325,38 +324,38 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
                 TipoVenda = _model.Pedido.TipoVenda,
                 ValorFrete25 = _model.Pedido.ValorFrete25,
                 ValorFrete30 = _model.Pedido.ValorFrete30,
-                Parcelas = _model.Pedido.Parcelas.Count()>0
+                Parcelas = _model.Pedido.Parcelas.Count() > 0
                             ? JsonConvert.SerializeObject(_model.Pedido.Parcelas)
                             : default,
-                PercentualDesconto= _model.PlanoPadraoCliente.VlDescpl,
+                PercentualDesconto = _model.PlanoPadraoCliente.VlDescpl,
                 PercentualJuros = _model.PlanoPadraoCliente.TxPerFin,
                 Observacao = TxtObservacao.Text,
                 NomeFilial = _model.Pedido.NomeFilial,
                 NomeTipo = _model.Pedido.NomeTipo,
                 NomeTipoVenda = _model.Pedido.NomeTipoVenda,
-                NomeTipoCobranca= _model.Pedido.NomeTipoCobranca,
+                NomeTipoCobranca = _model.Pedido.NomeTipoCobranca,
                 NomePlanoPagamento = _model.Pedido.NomePlanoPagamento
             };
             foreach (var iten in _model.Pedido.ItensPedido)
             {
-                var totalEncargos = _model.PlanoPadraoCliente!=null && _model.PlanoPadraoCliente.TxPerFin>0 ? _model.PlanoPadraoCliente.TxPerFin : 0M;
-                var totalDescontos = _model.PlanoPadraoCliente!=null && _model.PlanoPadraoCliente.VlDescpl>0 ? _model.PlanoPadraoCliente.VlDescpl : 0M;
+                var totalEncargos = _model.PlanoPadraoCliente != null && _model.PlanoPadraoCliente.TxPerFin > 0 ? _model.PlanoPadraoCliente.TxPerFin : 0M;
+                var totalDescontos = _model.PlanoPadraoCliente != null && _model.PlanoPadraoCliente.VlDescpl > 0 ? _model.PlanoPadraoCliente.VlDescpl : 0M;
 
                 var _itensPedido = new Carrinho
                 {
-                    Id=iten.Id,
+                    Id = iten.Id,
                     CodigoNomeProduto = iten.CodigoNomeProduto,
-                    Desconto=totalDescontos,
-                    Comissao=iten.Comissao,
-                    Frete=iten.FreteUnidade,
+                    Desconto = totalDescontos,
+                    Comissao = iten.Comissao,
+                    Frete = iten.FreteUnidade,
                     ImagemProduto = iten.ImagemProduto,
 
                     ProdutoId = iten.Produto.Id,
-                    Quantidade=iten.Quantidade,
+                    Quantidade = iten.Quantidade,
                     ValorProduto = iten.ValorBrutoProduto,
                     ValorCombinado = iten.ValorCombinado,
                     CodProduto = iten.CodProduto,
-                    TaxaEncargos= _model.PlanoPadraoCliente.TxPerFin,
+                    TaxaEncargos = _model.PlanoPadraoCliente.TxPerFin,
                     Encargos = totalEncargos
                 };
                 //App.CartRepository.Add(_itensPedido);
@@ -513,8 +512,8 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
         _model.Pedido.NomeFilial = filial.Value;
         _model.Pedido.NomeTipo = tipoPedido.Value;
         _model.Pedido.NomeTipoVenda = tipoVenda.Value;
-        _model.Pedido.NomeTipoCobranca= tipoCobranca.Value;
-        _model.Pedido.NomePlanoPagamento  =planoPagamento.Value;
+        _model.Pedido.NomeTipoCobranca = tipoCobranca.Value;
+        _model.Pedido.NomePlanoPagamento = planoPagamento.Value;
 
 
     }
@@ -523,69 +522,49 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
     {
         var dictionary = (DictionaryDto)PlanoPagamento.SelectedItem;
 
-        if (dictionary!= null && dictionary.Key=="88")
+        if (dictionary != null && dictionary.Key == "88")
         {
-            LblParcelas.IsVisible= true;
-            BtnParcelamento.IsVisible= true;
+            //LblParcelas.IsVisible = true;
+            BtnParcelamento.IsVisible = true;
         }
         else
         {
-            LblParcelas.IsVisible= false;
-            BtnParcelamento.IsVisible= false;
+            //LblParcelas.IsVisible = false;
+            BtnParcelamento.IsVisible = false;
         }
     }
 
     private void BtnAdicionarParcela_Clicked(object sender, EventArgs e)
     {
-        this.ShowPopup(new PopupPage(new PopupViewModel { PopupMessage= "Aguarde..." }));
-        //var guidControle = Guid.NewGuid().ToString();
+        //var _popmodel = new PopupViewModel
+        //{
+        //    PopupMessage = "Aguarde..."
+        //};
+        //var pop = new PopupPage(_popmodel);
+
         //var totalRows = GridParcelas.RowDefinitions.Count;
 
-        //var labelParcela = new Label
-        //{
-        //    Text=$"Parcela {totalRows}",
-        //    VerticalTextAlignment = TextAlignment.Center,
-        //    Margin = new Thickness(0, 2, 0, 0)
-        //};
-        //var entryParcela = new DatePicker
-        //{
-        //    MinimumDate=DateTime.Today
-        //};
+        var maxParcela = _model.Pedido.Parcelas != null && _model.Pedido.Parcelas.Any() ? _model.Pedido.Parcelas.Max(x => x.OptionalInteger) : 0;
+        maxParcela += 1;
 
 
-        //var btn = new Button
-        //{
-        //    ClassId=guidControle,
-        //    ImageSource="close_btn_mini.png",
-        //    HeightRequest=30,
-        //    WidthRequest=30,
-        //    CommandParameter=GridParcelas,
-        //};
+        var guid = Guid.NewGuid();
 
-        //btn.Clicked+= BtnRemoverParcela_Clicked;
+        _model.Pedido.Parcelas.Add(new DictionaryDto
+        {
+            Key = guid.ToString(),
+            Value = DateTime.Today.ToShortDateString(),
+            Optional = $"Parcela {maxParcela}",
+            OptionalInteger = maxParcela
 
-        //GridParcelas.RowDefinitions.Add(new RowDefinition {
-        //    Height = GridLength.Auto,
-        //});
+        });
 
 
-        //GridParcelas.SetRow(labelParcela, totalRows);
-        //GridParcelas.SetColumn(labelParcela, 1);
-        //GridParcelas.Children.Add(labelParcela);
+        AdicionarParcelasNoGrid(maxParcela, guid, DateTime.Today);
 
+        //GridPedido.RowDefinitions[6].Height = GridLength.Auto;
 
-        //GridParcelas.SetRow(entryParcela, totalRows);
-        //GridParcelas.SetColumn(entryParcela, 2);
-        ////GridParcelas.SetColumnSpan(entryParcela, 2);
-        //GridParcelas.Children.Add(entryParcela);
-
-        //GridParcelas.SetRow(btn, totalRows);
-        //GridParcelas.SetColumn(btn, 2);
-        //GridParcelas.Children.Add(btn);
-
-        //GridPedido.RowDefinitions[6].Height=GridLength.Auto;
-
-
+        //pop.Close();
     }
 
     private void BtnRemoverParcela_Clicked(object sender, EventArgs e)
@@ -609,19 +588,127 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
             }
 
 
-            for (var i = 0; i<parcelas.Count; i++)
+            for (var i = 0; i < parcelas.Count; i++)
             {
                 var _dicitionary = new DictionaryDto
                 {
-                    Key=Guid.NewGuid().ToString(),
+                    Key = Guid.NewGuid().ToString(),
                     Value = parcelas[i].ToShortDateString(),
-                    Optional = $"Parcela {i+1}"
+                    Optional = $"Parcela {i + 1}"
                 };
                 _model.Pedido.Parcelas.Add(_dicitionary);
             }
         }
 
         //grid.Children.Remove(picker);
+    }
+
+    private void BtnRemoverParcela_Clicked_old(object sender, EventArgs e)
+    {
+        var btn = (Button)sender;
+        var id = Guid.Parse(btn.ClassId.ToString());
+
+        var parcelas = new List<DateTime>();
+        var copyParcelas = new DictionaryDto[_model.Pedido.Parcelas.Count];
+        _model.Pedido.Parcelas.CopyTo(copyParcelas, 0);
+
+        if (copyParcelas.Count() > 0)
+        {
+            _model.Pedido.Parcelas.Clear();
+            foreach (var item in copyParcelas)
+            {
+                DateTime.TryParse(item.Value, out DateTime _data);
+                Guid.TryParse(item.Key, out Guid _id);
+                if (!id.Equals(_id))
+                    parcelas.Add(_data);
+            }
+
+
+            for (var i = 0; i < parcelas.Count; i++)
+            {
+                var _dicitionary = new DictionaryDto
+                {
+                    Key = Guid.NewGuid().ToString(),
+                    Value = parcelas[i].ToShortDateString(),
+                    Optional = $"Parcela {i + 1}",
+                    OptionalInteger = i + 1
+                };
+                _model.Pedido.Parcelas.Add(_dicitionary);
+            }
+        }
+
+        int rowNumber = Grid.GetRow(btn);
+        var childs = GridParcelas.Children.Count;
+        for (var i = childs - 1; i >= 0; i--)
+        {
+            GridParcelas.Children.RemoveAt(i);
+        }
+
+
+        //int callingButtonIndex = GridParcelas.Children.IndexOf(btn);
+        //var totalRows = GridParcelas.RowDefinitions.Count;
+        //GridParcelas.Children.RemoveAt(callingButtonIndex);
+        //GridParcelas.Children.RemoveAt(callingButtonIndex - 1);
+        //GridParcelas.Children.RemoveAt(callingButtonIndex - 2);
+        //GridParcelas.RowDefinitions.RemoveAt(rowNumber);
+
+        if (_model.Pedido.Parcelas != null && _model.Pedido.Parcelas.Count > 0)
+        {
+            foreach (var item in _model.Pedido.Parcelas)
+            {
+                var guid = Guid.Parse(item.Key);
+                DateTime.TryParse(item.Value, out DateTime dateTime);
+               // AdicionarParcelasNoGrid(item.OptionalInteger, guid, dateTime);
+            }
+        }
+
+        //grid.Children.Remove(picker);
+    }
+    private void AdicionarParcelasNoGrid(int totalRows, Guid guidControle, DateTime data)
+    {
+        //var labelParcela = new Label
+        //{
+        //    Text = $"Parcela {totalRows}",
+        //    VerticalTextAlignment = TextAlignment.Center,
+        //    Margin = new Thickness(0, 2, 0, 0)
+        //};
+        //var entryParcela = new DatePicker
+        //{
+        //    MinimumDate = data
+        //};
+
+
+        //var btn = new Button
+        //{
+        //    ClassId = guidControle.ToString(),
+        //    ImageSource = "close_btn_mini.png",
+        //    HeightRequest = 30,
+        //    WidthRequest = 30,
+        //    CommandParameter = GridParcelas,
+        //};
+
+        //btn.Clicked += BtnRemoverParcela_Clicked;
+
+        //GridParcelas.RowDefinitions.Add(new RowDefinition
+        //{
+        //    Height = GridLength.Auto,
+        //});
+
+        //var numRow = totalRows -= 1;
+        //GridParcelas.SetRow(labelParcela, numRow);
+        //GridParcelas.SetColumn(labelParcela, 0);
+        //GridParcelas.Children.Add(labelParcela);
+
+
+        //GridParcelas.SetRow(entryParcela, numRow);
+        //GridParcelas.SetColumn(entryParcela, 1);
+        ////GridParcelas.SetColumnSpan(entryParcela, 2);
+        //GridParcelas.Children.Add(entryParcela);
+
+        //GridParcelas.SetRow(btn, numRow);
+        //GridParcelas.SetColumn(btn, 2);
+        //GridParcelas.Children.Add(btn);
+        //GridPedido.RowDefinitions[13].Height = GridLength.Auto;
     }
 
     private void Entry_TextChanged(object sender, TextChangedEventArgs e)
@@ -639,8 +726,8 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
 
             var tempValue = decimal.Parse(_valueB.ToString(), cultureInfo);
             var newValue = 0M;
-            if (tempValue>0)
-                newValue=tempValue/100;
+            if (tempValue > 0)
+                newValue = tempValue / 100;
 
             var newFormat = newValue.ToString("N2", cultureInfo);
             textbox.Text = newFormat;
