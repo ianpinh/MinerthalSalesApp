@@ -597,11 +597,18 @@
                                                 Grid.Column="0"
                                                 FontAttributes="Bold"
                                                 Text="{Binding Optional}" />
-                                            <Label
+
+                                            <DatePicker
+                                                x:Name="Value"
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Margin="0,-15,0,0"
+                                                Date="{Binding Value, Mode=TwoWay}" />
+                                            <!--<Label
                                                 Grid.Row="0"
                                                 Grid.Column="1"
                                                 FontAttributes="Italic"
-                                                Text="{Binding Value}" />
+                                                Text="{Binding Value}" />-->
 
                                             <Button
                                                 Grid.Row="0"

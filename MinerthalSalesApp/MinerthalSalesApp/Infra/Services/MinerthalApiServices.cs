@@ -52,7 +52,7 @@ namespace MinerthalSalesApp.Infra.Services
                 };
                 var _requestJson = JsonConvert.SerializeObject(paramsToSend);
                 int attempts = 1;
-tryAgain:
+            tryAgain:
 
                 try
                 {
@@ -129,7 +129,7 @@ tryAgain:
                 };
                 var _requestJson = JsonConvert.SerializeObject(paramsToSend);
                 int attempts = 1;
-tryAgain:
+            tryAgain:
                 try
                 {
                     if (urlWebService.Contains("https://"))
@@ -202,7 +202,7 @@ tryAgain:
                 };
                 var _requestJson = JsonConvert.SerializeObject(paramsToSend);
                 int attempts = 1;
-tryAgain:
+            tryAgain:
                 try
                 {
                     if (urlWebService.Contains("https://"))
@@ -268,21 +268,21 @@ tryAgain:
                 var retorno = ("", "");
 
                 var listaPedidos = App.PedidoRepository.GetAll();
-                if (listaPedidos!=null && listaPedidos.Any())
+                if (listaPedidos != null && listaPedidos.Any())
                 {
                     foreach (var item in listaPedidos)
                     {
                         var carrinho = App.CartRepository.GetByOrderId(item.Id);
-                        var cliente = App.ClienteRepository.GetByCodigo(item.CodigoCliente+item.CodigoLoja);
+                        var cliente = App.ClienteRepository.GetByCodigo(item.CodigoCliente + item.CodigoLoja);
                         var totalFrete = carrinho.Sum(x => x.Frete * x.Quantidade);
 
                         var pesoTotal = 0M;
                         foreach (var cart in carrinho)
                         {
                             var produto = App.ProdutosRepository.GetByCodProduto(cart.CodProduto);
-                            pesoTotal +=produto.VlPeso * cart.Quantidade;
+                            pesoTotal += produto.VlPeso * cart.Quantidade;
                         }
-                        var precFreteLiquido = totalFrete/pesoTotal;
+                        var precFreteLiquido = totalFrete / pesoTotal;
 
 
                         var _parcelas = !string.IsNullOrWhiteSpace(item.Parcelas)
@@ -290,7 +290,7 @@ tryAgain:
                             : new List<DictionaryDto>();
 
                         var valorPedido = carrinho.Sum(x =>
-                            ((x.Quantidade * x.ValorCombinado) / (1 + (x.Desconto/100))) +
+                            ((x.Quantidade * x.ValorCombinado) / (1 + (x.Desconto / 100))) +
                             ((x.Quantidade * x.ValorCombinado) * (x.TaxaEncargos == 0 ? 0 : x.TaxaEncargos / 100)) +
                             totalFrete);
 
@@ -303,9 +303,9 @@ tryAgain:
                                 sbParcelas.Append($"{p.Value};");
                             }
 
-                            var valorParcelas = valorPedido/_parcelas.Count;
+                            var valorParcelas = valorPedido / _parcelas.Count;
 
-                            for (var i = 0; i< _parcelas.Count; i++)
+                            for (var i = 0; i < _parcelas.Count; i++)
                             {
                                 SbValores.Append($"{valorParcelas};");// 80.01; 80.01;
                             }
@@ -322,21 +322,21 @@ tryAgain:
                             {
                                 PERCCOMISSAO = x.Comissao.ToString(),
                                 PRECOUNITARIO = (x.ValorCombinado / (1 + (x.Desconto / 100))).ToString("F2").Replace(',', '.'),
-                                QUANTIDADEPRODUTO =x.Quantidade.ToString(),
-                                PRODUTOPEDIDO =x.CodProduto
+                                QUANTIDADEPRODUTO = x.Quantidade.ToString(),
+                                PRODUTOPEDIDO = x.CodProduto
                             }).ToArray();
 
                         }
                         var _totalFrete = (float)precFreteLiquido;
                         var _order = new TADDPEDIDOCAB
                         {
-                            BANCOPEDIDO=item.TipoCobranca,
-                            CONDICAOPAGAMENTO=item.PlanoPagamento,
-                            PRECOFRETELIQ=_totalFrete,
-                            OBSPEDIDO =!string.IsNullOrWhiteSpace(item.Observacao) ? item.Observacao : " ",
-                            TIPOFRETE="C",
-                            TRANSPORTADORACLIENTE=string.Empty,
-                            DATASPARCELA=sbParcelas.ToString(),
+                            BANCOPEDIDO = item.TipoCobranca,
+                            CONDICAOPAGAMENTO = item.PlanoPagamento,
+                            PRECOFRETELIQ = _totalFrete,
+                            OBSPEDIDO = !string.IsNullOrWhiteSpace(item.Observacao) ? item.Observacao : " ",
+                            TIPOFRETE = "C",
+                            TRANSPORTADORACLIENTE = string.Empty,
+                            DATASPARCELA = sbParcelas.ToString(),
                             VLRPARCELA = SbValores.ToString(),
                             TZITENSDOPEDIDO = itensPedido.ToArray()
 
@@ -348,11 +348,11 @@ tryAgain:
 
                         try
                         {
-                            totalEnviados+=1;
+                            totalEnviados += 1;
                             var _retorno = await client.ADDPEDIDOPECAAsync(codCliente, item.FilialMinerthal, item.Id.ToString(), _order);
                             totalPedidos.Add(_retorno.ADDPEDIDOPECARESULT);
 
-                            if (_retorno.ADDPEDIDOPECARESULT=="Sucesso")
+                            if (_retorno.ADDPEDIDOPECARESULT == "Sucesso")
                             {
                                 App.CartRepository.DeleteByPedido(item.Id);
                                 App.PedidoRepository.DeleteById(item.Id);
@@ -362,7 +362,7 @@ tryAgain:
                         {
                             if (ex is System.ServiceModel.CommunicationException)
                             {
-                                if (totalEnviados< listaPedidos.Count)
+                                if (totalEnviados < listaPedidos.Count)
                                     continue;
                                 else
                                     return ("Sucesso", $"Pedidos enviados com sucesso.");
@@ -380,11 +380,11 @@ tryAgain:
                     //    sb.AppendLine($" {item}");
 
 
-                    retorno=("Sucesso", sb.ToString());
+                    retorno = ("Sucesso", sb.ToString());
                 }
                 else
                 {
-                    retorno=("Sucesso", "Não há pedidos para serem enviados");
+                    retorno = ("Sucesso", "Não há pedidos para serem enviados");
                 }
                 return retorno;
             }
@@ -400,20 +400,20 @@ tryAgain:
                 var retorno = ("", "");
 
                 var pedido = App.PedidoRepository.GetById(pedidoId);
-                if (pedido!=null)
+                if (pedido != null)
                 {
 
                     var carrinho = App.CartRepository.GetByOrderId(pedido.Id);
-                    var cliente = App.ClienteRepository.GetByCodigo(pedido.CodigoCliente+pedido.CodigoLoja);
+                    var cliente = App.ClienteRepository.GetByCodigo(pedido.CodigoCliente + pedido.CodigoLoja);
                     var totalFrete = carrinho.Sum(x => x.Frete * x.Quantidade);
 
                     var pesoTotal = 0M;
                     foreach (var cart in carrinho)
                     {
                         var produto = App.ProdutosRepository.GetByCodProduto(cart.CodProduto);
-                        pesoTotal +=produto.VlPeso * cart.Quantidade;
+                        pesoTotal += produto.VlPeso * cart.Quantidade;
                     }
-                    var precFreteLiquido = totalFrete/pesoTotal;
+                    var precFreteLiquido = totalFrete / pesoTotal;
 
 
                     var _parcelas = !string.IsNullOrWhiteSpace(pedido.Parcelas)
@@ -430,9 +430,9 @@ tryAgain:
                             sbParcelas.Append($"{p.Value};");
                         }
 
-                        var valorParcelas = valorPedido/_parcelas.Count;
+                        var valorParcelas = valorPedido / _parcelas.Count;
 
-                        for (var i = 0; i< _parcelas.Count; i++)
+                        for (var i = 0; i < _parcelas.Count; i++)
                         {
                             SbValores.Append($"{valorParcelas};");// 80.01; 80.01;
                         }
@@ -448,25 +448,25 @@ tryAgain:
                         itensPedido = carrinho.Select(x => new TADDPEDIDODET
                         {
                             PERCCOMISSAO = x.Comissao.ToString(),
-                            PRECOUNITARIO= (x.ValorCombinado / (1 + (x.Desconto/100))).ToString("F2").Replace(',', '.'),
-                            QUANTIDADEPRODUTO=x.Quantidade.ToString(),
-                            PRODUTOPEDIDO =x.CodProduto
+                            PRECOUNITARIO = (x.ValorCombinado / (1 + (x.Desconto / 100))).ToString("F2").Replace(',', '.'),
+                            QUANTIDADEPRODUTO = x.Quantidade.ToString(),
+                            PRODUTOPEDIDO = x.CodProduto
                         }).ToList();
 
                     }
 
-                    
+
                     var _totalFrete = (float)precFreteLiquido;
                     var _order = new TADDPEDIDOCAB
                     {
-                        
-                        BANCOPEDIDO=pedido.TipoCobranca,
-                        CONDICAOPAGAMENTO=pedido.PlanoPagamento,
-                        PRECOFRETELIQ=_totalFrete,
-                        OBSPEDIDO =!string.IsNullOrWhiteSpace(pedido.Observacao) ? pedido.Observacao : " ",
-                        TIPOFRETE="C",
-                        TRANSPORTADORACLIENTE=string.Empty,
-                        DATASPARCELA=sbParcelas.ToString(),
+
+                        BANCOPEDIDO = pedido.TipoCobranca,
+                        CONDICAOPAGAMENTO = pedido.PlanoPagamento,
+                        PRECOFRETELIQ = _totalFrete,
+                        OBSPEDIDO = !string.IsNullOrWhiteSpace(pedido.Observacao) ? pedido.Observacao : " ",
+                        TIPOFRETE = "C",
+                        TRANSPORTADORACLIENTE = string.Empty,
+                        DATASPARCELA = sbParcelas.ToString(),
                         VLRPARCELA = SbValores.ToString(),
                         TZITENSDOPEDIDO = itensPedido.ToArray()
 
@@ -478,11 +478,11 @@ tryAgain:
 
                     var _retorno = await client.ADDPEDIDOPECAAsync(codCliente, pedido.FilialMinerthal, Guid.NewGuid().ToString(), _order).ConfigureAwait(true);
 
-                    retorno=("Sucesso", $"Pedidos enviados com sucesso. código : {_retorno.ADDPEDIDOPECARESULT}");
+                    retorno = ("Sucesso", $"Pedidos enviados com sucesso. código : {_retorno.ADDPEDIDOPECARESULT}");
                 }
                 else
                 {
-                    retorno=("Sucesso", "Não há pedidos para serem enviados");
+                    retorno = ("Sucesso", "Não há pedidos para serem enviados");
                 }
 
                 return retorno;
@@ -490,9 +490,20 @@ tryAgain:
             catch (Exception ex)
             {
                 if (ex is System.ServiceModel.CommunicationException)
-                    return ("Sucesso", $"Pedidos enviados com sucesso.");
+                {
+                    if (ex.Message.ToLower().Contains("ajuda"))
+                    {
+                        return ("Sucesso", ex.Message);
+                    }
+                    else
+                    {
+                        return ("Sucesso", $"Pedidos enviados com sucesso.");
+                    }
+                }
                 else
+                {
                     return ("Falha", ex.Message);
+                }
             }
         }
 
