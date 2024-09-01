@@ -100,9 +100,9 @@
 
             <ContentView
                 x:Name="geralview"
+                HorizontalOptions="FillAndExpand"
                 IsVisible="true"
-                VerticalOptions="StartAndExpand"
-                HorizontalOptions="FillAndExpand">
+                VerticalOptions="StartAndExpand">
                 <AbsoluteLayout Margin="20" VerticalOptions="StartAndExpand">
                     <BoxView AbsoluteLayout.LayoutBounds="8, -48, 80, 2" />
                     <Grid
@@ -603,6 +603,20 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
+
+                        <Grid
+                            x:Name="GridParcelas"
+                            Grid.Row="15"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            Margin="0,-20,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                        </Grid>
 
                         <Grid
                             Grid.Row="17"
