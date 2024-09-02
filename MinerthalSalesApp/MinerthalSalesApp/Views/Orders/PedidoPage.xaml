@@ -100,9 +100,9 @@
 
             <ContentView
                 x:Name="geralview"
+                HorizontalOptions="FillAndExpand"
                 IsVisible="true"
-                VerticalOptions="StartAndExpand"
-                HorizontalOptions="FillAndExpand">
+                VerticalOptions="StartAndExpand">
                 <AbsoluteLayout Margin="20" VerticalOptions="StartAndExpand">
                     <BoxView AbsoluteLayout.LayoutBounds="8, -48, 80, 2" />
                     <Grid
@@ -561,9 +561,22 @@
                             IsVisible="false"
                             Text="Adiconar Parcela" />
 
+
+                        <Grid
+                            x:Name="GridParcelas"
+                            Grid.Row="14"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
                         <ListView
                             x:Name="lstViewParcelas"
-                            Grid.Row="14"
+                            Grid.Row="15"
                             Grid.Column="1"
                             Grid.ColumnSpan="3"
                             ItemsSource="{Binding Pedido.Parcelas}">
@@ -584,11 +597,18 @@
                                                 Grid.Column="0"
                                                 FontAttributes="Bold"
                                                 Text="{Binding Optional}" />
-                                            <Label
+
+                                            <DatePicker
+                                                x:Name="Value"
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Margin="0,-15,0,0"
+                                                Date="{Binding Value, Mode=TwoWay}" />
+                                            <!--<Label
                                                 Grid.Row="0"
                                                 Grid.Column="1"
                                                 FontAttributes="Italic"
-                                                Text="{Binding Value}" />
+                                                Text="{Binding Value}" />-->
 
                                             <Button
                                                 Grid.Row="0"
