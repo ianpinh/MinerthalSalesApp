@@ -11,7 +11,7 @@ namespace MinerthalSalesApp.Infra.Services
         private readonly IMinerthalApiServices _minerthal;
         public ServicoDeCarregamentoDasBases(IMinerthalApiServices minerthalApiServices)
         {
-            _minerthal= minerthalApiServices??throw new ArgumentNullException(nameof(minerthalApiServices));
+            _minerthal = minerthalApiServices ?? throw new ArgumentNullException(nameof(minerthalApiServices));
         }
 
 
@@ -23,7 +23,7 @@ namespace MinerthalSalesApp.Infra.Services
             get => totalFinished;
             set
             {
-                totalFinished=value;
+                totalFinished = value;
                 IsLoadingFinised(totalCalls, value);
             }
         }
@@ -46,6 +46,7 @@ namespace MinerthalSalesApp.Infra.Services
                     case ApiMinertalTypes.Planos: await CarregarPlanosAsync(); break;
                     case ApiMinertalTypes.Bancos: await CarregarBancosAsync(); break;
                     case ApiMinertalTypes.Usuarios: await CarregarUsuariosAsync(); break;
+                    case ApiMinertalTypes.MetaMensal: await CarregarMetaMensalAsync(); break;
                 }
             }
             catch (Exception)
@@ -65,7 +66,7 @@ namespace MinerthalSalesApp.Infra.Services
                     var _query = $"{(byte)ApiQueriesIdsEnum.FiliaisMinerthal:#000000}";
                     var dados = _minerthal.ApiRequestServiceAsync(_query, false);
                     var _model = JsonConvert.DeserializeObject<ResponseApiFilial>(dados);
-                    if (_model.Details!=null)
+                    if (_model.Details != null)
                     {
                         App.FilialRepository.SaveFilial(_model.Details);
                         success = true;
@@ -78,7 +79,7 @@ namespace MinerthalSalesApp.Infra.Services
                     var _query = $"{(byte)ApiQueriesIdsEnum.Bancos:#000000}";
                     var dados = _minerthal.ApiRequestServiceAsync(_query, false);
                     var _model = JsonConvert.DeserializeObject<ResponseApiBanco>(dados);
-                    if (_model.Details!=null)
+                    if (_model.Details != null)
                     {
                         App.BancoRepository.SaveProduto(_model.Details);
                         success = true;
@@ -89,7 +90,7 @@ namespace MinerthalSalesApp.Infra.Services
                     var _query = $"{(byte)ApiQueriesIdsEnum.FvPlano:#000000}";
                     var dados = _minerthal.ApiRequestServiceAsync(_query, false);
                     var _model = JsonConvert.DeserializeObject<ResponseApiPlano>(dados);
-                    if (_model.Details!=null)
+                    if (_model.Details != null)
                     {
                         App.PlanosRepository.Save(_model.Details);
                         success = true;
@@ -106,19 +107,20 @@ namespace MinerthalSalesApp.Infra.Services
 
         public int AtualizarBaseDeDadosPrimeiraCarga(AtualizacaoViewModel model)
         {
-            totalCalls=1;
-            totalFinished=0;
-            model.TotalClientes=0;
-            model.TotalTbPrecos=0;
-            model.TotalPlanos=0;
-            model.TotalFaturamento=0;
-            model.TotalPedidos=0;
-            model.TotalProdutos=0;
-            model.TotalHistoricoPedidos=0;
-            model.TotalVendedores=0;
-            model.TotalFiliais=0;
-            model.TotalVisitas=0;
-            model.TotalTitulos=0;
+            totalCalls = 1;
+            totalFinished = 0;
+            model.TotalClientes = 0;
+            model.TotalTbPrecos = 0;
+            model.TotalPlanos = 0; 
+            model.TotalFaturamento = 0;
+            model.TotalPedidos = 0;
+            model.TotalProdutos = 0;
+            model.TotalHistoricoPedidos = 0;
+            model.TotalVendedores = 0;
+            model.TotalFiliais = 0;
+            model.TotalVisitas = 0;
+            model.TotalTitulos = 0;
+            model.TotalMetaMensal = 0;
             return CarregarDadosDoApp(model);
         }
 
@@ -131,51 +133,55 @@ namespace MinerthalSalesApp.Infra.Services
 
                 if (!IsLoading)
                 {
-                    IsLoading=true;
-                    model.TotalUsuarios=2; //#1
+                    IsLoading = true;
+                    model.TotalUsuarios = 2; //#1
 
                     model.TotalHistoricoPedidos = await CarregarHistoricoPedidoAsync(); //#2
-                    totalFinalised+=1;
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
                     model.TotalResumoPedidos = await CarregarResumoPedidoAsync(); //#3
-                    totalFinalised+=1;
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
                     model.TotalRanking = CarregarRankingAsync();//#4
-                    totalFinalised+=1;
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
                     model.TotalClientes = await CarregarClientesAsync(); //#5
-                    totalFinalised+=1;
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
-                    model.TotalPlanos= await CarregarPlanosAsync(); //#6
-                    totalFinalised+=1;
+                    model.TotalPlanos = await CarregarPlanosAsync(); //#6
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
-                    model.TotalBancos= await CarregarBancosAsync(); //#7
-                    totalFinalised+=1;
+                    model.TotalBancos = await CarregarBancosAsync(); //#7
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
                     model.TotalTbPrecos = await CarregarTabelaDePrecosAsync(); //#8
-                    totalFinalised+=1;
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
                     model.TotalProdutos = await CarregarProdutos(); //#9
-                    totalFinalised+=1;
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
                     model.TotalFiliais = await CarregarFiliaisAsync(); //#10
-                    totalFinalised+=1;
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
-                    model.TotalVendedores  = await CarregarVendedoresAsync(); //#11
-                    totalFinalised+=1;
+                    model.TotalVendedores = await CarregarVendedoresAsync(); //#11
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
-                    model.TotalFaturamento= await CarregarFaturamentoAsync(); //#12
-                    totalFinalised+=1;
+                    model.TotalFaturamento = await CarregarFaturamentoAsync(); //#12
+                    totalFinalised += 1;
+                    IsLoadingFinised(totalCalls, totalFinalised);
+
+                    model.TotalMetaMensal = await CarregarMetaMensalAsync(); //#17
+                    totalFinalised += 1;
                     IsLoadingFinised(totalCalls, totalFinalised);
 
 
@@ -224,7 +230,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarTabelaPrecoAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.TabelaPrecoRepository.SaveTabelaPreco(lista);
             }
             catch (Exception ex)
@@ -246,7 +252,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarClienteAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.ClienteRepository.SaveClientes(lista);
             }
             catch (Exception ex)
@@ -267,7 +273,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarProdutoAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.ProdutosRepository.SaveProduto(lista);
             }
             catch (Exception ex)
@@ -289,7 +295,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarFaturamentoAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.FaturamentoRepository.SaveFaturamento(lista);
             }
             catch (Exception ex)
@@ -310,7 +316,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarVendedoresAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.VendedorRepository.SaveVendedor(lista);
             }
             catch (Exception ex)
@@ -331,7 +337,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarPlanosAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.PlanosRepository.Save(lista);
             }
             catch (Exception ex)
@@ -352,7 +358,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarHistoricoPedidoAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.HistoricoPedidoReposity.SaveHistorico(lista);
             }
             catch (Exception ex)
@@ -373,7 +379,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarResumoPedidoAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.ResumoPedidoRepository.SavePedido(lista);
             }
             catch (Exception ex)
@@ -394,7 +400,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarFilialAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.FilialRepository.SaveFilial(lista);
             }
             catch (Exception ex)
@@ -415,7 +421,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = await PesquisarBancoAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.BancoRepository.SaveProduto(lista);
             }
             catch (Exception ex)
@@ -437,7 +443,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var lista = await PesquisarMeusPedidosAsync();
                 App.MeusPedidosRepository.SaveMeusPedidos(lista);
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
             }
             catch (Exception ex)
             {
@@ -461,9 +467,9 @@ namespace MinerthalSalesApp.Infra.Services
                 var faturamento = CarregarFaturamentoAsync();
                 await Task.WhenAll(clientes, faturamento);
 
-                total= clientes.Result + faturamento.Result;
+                total = clientes.Result + faturamento.Result;
 
-                total = total>0 ? total : 1;
+                total = total > 0 ? total : 1;
             }
             catch (Exception ex)
             {
@@ -473,6 +479,27 @@ namespace MinerthalSalesApp.Infra.Services
                     Data = DateTime.Now,
                     Descricao = ex.Message,
                     Pagina = ApiMinertalTypes.ClienteFaturamento.ToString()
+                });
+            }
+            return total;
+        }
+
+        private async Task<int> CarregarMetaMensalAsync()
+        {
+            var total = 2;
+            try
+            {
+                var lista = await PesquisarMetaMensalAsync();
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
+                App.MetaMensalRepository.SaveMeta(lista);
+            }
+            catch (Exception ex)
+            {
+                App.LogRepository.Add(new Log
+                {
+                    Data = DateTime.Now,
+                    Descricao = ex.Message,
+                    Pagina = ApiMinertalTypes.MetaMensal.ToString()
                 });
             }
             return total;
@@ -491,8 +518,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiTabelaPreco>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -516,8 +543,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiFaturamento>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -540,8 +567,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiPlano>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -563,8 +590,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiCliente>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -587,8 +614,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiProduto>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -612,8 +639,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiFilial>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -637,8 +664,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiVendedor>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -662,8 +689,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiMeusPedidos>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -685,8 +712,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiUsuario>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -706,8 +733,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiRanking>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -729,8 +756,31 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiBanco>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
+                }
+                return obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private async Task<List<MetaMensal>> PesquisarMetaMensalAsync()
+        {
+            try
+            {
+                var obj = new List<MetaMensal>();
+
+                string queryId = "000017";
+                bool filter = true;
+                string model = _minerthal.ApiRequestServiceAsync(queryId, filter);
+                if (!string.IsNullOrWhiteSpace(model))
+                {
+                    var _model = JsonConvert.DeserializeObject<ResponseApiMetaMensal>(model);
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -752,8 +802,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiHistoricoPedido>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -775,8 +825,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiResumoPedido>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
 
@@ -800,8 +850,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiUsuario>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -813,13 +863,13 @@ namespace MinerthalSalesApp.Infra.Services
 
         private void IsLoadingFinised(int totalCall, int totalFinalized)
         {
-            if (totalCall==totalFinalized)
+            if (totalCall == totalFinalized)
                 IsLoading = false;
         }
 
 
         public Task AtualizarBaseDeDados()
-         {
+        {
             return CarregarDadosDoAppAsync();
         }
 
@@ -832,18 +882,18 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 if (!isFinding)
                 {
-                    isFinding=true;
+                    isFinding = true;
                     var lista = await PesquisarMeusUsuarios();
                     if (lista != null && lista.Any())
                         App.UserRepository.SaveUsuers(lista);
 
-                    total = lista!=null && lista.Count>0 ? lista.Count : 2;
-                    isFinding=false;
+                    total = lista != null && lista.Count > 0 ? lista.Count : 2;
+                    isFinding = false;
                 }
             }
             catch (Exception ex)
             {
-                isFinding=false;
+                isFinding = false;
                 App.LogRepository.Add(new Log
                 {
                     Data = DateTime.Now,
@@ -863,8 +913,8 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 try
                 {
-                    IsLoading=true;
-                    total+=1;
+                    IsLoading = true;
+                    total += 1;
 
                     var lista = new List<CustomDictionary>();
                     Task.Run(() =>
@@ -888,7 +938,7 @@ namespace MinerthalSalesApp.Infra.Services
                         {
                             Key = query.ToName(),
                             StringValue = _query,
-                            ByteValue  = (byte)query,
+                            ByteValue = (byte)query,
                             Filter = _filter
                         });
                     }
@@ -905,7 +955,7 @@ namespace MinerthalSalesApp.Infra.Services
                 }
                 finally
                 {
-                    IsLoading=false;
+                    IsLoading = false;
                 }
             }
             return Task.CompletedTask;
@@ -918,13 +968,13 @@ namespace MinerthalSalesApp.Infra.Services
                 var _query = "";
                 try
                 {
-                    IsLoading=true;
-                    model.TotalUsuarios=2;
-                    total+=1;
+                    IsLoading = true;
+                    model.TotalUsuarios = 2;
+                    total += 1;
 
                     var lista = new List<CustomDictionary>();
-                    model.TotalRanking= CarregarRankingAsync();
-                    total+=1;
+                    model.TotalRanking = CarregarRankingAsync();
+                    total += 1;
 
                     foreach (ApiQueriesIdsEnum query in (ApiQueriesIdsEnum[])Enum.GetValues(typeof(ApiQueriesIdsEnum)))
                     {
@@ -934,6 +984,7 @@ namespace MinerthalSalesApp.Infra.Services
                             7 => true,
                             4 => true,
                             5 => true,
+                           17 => true,
                             _ => false
                         };
 
@@ -942,11 +993,11 @@ namespace MinerthalSalesApp.Infra.Services
                         {
                             Key = query.ToName(),
                             StringValue = _query,
-                            ByteValue  = (byte)query,
+                            ByteValue = (byte)query,
                             Filter = _filter
                         });
                     }
-                    total +=  CarregarDadosDaApi(lista, model);
+                    total += CarregarDadosDaApi(lista, model);
 
                 }
                 catch (Exception ex)
@@ -955,7 +1006,7 @@ namespace MinerthalSalesApp.Infra.Services
                 }
                 finally
                 {
-                    IsLoading=false;
+                    IsLoading = false;
                 }
             }
             return total;
@@ -975,125 +1026,130 @@ namespace MinerthalSalesApp.Infra.Services
                     if (!string.IsNullOrWhiteSpace(model))
                     {
 
-                        if (item.ByteValue==(byte)1)
+                        if (item.ByteValue == (byte)1)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiCliente>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.ClienteRepository.SaveClientes(_model.Details);
-                                viewmodel.TotalClientes = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalClientes = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)2)
+                        else if (item.ByteValue == (byte)2)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiTabelaPreco>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.TabelaPrecoRepository.SaveTabelaPreco(_model.Details);
-                                viewmodel.TotalTbPrecos = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalTbPrecos = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)3)
+                        else if (item.ByteValue == (byte)3)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiPlano>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.PlanosRepository.Save(_model.Details);
-                                viewmodel.TotalPlanos = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalPlanos = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)4)
+                        else if (item.ByteValue == (byte)4)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiFaturamento>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.FaturamentoRepository.SaveFaturamento(_model.Details);
-                                viewmodel.TotalFaturamento = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalFaturamento = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)5)
+                        else if (item.ByteValue == (byte)5)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiResumoPedido>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.ResumoPedidoRepository.SavePedido(_model.Details);
-                                viewmodel.TotalPedidos = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalPedidos = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)6)
+                        else if (item.ByteValue == (byte)6)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiProduto>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.ProdutosRepository.SaveProduto(_model.Details);
-                                viewmodel.TotalProdutos = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalProdutos = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)7)
+                        else if (item.ByteValue == (byte)7)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiHistoricoPedido>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.HistoricoPedidoReposity.SaveHistorico(_model.Details);
-                                viewmodel.TotalHistoricoPedidos = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalHistoricoPedidos = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)8)
+                        else if (item.ByteValue == (byte)8)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiVendedor>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.VendedorRepository.SaveVendedor(_model.Details);
-                                viewmodel.TotalVendedores = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalVendedores = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
 
                         }
-                        else if (item.ByteValue==(byte)9) { }
-                        else if (item.ByteValue==(byte)10) { }
-                        else if (item.ByteValue==(byte)11) { }
-                        else if (item.ByteValue==(byte)12) { }
-                        else if (item.ByteValue==(byte)13)
+                        else if (item.ByteValue == (byte)9) { }
+                        else if (item.ByteValue == (byte)10) { }
+                        else if (item.ByteValue == (byte)11) { }
+                        else if (item.ByteValue == (byte)12) { }
+                        else if (item.ByteValue == (byte)13)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiFilial>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.FilialRepository.SaveFilial(_model.Details);
-                                viewmodel.TotalFiliais = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalFiliais = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)14)
+                        else if (item.ByteValue == (byte)14)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiVisitas>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.VisitasRepository.SaveVisitasAsync(_model.Details);
-                                viewmodel.TotalVisitas = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalVisitas = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)15) { }
-                        else if (item.ByteValue==(byte)16) { }
-                        else if (item.ByteValue==(byte)17)
+                        else if (item.ByteValue == (byte)15) { }
+                        else if (item.ByteValue == (byte)16) { }
+                        else if (item.ByteValue == (byte)17)
                         {
-
+                            var _model = JsonConvert.DeserializeObject<ResponseApiMetaMensal>(model);
+                            if (_model.Details != null)
+                            {
+                                App.MetaMensalRepository.SaveMeta(_model.Details);
+                                viewmodel.TotalMetaMensal = _model.Details.Count > 0 ? _model.Details.Count : 1;
+                            }
                         }
-                        else if (item.ByteValue==(byte)18) { }
-                        else if (item.ByteValue==(byte)19)
+                        else if (item.ByteValue == (byte)18) { }
+                        else if (item.ByteValue == (byte)19)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiTitulos>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.TitulosRepositoy.SaveTitulos(_model.Details);
-                                viewmodel.TotalTitulos = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalTitulos = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
-                        else if (item.ByteValue==(byte)20) { }
-                        else if (item.ByteValue==(byte)21)
+                        else if (item.ByteValue == (byte)20) { }
+                        else if (item.ByteValue == (byte)21)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiBanco>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                             {
                                 App.BancoRepository.SaveProduto(_model.Details);
-                                viewmodel.TotalBancos = _model.Details.Count>0 ? _model.Details.Count : 1;
+                                viewmodel.TotalBancos = _model.Details.Count > 0 ? _model.Details.Count : 1;
                             }
                         }
                     }
@@ -1104,23 +1160,24 @@ namespace MinerthalSalesApp.Infra.Services
                     {
                         Data = DateTime.Now,
                         ErrorDetail = ex.Message,
-                        Pagina =item.ByteValue.ToString(),
+                        Pagina = item.ByteValue.ToString(),
                         Descricao = model
                     });
                     switch (item.ByteValue)
                     {
-                        case 1: viewmodel.TotalClientes=1; break;
-                        case 2: viewmodel.TotalTbPrecos=1; break;
-                        case 3: viewmodel.TotalPlanos=1; break;
-                        case 4: viewmodel.TotalFaturamento=1; break;
-                        case 5: viewmodel.TotalPedidos=1; break;
-                        case 6: viewmodel.TotalProdutos=1; break;
-                        case 7: viewmodel.TotalHistoricoPedidos=1; break;
-                        case 8: viewmodel.TotalVendedores=1; break;
-                        case 13: viewmodel.TotalFiliais=1; break;
-                        case 14: viewmodel.TotalVisitas=1; break;
-                        case 19: viewmodel.TotalTitulos=1; break;
-                        case 21: viewmodel.TotalBancos=1; break;
+                        case 1: viewmodel.TotalClientes = 1; break;
+                        case 2: viewmodel.TotalTbPrecos = 1; break;
+                        case 3: viewmodel.TotalPlanos = 1; break;
+                        case 4: viewmodel.TotalFaturamento = 1; break;
+                        case 5: viewmodel.TotalPedidos = 1; break;
+                        case 6: viewmodel.TotalProdutos = 1; break;
+                        case 7: viewmodel.TotalHistoricoPedidos = 1; break;
+                        case 8: viewmodel.TotalVendedores = 1; break;
+                        case 13: viewmodel.TotalFiliais = 1; break;
+                        case 14: viewmodel.TotalVisitas = 1; break;
+                        case 17: viewmodel.TotalMetaMensal = 1; break;
+                        case 19: viewmodel.TotalTitulos = 1; break;
+                        case 21: viewmodel.TotalBancos = 1; break;
                     }
                     continue;
                 }
@@ -1140,89 +1197,89 @@ namespace MinerthalSalesApp.Infra.Services
                     if (!string.IsNullOrWhiteSpace(model))
                     {
 
-                        if (item.ByteValue==(byte)1)
+                        if (item.ByteValue == (byte)1)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiCliente>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.ClienteRepository.SaveClientes(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)2)
+                        else if (item.ByteValue == (byte)2)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiTabelaPreco>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.TabelaPrecoRepository.SaveTabelaPreco(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)3)
+                        else if (item.ByteValue == (byte)3)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiPlano>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.PlanosRepository.Save(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)4)
+                        else if (item.ByteValue == (byte)4)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiFaturamento>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.FaturamentoRepository.SaveFaturamento(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)5)
+                        else if (item.ByteValue == (byte)5)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiResumoPedido>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.ResumoPedidoRepository.SavePedido(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)6)
+                        else if (item.ByteValue == (byte)6)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiProduto>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.ProdutosRepository.SaveProduto(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)7)
+                        else if (item.ByteValue == (byte)7)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiHistoricoPedido>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.HistoricoPedidoReposity.SaveHistorico(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)8)
+                        else if (item.ByteValue == (byte)8)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiVendedor>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.VendedorRepository.SaveVendedor(_model.Details);
 
                         }
-                        else if (item.ByteValue==(byte)9) { }
-                        else if (item.ByteValue==(byte)10) { }
-                        else if (item.ByteValue==(byte)11) { }
-                        else if (item.ByteValue==(byte)12) { }
-                        else if (item.ByteValue==(byte)13)
+                        else if (item.ByteValue == (byte)9) { }
+                        else if (item.ByteValue == (byte)10) { }
+                        else if (item.ByteValue == (byte)11) { }
+                        else if (item.ByteValue == (byte)12) { }
+                        else if (item.ByteValue == (byte)13)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiFilial>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.FilialRepository.SaveFilial(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)14)
+                        else if (item.ByteValue == (byte)14)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiVisitas>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.VisitasRepository.SaveVisitasAsync(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)15) { }
-                        else if (item.ByteValue==(byte)16) { }
-                        else if (item.ByteValue==(byte)17)
+                        else if (item.ByteValue == (byte)15) { }
+                        else if (item.ByteValue == (byte)16) { }
+                        else if (item.ByteValue == (byte)17)
                         {
 
                         }
-                        else if (item.ByteValue==(byte)18) { }
-                        else if (item.ByteValue==(byte)19)
+                        else if (item.ByteValue == (byte)18) { }
+                        else if (item.ByteValue == (byte)19)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiTitulos>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.TitulosRepositoy.SaveTitulos(_model.Details);
                         }
-                        else if (item.ByteValue==(byte)20) { }
-                        else if (item.ByteValue==(byte)21)
+                        else if (item.ByteValue == (byte)20) { }
+                        else if (item.ByteValue == (byte)21)
                         {
                             var _model = JsonConvert.DeserializeObject<ResponseApiBanco>(model);
-                            if (_model.Details!=null)
+                            if (_model.Details != null)
                                 App.BancoRepository.SaveProduto(_model.Details);
                         }
                     }
@@ -1233,7 +1290,7 @@ namespace MinerthalSalesApp.Infra.Services
                     {
                         Data = DateTime.Now,
                         ErrorDetail = ex.Message,
-                        Pagina =item.ByteValue.ToString(),
+                        Pagina = item.ByteValue.ToString(),
                         Descricao = model
                     });
                     continue;
@@ -1248,7 +1305,7 @@ namespace MinerthalSalesApp.Infra.Services
             try
             {
                 var lista = PesquisarRankingAsync();
-                total = lista!=null  && lista.Count>0 ? lista.Count : 2;
+                total = lista != null && lista.Count > 0 ? lista.Count : 2;
                 App.RankingRepository.SaveRanking(lista);
             }
             catch (Exception ex)
@@ -1283,8 +1340,8 @@ namespace MinerthalSalesApp.Infra.Services
                 App.AtualizacaoRepository.CriarTabela();
                 App.AtualizacaoRepository.Add(new Atualizacoes
                 {
-                    DataAtualizacao= DateTime.Now,
-                    NomeTabela =tableName
+                    DataAtualizacao = DateTime.Now,
+                    NomeTabela = tableName
                 });
 
                 App.LogRepository.CriarTabela();
@@ -1306,19 +1363,7 @@ namespace MinerthalSalesApp.Infra.Services
                 App.ResumoPedidoRepository.CriarTabela();
                 App.TitulosRepositoy.CriarTabela();
                 App.VisitasRepository.CriarTabela();
-
-
-
-
-
-
-
-
-
-
-
-
-
+                App.MetaMensalRepository.CriarTabela();
             }
         }
     }

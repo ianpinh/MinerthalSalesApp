@@ -112,7 +112,7 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
                 if (!string.IsNullOrWhiteSpace(_model.Pedido.PlanoPagamento))
                     PlanoPagamento.SelectedItem = ((List<DictionaryDto>)PlanoPagamento.ItemsSource).FirstOrDefault(c => c.Key == _model.Pedido.PlanoPagamento);
                 else
-                    PlanoPagamento.SelectedItem = ((List<DictionaryDto>)PlanoPagamento.ItemsSource).FirstOrDefault(c => c.Key == "001");
+                    PlanoPagamento.SelectedItem = ((List<DictionaryDto>)PlanoPagamento.ItemsSource).FirstOrDefault(c => c.Key == "20C");
 
                 if (!string.IsNullOrWhiteSpace(_model.Pedido.TipoCobranca))
                     TipoCobranca.SelectedItem = ((List<DictionaryDto>)TipoCobranca.ItemsSource).FirstOrDefault(c => c.Key == _model.Pedido.TipoCobranca);

@@ -141,6 +141,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IUserRepository, UserRepository>();
         builder.Services.AddSingleton<ILogRepository, LogRepository>();
         builder.Services.AddSingleton<IAtualizacaoRepository, AtualizacaoRepository>();
+        builder.Services.AddSingleton<IMetaMensalRepository, MetaMensalRepository>();
         builder.Services.AddSingleton<IRankingRepository, RankingRepository>();
         builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
 

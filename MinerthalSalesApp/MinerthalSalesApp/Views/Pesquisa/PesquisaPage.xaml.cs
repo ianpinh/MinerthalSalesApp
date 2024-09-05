@@ -71,6 +71,21 @@ public partial class PesquisaPage : ContentPage
         }
     }
 
+    private void Expander_ExpandedChangedMetasMensais(object sender, CommunityToolkit.Maui.Core.ExpandedChangedEventArgs e)
+    {
+
+        var _expander = (Expander)sender;
+        if (_expander.IsExpanded)
+        {
+            model.ExpandedImageMetaMensal = "chevron_up.png";
+        }
+        else
+        {
+            model.ExpandedImageMetaMensal= "chevron_down.png";
+        }
+    }
+    
+
     private void Expander_Loaded(object sender, EventArgs e)
     {
         //ImgUserLoading.IsVisible=false;

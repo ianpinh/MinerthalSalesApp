@@ -17,6 +17,7 @@ public partial class App : Application
     public static IUserRepository UserRepository { get; private set; }
     public static IRankingRepository RankingRepository { get; private set; }
     public static IAtualizacaoRepository AtualizacaoRepository { get; private set; }
+    public static IMetaMensalRepository MetaMensalRepository { get; private set; }
     public static ILogRepository LogRepository { get; private set; }
     public static IClienteRepository ClienteRepository { get; private set; }
     public static IFaturamentoRepository FaturamentoRepository { get; private set; }
@@ -40,7 +41,7 @@ public partial class App : Application
     public static ITitulosRepositoy TitulosRepositoy { get; internal set; }
     public static IVisitasRepository VisitasRepository { get; internal set; }
 
-    public App(IUserRepository userRepository, IRankingRepository rankingRepository, IAtualizacaoRepository atualizacaoRepository, ILogRepository logRepository, IClienteRepository clienteRepository, IFaturamentoRepository faturamentoRepository,
+    public App(IUserRepository userRepository, IRankingRepository rankingRepository, IAtualizacaoRepository atualizacaoRepository, IMetaMensalRepository metaMensalRepository, ILogRepository logRepository, IClienteRepository clienteRepository, IFaturamentoRepository faturamentoRepository,
     IProdutosRepository produtosRepository, ICartRepository cartRepository, IPedidoRepository pedidoRepository, IFilialRepository filialRepository, IMeusPedidosRepository meusPedidosRepository, ITabelaPrecoRepository tabelaPrecoRepository,
     IVendedorRepository vendedorRepository, IPlanosRepository planosRepository, IClientePlanoPagamentoRepository clientePlanoPagamentoRepository, IBancoRepository bancoRepository, IHistoricoPedidoReposity historicoPedidoReposity,
     IResumoPedidoRepository resumoPedidoRepository, IMinerthalApiServices minerthalApiServices, ITitulosRepositoy titulosRepositoy, IVisitasRepository visitasRepository,
@@ -66,6 +67,7 @@ public partial class App : Application
             UserRepository = userRepository;
             RankingRepository = rankingRepository;
             AtualizacaoRepository = atualizacaoRepository;
+            MetaMensalRepository = metaMensalRepository;
             LogRepository = logRepository;
             ClienteRepository = clienteRepository;
             FaturamentoRepository = faturamentoRepository;

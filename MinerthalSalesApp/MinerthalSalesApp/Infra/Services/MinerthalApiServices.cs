@@ -303,7 +303,11 @@ namespace MinerthalSalesApp.Infra.Services
                                 sbParcelas.Append($"{p.Value};");
                             }
 
-                            var valorParcelas = valorPedido / _parcelas.Count;
+                            var _valorPedidoComJuros = valorPedido;
+                            if (item.PercentualJuros > 0)
+                                _valorPedidoComJuros += valorPedido * (item.PercentualJuros / 100);
+
+                            var valorParcelas = Math.Round(_valorPedidoComJuros / _parcelas.Count, 2);
 
                             for (var i = 0; i < _parcelas.Count; i++)
                             {
@@ -430,7 +434,11 @@ namespace MinerthalSalesApp.Infra.Services
                             sbParcelas.Append($"{p.Value};");
                         }
 
-                        var valorParcelas = valorPedido / _parcelas.Count;
+                        var _valorPedidoComJuros = valorPedido;
+                        if (pedido.PercentualJuros > 0)
+                            _valorPedidoComJuros += valorPedido * (pedido.PercentualJuros / 100);
+
+                        var valorParcelas = Math.Round(_valorPedidoComJuros / _parcelas.Count, 2);
 
                         for (var i = 0; i < _parcelas.Count; i++)
                         {

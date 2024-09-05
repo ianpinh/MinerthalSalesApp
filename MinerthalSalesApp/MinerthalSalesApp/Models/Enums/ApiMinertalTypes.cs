@@ -18,6 +18,7 @@
         HistoricoPedido = 14,
         ResumoPedido = 15,
         Titulos = 16,
-        Visita = 17
+        MetaMensal = 17,
+        Visita = 18
     }
 }

@@ -7,5 +7,6 @@ namespace MinerthalSalesApp.Models.Dtos
         public List<Faturamento> TitulosaVencer { get; set; } = new List<Faturamento>();
         public List<HistoricoDePedidos> PedidosEmAberto { get; set; } = new List<HistoricoDePedidos>();
         public List<HistoricoDePedidos> Carregamentos { get; set; } = new List<HistoricoDePedidos>();
+        public List<MetaMensal> MetaMensal { get; set; } = new List<MetaMensal>();
     }
 }
