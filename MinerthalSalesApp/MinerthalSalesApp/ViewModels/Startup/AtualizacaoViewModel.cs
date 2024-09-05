@@ -166,7 +166,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
         }
 
 
-        public int TotalAtualizacoes => 14;
+        public int TotalAtualizacoes => 15;
 
         private int totalAtualizacoesRealizadas = 0;
         public int TotalAtualizacoesRealizadas
@@ -703,6 +703,30 @@ namespace MinerthalSalesApp.ViewModels.Startup
                     SalvarLog(ApiMinertalTypes.Visita);
                     TabelaAtualizada ="Visitas";
                     Completos.Add(("TotalVisitas", value));
+                }
+            }
+        }
+
+        #endregion
+
+        #region ::. META MENSAL .::
+
+        private int totalMetaMensal;
+        public int TotalMetaMensal
+        {
+            get => totalMetaMensal;
+            set
+
+            {
+                totalMetaMensal = value;
+                if (value > 0)
+                {
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(TotalMetaMensal));
+                    TotalAtualizacoesRealizadas += 1;
+                    SalvarLog(ApiMinertalTypes.MetaMensal);
+                    TabelaAtualizada = "Meta mensal";
+                    Completos.Add(("TotalMetaMensal", value));
                 }
             }
         }

@@ -26,10 +26,13 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
             ExpandedImageTitulosaVencer="chevron_down.png";
             ExpandedImagePedidosEmAberto="chevron_down.png";
             ExpandedImageCarregamentos="chevron_down.png";
+            ExpandedImageMetaMensal = "chevron_down.png";
+
             IsExpandedTitulosAVencer  =false;
             IsExpandedInadimplentes  =false;
             IsExpandedPedidosAberto  =false;
             IsExpandedCarregamentos  =false;
+            IsExpandedMetaMensal = false;
         }
 
         private void CarregarPesquisa()
@@ -38,6 +41,7 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
             var titulosAvencer = App.FaturamentoRepository.RecuperarTitulosAVencer();
             var pedidosEmAberto = App.HistoricoPedidoReposity.PedidosEmAberto();
             var carregamentos = App.HistoricoPedidoReposity.CarregamentoDePedidos();
+            var metasMensais = App.MetaMensalRepository.GetAll();
 
             PesquisaDto.TitulosaVencer=titulosAvencer;
             PesquisaDto.ClientesInadinplentes=inadimplentes;
@@ -47,6 +51,9 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
 
             if(carregamentos.Count>0)
             PesquisaDto.Carregamentos=carregamentos.OrderByDescending(x=>x.DataPedido).Take(20).ToList();
+
+            if (metasMensais.Count() > 0)
+                PesquisaDto.MetaMensal = metasMensais.OrderByDescending(x => x.Ano).ToList();
         }
 
         public PesquisaDto PesquisaDto { get; set; } = new PesquisaDto();
@@ -99,11 +106,24 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
             }
         }
 
+        private string expandedImageMetaMensal;
+        public string ExpandedImageMetaMensal
+        {
+            get => expandedImageMetaMensal;
+            set
+            {
+                expandedImageMetaMensal = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ExpandedImageMetaMensal));
+            }
+        }
+
 
         private bool isExpandedTitulosAVencer;
         private bool isExpandedInadimplentes;
         private bool isExpandedPedidosAberto;
         private bool isExpandedCarregamentos;
+        private bool isExpandedMetaMensal;
         
         public bool IsExpandedTitulosAVencer
         {
@@ -143,6 +163,16 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
                 isExpandedCarregamentos = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(IsExpandedCarregamentos));
+            }
+        }
+        public bool IsExpandedMetaMensal
+        {
+            get => isExpandedMetaMensal;
+            set
+            {
+                isExpandedMetaMensal = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsExpandedMetaMensal));
             }
         }
 

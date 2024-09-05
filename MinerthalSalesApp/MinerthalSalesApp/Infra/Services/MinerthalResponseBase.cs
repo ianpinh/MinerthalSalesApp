@@ -84,4 +84,9 @@ namespace MinerthalSalesApp.Infra.Services
     {
         public List<Visita> Details { get; set; } = new List<Visita>();
     }
+
+    public class ResponseApiMetaMensal : MinerthalResponseBase
+    {
+        public List<MetaMensal> Details { get; set; } = new List<MetaMensal>();
+    }
 }
