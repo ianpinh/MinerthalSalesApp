@@ -294,6 +294,10 @@ namespace MinerthalSalesApp.Infra.Services
                             ((x.Quantidade * x.ValorCombinado) * (x.TaxaEncargos == 0 ? 0 : x.TaxaEncargos / 100)) +
                             totalFrete);
 
+                        var valorPedidoParcela = carrinho.Sum(x =>
+                            ((x.Quantidade * x.ValorCombinado) / (1 + (x.Desconto / 100))) +
+                            totalFrete);
+
                         var sbParcelas = new StringBuilder();
                         var SbValores = new StringBuilder();
                         if (_parcelas.Any())
@@ -303,20 +307,20 @@ namespace MinerthalSalesApp.Infra.Services
                                 sbParcelas.Append($"{p.Value};");
                             }
 
-                            var _valorPedidoComJuros = valorPedido;
-                            if (item.PercentualJuros > 0)
-                                _valorPedidoComJuros += valorPedido * (item.PercentualJuros / 100);
+                            var _valorPedidoComJuros = valorPedidoParcela;
+                            /*if (item.PercentualJuros > 0)
+                                _valorPedidoComJuros += valorPedido * (item.PercentualJuros / 100);*/
 
                             var valorParcelas = Math.Round(_valorPedidoComJuros / _parcelas.Count, 2);
 
                             for (var i = 0; i < _parcelas.Count; i++)
                             {
-                                SbValores.Append($"{valorParcelas};");// 80.01; 80.01;
+                                SbValores.Append($"{valorParcelas};").Replace(',','.');// 80.01; 80.01;
                             }
                         }
                         else
                         {
-                            SbValores.Append($"{valorPedido};");
+                            SbValores.Append($"{valorPedido};").Replace(',', '.');
                         }
 
                         TADDPEDIDODET[] itensPedido = default;
@@ -424,7 +428,15 @@ namespace MinerthalSalesApp.Infra.Services
                         ? JsonConvert.DeserializeObject<List<DictionaryDto>>(pedido.Parcelas)
                         : new List<DictionaryDto>();
 
-                    var valorPedido = carrinho.Sum(x => (x.Quantidade * x.ValorCombinado) + totalFrete);
+                    var valorPedido = carrinho.Sum(x =>
+                            ((x.Quantidade * x.ValorCombinado) / (1 + (x.Desconto / 100))) +
+                            ((x.Quantidade * x.ValorCombinado) * (x.TaxaEncargos == 0 ? 0 : x.TaxaEncargos / 100)) +
+                            totalFrete);
+
+                    var valorPedidoParcela = carrinho.Sum(x =>
+                        ((x.Quantidade * x.ValorCombinado) / (1 + (x.Desconto / 100))) +
+                        totalFrete);
+
                     var sbParcelas = new StringBuilder();
                     var SbValores = new StringBuilder();
                     if (_parcelas.Any())
@@ -434,20 +446,20 @@ namespace MinerthalSalesApp.Infra.Services
                             sbParcelas.Append($"{p.Value};");
                         }
 
-                        var _valorPedidoComJuros = valorPedido;
-                        if (pedido.PercentualJuros > 0)
-                            _valorPedidoComJuros += valorPedido * (pedido.PercentualJuros / 100);
+                        var _valorPedidoComJuros = valorPedidoParcela;
+                        /*if (pedido.PercentualJuros > 0)
+                            _valorPedidoComJuros += valorPedido * (pedido.PercentualJuros / 100);*/
 
                         var valorParcelas = Math.Round(_valorPedidoComJuros / _parcelas.Count, 2);
 
                         for (var i = 0; i < _parcelas.Count; i++)
                         {
-                            SbValores.Append($"{valorParcelas};");// 80.01; 80.01;
+                            SbValores.Append($"{valorParcelas};").Replace(',', '.');// 80.01; 80.01;
                         }
                     }
                     else
                     {
-                        SbValores.Append($"{valorPedido};");
+                        SbValores.Append($"{valorPedido};").Replace(',', '.');
                     }
 
                     var itensPedido = new List<TADDPEDIDODET>();
