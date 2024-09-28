@@ -63,7 +63,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
                     historicoPedido = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(HistoricoPedido));
-                    GridLoadingVisible=false;
+                    GridLoadingVisible = false;
                 }
             }
         }
@@ -89,41 +89,41 @@ namespace MinerthalSalesApp.ViewModels.Orders
                     foreach (var item in pedidos)
                     {
                         var carrinho = App.CartRepository.GetByOrderId(item.Id);
-                        var cliente = App.ClienteRepository.GetByCodigo(item.CodigoCliente+item.CodigoLoja);
+                        var cliente = App.ClienteRepository.GetByCodigo(item.CodigoCliente + item.CodigoLoja);
 
                         var order = new OrderDto
                         {
-                            Id=item.Id,
+                            Id = item.Id,
                             CodigoCliente = item.CodigoCliente,
                             CodigoLoja = item.CodigoLoja,
-                            FilialMinerthal=item.FilialMinerthal,
+                            FilialMinerthal = item.FilialMinerthal,
                             TipoCobranca = item.TipoCobranca,
-                            TipoVenda=item.TipoVenda,
-                            TipoPedido=item.TipoPedido,
-                            PlanoPagamento=item.PlanoPagamento,
-                            ValorFrete25= item.ValorFrete25,
-                            ValorFrete30=   item.ValorFrete30,
+                            TipoVenda = item.TipoVenda,
+                            TipoPedido = item.TipoPedido,
+                            PlanoPagamento = item.PlanoPagamento,
+                            ValorFrete25 = item.ValorFrete25,
+                            ValorFrete30 = item.ValorFrete30,
                             Parcelas = !string.IsNullOrWhiteSpace(item.Parcelas) ? JsonConvert.DeserializeObject<ObservableCollection<DictionaryDto>>(item.Parcelas) : new ObservableCollection<DictionaryDto>(),
                             QdtItens = carrinho.Sum(x => x.Quantidade),
                             TotalPedido = CalcularTotalCarrinho(item, carrinho),
                             Observacao = item.Observacao,
-                            NomeFilial =item.NomeFilial,
-                            NomeTipo =item.NomeTipo,
-                            NomeTipoVenda =item.NomeTipoVenda,
-                            NomeTipoCobranca =item.NomeTipoCobranca,
-                            NomePlanoPagamento =item.NomePlanoPagamento,
+                            NomeFilial = item.NomeFilial,
+                            NomeTipo = item.NomeTipo,
+                            NomeTipoVenda = item.NomeTipoVenda,
+                            NomeTipoCobranca = item.NomeTipoCobranca,
+                            NomePlanoPagamento = item.NomePlanoPagamento,
 
                             ItensPedido = carrinho.Select(x => new ItensDto
                             {
-                                CodigoNomeProduto=x.CodigoNomeProduto,
-                                CodProduto =x.CodProduto,
+                                CodigoNomeProduto = x.CodigoNomeProduto,
+                                CodProduto = x.CodProduto,
                                 FreteUnidade = x.Frete,
                                 Id = x.Id,
                                 ImagemProduto = x.ImagemProduto,
                                 PedidoId = x.PedidoId,
                                 Quantidade = x.Quantidade,
                                 ValorBrutoProduto = x.ValorProduto,
-                                ValorCombinado=x.ValorCombinado,
+                                ValorCombinado = x.ValorCombinado,
                                 Comissao = x.Comissao,
                                 Desconto = x.Desconto,
                                 TaxaPlano = x.TaxaEncargos
@@ -137,7 +137,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
                         };
 
                         var index = _pedidos.FindIndex(x => x.Pedido.Id == ped.Pedido.Id);
-                        if (index<0)
+                        if (index < 0)
                         {
                             _pedidos.Add(ped);
                             PedidosPendentes.Add(ped);
@@ -164,17 +164,17 @@ namespace MinerthalSalesApp.ViewModels.Orders
                         var cliente = App.ClienteRepository.GetByCodigo(cdCliente);
                         var tpCobranca = App.BancoRepository.RecuperarNomeTipoCobranca(item.CdTipocob);
                         var _resumoPedido = App.ResumoPedidoRepository.GetByNumPedido(item.NrPedido);
-                        if (cliente!=null)
+                        if (cliente != null)
                         {
                             item.NomeCliente = cliente.A1Nome;
                             item.Loja = cliente.A1Loja;
-                            item.ClienteCodigo =cliente.A1Cod;
+                            item.ClienteCodigo = cliente.A1Cod;
                         }
 
-                        if (_resumoPedido!=null)
+                        if (_resumoPedido != null)
                             item.ResumoDoPedido = _resumoPedido;
 
-                        if (tpCobranca!=null)
+                        if (tpCobranca != null)
                             item.NomeTipoCobranca = tpCobranca.DsTipocob;
                     }
 
@@ -196,13 +196,23 @@ namespace MinerthalSalesApp.ViewModels.Orders
             var totalDescontos = 0M;
             var totalEncargos = 0M;
 
-            if (pedido.PercentualJuros>0)
-                totalEncargos = subtotal * (pedido.PercentualJuros/100);
+            if (pedido.PercentualJuros > 0)
+                if (pedido.PlanoPagamento.Equals("88"))
+                {
+                    foreach(var item in carrinho) 
+                    {
+                        totalEncargos += item.Encargos;
+                    }
+                }
+                else
+                {
+                    totalEncargos = subtotal * (pedido.PercentualJuros / 100);
+                }
 
-            if (pedido.PercentualDesconto>0)
-                totalDescontos = subTotalProduto - (subTotalProduto / (1 + (pedido.PercentualDesconto/100)));
+            if (pedido.PercentualDesconto > 0)
+                totalDescontos = subTotalProduto - (subTotalProduto / (1 + (pedido.PercentualDesconto / 100)));
 
-            var totalGeral = (subtotal+totalEncargos)-totalDescontos;
+            var totalGeral = (subtotal + totalEncargos) - totalDescontos;
 
             return totalGeral;
         }
@@ -212,7 +222,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
         {
             var pedidoTransmisao = await _servicoDeCarregamentoDasBases.TransmitirPedidos();
             await _alertService.ShowAlertAsync("Enviar Pedido", $"Status: {pedidoTransmisao.Mensagem}. ", "Ok");
-            return pedidoTransmisao.sucesso=="Sucesso";
+            return pedidoTransmisao.sucesso == "Sucesso";
 
             //if (pedidoTransmisao.sucesso=="Sucesso")
             //{
@@ -260,7 +270,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
             }
         }
 
-        
+
 
         //ICommand refreshCommand = new Command(() =>
         //{

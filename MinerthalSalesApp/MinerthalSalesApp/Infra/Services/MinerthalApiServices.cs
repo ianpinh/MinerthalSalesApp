@@ -304,18 +304,41 @@ namespace MinerthalSalesApp.Infra.Services
                         {
                             foreach (var p in _parcelas)
                             {
-                                sbParcelas.Append($"{p.Value};");
+                                sbParcelas.Append($"{p.Value.Substring(0,10)};");
                             }
 
                             var _valorPedidoComJuros = valorPedidoParcela;
                             /*if (item.PercentualJuros > 0)
                                 _valorPedidoComJuros += valorPedido * (item.PercentualJuros / 100);*/
 
-                            var valorParcelas = Math.Round(_valorPedidoComJuros / _parcelas.Count, 2);
+                            decimal valorTotal = _valorPedidoComJuros;
+                            int quantidadeParcelas = _parcelas.Count;
+
+                            // Calcula o valor básico das parcelas
+                            decimal valorParcela = Math.Round(valorTotal / quantidadeParcelas, 2);
+
+                            // Cria uma lista para armazenar as parcelas
+                            List<decimal> valoresParcelas = new List<decimal>();
+
+                            // Adiciona as parcelas arredondadas
+                            for (int i = 0; i < quantidadeParcelas - 1; i++)
+                            {
+                                valoresParcelas.Add(valorParcela);
+                            }
+
+                            // Ajusta a última parcela para garantir que a soma seja exata
+                            decimal somaParcelas = valorParcela * (quantidadeParcelas - 1);
+                            decimal ultimaParcela = Math.Round(valorTotal - somaParcelas, 2);
+
+                            // Adiciona a última parcela
+                            valoresParcelas.Add(ultimaParcela);
+
+                            // Junta os valores em uma string separada por ponto e vírgula
+                            string resultadoFinal = string.Join(";", valoresParcelas.Select(p => p.ToString("F2")));
 
                             for (var i = 0; i < _parcelas.Count; i++)
                             {
-                                SbValores.Append($"{valorParcelas};").Replace(',','.');// 80.01; 80.01;
+                                SbValores.Append($"{resultadoFinal};").Replace(',','.');// 80.01; 80.01;
                             }
                         }
                         else
@@ -382,7 +405,7 @@ namespace MinerthalSalesApp.Infra.Services
                         }
                     }
 
-                    var sb = new StringBuilder($"foram enviados {totalEnviados} com seucesso de {listaPedidos.Count}");
+                    var sb = new StringBuilder($"foram enviados {totalEnviados} com sucesso de {listaPedidos.Count}");
                     //sb.AppendLine($"Códigos retornos :");
                     //foreach (var item in totalPedidos)
                     //    sb.AppendLine($" {item}");
@@ -443,18 +466,41 @@ namespace MinerthalSalesApp.Infra.Services
                     {
                         foreach (var p in _parcelas)
                         {
-                            sbParcelas.Append($"{p.Value};");
+                            sbParcelas.Append($"{p.Value.Substring(0,10)};");
                         }
 
                         var _valorPedidoComJuros = valorPedidoParcela;
-                        /*if (pedido.PercentualJuros > 0)
-                            _valorPedidoComJuros += valorPedido * (pedido.PercentualJuros / 100);*/
+                        /*if (item.PercentualJuros > 0)
+                            _valorPedidoComJuros += valorPedido * (item.PercentualJuros / 100);*/
 
-                        var valorParcelas = Math.Round(_valorPedidoComJuros / _parcelas.Count, 2);
+                        decimal valorTotal = _valorPedidoComJuros;
+                        int quantidadeParcelas = _parcelas.Count;
+
+                        // Calcula o valor básico das parcelas
+                        decimal valorParcela = Math.Round(valorTotal / quantidadeParcelas, 2);
+
+                        // Cria uma lista para armazenar as parcelas
+                        List<decimal> valoresParcelas = new List<decimal>();
+
+                        // Adiciona as parcelas arredondadas
+                        for (int i = 0; i < quantidadeParcelas - 1; i++)
+                        {
+                            valoresParcelas.Add(valorParcela);
+                        }
+
+                        // Ajusta a última parcela para garantir que a soma seja exata
+                        decimal somaParcelas = valorParcela * (quantidadeParcelas - 1);
+                        decimal ultimaParcela = Math.Round(valorTotal - somaParcelas, 2);
+
+                        // Adiciona a última parcela
+                        valoresParcelas.Add(ultimaParcela);
+
+                        // Junta os valores em uma string separada por ponto e vírgula
+                        string resultadoFinal = string.Join(";", valoresParcelas.Select(p => p.ToString("F2")));
 
                         for (var i = 0; i < _parcelas.Count; i++)
                         {
-                            SbValores.Append($"{valorParcelas};").Replace(',', '.');// 80.01; 80.01;
+                            SbValores.Append($"{resultadoFinal};").Replace(',', '.');// 80.01; 80.01;
                         }
                     }
                     else

@@ -162,7 +162,37 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
                     if (_model.PlanoPadraoCliente != null)
                     {
                         if (_model.PlanoPadraoCliente.TxPerFin > 0)
-                            totalEncargos = ((subtotal + subtotalFrete) * (_model.PlanoPadraoCliente.TxPerFin / 100));
+                        {
+                            if (_model.PlanoPadraoCliente.CdPlano.Equals("88"))
+                            {
+                                var parcelas = _model.Pedido.Parcelas; // Supondo que seja sua lista de parcelas
+
+                                DateTime dataReferencia = DateTime.Today;
+
+                                // Variável para somar os dias de diferença
+                                decimal somaDias = 0;
+
+                                // Para cada parcela, calcular a diferença de dias
+                                foreach (var item in parcelas)
+                                {
+                                    DateTime dataConvertida = DateTime.ParseExact(item.Value.Substring(0, 10), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                                    // Calcular a diferença de dias entre a data da parcela e a data de referência (primeira parcela)
+                                    decimal diasDiferenca = (decimal)(dataConvertida - dataReferencia).TotalDays;
+
+                                    // Adicionar à soma dos dias
+                                    somaDias += diasDiferenca;
+                                }
+
+                                // Calcular o prazo médio
+                                decimal prazoMedio = somaDias / parcelas.Count;
+                                totalEncargos = (subtotal * (1 + (_model.PlanoPadraoCliente.TxPerFin * prazoMedio) / 100)) - subtotal;
+                            }
+                            else
+                            {
+                                totalEncargos = ((subtotal + subtotalFrete) * (_model.PlanoPadraoCliente.TxPerFin / 100));
+                            }
+                        }
 
                         if (_model.PlanoPadraoCliente.VlDescpl > 0)
                             totalDescontos = (subtotal) - ((subtotal) / (1 + (_model.PlanoPadraoCliente.VlDescpl / 100)));
@@ -338,7 +368,43 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
             };
             foreach (var iten in _model.Pedido.ItensPedido)
             {
-                var totalEncargos = _model.PlanoPadraoCliente != null && _model.PlanoPadraoCliente.TxPerFin > 0 ? _model.PlanoPadraoCliente.TxPerFin : 0M;
+                var totalEncargos = 0M;
+                if (_model.PlanoPadraoCliente.CdPlano.Equals("88"))
+                {
+                    var parcelas = _model.Pedido.Parcelas; // Supondo que seja sua lista de parcelas
+
+                    // Extrair a data da primeira parcela para ser a data de referência
+                    string primeiraDataIngles = parcelas.First().Value.Length == 9
+                        ? parcelas.First().Value.Substring(0, 9)
+                        : parcelas.First().Value.Substring(0, 10);
+
+                    DateTime dataReferencia = DateTime.ParseExact(primeiraDataIngles, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                    // Variável para somar os dias de diferença
+                    decimal somaDias = 0;
+
+                    // Para cada parcela, calcular a diferença de dias
+                    foreach (var item in parcelas)
+                    {
+                        // Extrair e converter a data de cada parcela
+                        string dataIngles = item.Value.Length == 9 ? item.Value.Substring(0, 9) : item.Value.Substring(0, 10);
+                        DateTime dataConvertida = DateTime.ParseExact(dataIngles, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                        // Calcular a diferença de dias entre a data da parcela e a data de referência (primeira parcela)
+                        decimal diasDiferenca = (decimal)(dataConvertida - dataReferencia).TotalDays;
+
+                        // Adicionar à soma dos dias
+                        somaDias += diasDiferenca;
+                    }
+
+                    // Calcular o prazo médio
+                    decimal prazoMedio = somaDias / parcelas.Count;
+                    totalEncargos = (iten.ValorCombinado * (1 + (_model.PlanoPadraoCliente.TxPerFin * prazoMedio)/100)) - iten.ValorCombinado;
+                }
+                else
+                {
+                    totalEncargos = ((iten.ValorCombinado + iten.FreteUnidade) * (_model.PlanoPadraoCliente.TxPerFin / 100));
+                }
                 var totalDescontos = _model.PlanoPadraoCliente != null && _model.PlanoPadraoCliente.VlDescpl > 0 ? _model.PlanoPadraoCliente.VlDescpl : 0M;
 
                 var _itensPedido = new Carrinho

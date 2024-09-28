@@ -159,8 +159,38 @@ public partial class CarrinhoPage : ContentPage
         var totalEncargos = 0M;
 
         if (model.PlanoPadraoCliente.TxPerFin>0)
-            totalEncargos = subtotal * (model.PlanoPadraoCliente.TxPerFin/100);
+        {
+            if (model.PlanoPadraoCliente.CdPlano.Equals("88"))
+            {
+                var parcelas = model.Pedido.Parcelas; // Supondo que seja sua lista de parcelas
 
+                DateTime dataReferencia = DateTime.Today;
+
+                // Variável para somar os dias de diferença
+                decimal somaDias = 0;
+
+                // Para cada parcela, calcular a diferença de dias
+                foreach (var item in parcelas)
+                {
+                    DateTime dataConvertida = DateTime.ParseExact(item.Value.Substring(0,10), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                    // Calcular a diferença de dias entre a data da parcela e a data de referência (primeira parcela)
+                    decimal diasDiferenca = (decimal)(dataConvertida - dataReferencia).TotalDays;
+
+                    // Adicionar à soma dos dias
+                    somaDias += diasDiferenca;
+                }
+
+                // Calcular o prazo médio
+                decimal prazoMedio = somaDias / parcelas.Count;
+                totalEncargos = (subtotal * (1 + (model.PlanoPadraoCliente.TxPerFin * prazoMedio)/100)) - subtotal;
+            }
+            else
+            {
+                totalEncargos = subtotal * (model.PlanoPadraoCliente.TxPerFin / 100);
+            }
+        }
+        
         if (model.PlanoPadraoCliente.VlDescpl > 0)
             totalDescontos = subTotalProduto - (subTotalProduto / (1 + (model.PlanoPadraoCliente.VlDescpl / 100)));
                 //subtotal * (model.PlanoPadraoCliente.VlDescpl/100);
