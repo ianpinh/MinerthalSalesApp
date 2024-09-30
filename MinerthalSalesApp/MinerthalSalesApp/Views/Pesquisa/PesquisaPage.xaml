@@ -182,7 +182,7 @@
                             Padding="10,15,3,3"
                             FontAttributes="Bold"
                             FontSize="16"
-                            Text="Titulos a vencer"
+                            Text="Titulos em Aberto"
                             TextColor="{AppThemeBinding Light=Black,
                                                         Dark=Black}" />
                         <Image
