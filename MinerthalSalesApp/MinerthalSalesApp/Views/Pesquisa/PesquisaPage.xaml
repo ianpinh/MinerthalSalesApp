@@ -292,6 +292,134 @@
 
                 </mct:Expander.Content>
             </mct:Expander>
+            <mct:Expander
+                Direction="Down"
+                ExpandedChanged="Expander_ExpandedChangedTitulosaVencidos"
+                IsExpanded="{Binding IsExpandedTitulosVencidos, Mode=TwoWay}"
+                Loaded="Expander_Loaded">
+                <mct:Expander.Header>
+                    <Grid
+                        BackgroundColor="  AliceBlue"
+                        ColumnDefinitions="*,30"
+                        HeightRequest="50"
+                        RowDefinitions="*">
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="10,15,3,3"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            Text="Titulos Vencidos"
+                            TextColor="{AppThemeBinding Light=Black,
+                                                        Dark=Black}" />
+                        <Image
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="10,20,10,10"
+                            HeightRequest="20"
+                            HorizontalOptions="End"
+                            Source="{Binding ExpandedImageTitulosVencidos}"
+                            WidthRequest="20" />
+                    </Grid>
+                </mct:Expander.Header>
+                <mct:Expander.Content>
+
+                    <VerticalStackLayout Padding="10" Spacing="20">
+                        <ListView
+                            ItemsSource="{Binding PesquisaDto.TitulosVencidos}"
+                            RowHeight="100"
+                            SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid
+                                            Padding="10"
+                                            ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
+                                            RowDefinitions="Auto,Auto,Auto,Auto">
+                                            <Image
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Margin="-20,0,0,0"
+                                                Aspect="AspectFit"
+                                                HeightRequest="20"
+                                                HorizontalOptions="Start"
+                                                Source="kuser.png"
+                                                WidthRequest="60" />
+
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="4"
+                                                FontAttributes="Bold"
+                                                FontSize="12"
+                                                HorizontalTextAlignment="Start">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0} - {1}">
+                                                        <Binding Path="CdCliente" />
+                                                        <Binding Path="NomeCliente" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Text="Nº Documento"
+                                                VerticalOptions="End" />
+
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="3"
+                                                Grid.ColumnSpan="2"
+                                                VerticalOptions="End">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0} - {1}">
+                                                        <Binding Path="NrDocum" />
+                                                        <Binding Path="NrParcel" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
+                                            <Label
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Text="Vencimento"
+                                                VerticalOptions="End" />
+
+                                            <Label
+                                                Grid.Row="2"
+                                                Grid.Column="3"
+                                                Grid.ColumnSpan="2"
+                                                Text="{Binding DtVenc}"
+                                                VerticalOptions="End" />
+
+                                            <Label
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Text="Valor"
+                                                VerticalOptions="End" />
+
+                                            <Label
+                                                Grid.Row="3"
+                                                Grid.Column="3"
+                                                Grid.ColumnSpan="2"
+                                                Text="{Binding VlDocum, StringFormat='R$ {0:N2}'}"
+                                                VerticalOptions="End" />
+
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </VerticalStackLayout>
+
+                </mct:Expander.Content>
+            </mct:Expander>
 
             <Grid RowDefinitions="auto,auto,auto">
                 <BoxView

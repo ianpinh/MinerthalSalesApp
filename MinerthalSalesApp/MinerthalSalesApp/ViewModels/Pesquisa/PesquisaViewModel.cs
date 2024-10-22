@@ -24,11 +24,13 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
             CarregarPesquisa();
             ExpandedImageInadimplentes="chevron_down.png";
             ExpandedImageTitulosaVencer="chevron_down.png";
+            ExpandedImageTitulosVencidos = "chevron_down.png";
             ExpandedImagePedidosEmAberto="chevron_down.png";
             ExpandedImageCarregamentos="chevron_down.png";
             ExpandedImageMetaMensal = "chevron_down.png";
 
             IsExpandedTitulosAVencer  =false;
+            IsExpandedTitulosVencidos = false;
             IsExpandedInadimplentes  =false;
             IsExpandedPedidosAberto  =false;
             IsExpandedCarregamentos  =false;
@@ -38,6 +40,7 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
         private void CarregarPesquisa()
         {
             var inadimplentes = App.ClienteRepository.RecuperarClientesInadimplentes();
+            var titulosVencidos= App.FaturamentoRepository.RecuperarTitulosVencidos();
             var titulosAvencer = App.FaturamentoRepository.RecuperarTitulosAVencer();
             var pedidosEmAberto = App.HistoricoPedidoReposity.PedidosEmAberto();
             var carregamentos = App.HistoricoPedidoReposity.CarregamentoDePedidos();
@@ -45,6 +48,7 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
 
             PesquisaDto.TitulosaVencer=titulosAvencer;
             PesquisaDto.ClientesInadinplentes=inadimplentes;
+            PesquisaDto.TitulosVencidos = titulosVencidos;
 
             if(pedidosEmAberto.Count>0)
             PesquisaDto.PedidosEmAberto=pedidosEmAberto.OrderByDescending(x=>x.DataPedido).Take(20).ToList();
@@ -94,6 +98,18 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
             }
         }
 
+        private string expandedImageTitulosVencidos;
+        public string ExpandedImageTitulosVencidos
+        {
+            get => expandedImageTitulosVencidos;
+            set
+            {
+                expandedImageTitulosVencidos = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ExpandedImageTitulosVencidos));
+            }
+        }
+
         private string expandedImageCarregamentos;
         public string ExpandedImageCarregamentos
         {
@@ -119,12 +135,23 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
         }
 
 
+        private bool isExpandedTitulosVencidos;
         private bool isExpandedTitulosAVencer;
         private bool isExpandedInadimplentes;
         private bool isExpandedPedidosAberto;
         private bool isExpandedCarregamentos;
         private bool isExpandedMetaMensal;
-        
+
+        public bool IsExpandedTitulosVencidos
+        {
+            get => isExpandedTitulosVencidos;
+            set
+            {
+                isExpandedTitulosVencidos = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsExpandedTitulosVencidos));
+            }
+        }
         public bool IsExpandedTitulosAVencer
         {
             get => isExpandedTitulosAVencer;
