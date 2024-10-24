@@ -28,8 +28,6 @@ namespace MinerthalSalesApp.Infra.Services
             }
         }
 
-
-
         public async Task AtualizarBaseDeDados(ApiMinertalTypes tipo)
         {
             try
@@ -47,6 +45,7 @@ namespace MinerthalSalesApp.Infra.Services
                     case ApiMinertalTypes.Bancos: await CarregarBancosAsync(); break;
                     case ApiMinertalTypes.Usuarios: await CarregarUsuariosAsync(); break;
                     case ApiMinertalTypes.MetaMensal: await CarregarMetaMensalAsync(); break;
+                    case ApiMinertalTypes.Vendedor: await CarregarVendedoresAsync(); break;
                 }
             }
             catch (Exception)
@@ -54,7 +53,6 @@ namespace MinerthalSalesApp.Infra.Services
                 throw;
             }
         }
-
 
         public bool AtualizarBaseDeDadosPedido(ApiQueriesIdsEnum tipo)
         {
@@ -875,7 +873,7 @@ namespace MinerthalSalesApp.Infra.Services
 
         bool isFinding = false;
         public async Task<int> CarregarUsuariosAsync()
-        {
+         {
 
             var total = 2;
             try
@@ -906,7 +904,12 @@ namespace MinerthalSalesApp.Infra.Services
             return total;
         }
 
-        private Task CarregarDadosDoAppAsync()
+		public async Task CarregarVendedoresAposLoginAsync()
+		{
+          await CarregarVendedoresAsync();
+		}
+
+		private Task CarregarDadosDoAppAsync()
         {
             int total = 0;
             if (!IsLoading)

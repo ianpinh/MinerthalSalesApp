@@ -38,5 +38,8 @@ namespace MinerthalSalesApp.Infra.Database.Tables
 
         [JsonProperty("CD_RCAXXX")]
         public string CdRcaxxx { get; set; } = string.Empty;
+
+        [JsonIgnore]
+        public string DadosJson => JsonConvert.SerializeObject(this);
     }
 }

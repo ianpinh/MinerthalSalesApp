@@ -56,8 +56,37 @@ namespace MinerthalSalesApp.Infra.Database.Base
             return cont;
 
         }
+		public int ExcecutarComandoCrudNoCommit(string command)
+		{
 
-        public IEnumerable<dynamic> ExcecutarSelect(string command)
+			var cont = 0;
+			using var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
+			if (connection.State != System.Data.ConnectionState.Open)
+				connection.Open();
+			try
+			{
+				cont = connection.Execute(command);
+			}
+			catch (Exception ex)
+			{
+				if (ex.Message.Contains("no such table: Log"))
+					App.LogRepository.CriarTabela();
+				else if (ex.Message.Contains("no such table: Atualizacoes"))
+					App.AtualizacaoRepository.CriarTabela();
+
+				var _command = command.Contains("'") ? command.Replace("'", "") : command;
+				App.LogRepository.Add(new Log
+				{
+					Data = DateTime.Now,
+					ErrorDetail = ex.Message,
+					Command = _command
+				});
+				cont = 1;
+			}
+			return cont;
+
+		}
+		public IEnumerable<dynamic> ExcecutarSelect(string command)
         {
             try
             {

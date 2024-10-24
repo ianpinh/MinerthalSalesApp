@@ -5,7 +5,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
     public interface IFaturamentoRepository
     {
          List<Faturamento> GetAll();
-
+        List<Faturamento> RecuperarTitulosVencidos();
         List<Faturamento> GetByCodigo(string codCliente);
 
          void SaveFaturamento(List<Faturamento> fatura);

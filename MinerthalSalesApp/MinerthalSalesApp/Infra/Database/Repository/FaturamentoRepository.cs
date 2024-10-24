@@ -14,6 +14,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             _context = context??throw new ArgumentNullException(nameof(context));
             Init();
         }
+       
         private void Init()
         {
             try
@@ -39,6 +40,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 throw;
             }
         }
+
         public List<Faturamento> GetAll()
         {
             try
@@ -69,6 +71,50 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                         Juros=item.Juros!=null ? Convert.ToDecimal(item.Juros) : 0M,
                         VlDocum=item.VlDocum!=null ? Convert.ToDecimal(item.VlDocum) : 0M,
                         VlJuro=item.VlJuro!=null ? Convert.ToDecimal(item.VlJuro) : 0M,
+                    });
+                }
+                return lstuser;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Faturamento> RecuperarTitulosVencidos()
+        {
+            try
+            {
+                var hoje = DateTime.Today;
+                var command = $@"SELECT F.* 
+                                       ,(SELECT C.A1Nome FROM Cliente C WHERE C.A1Loja = (SELECT substr(F.CdCliente,7,2)) 
+                                        AND C.A1Cod = (SELECT substr(F.CdCliente,0,7))) AS NomeCliente 
+                                        FROM Faturamento F                                        
+                                        WHERE F.DtVenc <'{hoje.Year}-{hoje.Month}-{hoje.Day}';";
+                var retorno = _context.ExcecutarSelect(command);
+
+                if (retorno == null)
+                    return new List<Faturamento>();
+
+                var lstuser = new List<Faturamento>();
+                foreach (var item in retorno)
+                {
+                    lstuser.Add(new Faturamento
+                    {
+                        NomeCliente = item.NomeCliente?.ToString(),
+                        Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                        CdCliente = item.CdCliente.ToString(),
+                        NrDocum = item.NrDocum.ToString(),
+                        NrParcel = item.NrParcel.ToString(),
+                        DtEmissao = item.DtEmissao.ToString(),
+                        DtVenc = item.DtVenc.ToString(),
+                        TpCobran = item.TpCobran.ToString(),
+                        CdRca = item.CdRca.ToString(),
+                        CdRcaxxx = item.CdRcaxxx.ToString(),
+                        QtDiaatr = item.QtDiaatr != null ? Convert.ToInt32(item.QtDiaatr) : 0,
+                        Juros = item.Juros != null ? Convert.ToDecimal(item.Juros) : 0M,
+                        VlDocum = item.VlDocum != null ? Convert.ToDecimal(item.VlDocum) : 0M,
+                        VlJuro = item.VlJuro != null ? Convert.ToDecimal(item.VlJuro) : 0M,
                     });
                 }
                 return lstuser;

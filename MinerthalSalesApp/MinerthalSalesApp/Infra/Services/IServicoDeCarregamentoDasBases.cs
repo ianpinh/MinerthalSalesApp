@@ -19,5 +19,8 @@ namespace MinerthalSalesApp.Infra.Services
 
         Task<(string sucesso, string Mensagem)> TransmitirPedidos(Guid pedidoId);
         void DeleteAllTables(string dropCommand);
-    }
+
+        Task CarregarVendedoresAposLoginAsync();
+
+	}
 }

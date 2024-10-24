@@ -1,11 +1,11 @@
 ﻿using MinerthalSalesApp.Infra.Database.Base;
 using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Database.Tables;
-using SQLite;
+using System.Text;
 
 namespace MinerthalSalesApp.Infra.Database.Repository
 {
-    public class AtualizacaoRepository : IAtualizacaoRepository
+	public class AtualizacaoRepository : IAtualizacaoRepository
     {
         private readonly IAppthalContext _context;
 
@@ -129,7 +129,33 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             Init();
         }
-    }
+
+		public void ClearAllTables()
+		{
+            try
+            {
+				var sb = new StringBuilder();
+				sb.AppendLine("delete from Atualizacoes; delete from sqlite_sequence where name = 'Atualizacoes'");
+				sb.AppendLine("delete from HistoricoDePedidos; delete from sqlite_sequence where name = 'HistoricoDePedidos'");
+				sb.AppendLine("delete from ResumoPedido; delete from sqlite_sequence where name = 'ResumoPedido'");
+				sb.AppendLine("delete from Carrinho; delete from sqlite_sequence where name = 'Carrinho'");
+				sb.AppendLine("delete from MeusPedidos; delete from sqlite_sequence where name = 'MeusPedidos'");
+				sb.AppendLine("delete from Titulo; delete from sqlite_sequence where name = 'Titulo'");
+				sb.AppendLine("delete from Cliente; delete from sqlite_sequence where name = 'Cliente'");
+				sb.AppendLine("delete from Pedido; delete from sqlite_sequence where name = 'Pedido'");
+				sb.AppendLine("delete from Faturamento; delete from sqlite_sequence where name = 'Faturamento'");
+				sb.AppendLine("delete from Visita; delete from sqlite_sequence where name = 'Visita'");
+                var clearCommand = sb.ToString();
+
+				_context.ExcecutarComandoCrudNoCommit(clearCommand);
+			}
+            catch (Exception)
+            {
+
+                throw;
+            }
+		}
+	}
 }
 
 

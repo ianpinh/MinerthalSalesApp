@@ -9,6 +9,7 @@
     xmlns:RankingPages="clr-namespace:MinerthalSalesApp.Views.Ranking"
     xmlns:SharingPages="clr-namespace:MinerthalSalesApp.Views.Shared"
     xmlns:configs="clr-namespace:MinerthalSalesApp.Views.Configuration"
+    xmlns:dadosEquipe="clr-namespace:MinerthalSalesApp.Views.DadosEquipe"
     xmlns:dashboard="clr-namespace:MinerthalSalesApp.Views.Dashboard"
     xmlns:local="clr-namespace:MinerthalSalesApp"
     xmlns:models="clr-namespace:MinerthalSalesApp.Models"
@@ -157,11 +158,36 @@
         Shell.FlyoutBehavior="Disabled" />
 
 
+    <ShellContent
+        Title="Dados Equipe"
+        ContentTemplate="{DataTemplate dadosEquipe:DadosEquipePage}"
+        FlyoutItemIsVisible="False"
+        Route="DadosEquipePage"
+        Shell.FlyoutBehavior="Disabled" />
 
+    <ShellContent
+        Title="Dados Vendedor"
+        ContentTemplate="{DataTemplate dadosEquipe:DetalheVendedorPage}"
+        FlyoutItemIsVisible="False"
+        Route="DetalheVendedorPage"
+        Shell.FlyoutBehavior="Disabled" />
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
-            <Button Command="{Binding SignOutCommand}" Text="Sign Out" />
+            <Button
+                x:Name="BtnLoginSupervisor"
+                Margin="0,10,0,0"
+                Command="{Binding SignInManagerCommand}"
+                HeightRequest="40"
+                IsVisible="{Binding IsManagerButtonVisible}"
+                Text="Retornar como supervisor"
+                WidthRequest="240" />
+            <Button
+                Margin="0,10,0,0"
+                Command="{Binding SignOutCommand}"
+                HeightRequest="40"
+                Text="Sign Out"
+                WidthRequest="240" />
             <Label
                 Margin="0,10,0,0"
                 FontSize="12"

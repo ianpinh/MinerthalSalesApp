@@ -4,23 +4,24 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
 {
     public interface IVendedorRepository
     {
-         List<Vendedor> GetAll();
+        List<Vendedor> GetAll();
 
-         Vendedor GetById(int id);
+        Vendedor GetById(int id);
 
-         Vendedor GetByCodigo(string rca);
+        Vendedor GetByCodigo(string rca);
+        IEnumerable<Vendedor> GetByCodigoSuperviso(string rcaxxx);
 
-         void Add(Vendedor vendedor);
+        void Add(Vendedor vendedor);
 
-         void AddRange(List<Vendedor> salers);
+        void AddRange(List<Vendedor> salers);
 
-         void DeleteById(int id);
+        void DeleteById(int id);
 
-         void DeleteAll();
+        void DeleteAll();
 
-         int GetTotal();
+        int GetTotal();
 
-         void SaveVendedor(List<Vendedor> salers);
+        void SaveVendedor(List<Vendedor> salers);
         void CriarTabela();
     }
 }

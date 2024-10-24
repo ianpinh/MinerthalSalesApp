@@ -16,10 +16,14 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
     private const string clientePageKey = "chaveClienteDetalhes";
     public ClientsPage(ClientViewModel viewModel)
     {
+        InitializeComponent();
         _model = viewModel;
         BindingContext = _model;
-        InitializeComponent();
         Initialization = InitializeAsync(viewModel);
+    }
+    public ClientsPage()
+    {
+        
     }
 
     protected async override void OnAppearing()
@@ -56,13 +60,14 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
         {
             var clientes = await _model.FiltrarClientesAsync(string.Empty);
             var totalItensSource = ListaClientes.ItemsSource!=null ? ListaClientes.ItemsSource.Cast<object>().Count() : 0;
-            if (clientes.Count() > totalItensSource)
-            {
-                ListaClientes.ItemsSource = clientes;
-                await Task.Delay(1000);
-                //FiltroCliente.Focus();
-            }
-        }
+			ListaClientes.ItemsSource = clientes;
+			//if (clientes.Count() > totalItensSource)
+			//{
+			//    ListaClientes.ItemsSource = clientes;
+			//    await Task.Delay(1000);
+			//    //FiltroCliente.Focus();
+			//}
+		}
         catch (Exception ex)
         {
             await DisplayAlert("Clientes", $"Erro ao recarregar a tela de clientes.  Erro:{ex.Message}", "Ok");
@@ -106,9 +111,7 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
 
     private async Task InitializeAsync(ClientViewModel model)
     {
-        
-
-        SetSessionValue(model);
+        //SetSessionValue(model);
     }
 
     [RelayCommand]
@@ -176,7 +179,6 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
 
     void SetSessionValue(ClientViewModel model)
     {
-       
         var session = DependencyService.Get<ISession>();
         var data = JsonConvert.SerializeObject(model);
         SecureStorage.SetAsync(clientePageKey, data);

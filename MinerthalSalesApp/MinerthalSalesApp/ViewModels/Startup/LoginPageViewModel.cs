@@ -7,10 +7,10 @@ using MinerthalSalesApp.Models.Enums;
 using MinerthalSalesApp.ViewModels.Shared;
 using MinerthalSalesApp.Views.Startup;
 using Newtonsoft.Json;
-
+using MinerthalSalesApp.Controls;
 namespace MinerthalSalesApp.ViewModels.Startup
 {
-    public partial class LoginPageViewModel : BaseViewModel
+	public partial class LoginPageViewModel : BaseViewModel
 	{
 		private readonly IAlertService _alertService;
 		private readonly IServicoDeCarregamentoDasBases _servicoDeCarregamentoDasBases;
@@ -18,8 +18,8 @@ namespace MinerthalSalesApp.ViewModels.Startup
 		public LoginPageViewModel(IAlertService alertService, IPopupAppService popupAppService, IServicoDeCarregamentoDasBases servicoDeCarregamentoDasBases)
 		{
 			_alertService = alertService ?? throw new ArgumentNullException(nameof(alertService));
-			_popupAppService= popupAppService?? throw new ArgumentNullException(nameof(popupAppService));
-			_servicoDeCarregamentoDasBases= servicoDeCarregamentoDasBases?? throw new ArgumentNullException(nameof(servicoDeCarregamentoDasBases));
+			_popupAppService = popupAppService ?? throw new ArgumentNullException(nameof(popupAppService));
+			_servicoDeCarregamentoDasBases = servicoDeCarregamentoDasBases ?? throw new ArgumentNullException(nameof(servicoDeCarregamentoDasBases));
 		}
 
 
@@ -63,7 +63,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
 			{
 				_model.PopupMessage = "Recuperando usuário...";
 				var userCount = App.UserRepository.GetTotal();
-				if (userCount <=0)
+				if (userCount <= 0)
 					await ValidarDadosInternos();
 
 				var logUser = await LoginUsuario(Codigo, Password);
@@ -77,6 +77,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
 
 					userDetails.RoleID = (int)RoleDetails.Admin;
 					userDetails.RoleText = "Admin Role";
+					userDetails.QtdVendedoresNaEquipe = logUser.QtdVendedoresNaEquipe;
 
 					if (Preferences.ContainsKey(nameof(App.UserDetails)))
 						Preferences.Remove(nameof(App.UserDetails));
@@ -84,7 +85,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
 					string userDetailStr = JsonConvert.SerializeObject(userDetails);
 					Preferences.Set(nameof(App.UserDetails), userDetailStr);
 					App.UserDetails = userDetails;
-
+					
 					RedirectToMain();
 
 				}
@@ -106,11 +107,41 @@ namespace MinerthalSalesApp.ViewModels.Startup
 
 		private void RedirectToMain()
 		{
-			var totalAtualizacoes =App.AtualizacaoRepository.GetTotal();
-			if (totalAtualizacoes>1)
-				AppConstant.AddFlyoutMenusDetails();
-			else
-				Shell.Current.GoToAsync($"//{nameof(AtualizacaoPage)}");
+			try
+			{
+				if (App.UserDetails != null && App.UserDetails.QtdVendedoresNaEquipe > 0)
+				{
+					var vendedores = App.VendedorRepository.GetByCodigoSuperviso(App.UserDetails.Codigo);
+					if (vendedores.Count() > 0)
+					{
+						App.AtualizacaoRepository.ClearAllTables();
+						Shell.Current.GoToAsync($"//{nameof(AtualizacaoPage)}");
+					}
+					else
+					{
+						var totalAtualizacoes = App.AtualizacaoRepository.GetTotal();
+						if (totalAtualizacoes > 1)
+							AppConstant.AddFlyoutMenusDetails();
+						else
+							Shell.Current.GoToAsync($"//{nameof(AtualizacaoPage)}");
+					}
+				}
+				else
+				{
+					var totalAtualizacoes = App.AtualizacaoRepository.GetTotal();
+					if (totalAtualizacoes > 1)
+						AppConstant.AddFlyoutMenusDetails();
+					else
+						Shell.Current.GoToAsync($"//{nameof(AtualizacaoPage)}");
+				}
+			}
+			catch (Exception)
+			{
+			}
+			finally
+			{
+				AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+			}
 		}
 
 		#endregion
@@ -127,7 +158,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
 			try
 			{
 				var totalCadastrado = App.UserRepository.GetTotal();
-				if (totalCadastrado<=1)
+				if (totalCadastrado <= 1)
 					await _servicoDeCarregamentoDasBases.AtualizarBaseDeDados(ApiMinertalTypes.Usuarios);
 			}
 			catch (Exception ex)
@@ -183,8 +214,8 @@ namespace MinerthalSalesApp.ViewModels.Startup
 		{
 			try
 			{
-				var numUsers =  App.UserRepository.GetTotal();
-				if (numUsers==0)
+				var numUsers = App.UserRepository.GetTotal();
+				if (numUsers == 0)
 					await CarregarUsuarios();
 
 				var usuario = App.UserRepository.GetByCodigo(codigo);
@@ -210,12 +241,11 @@ namespace MinerthalSalesApp.ViewModels.Startup
 				await _servicoDeCarregamentoDasBases.CarregarUsuariosAsync();
 				var numUsers = App.UserRepository.GetTotal();
 
-				if (numUsers<0)
+				if (numUsers < 0)
 					throw new CustomExceptions("Erro ao carregar os dados do usuário");
 			}
 			catch (Exception ex)
 			{
-
 				_alertService.ShowAlert("Planos", $"Erro ao fazer a atualização dos planos. {ex.Message}", "OK");
 			}
 		}

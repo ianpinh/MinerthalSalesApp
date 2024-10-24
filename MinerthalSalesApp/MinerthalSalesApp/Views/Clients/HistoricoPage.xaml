@@ -428,7 +428,7 @@
                                                                                 Dark=White}" />
 
                                                 <Label
-                                                    Grid.Row="4" 
+                                                    Grid.Row="4"
                                                     Grid.Column="0"
                                                     Grid.ColumnSpan="2"
                                                     Margin="0,0,0,0"
@@ -439,7 +439,7 @@
                                                                                 Dark=White}" />
 
                                                 <Label
-                                                    Grid.Row="4" 
+                                                    Grid.Row="4"
                                                     Grid.Column="2"
                                                     Grid.ColumnSpan="2"
                                                     Margin="10,0,0,0"

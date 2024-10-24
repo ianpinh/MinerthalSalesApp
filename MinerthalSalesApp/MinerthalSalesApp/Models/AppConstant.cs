@@ -5,6 +5,7 @@ using MinerthalSalesApp.Views.Ranking;
 using MinerthalSalesApp.Views.Products;
 using MinerthalSalesApp.Views.Orders;
 using MinerthalSalesApp.Views.Pesquisa;
+using MinerthalSalesApp.Views.DadosEquipe;
 
 namespace MinerthalSalesApp.Models
 {
@@ -23,6 +24,8 @@ namespace MinerthalSalesApp.Models
             {
                 if (App.UserDetails.RoleID == (int)RoleDetails.Admin)
                 {
+
+
                     var flyoutItem = new FlyoutItem()
                     {
                         Title = "Dashboard Page",
@@ -36,7 +39,7 @@ namespace MinerthalSalesApp.Models
                                     Title = "Home",
                                     ContentTemplate = new DataTemplate(typeof(AdminDashboardPage)),
                                 },
-                            new ShellContent
+                                  new ShellContent
                                 {
                                     Icon = Icons.Clients,
                                     Title = "Clientes",
@@ -65,14 +68,18 @@ namespace MinerthalSalesApp.Models
                                     Icon = Icons.Ranking,
                                     Title = "Ranking",
                                     ContentTemplate = new DataTemplate(typeof(RankingPage)),
+                                },
+                                 new ShellContent
+                                {
+                                    Icon = Icons.DadosEquipe,
+                                    Title = "Dados Equipe",
+                                    ContentTemplate = new DataTemplate(typeof(DadosEquipePage)),
                                 }
-                               
 
                    }
                     };
 
-
-                    var item = Shell.Current.Items.Where(x => x.Title == flyoutItem.Title).FirstOrDefault();
+					var item = Shell.Current.Items.Where(x => x.Title == flyoutItem.Title).FirstOrDefault();
 
 
                     //if (!Shell.Current.Items.Contains(flyoutItem))
@@ -234,6 +241,20 @@ namespace MinerthalSalesApp.Models
                 else
                 {
                     await Shell.Current.GoToAsync($"//{nameof(PesquisaPage)}");
+                }
+            }
+            else if (route == "DadosEquipe")
+            {
+                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                {
+                    Shell.Current.Dispatcher.Dispatch(async () =>
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(DadosEquipePage)}");
+                    });
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync($"//{nameof(DadosEquipePage)}");
                 }
             }
 

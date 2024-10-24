@@ -15,7 +15,19 @@ public partial class PesquisaPage : ContentPage
         ImgUserLoading.IsAnimationPlaying = true;
     }
 
-
+    private void Expander_ExpandedChangedTitulosaVencidos(object sender, CommunityToolkit.Maui.Core.ExpandedChangedEventArgs e)
+    {
+        var _expander = (Expander)sender;
+        if (_expander.IsExpanded)
+        {
+            model.ExpandedImageTitulosaVencer="chevron_up.png";
+        }
+        else
+        {
+            model.ExpandedImageTitulosaVencer = "chevron_down.png";
+        }
+    }
+    
     private void Expander_ExpandedChangedTitulosaVencer(object sender, CommunityToolkit.Maui.Core.ExpandedChangedEventArgs e)
     {
         var _expander = (Expander)sender;
@@ -84,7 +96,6 @@ public partial class PesquisaPage : ContentPage
             model.ExpandedImageMetaMensal= "chevron_down.png";
         }
     }
-    
 
     private void Expander_Loaded(object sender, EventArgs e)
     {

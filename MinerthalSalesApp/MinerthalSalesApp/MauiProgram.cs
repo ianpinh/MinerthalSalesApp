@@ -16,6 +16,7 @@ using MinerthalSalesApp.ViewModels.Startup;
 using MinerthalSalesApp.ViewModels.Usuarios;
 using MinerthalSalesApp.Views.Clients;
 using MinerthalSalesApp.Views.Configuration;
+using MinerthalSalesApp.Views.DadosEquipe;
 using MinerthalSalesApp.Views.Dashboard;
 using MinerthalSalesApp.Views.Orders;
 using MinerthalSalesApp.Views.Pesquisa;
@@ -23,7 +24,7 @@ using MinerthalSalesApp.Views.Products;
 using MinerthalSalesApp.Views.Ranking;
 using MinerthalSalesApp.Views.Shared;
 using MinerthalSalesApp.Views.Startup;
-
+using MinerthalSalesApp.ViewModels.DadosEquipe;
 
 namespace MinerthalSalesApp;
 
@@ -111,8 +112,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<HistoricoPage>();
         builder.Services.AddSingleton<ClienteTituloPage>();
         builder.Services.AddSingleton<PesquisaPage>();
+        builder.Services.AddSingleton<DadosEquipePage>();
+        builder.Services.AddSingleton<DetalheVendedorPage>();
 
-        
         //View Models
         builder.Services.AddSingleton<BaseViewModel>();
         builder.Services.AddSingleton<LoginPageViewModel>();
@@ -132,6 +134,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<HistoricoPageViewModel>();
         builder.Services.AddSingleton<ClienteTituloViewModel>();
         builder.Services.AddSingleton<PesquisaViewModel>();
+        builder.Services.AddSingleton<DadosEquipeViewModel>();
 
 
         //Database
