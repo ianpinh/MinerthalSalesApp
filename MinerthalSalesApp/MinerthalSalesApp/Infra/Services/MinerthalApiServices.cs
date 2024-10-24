@@ -295,8 +295,7 @@ namespace MinerthalSalesApp.Infra.Services
                             totalFrete);
 
                         var valorPedidoParcela = carrinho.Sum(x =>
-                            ((x.Quantidade * x.ValorCombinado) / (1 + (x.Desconto / 100))) +
-                            totalFrete);
+                            ((x.Quantidade * x.ValorCombinado) / (1 + (x.Desconto / 100))));
 
                         var sbParcelas = new StringBuilder();
                         var SbValores = new StringBuilder();
@@ -336,9 +335,12 @@ namespace MinerthalSalesApp.Infra.Services
                             // Junta os valores em uma string separada por ponto e vírgula
                             string resultadoFinal = string.Join(";", valoresParcelas.Select(p => p.ToString("F2")));
 
+                            // Ajuste no loop para não duplicar
+                            SbValores.Clear(); // Limpa qualquer conteúdo existente
+
                             for (var i = 0; i < _parcelas.Count; i++)
                             {
-                                SbValores.Append($"{resultadoFinal};").Replace(',','.');// 80.01; 80.01;
+                                SbValores.Append($"{valoresParcelas[i].ToString("F2").Replace(',', '.')};");
                             }
                         }
                         else
@@ -498,9 +500,12 @@ namespace MinerthalSalesApp.Infra.Services
                         // Junta os valores em uma string separada por ponto e vírgula
                         string resultadoFinal = string.Join(";", valoresParcelas.Select(p => p.ToString("F2")));
 
+                        // Ajuste no loop para não duplicar
+                        SbValores.Clear(); // Limpa qualquer conteúdo existente
+
                         for (var i = 0; i < _parcelas.Count; i++)
                         {
-                            SbValores.Append($"{resultadoFinal};").Replace(',', '.');// 80.01; 80.01;
+                            SbValores.Append($"{valoresParcelas[i].ToString("F2").Replace(',', '.')};");
                         }
                     }
                     else
