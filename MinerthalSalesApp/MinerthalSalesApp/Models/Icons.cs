@@ -12,5 +12,6 @@
 		public const string Orders = "orders.png";
 		public const string Ranking = "ranking.png";
 		public const string Home = "home.png";
-	}
+        public const string DadosEquipe = "networksettings.png";
+    }
 }

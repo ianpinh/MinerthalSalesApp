@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.DadosEquipe.DetalheVendedorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:MinerthalSalesApp.Handlers"
+    xmlns:views="clr-namespace:MinerthalSalesApp.Views.Clients"
+    Title="Dados do Vendedor">
+    <ScrollView>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ContentView
+                x:Name="detailsview"
+                IsVisible="true"
+                VerticalOptions="StartAndExpand">
+                <AbsoluteLayout Margin="5" VerticalOptions="StartAndExpand">
+                    <BoxView AbsoluteLayout.LayoutBounds="-20, 48, 0, 0" Color="Silver" />
+                    <Grid Margin="1,2,1,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!--  CÓDIGO  -->
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,0,10"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Código" />
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ddd"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+                            <Label
+                                x:Name="Codigo"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="5,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding CdRca}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  NOME  -->
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Nome" />
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding NmRca}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  CPF  -->
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="CPF"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding NrCpf}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  EMAIL  -->
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="E-mail"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding NmEmail}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  TELEFONE  -->
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Telefone"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding NrFone}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  CELULAR  -->
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Celular"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding NrCelular}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  CIDADE  -->
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Cidade"
+                            WidthRequest="100" />
+
+                        <Border
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding NmCidade}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  UF  -->
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="CPF / CNPJ"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3">
+
+                            <Label
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="3"
+                                Padding="2,5,0,5"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding CdUf}"
+                                TextColor="{AppThemeBinding Dark=White,
+                                                            Light=Black}"
+                                WidthRequest="265" />
+                        </Border>
+
+                        <!--  TABELA PREÇO  -->
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            Padding="2,5,0,5"
+                            FontSize="12"
+                            Text="Tabela Preço"
+                            WidthRequest="100" />
+                        <Border
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            Padding="3,0,0,0"
+                            BackgroundColor="Transparent"
+                            HeightRequest="30"
+                            Stroke="#ccc"
+                            StrokeShape="RoundRectangle 3,3,3,3" />
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Padding="2,5,0,5"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="{Binding TabPreco}"
+                            TextColor="{AppThemeBinding Dark=White,
+                                                        Light=Black}"
+                            WidthRequest="265" />
+
+
+
+                        <!--  BOTTOM BUTTONS  -->
+
+                        <Button
+                            x:Name="BtnNovoLogin"
+                            Grid.Row="11"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Margin="-15,30,5,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="{AppThemeBinding Light=#254866,
+                                                              Dark=#FFFFFF}"
+                            BorderColor="#FFFFFF"
+                            BorderWidth="1"
+                            Clicked="BtnNovoLogin_Clicked"
+                            CommandParameter="{Binding DadosJson}"
+                            HeightRequest="60"
+                            HorizontalOptions="Center"
+                            Text="Login como vendedor"
+                            TextColor="{AppThemeBinding Light=white,
+                                                        Dark=black}"
+                            VerticalOptions="Center"
+                            WidthRequest="240" />
+
+                    </Grid>
+                </AbsoluteLayout>
+            </ContentView>
+        </StackLayout>
+
+    </ScrollView>
+</ContentPage>

@@ -20,6 +20,8 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
         
         void DeleteAllTables(string dropCommand);
 
-        void CriarTabela();
+		void ClearAllTables();
+
+		void CriarTabela();
     }
 }

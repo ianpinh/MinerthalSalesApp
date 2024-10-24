@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.DadosEquipe.DadosEquipePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:MinerthalSalesApp.Handlers"
+    Title="Dados da equipe">
+
+    <ContentPage.Resources>
+        <Style TargetType="ListView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Yellow" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <RefreshView
+        Command="{Binding RefreshCommand}"
+        IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+        RefreshColor="{DynamicResource InvertedErrorForeground}">
+        <ScrollView
+            HorizontalOptions="FillAndExpand"
+            HorizontalScrollBarVisibility="Always"
+            Orientation="Vertical"
+            VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                <ListView
+                    x:Name="ListaEquipe"
+                    Grid.Row="0"
+                    CachingStrategy="RecycleElement"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding ListaVendedores}"
+                    RowHeight="100"
+                    SelectionMode="None"
+                    SeparatorColor="#254866"
+                    VerticalOptions="FillAndExpand">
+
+                    <ListView.Header>
+                        <StackLayout Margin="0,0,0,10">
+                            <Border>
+                                <SearchBar
+                                    x:Name="FiltroEquipe"
+                                    BackgroundColor="AliceBlue"
+                                    Placeholder="Pesquisar vendedor"
+                                    TextChanged="FiltroEquipe_TextChanged"
+                                    TextColor="Black"
+                                    VerticalOptions="FillAndExpand"
+                                    WidthRequest="390" />
+                            </Border>
+                        </StackLayout>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid
+                                    Padding="5"
+                                    ColumnDefinitions="*,20"
+                                    RowDefinitions="Auto">
+                                    <Button
+                                        x:Name="BtnSelectedCliente"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="3"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        BackgroundColor="Transparent"
+                                        Clicked="BtnSelectedVendedor_Clicked"
+                                        ZIndex="5">
+                                        <Button.CommandParameter>
+                                            <MultiBinding StringFormat="{}{0}-{1}|{2}">
+                                                <Binding Path="CdRca" />
+                                                <Binding Path="NmRca" />
+                                                <Binding Path="DadosJson" />
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Padding="0,2,2,2"
+                                        FontSize="13"
+                                        TextColor="{AppThemeBinding Light=black,
+                                                                    Dark=White}">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="CdRca" />
+                                                <Binding Path="NmRca" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                    <Image
+                                        Grid.Row="0"
+                                        Grid.RowSpan="3"
+                                        Grid.Column="1"
+                                        Aspect="AspectFit"
+                                        Source="chevron_right.png" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </RefreshView>
+
+</ContentPage>

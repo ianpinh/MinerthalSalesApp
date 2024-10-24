@@ -6,7 +6,7 @@
     xmlns:handlers="clr-namespace:MinerthalSalesApp.Handlers"
     Title="Clientes">
 
-    <ContentPage.Resources>
+    <!--<ContentPage.Resources>
         <Style TargetType="ListView">
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
@@ -21,10 +21,9 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
-    </ContentPage.Resources>
+    </ContentPage.Resources>-->
 
-    <StackLayout VerticalOptions="StartAndExpand"
-                 HorizontalOptions="FillAndExpand">
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
 
         <Grid
             x:Name="GridLoading"
@@ -56,7 +55,6 @@
         <ListView
             x:Name="ListaClientes"
             Grid.Row="0"
-            CachingStrategy="RecycleElement"
             HasUnevenRows="True"
             ItemsSource="{Binding Items}"
             RowHeight="100"

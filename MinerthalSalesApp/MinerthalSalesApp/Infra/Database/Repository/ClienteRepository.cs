@@ -210,7 +210,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                         var a1Bairroe = item.A1Bairroe.Contains("'") ? item.A1Bairroe.Replace("'", "''") : item.A1Bairroe;
                         var a1Mune = item.A1Mune.Contains("'") ? item.A1Mune.Replace("'", "''") : item.A1Mune;
 
-                        var commandInsert = $@"INSERT INTO [Cliente](
+                        var commandInsert = $@"INSERT INTO Cliente(
                                                          A1Cgc 
                                                         ,A1Cod 
                                                         ,A1Loja 
@@ -283,7 +283,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var a1Nreduz = cliente.A1Nreduz.Contains("'") ? cliente.A1Nreduz.Replace("'", "''") : cliente.A1Nreduz;
             var a1Endent = cliente.A1Endent.Contains("'") ? cliente.A1Endent.Replace("'", "''") : cliente.A1Endent;
 
-            var command = $@"INSERT INTO [Cliente](
+            var command = $@"INSERT INTO Cliente(
                                                          A1Cgc 
                                                         ,A1Cod 
                                                         ,A1Loja 
@@ -349,7 +349,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     var a1Nreduz = item.A1Nreduz.Contains("'") ? item.A1Nreduz.Replace("'", "''") : item.A1Nreduz;
                     var a1Endent = item.A1Endent.Contains("'") ? item.A1Endent.Replace("'", "''") : item.A1Endent;
 
-                    var commandInsert = $@"INSERT INTO [Cliente](
+                    var commandInsert = $@"INSERT INTO Cliente(
                                                          A1Cgc 
                                                         ,A1Cod 
                                                         ,A1Loja 

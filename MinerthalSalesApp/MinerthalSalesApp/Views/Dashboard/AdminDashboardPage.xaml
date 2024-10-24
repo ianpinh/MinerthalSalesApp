@@ -249,7 +249,97 @@
                 </AbsoluteLayout>
             </ContentView>
 
-            <ContentView VerticalOptions="StartAndExpand">
+            <ContentView IsVisible="{Binding VisibleOnlyForManagers}" VerticalOptions="StartAndExpand">
+                <AbsoluteLayout HorizontalOptions="Center" VerticalOptions="StartAndExpand">
+                    <Grid ColumnSpacing="15" RowSpacing="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="140" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="10,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HorizontalOptions="Center"
+                            MaximumHeightRequest="90"
+                            Stroke="#284763"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="2"
+                                Grid.ColumnSpan="3"
+                                Aspect="AspectFit"
+                                Command="{Binding CarregarTelaDePesquisaCommand}"
+                                HeightRequest="65"
+                                HorizontalOptions="FillAndExpand"
+                                MaximumHeightRequest="70"
+                                MaximumWidthRequest="200"
+                                Source="Resources/Images/kfind.png"
+                                VerticalOptions="FillAndExpand" />
+                        </Border>
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,110,0,0"
+                            Padding="0,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="Pesquisa"
+                            VerticalOptions="Center" />
+
+
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="30,0,0,0"
+                            Padding="0,0,0,0"
+                            BackgroundColor="#dddddd"
+                            HorizontalOptions="Center"
+                            MaximumHeightRequest="90"
+                            Stroke="#284763"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6,6,6,6" />
+                            </Border.StrokeShape>
+                            <ImageButton
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Margin="0,0,0,0"
+                                Aspect="AspectFit"
+                                Command="{Binding CarregarTelaDeDadosEquipeCommand}"
+                                HorizontalOptions="CenterAndExpand"
+                                MaximumHeightRequest="70"
+                                MaximumWidthRequest="200"
+                                Source="Resources/Images/networksettings.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="120" />
+                        </Border>
+
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Margin="40,110,0,0"
+                            Padding="0,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="Dados Equipe"
+                            VerticalOptions="Center" />
+
+                    </Grid>
+                </AbsoluteLayout>
+            </ContentView>
+
+            <ContentView IsVisible="{Binding VisibleOnlyForSellers}" VerticalOptions="StartAndExpand">
                 <AbsoluteLayout HorizontalOptions="Center" VerticalOptions="StartAndExpand">
                     <Grid ColumnSpacing="15" RowSpacing="15">
                         <Grid.RowDefinitions>
@@ -300,6 +390,8 @@
                     </Grid>
                 </AbsoluteLayout>
             </ContentView>
+
+
         </StackLayout>
     </ScrollView>
 

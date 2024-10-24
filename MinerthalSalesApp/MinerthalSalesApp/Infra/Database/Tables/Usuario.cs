@@ -11,5 +11,7 @@
         public string CNPJorCPF { get; set; } = string.Empty;
         public string SellerNickName { get; set; } = string.Empty;
         public string SellerPassword { get; set; } = string.Empty;
-    }
+        public int QtdVendedoresNaEquipe { get; set; } = 0;
+
+	}
 }

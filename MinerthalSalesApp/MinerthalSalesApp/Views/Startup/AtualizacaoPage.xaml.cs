@@ -31,7 +31,7 @@ public partial class AtualizacaoPage : ContentPage
 
                 if (total > 0)
                 {
-
+                   
                     //var dashview = new DashboardPageViewModel(App.PopupAppService, App.AlertService);
                     //await Navigation.PushAsync(new AdminDashboardPage(dashview, App.PopupAppService));
                     await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");

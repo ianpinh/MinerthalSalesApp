@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MinerthalSalesApp.Views.Shared.SharedLoadingPage"
-             Title="SharedLoadingPage">
-    
+<ContentPage
+    x:Class="MinerthalSalesApp.Views.Shared.SharedLoadingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="SharedLoadingPage">
+
     <StackLayout Padding="50,50,50,50">
-        <Image Source="logo_aniversario_minertal.png" HeightRequest="200" WidthRequest="180">
+        <Image
+            HeightRequest="200"
+            Source="logo_aniversario_minertal.png"
+            WidthRequest="180">
             <Image.Shadow>
-                <Shadow Brush="{AppThemeBinding Light=Black,Dark=Gray }" Offset="20,20" Radius="40" Opacity="0.8"></Shadow>
+                <Shadow
+                    Brush="{AppThemeBinding Light=Black,
+                                            Dark=Gray}"
+                    Opacity="0.8"
+                    Radius="40"
+                    Offset="20,20" />
             </Image.Shadow>
         </Image>
-        
-        <ActivityIndicator IsRunning="True" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center"/>
-      
-        <Label Text="{Binding MessageRanking}" HorizontalOptions="Center"></Label>
+
+        <ActivityIndicator
+            HeightRequest="40"
+            HorizontalOptions="Center"
+            IsRunning="True"
+            VerticalOptions="Center"
+            WidthRequest="40" />
+
+        <Label HorizontalOptions="Center" Text="{Binding MessageRanking}" />
 
     </StackLayout>
 </ContentPage>

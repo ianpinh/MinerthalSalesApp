@@ -1,5 +1,4 @@
-﻿using MinerthalSalesApp.Infra.Database.Repository;
-using MinerthalSalesApp.Infra.Database.Repository.Interface;
+﻿using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Services;
 using MinerthalSalesApp.Models;
 using MinerthalSalesApp.ViewModels;
