@@ -111,7 +111,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 			};
 		}
 
-		public IEnumerable<Vendedor> GetByCodigoSuperviso(string rcaxxx)
+		public IEnumerable<Vendedor> GetByCodigoSupervisor(string rcaxxx)
 		{
 			var command = $@"SELECT * FROM Vendedor WHERE CdRcaxxx = '{rcaxxx}';";
 			var retorno = _context.ExcecutarSelect(command);
@@ -258,16 +258,13 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 				var vendedoresCadastrados = App.VendedorRepository.GetAll();
 
 				var scriptCommand = new StringBuilder();
-				// scriptCommand.AppendLine("DELETE FROM Vendedor;");
+				scriptCommand.AppendLine("DELETE FROM Vendedor;");
 
 				foreach (var item in salers)
 				{
-					if (vendedoresCadastrados == null || !vendedoresCadastrados.Any() || vendedoresCadastrados.Contains(item))
-					{
-
-						var nmCidade = item.NmCidade.Contains("'") ? item.NmCidade.Replace("'", "''") : item.NmCidade;
-						var nmRca = item.NmRca.Contains("'") ? item.NmRca.Replace("'", "''") : item.NmRca;
-						var commandInsert = $@"INSERT INTO [Vendedor](
+					var nmCidade = item.NmCidade.Contains("'") ? item.NmCidade.Replace("'", "''") : item.NmCidade;
+					var nmRca = item.NmRca.Contains("'") ? item.NmRca.Replace("'", "''") : item.NmRca;
+					var commandInsert = $@"INSERT INTO [Vendedor](
                                                                    CdRca
                                                                   ,NmRca
                                                                   ,NmCidade
@@ -289,8 +286,36 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                                    ,'{item.NmEmail}'
                                                                    ,'{item.TabPreco}'
                                                                    ,'{item.CdRcaxxx}');";
-						scriptCommand.AppendLine(commandInsert);
-					}
+					scriptCommand.AppendLine(commandInsert);
+
+					//if (vendedoresCadastrados == null || !vendedoresCadastrados.Any() || vendedoresCadastrados.Contains(item))
+					//{
+					//	var nmCidade = item.NmCidade.Contains("'") ? item.NmCidade.Replace("'", "''") : item.NmCidade;
+					//	var nmRca = item.NmRca.Contains("'") ? item.NmRca.Replace("'", "''") : item.NmRca;
+					//	var commandInsert = $@"INSERT INTO [Vendedor](
+     //                                                              CdRca
+     //                                                             ,NmRca
+     //                                                             ,NmCidade
+     //                                                             ,CdUf
+     //                                                             ,NrCpf
+     //                                                             ,NrFone
+     //                                                             ,NrCelular
+     //                                                             ,NmEmail
+     //                                                             ,TabPreco
+     //                                                             ,CdRcaxxx)
+     //                                                                 VALUES (
+     //                                                               '{item.CdRca}'
+     //                                                              ,'{nmRca}'
+     //                                                              ,'{nmCidade}'
+     //                                                              ,'{item.CdUf}'
+     //                                                              ,'{item.NrCpf}'
+     //                                                              ,'{item.NrFone}'
+     //                                                              ,'{item.NrCelular}'
+     //                                                              ,'{item.NmEmail}'
+     //                                                              ,'{item.TabPreco}'
+     //                                                              ,'{item.CdRcaxxx}');";
+					//	scriptCommand.AppendLine(commandInsert);
+					//}
 				}
 
 				var command = scriptCommand.ToString();
