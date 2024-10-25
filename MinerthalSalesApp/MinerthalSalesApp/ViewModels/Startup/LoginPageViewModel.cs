@@ -111,7 +111,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
 			{
 				if (App.UserDetails != null && App.UserDetails.QtdVendedoresNaEquipe > 0)
 				{
-					var vendedores = App.VendedorRepository.GetByCodigoSuperviso(App.UserDetails.Codigo);
+					var vendedores = App.VendedorRepository.GetByCodigoSupervisor(App.UserDetails.Codigo);
 					if (vendedores.Count() > 0)
 					{
 						App.AtualizacaoRepository.ClearAllTables();

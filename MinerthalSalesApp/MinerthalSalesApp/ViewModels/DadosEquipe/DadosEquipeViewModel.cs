@@ -33,7 +33,7 @@ namespace MinerthalSalesApp.ViewModels.DadosEquipe
 		{
 			var user = App.UserDetails;
 			var codigoRca = user.Codigo;
-			var vendedores = App.VendedorRepository.GetByCodigoSuperviso(codigoRca);
+			var vendedores = App.VendedorRepository.GetByCodigoSupervisor(codigoRca);
 
 			if (listaVendedores != null)
 				listaVendedores = Enumerable.Empty<Vendedor>();
@@ -63,7 +63,7 @@ namespace MinerthalSalesApp.ViewModels.DadosEquipe
 		public void FiltrarVendedores(string textoBusca)
 		{
 			var lista = Enumerable.Empty<Vendedor>();
-			var lst = App.VendedorRepository.GetAll();
+			var lst = App.VendedorRepository.GetByCodigoSupervisor(App.UserDetails.Codigo);
 
 			if (lst.Any())
 			{

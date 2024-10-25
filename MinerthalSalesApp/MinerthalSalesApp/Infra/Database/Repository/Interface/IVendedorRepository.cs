@@ -9,7 +9,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
         Vendedor GetById(int id);
 
         Vendedor GetByCodigo(string rca);
-        IEnumerable<Vendedor> GetByCodigoSuperviso(string rcaxxx);
+        IEnumerable<Vendedor> GetByCodigoSupervisor(string rcaxxx);
 
         void Add(Vendedor vendedor);
 
