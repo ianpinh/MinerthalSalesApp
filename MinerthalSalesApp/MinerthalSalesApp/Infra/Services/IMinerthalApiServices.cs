@@ -4,6 +4,7 @@
     {
 
         string ApiRequestServiceAsync(string queryId, bool filter);
+        string ApiRequestServiceAsync(string queryId, bool filter, string codigoVendedor);
         //Task<string> ApiRequestServiceAsync(string queryId, bool filter);
         string RecuperarUsuarioAsync();
         string RecuperarRankingAsync();

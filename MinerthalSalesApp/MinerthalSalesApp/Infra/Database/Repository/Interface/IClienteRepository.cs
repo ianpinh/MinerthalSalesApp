@@ -5,7 +5,6 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
     public interface IClienteRepository
     {
          List<Cliente> GetAll();
-
          Cliente GetByCpf(string cpf);
 
          Cliente GetByCodigo(string codCliente);
@@ -23,5 +22,6 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
         void CriarTabela();
 
         List<Cliente> RecuperarClientesInadimplentes();
+        void SaveClientesVendedor(List<Cliente> details, string codigoVendedor);
     }
 }

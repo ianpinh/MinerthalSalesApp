@@ -7,15 +7,15 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 {
     public class ResumoPedidoRepository : IResumoPedidoRepository
     {
+        private string NomeTabelaResumoPedido => RecuperarNomeDaTabelaResumoPedido();
         private readonly IAppthalContext _context;
         public ResumoPedidoRepository(IAppthalContext context)
         {
             _context = context??throw new ArgumentNullException(nameof(context));
-            Init();
         }
-        private void Init()
+        private void Init(string nomeTabela)
         {
-            var command = $@"CREATE TABLE IF NOT EXISTS ResumoPedido(
+            var command = $@"CREATE TABLE IF NOT EXISTS {nomeTabela}(
                                                    Id INTEGER PRIMARY KEY AUTOINCREMENT
                                                   ,NrPedido  VARCHAR(20)
                                                   ,CdProduto VARCHAR(20)
@@ -32,10 +32,9 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             _context.ExcecutarComandoCrud(command);
         }
 
-
         public ResumoPedido GetById(int id)
         {
-            var command = $@"SELECT * FROM ResumoPedido Where Id= '{id}';";
+            var command = $@"SELECT * FROM {NomeTabelaResumoPedido} Where Id= '{id}';";
             var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
             if (retorno == null)
@@ -60,7 +59,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public List<ResumoPedido> GetAll()
         {
-            var command = $@"SELECT * FROM ResumoPedido;";
+            var command = $@"SELECT * FROM {NomeTabelaResumoPedido};";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -94,7 +93,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             if (resumo!=null)
             {
-                var commandInsert = $@"INSERT INTO [ResumoPedido](
+                var commandInsert = $@"INSERT INTO [{NomeTabelaResumoPedido}](
                                                     NrPedido 
                                                    ,CdProduto
                                                    ,DsProduto
@@ -131,7 +130,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 foreach (var item in resumoPedidos)
                 {
-                    var commandInsert = $@"INSERT INTO [ResumoPedido](
+                    var commandInsert = $@"INSERT INTO [{NomeTabelaResumoPedido}](
                                                  NrPedido 
                                                  ,CdProduto
                                                  ,DsProduto
@@ -167,23 +166,23 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public void Delete(string numPedido)
         {
-            var command = $"Delete from ResumoPedido WHERE numPedido = '{numPedido}';";
+            var command = $"Delete FROM {NomeTabelaResumoPedido} WHERE numPedido = '{numPedido}';";
             _context.ExcecutarComandoCrud(command);
         }
         public void DeleteAll()
         {
-            var command = $"Delete from ResumoPedido;";
+            var command = $"Delete FROM {NomeTabelaResumoPedido};";
             _context.ExcecutarComandoCrud(command);
         }
         public void Delete(int id)
         {
-            var command = $"Delete from ResumoPedido WHERE Id = {id};";
+            var command = $"Delete FROM {NomeTabelaResumoPedido} WHERE Id = {id};";
             _context.ExcecutarComandoCrud(command);
         }
         public List<ResumoPedido> Pesquisa(string termoBusca)
         {
             //return conn.Table<ResumoPedido>().Where(x => x.NrPedido.StartsWith(termoBusca) || x.DsProduto.StartsWith(termoBusca)).ToList().Result;
-            var command = $@"SELECT * FROM ResumoPedido WHERE NrPedido LIKE '{termoBusca}%' OR DsProduto LIKE '{termoBusca}%';";
+            var command = $@"SELECT * FROM {NomeTabelaResumoPedido} WHERE NrPedido LIKE '{termoBusca}%' OR DsProduto LIKE '{termoBusca}%';";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -219,11 +218,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             if (resumoPedidos!=null && resumoPedidos.Any())
             {
                 var scriptCommand = new StringBuilder();
-                scriptCommand.AppendLine("DELETE FROM ResumoPedido;");
+                scriptCommand.AppendLine($"DELETE FROM {NomeTabelaResumoPedido};");
 
                 foreach (var item in resumoPedidos)
                 {
-                    var commandInsert = $@"INSERT INTO [ResumoPedido](
+                    var commandInsert = $@"INSERT INTO [{NomeTabelaResumoPedido}](
                                                   NrPedido 
                                                  ,CdProduto
                                                  ,DsProduto
@@ -260,7 +259,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public int GetTotal()
         {
 
-            var command = $@"SELECT COUNT(*) FROM ResumoPedido;";
+            var command = $@"SELECT COUNT(*) FROM {NomeTabelaResumoPedido};";
             var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
             if (retorno == null)
@@ -274,7 +273,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public List<ResumoPedido> GetByNumPedido(string numeroPedido)
         {
-            var command = $@"SELECT * FROM ResumoPedido Where NrPedido= '{numeroPedido}';";
+            var command = $@"SELECT * FROM {NomeTabelaResumoPedido} Where NrPedido= '{numeroPedido}';";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -317,7 +316,90 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void CriarTabela()
         {
-            Init();
+            Init(NomeTabelaResumoPedido);
+        }
+
+        public void SavePedidoVendedor(List<ResumoPedido> resumoPedidos, string codigoVendedor)
+        {
+            if (resumoPedidos != null && resumoPedidos.Any())
+            {
+                CriarTabelaResumoPedidoVendedor(codigoVendedor);
+                var scriptCommand = new StringBuilder();
+                scriptCommand.AppendLine($"DELETE FROM ResumoPedido_{codigoVendedor};");
+
+                foreach (var item in resumoPedidos)
+                {
+                    var commandInsert = $@"INSERT INTO ResumoPedido_{codigoVendedor}(
+                                                  NrPedido 
+                                                 ,CdProduto
+                                                 ,DsProduto
+                                                 ,NumLote
+                                                 ,CdRcaxxx
+                                                 ,ImagemProduto
+                                                 ,QtProduto
+                                                 ,QtAtend
+                                                 ,VlVenda
+                                                 ,VlUnit
+                                                 ,VlFrete
+                                                 ,CdPercComiss)
+                                                            VALUES (
+                                                   '{item.NrPedido}'
+                                                  ,'{item.CdProduto}'
+                                                  ,'{item.DsProduto}'
+                                                  ,'{item.NumLote}'
+                                                  ,'{item.CdRcaxxx}'
+                                                  ,'{item.ImagemProduto}'
+                                                  , {item.QtProduto}
+                                                  , {item.QtAtend}
+                                                  , {item.VlVenda.ToStringInvariant("0.00")}
+                                                  , {item.VlUnit.ToStringInvariant("0.00")}
+                                                  , {item.VlFrete.ToStringInvariant("0.00")}
+                                                  , {item.CdPercComiss.ToStringInvariant("0.00")});";
+                    scriptCommand.AppendLine(commandInsert);
+                }
+
+
+                var command = scriptCommand.ToString();
+                _context.ExcecutarComandoCrud(command);
+            }
+        }
+
+        private void CriarTabelaResumoPedidoVendedor(string codigoVendedor)
+        {
+            var command = $@"CREATE TABLE IF NOT EXISTS ResumoPedido_{codigoVendedor}(
+                                                   Id INTEGER PRIMARY KEY AUTOINCREMENT
+                                                  ,NrPedido  VARCHAR(20)
+                                                  ,CdProduto VARCHAR(20)
+                                                  ,DsProduto VARCHAR(120)
+                                                  ,NumLote VARCHAR(20)
+                                                  ,CdRcaxxx VARCHAR(20)
+                                                  ,ImagemProduto VARCHAR(100)
+                                                  ,QtProduto INT
+                                                  ,QtAtend INT
+                                                  ,VlVenda DECIMAL(7,2)
+                                                  ,VlUnit DECIMAL(7,2)
+                                                  ,VlFrete DECIMAL(7,2)
+                                                  ,CdPercComiss DECIMAL(7,2));";
+            _context.ExcecutarComandoCrud(command);
+        }
+
+        private string RecuperarNomeDaTabelaResumoPedido()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"ResumoPedido_{App.VendedorSelecionado.CodigoVendedor}";
+                    Init(tableName);
+                    return tableName;
+                }
+
+                return "ResumoPedido";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

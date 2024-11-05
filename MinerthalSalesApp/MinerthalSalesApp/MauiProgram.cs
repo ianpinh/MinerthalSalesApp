@@ -192,10 +192,6 @@ public static class MauiProgram
         //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<TitulosRepositoy>(s, dbPath));
         //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<VisitasRepository>(s, dbPath));
 
-       
-
-
-
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

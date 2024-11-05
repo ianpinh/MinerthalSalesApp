@@ -17,7 +17,7 @@ public partial class AppShell : Shell
 		base.OnNavigating(args);
 		var _current = args.Current;
 		if (model != null)
-			model.IsManagerButtonVisible = App.UserDetails != null && !string.IsNullOrWhiteSpace(App.UserDetails.UserInfoManager);
+			model.IsManagerButtonVisible = App.VendedorSelecionado != null;
 
 		if (args.Current != null)
 		{

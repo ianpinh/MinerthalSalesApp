@@ -10,5 +10,6 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
 
          List<Titulo> RecuperarTodosTitulosDoCliente(string codCliente);
         void CriarTabela();
+        void SaveTitulosVendedor(List<Titulo> details, string codigoVendedor);
     }
 }

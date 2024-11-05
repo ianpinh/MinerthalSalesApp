@@ -8,5 +8,6 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
         IEnumerable<Visita> RecuperarTodasVisitas();
         IEnumerable<Visita> RecuperarTodasVisitasDoCliente(string codCliente);
         void CriarTabela();
+        void SaveVisitasVendedorAsync(List<Visita> details, string codigoVendedor);
     }
 }

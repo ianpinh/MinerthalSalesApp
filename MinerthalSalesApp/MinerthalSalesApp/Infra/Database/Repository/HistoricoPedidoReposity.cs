@@ -8,16 +8,19 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 {
     public class HistoricoPedidoReposity : IHistoricoPedidoReposity
     {
+        private string NomeTabelaHistoricoPedidos => RecuperarNomeDaTabela();
+        private string NomeTabelaCliente => RecuperarNomeDaTabelaCliente();
+        private string NomeTabelaResumoPedido => RecuperarNomeDaTabelaResumoPedido();
+
         private readonly IAppthalContext _context;
         public HistoricoPedidoReposity(IAppthalContext context)
         {
             _context = context??throw new ArgumentNullException(nameof(context));
-            Init();
         }
 
-        private void Init()
+        private void Init(string tableName)
         {
-            var command = $@"CREATE TABLE IF NOT EXISTS HistoricoDePedidos(
+            var command = $@"CREATE TABLE IF NOT EXISTS {tableName}(
                                                   Id INTEGER PRIMARY KEY AUTOINCREMENT
                                                   ,CdCliente  VARCHAR(15)
                                                   ,NrPedido  VARCHAR(15)
@@ -43,9 +46,66 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             _context.ExcecutarComandoCrud(command);
         }
 
+        private void InitResumoPedido_(string tableName)
+        {
+            var command = $@"CREATE TABLE IF NOT EXISTS {tableName}(
+                                                   Id INTEGER PRIMARY KEY AUTOINCREMENT
+                                                  ,NrPedido  VARCHAR(20)
+                                                  ,CdProduto VARCHAR(20)
+                                                  ,DsProduto VARCHAR(120)
+                                                  ,NumLote VARCHAR(20)
+                                                  ,CdRcaxxx VARCHAR(20)
+                                                  ,ImagemProduto VARCHAR(100)
+                                                  ,QtProduto INT
+                                                  ,QtAtend INT
+                                                  ,VlVenda DECIMAL(7,2)
+                                                  ,VlUnit DECIMAL(7,2)
+                                                  ,VlFrete DECIMAL(7,2)
+                                                  ,CdPercComiss DECIMAL(7,2));";
+            _context.ExcecutarComandoCrud(command);
+        }
+        private void InitCliente(string tableName)
+        {
+            try
+            {
+                var command = $@"CREATE TABLE IF NOT EXISTS {tableName}(
+                                                  Id INTEGER PRIMARY KEY AUTOINCREMENT
+                                                 ,A1Cgc VARCHAR(20) NULL
+                                                 ,A1Cod VARCHAR(20) NULL
+                                                 ,A1Loja VARCHAR(30) NULL
+                                                 ,A1Nome VARCHAR(150) NULL
+                                                 ,A1Nreduz VARCHAR(150) NULL
+                                                 ,A1Nomprp1 VARCHAR(100) NULL
+                                                 ,A1Nomprp2 VARCHAR(100) NULL
+                                                 ,A1Tipo VARCHAR(100) NULL
+                                                 ,A1Pessoa VARCHAR(100) NULL
+                                                 ,A1Msblql VARCHAR(100) NULL
+                                                 ,A1Condpag VARCHAR(100) NULL
+                                                 ,A1Inscr VARCHAR(30) NULL
+                                                 ,A1Observ VARCHAR(500) NULL
+                                                 ,A1Ddd VARCHAR(20) NULL
+                                                 ,A1Telex VARCHAR(20) NULL
+                                                 ,A1Email VARCHAR(100) NULL
+                                                 ,A1Este VARCHAR(20) NULL
+                                                 ,A1Mune VARCHAR(100) NULL
+                                                 ,A1Bairroe VARCHAR(100) NULL
+                                                 ,A1Endent VARCHAR(300) NULL
+                                                 ,A1Ultcom VARCHAR(200) NULL
+                                                 ,A1Lc DECIMAL(7,2)
+                                                 ,LcDisponivel DECIMAL(7,2)
+                                                 ,AVencer DECIMAL(7,2)
+                                                 ,A1Atr DECIMAL(7,2));";
+                _context.ExcecutarComandoCrud(command);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public HistoricoDePedidos GetById(int id)
         {
-            var command = $@"SELECT * FROM HistoricoDePedidos WHERE Id = {id};";
+            var command = $@"SELECT * FROM {NomeTabelaHistoricoPedidos} WHERE Id = {id};";
             var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
             if (retorno == null)
@@ -80,7 +140,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public List<HistoricoDePedidos> GetAll()
         {
-            var command = $@"SELECT * FROM HistoricoDePedidos Order by Id Desc;";
+            var command = $@"SELECT * FROM {NomeTabelaHistoricoPedidos} Order by Id Desc;";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -132,7 +192,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public List<HistoricoDePedidos> GetAllFromLastYear()
         {
             //  return lista!=null && lista.Any() ? lista.OrderByDescending(x => x.DataPedido).Take(50).ToList() : new List<HistoricoDePedidos>();
-            var command = $@"SELECT * FROM HistoricoDePedidos;";
+            var command = $@"SELECT * FROM {NomeTabelaHistoricoPedidos};";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -186,7 +246,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 var scriptCommand = new StringBuilder();
 
-                var commandInsert = $@"INSERT INTO [HistoricoDePedidos](
+                var commandInsert = $@"INSERT INTO [{NomeTabelaHistoricoPedidos}](
                                                     CdCliente 
                                                    ,NrPedido 
                                                    ,dtPedido
@@ -247,7 +307,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 foreach (var item in historico)
                 {
-                    var commandInsert = $@"INSERT INTO [HistoricoDePedidos](
+                    var commandInsert = $@"INSERT INTO [{NomeTabelaHistoricoPedidos}](
                                                     CdCliente 
                                                    ,NrPedido 
                                                    ,dtPedido
@@ -301,13 +361,13 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void Delete(int id)
         {
-            var command = @$"DELETE FROM HistoricoDePedidos WHERE Id = {id};";
+            var command = @$"DELETE FROM {NomeTabelaHistoricoPedidos} WHERE Id = {id};";
             _context.ExcecutarComandoCrud(command);
         }
 
         public void DeleteAll()
         {
-            var command = @$"DELETE FROM HistoricoDePedidos;";
+            var command = @$"DELETE FROM {NomeTabelaHistoricoPedidos};";
             _context.ExcecutarComandoCrud(command);
         }
 
@@ -319,7 +379,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             //    x.DsPlano.Contains(termo)
             //).ToList().Result;
 
-            var command = $@"SELECT * FROM HistoricoDePedidos 
+            var command = $@"SELECT * FROM {NomeTabelaHistoricoPedidos} 
                                       WHERE CdCliente LIKE '{termo}%'
                                       OR NrNota LIKE '{termo}%' 
                                       OR x.DsPlano LIKE '{termo}%';";
@@ -367,11 +427,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             if (historico!=null && historico.Any())
             {
                 var scriptCommand = new StringBuilder();
-                scriptCommand.AppendLine("DELETE FROM HistoricoDePedidos;");
+                scriptCommand.AppendLine($"DELETE FROM {NomeTabelaHistoricoPedidos};");
 
                 foreach (var item in historico)
                 {
-                    var commandInsert = $@"INSERT INTO [HistoricoDePedidos](
+                    var commandInsert = $@"INSERT INTO [{NomeTabelaHistoricoPedidos}](
                                                     CdCliente 
                                                    ,NrPedido 
                                                    ,dtPedido
@@ -426,7 +486,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public int GetTotal()
         {
 
-            var command = $@"SELECT COUNT(*) FROM HistoricoDePedidos;";
+            var command = $@"SELECT COUNT(*) FROM {NomeTabelaHistoricoPedidos};";
             var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
             if (retorno == null)
@@ -442,7 +502,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public IEnumerable<HistoricoDePedidos> GetAllFromClient(string codigoCliente)
         {
-            var command = $@"SELECT * FROM HistoricoDePedidos WHERE CdCliente = '{codigoCliente}' ORDER BY Id DESC;";
+            var command = $@"SELECT * FROM {NomeTabelaHistoricoPedidos} WHERE CdCliente = '{codigoCliente}' ORDER BY Id DESC;";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -493,12 +553,12 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void CriarTabela()
         {
-            Init();
+            Init(NomeTabelaHistoricoPedidos);
         }
 
         public List<HistoricoDePedidos> PedidosEmAberto()
         {
-            var command = $@"SELECT * FROM HistoricoDePedidos where NrNota is null or NrNota='';";
+            var command = $@"SELECT * FROM {NomeTabelaHistoricoPedidos} where NrNota is null or NrNota='';";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -518,7 +578,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 }
 
 
-                var commandCliente = $@"SELECT * FROM Cliente WHERE A1Cod = '{cdCliente}' AND A1Loja='{clienteLoja}'";
+                var commandCliente = $@"SELECT * FROM {NomeTabelaCliente} WHERE A1Cod = '{cdCliente}' AND A1Loja='{clienteLoja}'";
                 var _cliente = _context.ExcecutarSelectFirstOrDefault(commandCliente);
 
                 try
@@ -565,7 +625,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public List<HistoricoDePedidos> CarregamentoDePedidos()
         {
-            var command = $@"SELECT * FROM HistoricoDePedidos Where NrNota is not null AND TRIM(NrNota,' ') != '';";
+            var command = $@"SELECT * FROM {NomeTabelaHistoricoPedidos} Where NrNota is not null AND TRIM(NrNota,' ') != '';";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -574,7 +634,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var lstHistorico = new List<HistoricoDePedidos>();
             foreach (var item in retorno)
             {
-                var commandResumo = $@"SELECT * FROM ResumoPedido WHERE NrPedido = '{item.NrPedido}'";
+                var commandResumo = $@"SELECT * FROM {NomeTabelaResumoPedido} WHERE NrPedido = '{item.NrPedido}'";
                 var resumo = _context.ExcecutarSelect(commandResumo);
 
                 var cdCliente = "";
@@ -587,7 +647,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 }
 
 
-                var commandCliente = $@"SELECT * FROM Cliente WHERE A1Cod = '{cdCliente}' AND A1Loja='{clienteLoja}'";
+                var commandCliente = $@"SELECT * FROM {NomeTabelaCliente} WHERE A1Cod = '{cdCliente}' AND A1Loja='{clienteLoja}'";
                 var _cliente = _context.ExcecutarSelectFirstOrDefault(commandCliente);
                 try
                 {
@@ -657,5 +717,155 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             }
             return lstHistorico;
         }
+
+        public void SaveHistoricoVendedor(List<HistoricoDePedidos> historico, string codigoVendedor)
+        {
+            if (historico != null && historico.Any())
+            {
+                CriarTabelaHistoricoVendedor(codigoVendedor);
+                var scriptCommand = new StringBuilder();
+                scriptCommand.AppendLine($"DELETE FROM HistoricoDePedidos_{codigoVendedor};");
+
+                foreach (var item in historico)
+                {
+                    var commandInsert = $@"INSERT INTO HistoricoDePedidos_{codigoVendedor}(
+                                                    CdCliente 
+                                                   ,NrPedido 
+                                                   ,dtPedido
+                                                   ,TpPedido 
+                                                   ,NrNota 
+                                                   ,DtEmissao
+                                                   ,TxObs1 
+                                                   ,X5Chave 
+                                                   ,NrCarreg 
+                                                   ,CdTipocob 
+                                                   ,CdPlano 
+                                                   ,DsPlano 
+                                                   ,PedidoMaxima 
+                                                   ,ZyMinum 
+                                                   ,DtSaidaMerc 
+                                                   ,Transportador 
+                                                   ,Credito 
+                                                   ,Ordem 
+                                                   ,CdRcaxxx 
+                                                   ,VlFinal
+                                                   ,VlTotal)
+                                                            VALUES (
+                                                    '{item.CdCliente}'
+                                                   ,'{item.NrPedido}'
+                                                   ,'{item.DtPedido}'
+                                                   ,'{item.TpPedido}'
+                                                   ,'{item.NrNota}'
+                                                   ,'{item.DtEmissao}'
+                                                   ,'{item.TxObs1}'
+                                                   ,'{item.X5Chave}'
+                                                   ,'{item.NrCarreg}'
+                                                   ,'{item.CdTipocob}'
+                                                   ,'{item.CdPlano}'
+                                                   ,'{item.DsPlano}'
+                                                   ,'{item.PedidoMaxima}'
+                                                   ,'{item.ZyMinum}'
+                                                   ,'{item.DtSaidaMerc}'
+                                                   ,'{item.Transportador}'
+                                                   ,'{item.Credito}'
+                                                   ,'{item.Ordem}'
+                                                   ,'{item.CdRcaxxx}'
+                                                   , {item.VlFinal.ToStringInvariant("0.00")}
+                                                   , {item.VlTotal.ToStringInvariant("0.00")});";
+                    scriptCommand.AppendLine(commandInsert);
+                }
+
+                var command = scriptCommand.ToString();
+                _context.ExcecutarComandoCrud(command);
+            }
+        }
+
+        private void CriarTabelaHistoricoVendedor(string codigoVendedor)
+        {
+            var command = $@"CREATE TABLE IF NOT EXISTS HistoricoDePedidos_{codigoVendedor}(
+                                                  Id INTEGER PRIMARY KEY AUTOINCREMENT
+                                                  ,CdCliente  VARCHAR(15)
+                                                  ,NrPedido  VARCHAR(15)
+                                                  ,DtPedido VARCHAR(15)
+                                                  ,TpPedido  VARCHAR(15)
+                                                  ,NrNota  VARCHAR(15)
+                                                  ,DtEmissao VARCHAR(15)
+                                                  ,TxObs1  VARCHAR(150)
+                                                  ,X5Chave  VARCHAR(15)
+                                                  ,NrCarreg  VARCHAR(15)
+                                                  ,CdTipocob  VARCHAR(15)
+                                                  ,CdPlano  VARCHAR(15)
+                                                  ,DsPlano  VARCHAR(150)
+                                                  ,PedidoMaxima  VARCHAR(15)
+                                                  ,ZyMinum  VARCHAR(15)
+                                                  ,DtSaidaMerc  VARCHAR(15)
+                                                  ,Transportador  VARCHAR(150)
+                                                  ,Credito  VARCHAR(15)
+                                                  ,Ordem  VARCHAR(15)
+                                                  ,CdRcaxxx  VARCHAR(15)
+                                                  ,VlFinal DECIMAL(7,2)
+                                                  ,VlTotal DECIMAL(7,2));";
+            _context.ExcecutarComandoCrud(command);
+        }
+
+        private string RecuperarNomeDaTabela()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"HistoricoDePedidos_{App.VendedorSelecionado.CodigoVendedor}";
+                    Init(tableName);
+                    return tableName;
+                }
+
+                return "HistoricoDePedidos";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private string RecuperarNomeDaTabelaCliente()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"Cliente_{App.VendedorSelecionado.CodigoVendedor}";
+                    InitCliente(tableName);
+                    return tableName;
+                }
+
+                return "Cliente";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+       
+
+        private string RecuperarNomeDaTabelaResumoPedido()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"ResumoPedido_{App.VendedorSelecionado.CodigoVendedor}";
+                    InitResumoPedido_(tableName);
+                    return tableName;
+                }
+
+                return "ResumoPedido";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+       
     }
 }

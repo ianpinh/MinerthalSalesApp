@@ -19,5 +19,6 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
         void CriarTabela();
         List<HistoricoDePedidos> PedidosEmAberto();
         List<HistoricoDePedidos> CarregamentoDePedidos();
+        void SaveHistoricoVendedor(List<HistoricoDePedidos> details, string codigoVendedor);
     }
 }

@@ -7,16 +7,16 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 {
     public class CartRepository : ICartRepository
     {
-
+        private string NomeTabelaCarrinho => RecuperarNomeDaTabelaCarrinho();
         private readonly IAppthalContext _context;
         public CartRepository(IAppthalContext context)
         {
             _context = context??throw new ArgumentNullException(nameof(context));
-            Init();
+            //Init();
         }
-        private void Init()
+        private void Init(string nomeTabela)
         {
-            var command = $@"CREATE TABLE IF NOT EXISTS Carrinho(
+            var command = $@"CREATE TABLE IF NOT EXISTS {nomeTabela}(
                                                   Id INTEGER PRIMARY KEY AUTOINCREMENT
                                                  ,PedidoId UNIQUEIDENTIFIER NOT NULL
                                                  ,ProdutoId INT
@@ -36,7 +36,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public List<Carrinho> GetAll()
         {
-            var command = $@"SELECT * FROM Carrinho";
+            var command = $@"SELECT * FROM {NomeTabelaCarrinho}";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -68,7 +68,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void Add(Carrinho cart)
         {
-            var commandInsert = $@"INSERT INTO [Carrinho](
+            var commandInsert = $@"INSERT INTO [{NomeTabelaCarrinho}](
                                                   PedidoId
                                                  ,ProdutoId
                                                  ,Quantidade
@@ -108,25 +108,25 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void DeleteAll()
         {
-            var command = $"Delete from Carrinho;";
+            var command = $"Delete from {NomeTabelaCarrinho};";
             _context.ExcecutarComandoCrud(command);
         }
 
         public void DeleteById(int id)
         {
-            var command = $"Delete from Carrinho WHERE Id = {id};";
+            var command = $"Delete from {NomeTabelaCarrinho} WHERE Id = {id};";
             _context.ExcecutarComandoCrud(command);
         }
 
         public void DeleteByPedido(Guid pedidoId)
         {
-            var command = $"Delete from Carrinho WHERE PedidoId = '{pedidoId}';";
+            var command = $"Delete from {NomeTabelaCarrinho} WHERE PedidoId = '{pedidoId}';";
             _context.ExcecutarComandoCrud(command);
         }
 
         public List<Carrinho> GetByOrderId(Guid pedidoId)
         {
-            var command = $@"SELECT * FROM Carrinho WHERE PedidoId = '{pedidoId}';";
+            var command = $@"SELECT * FROM {NomeTabelaCarrinho} WHERE PedidoId = '{pedidoId}';";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -158,7 +158,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public int GetTotal()
         {
-            var command = $@"SELECT COUNT(*) FROM Carrinho;";
+            var command = $@"SELECT COUNT(*) FROM {NomeTabelaCarrinho};";
             var retorno = _context.ExcecutarSelectFirstOrDefault(command);
             if (retorno == null)
                 return 0;
@@ -172,7 +172,26 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void CriarTabela()
         {
-            Init();
+            Init(NomeTabelaCarrinho);
+        }
+
+        private string RecuperarNomeDaTabelaCarrinho()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"Carrinho_{App.VendedorSelecionado.CodigoVendedor}";
+                    Init(tableName);
+                    return tableName;
+                }
+
+                return "Carrinho";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

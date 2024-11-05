@@ -10,7 +10,6 @@ public partial class LoginPage : ContentPage
 		{
 			InitializeComponent();
 			BindingContext = viewModel;
-
 		}
 		catch (Exception ex)
 		{

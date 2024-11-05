@@ -8,17 +8,17 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 {
     public class ClienteRepository : IClienteRepository
     {
+        private string NomeTabelaCliente=> RecuperarNomeDaTabela();
         private readonly IAppthalContext _context;
         public ClienteRepository(IAppthalContext context)
         {
             _context = context??throw new ArgumentNullException(nameof(context));
-            Init();
         }
-        private void Init()
+        private void Init(string nomeTabelaCliente)
         {
             try
             {
-                var command = $@"CREATE TABLE IF NOT EXISTS Cliente(
+                var command = $@"CREATE TABLE IF NOT EXISTS {nomeTabelaCliente}(
                                                   Id INTEGER PRIMARY KEY AUTOINCREMENT
                                                  ,A1Cgc VARCHAR(20) NULL
                                                  ,A1Cod VARCHAR(20) NULL
@@ -57,7 +57,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                var command = $@"SELECT * FROM Cliente ORDER BY A1Nome";
+                var command = $@"SELECT * FROM {NomeTabelaCliente} ORDER BY A1Nome";
                 var retorno = _context.ExcecutarSelect(command);
 
                 if (retorno == null)
@@ -106,7 +106,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                var command = $@"SELECT * FROM Cliente WHERE CNPJorCPF = '{cpf}'";
+                var command = $@"SELECT * FROM {NomeTabelaCliente} WHERE CNPJorCPF = '{cpf}'";
                 var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
                 if (retorno == null)
@@ -153,7 +153,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                var command = $@"SELECT * FROM Cliente WHERE A1Cod || A1Loja  = '{codCliente}';";
+                var command = $@"SELECT * FROM {NomeTabelaCliente} WHERE A1Cod || A1Loja  = '{codCliente}';";
                 var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
                 if (retorno == null)
@@ -201,7 +201,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 if (clientes!=null && clientes.Any())
                 {
                     var scriptCommand = new StringBuilder();
-                    scriptCommand.AppendLine("DELETE FROM Cliente;");
+                    scriptCommand.AppendLine($"DELETE FROM {NomeTabelaCliente};");
 
                     foreach (var item in clientes)
                     {
@@ -210,7 +210,91 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                         var a1Bairroe = item.A1Bairroe.Contains("'") ? item.A1Bairroe.Replace("'", "''") : item.A1Bairroe;
                         var a1Mune = item.A1Mune.Contains("'") ? item.A1Mune.Replace("'", "''") : item.A1Mune;
 
-                        var commandInsert = $@"INSERT INTO Cliente(
+                        var commandInsert = $@"INSERT INTO {NomeTabelaCliente}(
+                                                         A1Cgc 
+                                                        ,A1Cod 
+                                                        ,A1Loja 
+                                                        ,A1Nome 
+                                                        ,A1Nreduz 
+                                                        ,A1Nomprp1 
+                                                        ,A1Nomprp2 
+                                                        ,A1Tipo 
+                                                        ,A1Pessoa 
+                                                        ,A1Msblql 
+                                                        ,A1Condpag 
+                                                        ,A1Inscr 
+                                                        ,A1Observ 
+                                                        ,A1Ddd 
+                                                        ,A1Telex 
+                                                        ,A1Email 
+                                                        ,A1Este 
+                                                        ,A1Mune 
+                                                        ,A1Bairroe 
+                                                        ,A1Endent 
+                                                        ,A1Ultcom 
+                                                        ,LcDisponivel 
+                                                        ,A1Lc
+                                                        ,AVencer 
+                                                        ,A1Atr)
+                                                            VALUES (
+                                                         '{item.A1Cgc}'
+                                                        ,'{item.A1Cod}'
+                                                        ,'{item.A1Loja}'
+                                                        ,'{item.A1Nome}'
+                                                        ,'{a1Nreduz}'
+                                                        ,'{item.A1Nomprp1}'
+                                                        ,'{item.A1Nomprp2}'
+                                                        ,'{item.A1Tipo}'
+                                                        ,'{item.A1Pessoa}'
+                                                        ,'{item.A1Msblql}'
+                                                        ,'{item.A1Condpag}'
+                                                        ,'{item.A1Inscr}'
+                                                        ,'{item.A1Observ}'
+                                                        ,'{item.A1Ddd}'
+                                                        ,'{item.A1Telex}'
+                                                        ,'{item.A1Email}'
+                                                        ,'{item.A1Este}'
+                                                        ,'{a1Mune}'
+                                                        ,'{a1Bairroe}'
+                                                        ,'{a1Endent}'
+                                                        ,'{item.A1Ultcom}'
+                                                        , {item.A1Lc.ToStringInvariant("0.00")}
+                                                        , {item.LcDisponivel.ToStringInvariant("0.00")}
+                                                        , {item.AVencer.ToStringInvariant("0.00")}
+                                                        , {item.A1Atr.ToStringInvariant("0.00")});";
+
+                        scriptCommand.AppendLine(commandInsert);
+                    }
+
+
+                    var command = scriptCommand.ToString();
+                    _context.ExcecutarComandoCrud(command);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public void SaveClientesVendedor(List<Cliente> clientes,string codigoVendedor)
+        {
+            try
+            {
+                if (clientes != null && clientes.Any())
+                {
+                    var scriptCommand = new StringBuilder();
+                    CriarTabelaVendedor(codigoVendedor);
+                    scriptCommand.AppendLine($"DELETE FROM Cliente_{codigoVendedor};");
+
+                    foreach (var item in clientes)
+                    {
+                        var a1Nreduz = item.A1Nreduz.Contains("'") ? item.A1Nreduz.Replace("'", "''") : item.A1Nreduz;
+                        var a1Endent = item.A1Endent.Contains("'") ? item.A1Endent.Replace("'", "''") : item.A1Endent;
+                        var a1Bairroe = item.A1Bairroe.Contains("'") ? item.A1Bairroe.Replace("'", "''") : item.A1Bairroe;
+                        var a1Mune = item.A1Mune.Contains("'") ? item.A1Mune.Replace("'", "''") : item.A1Mune;
+
+                        var commandInsert = $@"INSERT INTO Cliente_{codigoVendedor}(
                                                          A1Cgc 
                                                         ,A1Cod 
                                                         ,A1Loja 
@@ -283,7 +367,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var a1Nreduz = cliente.A1Nreduz.Contains("'") ? cliente.A1Nreduz.Replace("'", "''") : cliente.A1Nreduz;
             var a1Endent = cliente.A1Endent.Contains("'") ? cliente.A1Endent.Replace("'", "''") : cliente.A1Endent;
 
-            var command = $@"INSERT INTO Cliente(
+            var command = $@"INSERT INTO {NomeTabelaCliente}(
                                                          A1Cgc 
                                                         ,A1Cod 
                                                         ,A1Loja 
@@ -349,7 +433,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     var a1Nreduz = item.A1Nreduz.Contains("'") ? item.A1Nreduz.Replace("'", "''") : item.A1Nreduz;
                     var a1Endent = item.A1Endent.Contains("'") ? item.A1Endent.Replace("'", "''") : item.A1Endent;
 
-                    var commandInsert = $@"INSERT INTO Cliente(
+                    var commandInsert = $@"INSERT INTO {NomeTabelaCliente}(
                                                          A1Cgc 
                                                         ,A1Cod 
                                                         ,A1Loja 
@@ -411,7 +495,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void Delete(int id)
         {
-            var command = @$"DELETE FROM Cliente WHERE Id = {id};";
+            var command = @$"DELETE FROM {NomeTabelaCliente} WHERE Id = {id};";
             _context.ExcecutarComandoCrud(command);
         }
 
@@ -419,7 +503,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                var command = $@"SELECT COUNT(*) FROM Cliente;";
+                var command = $@"SELECT COUNT(*) FROM {NomeTabelaCliente};";
                 var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
                 if (retorno == null)
@@ -439,14 +523,54 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void CriarTabela()
         {
-            Init();
+            Init(NomeTabelaCliente);
+        }
+
+        private void CriarTabelaVendedor(string codigoVendedor)
+        {
+            try
+            {
+                var tableName = $"Cliente_{codigoVendedor}";
+                var command = $@"CREATE TABLE IF NOT EXISTS {tableName}(
+                                                  Id INTEGER PRIMARY KEY AUTOINCREMENT
+                                                 ,A1Cgc VARCHAR(20) NULL
+                                                 ,A1Cod VARCHAR(20) NULL
+                                                 ,A1Loja VARCHAR(30) NULL
+                                                 ,A1Nome VARCHAR(150) NULL
+                                                 ,A1Nreduz VARCHAR(150) NULL
+                                                 ,A1Nomprp1 VARCHAR(100) NULL
+                                                 ,A1Nomprp2 VARCHAR(100) NULL
+                                                 ,A1Tipo VARCHAR(100) NULL
+                                                 ,A1Pessoa VARCHAR(100) NULL
+                                                 ,A1Msblql VARCHAR(100) NULL
+                                                 ,A1Condpag VARCHAR(100) NULL
+                                                 ,A1Inscr VARCHAR(30) NULL
+                                                 ,A1Observ VARCHAR(500) NULL
+                                                 ,A1Ddd VARCHAR(20) NULL
+                                                 ,A1Telex VARCHAR(20) NULL
+                                                 ,A1Email VARCHAR(100) NULL
+                                                 ,A1Este VARCHAR(20) NULL
+                                                 ,A1Mune VARCHAR(100) NULL
+                                                 ,A1Bairroe VARCHAR(100) NULL
+                                                 ,A1Endent VARCHAR(300) NULL
+                                                 ,A1Ultcom VARCHAR(200) NULL
+                                                 ,A1Lc DECIMAL(7,2)
+                                                 ,LcDisponivel DECIMAL(7,2)
+                                                 ,AVencer DECIMAL(7,2)
+                                                 ,A1Atr DECIMAL(7,2));";
+                _context.ExcecutarComandoCrud(command);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<Cliente> RecuperarClientesInadimplentes()
         {
             try
             {
-                var command = $@"SELECT * FROM Cliente WHERE A1Atr < 0";
+                var command = $@"SELECT * FROM {NomeTabelaCliente} WHERE A1Atr < 0";
                 var dataCliente = _context.ExcecutarSelect(command);
 
                 if (dataCliente == null)
@@ -486,6 +610,25 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     lst.Add(_cliente);
                 }
                 return lst;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private string RecuperarNomeDaTabela()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"Cliente_{App.VendedorSelecionado.CodigoVendedor}";
+                    Init(tableName);
+                    return tableName;
+                }
+
+                return "Cliente";
             }
             catch (Exception)
             {

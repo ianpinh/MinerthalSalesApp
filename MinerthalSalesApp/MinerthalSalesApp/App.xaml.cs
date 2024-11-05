@@ -1,6 +1,7 @@
 ﻿using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Services;
 using MinerthalSalesApp.Models;
+using MinerthalSalesApp.Models.Dtos;
 using MinerthalSalesApp.ViewModels;
 using MinerthalSalesApp.ViewModels.Orders;
 using MinerthalSalesApp.Views.Startup;
@@ -12,6 +13,7 @@ namespace MinerthalSalesApp;
 public partial class App : Application
 {
     public static UserBasicInfo UserDetails;
+    public static VendedorSelecionadoDto VendedorSelecionado;
     public static PedidoViewModel PedidoViewModel { get; private set; }
     public static IUserRepository UserRepository { get; private set; }
     public static IRankingRepository RankingRepository { get; private set; }
@@ -79,15 +81,15 @@ public partial class App : Application
             MeusPedidosRepository = meusPedidosRepository;
             TabelaPrecoRepository = tabelaPrecoRepository;
             VendedorRepository = vendedorRepository;
-            PlanosRepository=planosRepository;
-            ClientePlanoPagamentoRepository=clientePlanoPagamentoRepository;
-            BancoRepository= bancoRepository;
-            HistoricoPedidoReposity =historicoPedidoReposity;
-            ResumoPedidoRepository =resumoPedidoRepository;
-            ServicoDeCarregamentoDasBases=servicoDeCarregamentoDasBases;
-            PopupAppService=popupAppService;
-            TitulosRepositoy =titulosRepositoy;
-            VisitasRepository=visitasRepository;
+            PlanosRepository = planosRepository;
+            ClientePlanoPagamentoRepository = clientePlanoPagamentoRepository;
+            BancoRepository = bancoRepository;
+            HistoricoPedidoReposity = historicoPedidoReposity;
+            ResumoPedidoRepository = resumoPedidoRepository;
+            ServicoDeCarregamentoDasBases = servicoDeCarregamentoDasBases;
+            PopupAppService = popupAppService;
+            TitulosRepositoy = titulosRepositoy;
+            VisitasRepository = visitasRepository;
             BuildDatabase();
 
 
@@ -117,7 +119,8 @@ public partial class App : Application
     }
 
 
-    static int lastHour = DateTime.Now.Hour;
+    static DateTime lastHour = DateTime.Now;
+    static int tempoAtualizacaoBanco = 2;
     async Task BuildDatabase()
     {
         try
@@ -134,7 +137,7 @@ public partial class App : Application
 
     private void UpdateDatabase()
     {
-        var aTimer = new System.Timers.Timer(20 * 60 * 1000); //20 MINUTOS
+        var aTimer = new System.Timers.Timer(tempoAtualizacaoBanco * 60 * 1000); //20 MINUTOS
         aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
         aTimer.Start();
     }
@@ -143,14 +146,22 @@ public partial class App : Application
     {
 
         if (!Preferences.ContainsKey(nameof(App.UserDetails)))
-        {
             Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-        }
-        else if (lastHour < DateTime.Now.Hour || (lastHour == 23 && DateTime.Now.Hour == 0))
+
+        ServicoDeCarregamentoDasBases.AtualizarBaseDeDados().GetAwaiter().OnCompleted(() =>
         {
-            lastHour = DateTime.Now.Hour;
-            _= ServicoDeCarregamentoDasBases.AtualizarBaseDeDados();
-        }
+            ServicoDeCarregamentoDasBases.AtualizarBaseDeDadosVendedores();
+        });
+
+        TimeSpan difference = DateTime.Now - lastHour;
+        if (difference.Minutes > tempoAtualizacaoBanco)
+            lastHour = DateTime.Now.AddMinutes(tempoAtualizacaoBanco);
+
+        //else if (lastHour < DateTime.Now.Hour || (lastHour == 23 && DateTime.Now.Hour == 0))
+        //{
+        //    lastHour = DateTime.Now.Hour;
+        //    _= ServicoDeCarregamentoDasBases.AtualizarBaseDeDados();
+        //}
 
     }
 

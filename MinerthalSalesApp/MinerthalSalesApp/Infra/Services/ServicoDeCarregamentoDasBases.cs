@@ -109,7 +109,7 @@ namespace MinerthalSalesApp.Infra.Services
             totalFinished = 0;
             model.TotalClientes = 0;
             model.TotalTbPrecos = 0;
-            model.TotalPlanos = 0; 
+            model.TotalPlanos = 0;
             model.TotalFaturamento = 0;
             model.TotalPedidos = 0;
             model.TotalProdutos = 0;
@@ -576,7 +576,7 @@ namespace MinerthalSalesApp.Infra.Services
             }
         }
 
-        private async Task<List<Cliente>> PesquisarClienteAsync()
+        public async Task<List<Cliente>> PesquisarClienteAsync()
         {
             try
             {
@@ -584,6 +584,28 @@ namespace MinerthalSalesApp.Infra.Services
                 string queryId = "000001";
                 bool filter = true;
                 string model = _minerthal.ApiRequestServiceAsync(queryId, filter);
+
+                if (!string.IsNullOrWhiteSpace(model))
+                {
+                    var _model = JsonConvert.DeserializeObject<ResponseApiCliente>(model);
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
+                }
+                return obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<List<Cliente>> PesquisarClienteAsync(string codVendedor)
+        {
+            try
+            {
+                var obj = new List<Cliente>();
+                string queryId = "000001";
+                bool filter = true;
+                string model = _minerthal.ApiRequestServiceAsync(queryId, filter, codVendedor);
 
                 if (!string.IsNullOrWhiteSpace(model))
                 {
@@ -871,9 +893,16 @@ namespace MinerthalSalesApp.Infra.Services
             return CarregarDadosDoAppAsync();
         }
 
+        public void AtualizarBaseDeDadosVendedores()
+        {
+            Thread t = new Thread(() => CarregarVendedoresDoSupervisor());
+            t.Start();
+        }
+
+
         bool isFinding = false;
         public async Task<int> CarregarUsuariosAsync()
-         {
+        {
 
             var total = 2;
             try
@@ -904,12 +933,12 @@ namespace MinerthalSalesApp.Infra.Services
             return total;
         }
 
-		public async Task CarregarVendedoresAposLoginAsync()
-		{
-          await CarregarVendedoresAsync();
-		}
+        public async Task CarregarVendedoresAposLoginAsync()
+        {
+            await CarregarVendedoresAsync();
+        }
 
-		private Task CarregarDadosDoAppAsync()
+        private Task CarregarDadosDoAppAsync()
         {
             int total = 0;
             if (!IsLoading)
@@ -987,7 +1016,7 @@ namespace MinerthalSalesApp.Infra.Services
                             7 => true,
                             4 => true,
                             5 => true,
-                           17 => true,
+                            17 => true,
                             _ => false
                         };
 
@@ -1188,6 +1217,7 @@ namespace MinerthalSalesApp.Infra.Services
             }
             return cont;
         }
+
         private Task CarregarDadosDaApiAsync(List<CustomDictionary> lista)
         {
             var model = string.Empty;
@@ -1302,6 +1332,73 @@ namespace MinerthalSalesApp.Infra.Services
             return Task.CompletedTask;
         }
 
+        private void CarregarDadosVendedorDaApiAsync(List<CustomDictionary> lista, string codigoVendedor)
+        {
+            var model = string.Empty;
+            foreach (var item in lista)
+            {
+                try
+                {
+                    model = _minerthal.ApiRequestServiceAsync(item.StringValue, item.Filter, codigoVendedor);
+
+                    if (!string.IsNullOrWhiteSpace(model))
+                    {
+
+                        if (item.ByteValue == (byte)1)
+                        {
+                            var _model = JsonConvert.DeserializeObject<ResponseApiCliente>(model);
+                            if (_model.Details != null)
+                                App.ClienteRepository.SaveClientesVendedor(_model.Details, codigoVendedor);
+                        }
+
+                        else if (item.ByteValue == (byte)4)
+                        {
+                            var _model = JsonConvert.DeserializeObject<ResponseApiFaturamento>(model);
+                            if (_model.Details != null)
+                                App.FaturamentoRepository.SaveFaturamentoVendedor(_model.Details, codigoVendedor);
+                        }
+                        else if (item.ByteValue == (byte)5)
+                        {
+                            var _model = JsonConvert.DeserializeObject<ResponseApiResumoPedido>(model);
+                            if (_model.Details != null)
+                                App.ResumoPedidoRepository.SavePedidoVendedor(_model.Details, codigoVendedor);
+                        }
+                        else if (item.ByteValue == (byte)7)
+                        {
+                            var _model = JsonConvert.DeserializeObject<ResponseApiHistoricoPedido>(model);
+                            if (_model.Details != null)
+                                App.HistoricoPedidoReposity.SaveHistoricoVendedor(_model.Details, codigoVendedor);
+                        }
+
+                        else if (item.ByteValue == (byte)14)
+                        {
+                            var _model = JsonConvert.DeserializeObject<ResponseApiVisitas>(model);
+                            if (_model.Details != null)
+                                App.VisitasRepository.SaveVisitasVendedorAsync(_model.Details, codigoVendedor);
+                        }
+                        else if (item.ByteValue == (byte)19)
+                        {
+                            var _model = JsonConvert.DeserializeObject<ResponseApiTitulos>(model);
+                            if (_model.Details != null)
+                                App.TitulosRepositoy.SaveTitulosVendedor(_model.Details, codigoVendedor);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.LogRepository.Add(new Log
+                    {
+                        Data = DateTime.Now,
+                        ErrorDetail = ex.Message,
+                        Pagina = item.ByteValue.ToString(),
+                        Descricao = model
+                    });
+                    continue;
+                }
+            }
+
+        }
+
         private int CarregarRankingAsync()
         {
             var total = 2;
@@ -1327,10 +1424,12 @@ namespace MinerthalSalesApp.Infra.Services
         {
             return await _minerthal.TransmitirPedidos();
         }
+
         public async Task<(string sucesso, string Mensagem)> TransmitirPedidos(Guid pedidoId)
         {
             return await _minerthal.TransmitirPedidos(pedidoId);
         }
+
         public void DeleteAllTables(string dropCommand)
         {
             var tableName = "APPTHAL_BASE_V53";
@@ -1367,6 +1466,71 @@ namespace MinerthalSalesApp.Infra.Services
                 App.TitulosRepositoy.CriarTabela();
                 App.VisitasRepository.CriarTabela();
                 App.MetaMensalRepository.CriarTabela();
+            }
+        }
+
+        public void CarregarVendedoresDoSupervisor()
+        {
+            try
+            {
+                var supervisor = App.UserDetails.QtdVendedoresNaEquipe > 0;
+                if (supervisor)
+                    CarregarDadosDoAppVendedoresAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        bool IsLoadingSellers = false;
+        private void CarregarDadosDoAppVendedoresAsync()
+        {
+            int total = 0;
+            if (!IsLoadingSellers)
+            {
+                try
+                {
+                    IsLoadingSellers = true;
+                    var listaDeVendedores = App.VendedorRepository.GetByCodigoSupervisor(App.UserDetails.Codigo);
+
+                    total += 1;
+                    if (listaDeVendedores != null && listaDeVendedores.Any())
+                    {
+                        foreach (var vendedor in listaDeVendedores)
+                        {
+                            var lista = new List<CustomDictionary>();
+                            foreach (ApiQueriesIdsEnum query in (ApiQueriesIdsEnum[])Enum.GetValues(typeof(ApiQueriesIdsEnum)))
+                            {
+                                var _filter = (byte)query switch
+                                {
+                                    1 => true,
+                                    7 => true,
+                                    4 => true,
+                                    5 => true,
+                                    _ => false
+                                };
+
+                                var _query = $"{(byte)query:#000000}";
+                                lista.Add(new CustomDictionary
+                                {
+                                    Key = query.ToName(),
+                                    StringValue = _query,
+                                    ByteValue = (byte)query,
+                                    Filter = _filter
+                                });
+                            }
+                            CarregarDadosVendedorDaApiAsync(lista, vendedor.CdRca);
+                        }
+
+                    }
+                    IsLoadingSellers = false;
+                }
+                catch (Exception ex)
+                {
+                    IsLoadingSellers = false;
+                    throw;
+                }
             }
         }
     }

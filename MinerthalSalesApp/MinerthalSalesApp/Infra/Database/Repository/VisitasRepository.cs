@@ -7,15 +7,15 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 {
     public class VisitasRepository : IVisitasRepository
     {
+        private string NomeTabelaVisita=> RecuperarNomeDaTabela();
         private readonly IAppthalContext _context;
         public VisitasRepository(IAppthalContext context)
         {
             _context = context??throw new ArgumentNullException(nameof(context));
-            Init();
         }
-        private void Init()
+        private void Init(string tableName)
         {
-            var command = $@"CREATE TABLE IF NOT EXISTS Visita(
+            var command = $@"CREATE TABLE IF NOT EXISTS {tableName}(
                                                   Id INTEGER PRIMARY KEY AUTOINCREMENT
                                                  ,CdCliente VARCHAR(20)
                                                  ,DtReg VARCHAR(150)
@@ -33,14 +33,14 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             if (visitas!=null && visitas.Any())
             {
                 var scriptCommand = new StringBuilder();
-                scriptCommand.AppendLine("DELETE FROM Visita;");
+                scriptCommand.AppendLine($"DELETE FROM {NomeTabelaVisita};");
 
                 foreach (var item in visitas)
                 {
                     var nmCliente = item.NmCliente.Contains("'") ? item.NmCliente.Replace("'", "''") : item.NmCliente;
                     var ocorrencia = item.Ocorrencia.Contains("'") ? item.Ocorrencia.Replace("'", "''") : item.Ocorrencia;
                     var cidade = item.Cidade.Contains("'") ? item.Cidade.Replace("'", "''") : item.Cidade;
-                    var commandInsert = $@"INSERT INTO [Visita](
+                    var commandInsert = $@"INSERT INTO [{NomeTabelaVisita}](
                                                          CdCliente
                                                         ,DtReg
                                                         ,IsClienteNovo
@@ -73,7 +73,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public IEnumerable<Visita> RecuperarTodasVisitas()
         {
 
-            var command = $@"SELECT * FROM Visita";
+            var command = $@"SELECT * FROM {NomeTabelaVisita}";
             var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
             if (retorno == null)
@@ -101,7 +101,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public IEnumerable<Visita> RecuperarTodasVisitasDoCliente(string codCliente)
         {
-            var command = $@"SELECT * FROM Visita WHERE CdCliente='{codCliente}';";
+            var command = $@"SELECT * FROM {NomeTabelaVisita} WHERE CdCliente='{codCliente}';";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -138,7 +138,85 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void CriarTabela()
         {
-            Init();
+            Init(NomeTabelaVisita);
+        }
+
+        public void SaveVisitasVendedorAsync(List<Visita> visitas, string codigoVendedor)
+        {
+            if (visitas != null && visitas.Any())
+            {
+                var scriptCommand = new StringBuilder();
+                CriarTabelaVisitaVendedor(codigoVendedor);
+                scriptCommand.AppendLine($"DELETE FROM Visita_{codigoVendedor};");
+
+
+                foreach (var item in visitas)
+                {
+                    var nmCliente = item.NmCliente.Contains("'") ? item.NmCliente.Replace("'", "''") : item.NmCliente;
+                    var ocorrencia = item.Ocorrencia.Contains("'") ? item.Ocorrencia.Replace("'", "''") : item.Ocorrencia;
+                    var cidade = item.Cidade.Contains("'") ? item.Cidade.Replace("'", "''") : item.Cidade;
+                    var commandInsert = $@"INSERT INTO Visita_{codigoVendedor}(
+                                                         CdCliente
+                                                        ,DtReg
+                                                        ,IsClienteNovo
+                                                        ,ProximaVisita
+                                                        ,NmCliente
+                                                        ,Ocorrencia
+                                                        ,Cidade
+                                                        ,Uf        
+                                                        ,CdRcaxxx)
+                                                            VALUES (
+                                                         '{item.CdCliente}'
+                                                        ,'{item.DtReg}'
+                                                        ,'{item.IsClienteNovo}'
+                                                        ,'{item.ProximaVisita}'
+                                                        ,'{nmCliente}' 
+                                                        ,'{ocorrencia}'
+                                                        ,'{cidade}'
+                                                        ,'{item.Uf}'
+                                                        ,'{item.CdRcaxxx}');";
+
+                    scriptCommand.AppendLine(commandInsert);
+                }
+
+                var command = scriptCommand.ToString();
+                _context.ExcecutarComandoCrud(command);
+            }
+        }
+
+        private void CriarTabelaVisitaVendedor(string codigoVendedor)
+        {
+            var command = $@"CREATE TABLE IF NOT EXISTS Visita_{codigoVendedor}(
+                                                  Id INTEGER PRIMARY KEY AUTOINCREMENT
+                                                 ,CdCliente VARCHAR(20)
+                                                 ,DtReg VARCHAR(150)
+                                                 ,IsClienteNovo VARCHAR(20)
+                                                 ,ProximaVisita VARCHAR(20)
+                                                 ,NmCliente VARCHAR(20)
+                                                 ,Ocorrencia VARCHAR(300)
+                                                 ,Cidade VARCHAR(150)
+                                                 ,Uf VARCHAR(20)
+                                                 ,CdRcaxxx VARCHAR(20));";
+            _context.ExcecutarComandoCrud(command);
+        }
+
+        private string RecuperarNomeDaTabela()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"Visita_{App.VendedorSelecionado.CodigoVendedor}";
+                    Init(tableName);
+                    return tableName;
+                }
+
+                return "Visita";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
