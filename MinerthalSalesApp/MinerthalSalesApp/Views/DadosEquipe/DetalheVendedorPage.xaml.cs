@@ -1,6 +1,7 @@
 using MinerthalSalesApp.Controls;
 using MinerthalSalesApp.Customs.Exceptions;
 using MinerthalSalesApp.Infra.Database.Tables;
+using MinerthalSalesApp.Views.Clients;
 using MinerthalSalesApp.Views.Startup;
 using Newtonsoft.Json;
 namespace MinerthalSalesApp.Views.DadosEquipe;
@@ -22,32 +23,46 @@ public partial class DetalheVendedorPage : ContentPage
 		if (!string.IsNullOrWhiteSpace(_vendedorStr))
 		{
 			var dadosVendedor = JsonConvert.DeserializeObject<Vendedor>(_vendedorStr);
-
 			if (dadosVendedor != null)
 			{
-				var userDetails = new Models.UserBasicInfo();
-				userDetails.Codigo = dadosVendedor.CdRca;
-				userDetails.FullName = dadosVendedor.NmRca;
+				var lstClinetes = await App.ServicoDeCarregamentoDasBases.PesquisarClienteAsync(dadosVendedor.CdRca);
+				var vendedorSelecionado = new Models.Dtos.VendedorSelecionadoDto
+				{
+					Clientes = lstClinetes,
+					CodigoVendedor = dadosVendedor.CdRca,
+					VendedorId = dadosVendedor.Id,
+				};
 
-				userDetails.RoleID = (int)Models.RoleDetails.Admin;
-				userDetails.RoleText = "Admin Role";
-
-				var gerente = App.UserDetails;
-				userDetails.UserInfoManager = JsonConvert.SerializeObject(gerente);
-
-				//if (Preferences.ContainsKey(nameof(App.UserDetails)))
-				//    Preferences.Remove(nameof(App.UserDetails));
-
-
-				//string userDetailStr = JsonConvert.SerializeObject(userDetails);
-				//Preferences.Set(nameof(App.UserDetails), userDetailStr);
-				//App.UserDetails = userDetails;
-
-				await SignOut(userDetails);
-
+				App.VendedorSelecionado = vendedorSelecionado;
+				await Shell.Current.GoToAsync($"//{nameof(ClientsPage)}");
 			}
+
+
+			//if (dadosVendedor != null)
+			//{
+			//	var userDetails = new Models.UserBasicInfo();
+			//	userDetails.Codigo = dadosVendedor.CdRca;
+			//	userDetails.FullName = dadosVendedor.NmRca;
+
+			//	userDetails.RoleID = (int)Models.RoleDetails.Admin;
+			//	userDetails.RoleText = "Admin Role";
+
+			//	var gerente = App.UserDetails;
+			//	userDetails.UserInfoManager = JsonConvert.SerializeObject(gerente);
+
+			//	//if (Preferences.ContainsKey(nameof(App.UserDetails)))
+			//	//    Preferences.Remove(nameof(App.UserDetails));
+
+
+			//	//string userDetailStr = JsonConvert.SerializeObject(userDetails);
+			//	//Preferences.Set(nameof(App.UserDetails), userDetailStr);
+			//	//App.UserDetails = userDetails;
+
+			//	await SignOut(userDetails);
+
+		//}
 		}
-	}
+    }
 
 	async Task SignOut(Models.UserBasicInfo userDetails)
 	{

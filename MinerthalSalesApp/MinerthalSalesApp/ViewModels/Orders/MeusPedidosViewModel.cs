@@ -155,6 +155,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
         {
             try
             {
+                if (HistoricoPedido != null) HistoricoPedido.Clear();
                 var pedidos = App.HistoricoPedidoReposity.GetAllFromLastCurrentMonth();
                 if (pedidos.Any())
                 {

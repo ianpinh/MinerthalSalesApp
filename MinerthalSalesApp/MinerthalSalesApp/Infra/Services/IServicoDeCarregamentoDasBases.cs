@@ -1,4 +1,5 @@
-﻿using MinerthalSalesApp.Models.Enums;
+﻿using MinerthalSalesApp.Infra.Database.Tables;
+using MinerthalSalesApp.Models.Enums;
 using MinerthalSalesApp.ViewModels.Startup;
 
 namespace MinerthalSalesApp.Infra.Services
@@ -10,8 +11,10 @@ namespace MinerthalSalesApp.Infra.Services
         int AtualizarBaseDeDadosPrimeiraCarga(AtualizacaoViewModel model);
 
 		Task AtualizarBaseDeDados();
+        void AtualizarBaseDeDadosVendedores();
 
-		Task<int> CarregarClientesAsync();
+
+        Task<int> CarregarClientesAsync();
 
         Task<int> CarregarUsuariosAsync();
 
@@ -22,5 +25,8 @@ namespace MinerthalSalesApp.Infra.Services
 
         Task CarregarVendedoresAposLoginAsync();
 
-	}
+        Task<List<Cliente>> PesquisarClienteAsync(string codVendedor);
+
+
+    }
 }

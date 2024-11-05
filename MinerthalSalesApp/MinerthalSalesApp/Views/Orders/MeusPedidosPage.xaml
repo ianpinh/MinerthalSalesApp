@@ -434,6 +434,7 @@
                         WidthRequest="365">
                         <ListView
                             x:Name="ListaPedidos"
+                            Margin="0,10,0,0"
                             ItemsSource="{Binding PedidosPendentes}"
                             RefreshCommand="{Binding AtualizarListaDePedidosPendentes}"
                             SelectionMode="Single">

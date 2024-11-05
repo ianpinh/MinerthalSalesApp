@@ -11,9 +11,12 @@ namespace MinerthalSalesApp.Infra.Database.Repository
     public class PedidoRepository : IPedidoRepository
     {
         private readonly IAppthalContext _context;
+        private string NomeTabelaPedido=>RecuperarNomeDaTabelaPedido();
+        private string NomeTabelaCarrinho=>RecuperarNomeDaTabelaCarrinho();
+
         public PedidoRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
 
@@ -65,10 +68,118 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 _context.ExcecutarComandoCrud(addColumnCommand);
             }
         }
+        private void InitPedidoVendedor(string nomeTabela)
+        {
+                var command = $@"CREATE TABLE IF NOT EXISTS {nomeTabela}(
+                                                  Id UNIQUEIDENTIFIER PRIMARY KEY  NOT NULL
+                                                 ,CodigoCliente VARCHAR(20)
+                                                 ,CodigoLoja VARCHAR(20)
+                                                 ,FilialMinerthal VARCHAR(20)
+                                                 ,TipoPedido VARCHAR(20)
+                                                 ,TipoVenda VARCHAR(20)
+                                                 ,PlanoPagamento VARCHAR(20)
+                                                 ,TipoCobranca VARCHAR(20)
+                                                 ,Parcelas VARCHAR(20)
+                                                 ,CodProduto VARCHAR(20)
+                                                 ,Observacao VARCHAR(300)
+                                                 ,NomeFilial VARCHAR(150)
+                                                 ,NomeTipo VARCHAR(50)
+                                                 ,NomeTipoVenda VARCHAR(20)
+                                                 ,NomeTipoCobranca VARCHAR(20)
+                                                 ,NomePlanoPagamento VARCHAR(100)
+                                                 ,PercentualDesconto DECIMAL(7,2)
+                                                 ,PercentualJuros DECIMAL(7,2)
+                                                 ,Comissao DECIMAL(7,2)
+                                                 ,ValorFrete25 DECIMAL(7,2)
+                                                 ,ValorParcelas DECIMAL(7,2)
+                                                 ,ValorFrete30 DECIMAL(7,2));";
+                _context.ExcecutarComandoCrud(command);
+
+
+                var checkColumnCommand = $"PRAGMA table_info({nomeTabela});";
+                var columns = _context.ExecutarComandoConsulta(checkColumnCommand);
+
+                bool columnExists = false;
+                foreach (var column in columns)
+                {
+                    if (column["name"].ToString() == "CodigoLoja")
+                    {
+                        columnExists = true;
+                        break;
+                    }
+                }
+
+                // Adicionar a coluna se ela não existir
+                if (!columnExists)
+                {
+                    var addColumnCommand = $"ALTER TABLE {nomeTabela} ADD COLUMN CodigoLoja VARCHAR(20);";
+                    _context.ExcecutarComandoCrud(addColumnCommand);
+                }
+        }
+
+        private void InitCarrinhoVendedor(string nomeTabela)
+        {
+            var command = $@"CREATE TABLE IF NOT EXISTS {nomeTabela}(
+                                                  Id INTEGER PRIMARY KEY AUTOINCREMENT
+                                                 ,PedidoId UNIQUEIDENTIFIER NOT NULL
+                                                 ,ProdutoId INT
+                                                 ,Quantidade INT
+                                                 ,CodProduto VARCHAR(50)
+                                                 ,CodigoNomeProduto VARCHAR(50)
+                                                 ,ImagemProduto VARCHAR(80)
+                                                 ,ValorProduto DECIMAL(7,2)
+                                                 ,ValorCombinado DECIMAL(7,2)
+                                                 ,Frete DECIMAL(7,2)
+                                                 ,Comissao DECIMAL(7,2)
+                                                 ,Desconto DECIMAL(7,2)
+                                                 ,Encargos DECIMAL(7,2)
+                                                 ,TaxaEncargos DECIMAL(7,2));";
+            _context.ExcecutarComandoCrud(command);
+        }
+
+        private  string RecuperarNomeDaTabelaPedido()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"Pedido_{App.VendedorSelecionado.CodigoVendedor}";
+                    InitPedidoVendedor(tableName);
+                    return tableName;
+                }
+
+                return "Pedido";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private string RecuperarNomeDaTabelaCarrinho()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"Carrinho_{App.VendedorSelecionado.CodigoVendedor}";
+                    InitCarrinhoVendedor(tableName);
+                    return tableName;
+                }
+
+                return "Carrinho";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+       
+
 
         public List<Pedido> GetAll()
         {
-            var command = $@"SELECT * FROM Pedido";
+            var command = $@"SELECT * FROM {NomeTabelaPedido}";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -80,28 +191,28 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lst.Add(new Pedido
                 {
-                    Id=item.Id!=null ? Guid.Parse(item.Id) : Guid.Empty,
-                    CodigoCliente=item.CodigoCliente.ToString(),
-                    CodigoLoja=item.CodigoLoja.ToString(),
-                    FilialMinerthal=item.FilialMinerthal.ToString(),
-                    TipoPedido=item.TipoPedido.ToString(),
-                    TipoVenda=item.TipoVenda.ToString(),
-                    PlanoPagamento=item.PlanoPagamento.ToString(),
-                    TipoCobranca=item.TipoCobranca.ToString(),
-                    Parcelas=item.Parcelas.ToString(),
-                    CodProduto=item.CodProduto.ToString(),
-                    Observacao=item.Observacao.ToString(),
-                    NomeFilial=item.NomeFilial.ToString(),
-                    NomeTipo=item.NomeTipo.ToString(),
-                    NomeTipoVenda=item.NomeTipoVenda.ToString(),
-                    NomeTipoCobranca=item.NomeTipoCobranca.ToString(),
-                    NomePlanoPagamento=item.NomePlanoPagamento.ToString(),
-                    PercentualDesconto=item.PercentualDesconto!=null ? Convert.ToDecimal(item.PercentualDesconto) : 0M,
-                    PercentualJuros=item.PercentualJuros!=null ? Convert.ToDecimal(item.PercentualJuros) : 0M,
-                    Comissao=item.Comissao!=null ? Convert.ToDecimal(item.Comissao) : 0M,
-                    ValorFrete25=item.VlPrectab!=null ? Convert.ToDecimal(item.VlPrectab) : 0M,
-                    ValorParcelas=item.VlPrectab!=null ? Convert.ToDecimal(item.VlPrectab) : 0M,
-                    ValorFrete30=item.VlPrectab!=null ? Convert.ToDecimal(item.VlPrectab) : 0M,
+                    Id = item.Id != null ? Guid.Parse(item.Id) : Guid.Empty,
+                    CodigoCliente = item.CodigoCliente.ToString(),
+                    CodigoLoja = item.CodigoLoja.ToString(),
+                    FilialMinerthal = item.FilialMinerthal.ToString(),
+                    TipoPedido = item.TipoPedido.ToString(),
+                    TipoVenda = item.TipoVenda.ToString(),
+                    PlanoPagamento = item.PlanoPagamento.ToString(),
+                    TipoCobranca = item.TipoCobranca.ToString(),
+                    Parcelas = item.Parcelas.ToString(),
+                    CodProduto = item.CodProduto.ToString(),
+                    Observacao = item.Observacao.ToString(),
+                    NomeFilial = item.NomeFilial.ToString(),
+                    NomeTipo = item.NomeTipo.ToString(),
+                    NomeTipoVenda = item.NomeTipoVenda.ToString(),
+                    NomeTipoCobranca = item.NomeTipoCobranca.ToString(),
+                    NomePlanoPagamento = item.NomePlanoPagamento.ToString(),
+                    PercentualDesconto = item.PercentualDesconto != null ? Convert.ToDecimal(item.PercentualDesconto) : 0M,
+                    PercentualJuros = item.PercentualJuros != null ? Convert.ToDecimal(item.PercentualJuros) : 0M,
+                    Comissao = item.Comissao != null ? Convert.ToDecimal(item.Comissao) : 0M,
+                    ValorFrete25 = item.VlPrectab != null ? Convert.ToDecimal(item.VlPrectab) : 0M,
+                    ValorParcelas = item.VlPrectab != null ? Convert.ToDecimal(item.VlPrectab) : 0M,
+                    ValorFrete30 = item.VlPrectab != null ? Convert.ToDecimal(item.VlPrectab) : 0M,
                 });
             }
 
@@ -110,14 +221,13 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public int Add(Pedido pedido)
         {
-            if (pedido!=null)
+            if (pedido != null)
             {
                 if (pedido.Id.Equals(Guid.Empty))
                     pedido.Id = Guid.NewGuid();
 
-
                 var sb = new StringBuilder();
-                sb.AppendLine($@"INSERT INTO [Pedido](
+                sb.AppendLine($@"INSERT INTO [{NomeTabelaPedido}](
                                                      Id
                                                     ,CodigoCliente
                                                     ,CodigoLoja
@@ -165,11 +275,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                     , {pedido.ValorFrete30.ToStringInvariant("0.00")});");
 
                 sb.AppendLine();
-                if (pedido.ItensDoPedido.Count>0)
+                if (pedido.ItensDoPedido.Count > 0)
                 {
                     foreach (var cart in pedido.ItensDoPedido)
                     {
-                        sb.AppendLine($@"INSERT INTO [Carrinho](
+                        sb.AppendLine($@"INSERT INTO [{NomeTabelaCarrinho}](
                                                   PedidoId
                                                  ,ProdutoId
                                                  ,Quantidade
@@ -208,13 +318,13 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<Pedido> pedido)
         {
-            if (pedido!=null && pedido.Any())
+            if (pedido != null && pedido.Any())
             {
                 var sb = new StringBuilder();
                 foreach (var item in pedido)
                 {
-                    
-                    var commandInsert = $@"INSERT INTO [Pedido](Id
+
+                    var commandInsert = $@"INSERT INTO [{NomeTabelaPedido}](Id
                                                     ,CodigoCliente
                                                     ,CodigoLoja
                                                     ,FilialMinerthal
@@ -262,11 +372,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     sb.AppendLine(commandInsert);
 
                     sb.AppendLine();
-                    if (item.ItensDoPedido.Count>0)
+                    if (item.ItensDoPedido.Count > 0)
                     {
                         foreach (var cart in item.ItensDoPedido)
                         {
-                            sb.AppendLine($@"INSERT INTO [Carrinho](
+                            sb.AppendLine($@"INSERT INTO [{NomeTabelaCarrinho}](
                                                   PedidoId
                                                  ,ProdutoId
                                                  ,Quantidade
@@ -305,7 +415,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public Pedido GetById(Guid id)
         {
-            var command = $@"SELECT * FROM Pedido WHERE Id = '{id}';";
+            var command = $@"SELECT * FROM {NomeTabelaPedido} WHERE Id = '{id}';";
             var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
             if (retorno == null)
@@ -313,35 +423,35 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new Pedido
             {
-                Id=retorno.Id!=null ? Guid.Parse(retorno.Id) : Guid.Empty,
-                CodigoCliente=retorno.CodigoCliente.ToString(),
-                CodigoLoja=retorno.CodigoLoja.ToString(),
-                FilialMinerthal=retorno.FilialMinerthal.ToString(),
-                TipoPedido=retorno.TipoPedido.ToString(),
-                TipoVenda=retorno.TipoVenda.ToString(),
-                PlanoPagamento=retorno.PlanoPagamento.ToString(),
-                TipoCobranca=retorno.TipoCobranca.ToString(),
-                Parcelas=retorno.Parcelas.ToString(),
-                CodProduto=retorno.CodProduto.ToString(),
-                Observacao=retorno.Observacao.ToString(),
-                NomeFilial=retorno.NomeFilial.ToString(),
-                NomeTipo=retorno.NomeTipo.ToString(),
-                NomeTipoVenda=retorno.NomeTipoVenda.ToString(),
-                NomeTipoCobranca=retorno.NomeTipoCobranca.ToString(),
-                NomePlanoPagamento=retorno.NomePlanoPagamento.ToString(),
-                PercentualDesconto=retorno.PercentualDesconto!=null ? Convert.ToDecimal(retorno.PercentualDesconto) : 0M,
-                PercentualJuros=retorno.PercentualJuros!=null ? Convert.ToDecimal(retorno.PercentualJuros) : 0M,
-                Comissao=retorno.Comissao!=null ? Convert.ToDecimal(retorno.Comissao) : 0M,
-                ValorFrete25=retorno.VlPrectab!=null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
-                ValorParcelas=retorno.VlPrectab!=null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
-                ValorFrete30=retorno.VlPrectab!=null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
+                Id = retorno.Id != null ? Guid.Parse(retorno.Id) : Guid.Empty,
+                CodigoCliente = retorno.CodigoCliente.ToString(),
+                CodigoLoja = retorno.CodigoLoja.ToString(),
+                FilialMinerthal = retorno.FilialMinerthal.ToString(),
+                TipoPedido = retorno.TipoPedido.ToString(),
+                TipoVenda = retorno.TipoVenda.ToString(),
+                PlanoPagamento = retorno.PlanoPagamento.ToString(),
+                TipoCobranca = retorno.TipoCobranca.ToString(),
+                Parcelas = retorno.Parcelas.ToString(),
+                CodProduto = retorno.CodProduto.ToString(),
+                Observacao = retorno.Observacao.ToString(),
+                NomeFilial = retorno.NomeFilial.ToString(),
+                NomeTipo = retorno.NomeTipo.ToString(),
+                NomeTipoVenda = retorno.NomeTipoVenda.ToString(),
+                NomeTipoCobranca = retorno.NomeTipoCobranca.ToString(),
+                NomePlanoPagamento = retorno.NomePlanoPagamento.ToString(),
+                PercentualDesconto = retorno.PercentualDesconto != null ? Convert.ToDecimal(retorno.PercentualDesconto) : 0M,
+                PercentualJuros = retorno.PercentualJuros != null ? Convert.ToDecimal(retorno.PercentualJuros) : 0M,
+                Comissao = retorno.Comissao != null ? Convert.ToDecimal(retorno.Comissao) : 0M,
+                ValorFrete25 = retorno.VlPrectab != null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
+                ValorParcelas = retorno.VlPrectab != null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
+                ValorFrete30 = retorno.VlPrectab != null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
             };
         }
 
         public int GetTotal()
         {
 
-            var command = $@"SELECT COUNT(*) FROM Pedido;";
+            var command = $@"SELECT COUNT(*) FROM {NomeTabelaPedido};";
             var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
             if (retorno == null)
@@ -350,13 +460,13 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var fields = retorno as IDictionary<string, object>;
             var _total = fields["COUNT(*)"];
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
 
         public Pedido GetByClientId(string codigoCliente)
         {
-            var command = $@"SELECT * FROM Pedido WHERE CodigoCliente = {codigoCliente};";
+            var command = $@"SELECT * FROM {NomeTabelaPedido} WHERE CodigoCliente = {codigoCliente};";
             var retorno = _context.ExcecutarSelectFirstOrDefault(command);
 
             if (retorno == null)
@@ -364,36 +474,36 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new Pedido
             {
-                Id=retorno.Id!=null ? Guid.Parse(retorno.Id) : Guid.Empty,
-                CodigoCliente=retorno.CodigoCliente.ToString(),
-                CodigoLoja=retorno.CodigoLoja.ToString(),
-                FilialMinerthal=retorno.FilialMinerthal.ToString(),
-                TipoPedido=retorno.TipoPedido.ToString(),
-                TipoVenda=retorno.TipoVenda.ToString(),
-                PlanoPagamento=retorno.PlanoPagamento.ToString(),
-                TipoCobranca=retorno.TipoCobranca.ToString(),
-                Parcelas=retorno.Parcelas.ToString(),
-                CodProduto=retorno.CodProduto.ToString(),
-                Observacao=retorno.Observacao.ToString(),
-                NomeFilial=retorno.NomeFilial.ToString(),
-                NomeTipo=retorno.NomeTipo.ToString(),
-                NomeTipoVenda=retorno.NomeTipoVenda.ToString(),
-                NomeTipoCobranca=retorno.NomeTipoCobranca.ToString(),
-                NomePlanoPagamento=retorno.NomePlanoPagamento.ToString(),
-                PercentualDesconto=retorno.PercentualDesconto!=null ? Convert.ToDecimal(retorno.PercentualDesconto) : 0M,
-                PercentualJuros=retorno.PercentualJuros!=null ? Convert.ToDecimal(retorno.PercentualJuros) : 0M,
-                Comissao=retorno.Comissao!=null ? Convert.ToDecimal(retorno.Comissao) : 0M,
-                ValorFrete25=retorno.VlPrectab!=null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
-                ValorParcelas=retorno.VlPrectab!=null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
-                ValorFrete30=retorno.VlPrectab!=null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
+                Id = retorno.Id != null ? Guid.Parse(retorno.Id) : Guid.Empty,
+                CodigoCliente = retorno.CodigoCliente.ToString(),
+                CodigoLoja = retorno.CodigoLoja.ToString(),
+                FilialMinerthal = retorno.FilialMinerthal.ToString(),
+                TipoPedido = retorno.TipoPedido.ToString(),
+                TipoVenda = retorno.TipoVenda.ToString(),
+                PlanoPagamento = retorno.PlanoPagamento.ToString(),
+                TipoCobranca = retorno.TipoCobranca.ToString(),
+                Parcelas = retorno.Parcelas.ToString(),
+                CodProduto = retorno.CodProduto.ToString(),
+                Observacao = retorno.Observacao.ToString(),
+                NomeFilial = retorno.NomeFilial.ToString(),
+                NomeTipo = retorno.NomeTipo.ToString(),
+                NomeTipoVenda = retorno.NomeTipoVenda.ToString(),
+                NomeTipoCobranca = retorno.NomeTipoCobranca.ToString(),
+                NomePlanoPagamento = retorno.NomePlanoPagamento.ToString(),
+                PercentualDesconto = retorno.PercentualDesconto != null ? Convert.ToDecimal(retorno.PercentualDesconto) : 0M,
+                PercentualJuros = retorno.PercentualJuros != null ? Convert.ToDecimal(retorno.PercentualJuros) : 0M,
+                Comissao = retorno.Comissao != null ? Convert.ToDecimal(retorno.Comissao) : 0M,
+                ValorFrete25 = retorno.VlPrectab != null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
+                ValorParcelas = retorno.VlPrectab != null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
+                ValorFrete30 = retorno.VlPrectab != null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
             };
         }
 
         public void DeleteAll()
         {
             var scriptCommand = new StringBuilder();
-            scriptCommand.AppendLine($"Delete from Carrinho;");
-            scriptCommand.AppendLine($"Delete from Pedido;");
+            scriptCommand.AppendLine($"Delete from {NomeTabelaCarrinho};");
+            scriptCommand.AppendLine($"Delete from {NomeTabelaPedido};");
             var command = scriptCommand.ToString();
             _context.ExcecutarComandoCrud(command);
         }
@@ -401,8 +511,8 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public void DeleteById(Guid id)
         {
             var scriptCommand = new StringBuilder();
-            scriptCommand.AppendLine($"Delete from Carrinho WHERE PedidoId = '{id}';");
-            scriptCommand.AppendLine($"Delete from Pedido WHERE Id = '{id}';");
+            scriptCommand.AppendLine($"Delete from {NomeTabelaCarrinho} WHERE PedidoId = '{id}';");
+            scriptCommand.AppendLine($"Delete from {NomeTabelaPedido} WHERE Id = '{id}';");
 
             var command = scriptCommand.ToString();
             _context.ExcecutarComandoCrud(command);
@@ -410,14 +520,14 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void SavePedido(List<Pedido> pedido)
         {
-            if (pedido!=null && pedido.Any())
+            if (pedido != null && pedido.Any())
             {
                 var sb = new StringBuilder();
-                sb.AppendLine("DELETE FROM Pedido;");
+                sb.AppendLine($"DELETE FROM {NomeTabelaPedido};");
 
                 foreach (var item in pedido)
                 {
-                    
+
                     var commandInsert = $@"INSERT INTO [Pedido](Id,
                                                      CodigoCliente
                                                     ,CodigoLoja
@@ -466,11 +576,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     sb.AppendLine(commandInsert);
 
                     sb.AppendLine();
-                    if (item.ItensDoPedido.Count>0)
+                    if (item.ItensDoPedido.Count > 0)
                     {
                         foreach (var cart in item.ItensDoPedido)
                         {
-                            sb.AppendLine($@"INSERT INTO [Carrinho](
+                            sb.AppendLine($@"INSERT INTO [{NomeTabelaCarrinho}](
                                                   PedidoId
                                                  ,ProdutoId
                                                  ,Quantidade

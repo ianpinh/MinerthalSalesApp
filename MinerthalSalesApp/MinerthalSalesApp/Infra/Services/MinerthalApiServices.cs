@@ -27,6 +27,88 @@ namespace MinerthalSalesApp.Infra.Services
 
         }
 
+        public string ApiRequestServiceAsync(string queryId, bool filter,string codigoVendedor)
+        {
+            try
+            {
+                ServicoDeRede.IsInternectConnected();
+                var userDetailStr = AppUser();
+                var paramsToSend = new
+                {
+                    cEmp = "01",
+                    cFil = "01",
+                    lChkPrepEnv = true,
+                    ErrorType = "ErrorFullMessage",
+                    ClassName = "uVSNT001",
+                    FunctionName = "uGetInfoErp",
+                    FunctionParameters = new
+                    {
+                        idQuery = queryId,
+                        pagina = 1,
+                        RegistrosPag = registrosPorPagina,
+                        Filter = filter,
+                        MV_PAR01 = codigoVendedor
+                    }
+                };
+                var _requestJson = JsonConvert.SerializeObject(paramsToSend);
+                int attempts = 1;
+            tryAgain:
+
+                try
+                {
+
+                    if (urlWebService.Contains("https://"))
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
+                    var request = new HttpRequestMessage
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(urlWebService),
+                        Content = new StringContent(
+                                        _requestJson,
+                                        Encoding.UTF8,
+                                        MediaTypeNames.Application.Json),
+
+
+                    };
+                    using var client = new HttpClient();
+
+                    var task = Task.Run(() => client.SendAsync(request));
+                    task.Wait();
+                    var response = task.Result;
+
+
+                    //var response = await client.SendAsync(request).ConfigureAwait(false);
+                    //response.EnsureSuccessStatusCode();
+                    //var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    response.EnsureSuccessStatusCode();
+
+
+                    var responseBody = Task.Run(() => response.Content.ReadAsStringAsync());
+                    responseBody.Wait();
+
+                    return responseBody.Result;
+                }
+                catch (Exception ex)
+                {
+                    if (attempts <= 12)
+                    {
+                        attempts++;
+                        //Thread.Sleep(2000);
+                        goto tryAgain;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public string ApiRequestServiceAsync(string queryId, bool filter)
         {
             try

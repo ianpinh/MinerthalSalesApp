@@ -12,6 +12,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
         void Delete(int id);
         List<ResumoPedido> Pesquisa(string termoBusca);
         void SavePedido(List<ResumoPedido> resumoPedidos);
+        void SavePedidoVendedor(List<ResumoPedido> details, string codigoVendedor);
         int GetTotal();
         List<ResumoPedido> GetByNumPedido(string numeroPedido);
         void CriarTabela();

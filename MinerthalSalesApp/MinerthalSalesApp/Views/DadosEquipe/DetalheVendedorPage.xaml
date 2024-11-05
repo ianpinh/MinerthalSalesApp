@@ -347,7 +347,7 @@
                             CommandParameter="{Binding DadosJson}"
                             HeightRequest="60"
                             HorizontalOptions="Center"
-                            Text="Login como vendedor"
+                            Text="Novo Pedido"
                             TextColor="{AppThemeBinding Light=white,
                                                         Dark=black}"
                             VerticalOptions="Center"

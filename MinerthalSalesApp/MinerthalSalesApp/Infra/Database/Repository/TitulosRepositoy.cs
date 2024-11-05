@@ -8,16 +8,16 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 {
     public class TitulosRepositoy : ITitulosRepositoy
     {
+        private string NomeTabelaTitulo => RecuperarNomeDaTabela();
         private readonly IAppthalContext _context;
         public TitulosRepositoy(IAppthalContext context)
         {
             _context = context??throw new ArgumentNullException(nameof(context));
-            Init();
         }
 
-        private void Init()
+        private void Init(string tableName)
         {
-            var command = $@"CREATE TABLE IF NOT EXISTS Titulo(
+            var command = $@"CREATE TABLE IF NOT EXISTS {tableName}(
                                                   Id INTEGER PRIMARY KEY AUTOINCREMENT
                                                   ,CdRca VARCHAR(15)
                                                   ,CdRcaxxx VARCHAR(15)
@@ -31,10 +31,10 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             if (titulos!=null && titulos.Any())
             {
                 var scriptCommand = new StringBuilder();
-                scriptCommand.AppendLine("DELETE FROM Titulo;");
+                scriptCommand.AppendLine($"DELETE FROM {NomeTabelaTitulo};");
                 foreach (var item in titulos)
                 {
-                    var commandInsert = $@"INSERT INTO [Titulo](
+                    var commandInsert = $@"INSERT INTO [{NomeTabelaTitulo}](
                                                          CdRca
                                                         ,CdRcaxxx
                                                         ,QtFatSc
@@ -55,7 +55,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public List<Titulo> RecuperarTodosTitulos()
         {
-            var command = $@"SELECT * FROM Titulo;";
+            var command = $@"SELECT * FROM {NomeTabelaTitulo};";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -81,7 +81,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
      
         public List<Titulo> RecuperarTodosTitulosDoCliente(string codCliente)
         {
-            var command = $@"SELECT * FROM Titulo WHERE CdCliente='{codCliente}'";
+            var command = $@"SELECT * FROM {NomeTabelaTitulo} WHERE CdCliente='{codCliente}'";
             var retorno = _context.ExcecutarSelect(command);
 
             if (retorno == null)
@@ -107,7 +107,65 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void CriarTabela()
         {
-            Init();
+            Init(NomeTabelaTitulo);
+        }
+
+        public void SaveTitulosVendedor(List<Titulo> titulos, string codigoVendedor)
+        {
+            if (titulos != null && titulos.Any())
+            {
+                CriarTabelaTituloVendedor(codigoVendedor);
+                var scriptCommand = new StringBuilder();
+                scriptCommand.AppendLine($"DELETE FROM Titulo_{codigoVendedor};");
+                foreach (var item in titulos)
+                {
+                    var commandInsert = $@"INSERT INTO Titulo_{codigoVendedor}(
+                                                         CdRca
+                                                        ,CdRcaxxx
+                                                        ,QtFatSc
+                                                        ,QtFatCabsupl)
+                                                            VALUES (
+                                                         '{item.CdRca}'
+                                                        ,'{item.CdRcaxxx}'
+                                                        , {item.QtFatSc.ToStringInvariant("0.00")}
+                                                        , {item.QtFatCabsupl.ToStringInvariant("0.00")});";
+                    scriptCommand.AppendLine(commandInsert);
+                }
+
+
+                var command = scriptCommand.ToString();
+                _context.ExcecutarComandoCrud(command);
+            }
+        }
+
+        private void CriarTabelaTituloVendedor(string codigoVendedor)
+        {
+            var command = $@"CREATE TABLE IF NOT EXISTS Titulo_{codigoVendedor}(
+                                                  Id INTEGER PRIMARY KEY AUTOINCREMENT
+                                                  ,CdRca VARCHAR(15)
+                                                  ,CdRcaxxx VARCHAR(15)
+                                                  ,QtFatSc DECIMAL(7,2)
+                                                  ,QtFatCabsupl DECIMAL(7,2));";
+            _context.ExcecutarComandoCrud(command);
+        }
+
+        private string RecuperarNomeDaTabela()
+        {
+            try
+            {
+                if (App.VendedorSelecionado != null)
+                {
+                    var tableName = $"Titulo_{App.VendedorSelecionado.CodigoVendedor}";
+                    Init(tableName);
+                    return tableName;
+                }
+
+                return "Titulo";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

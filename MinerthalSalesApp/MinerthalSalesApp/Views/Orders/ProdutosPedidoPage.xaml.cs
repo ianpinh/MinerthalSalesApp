@@ -15,22 +15,22 @@ public partial class ProdutosPedidoPage : ContentPage
     private readonly PedidoViewModel model;
     public ProdutosPedidoPage(PedidoViewModel viewModel)
     {
-        model = viewModel!=null ? viewModel : App.PedidoViewModel;
+        model = viewModel != null ? viewModel : App.PedidoViewModel;
         BindingContext = model;
         InitializeComponent();
     }
 
     public ProdutosPedidoPage()
     {
-        model =  App.PedidoViewModel;
+        model = App.PedidoViewModel;
         BindingContext = model;
         InitializeComponent();
     }
 
     private void FecharLoading()
     {
-        GridLoading.IsVisible=false;
-        if (ListaProdutos.SelectedItem!=null)
+        GridLoading.IsVisible = false;
+        if (ListaProdutos.SelectedItem != null)
             ListaProdutos.SelectedItem = null;
     }
 
@@ -49,10 +49,10 @@ public partial class ProdutosPedidoPage : ContentPage
         await Task.Delay(500);
         ImgUserLoading.IsAnimationPlaying = true;
 
-        Loaded+=(s, e) =>
+        Loaded += (s, e) =>
         {
             if (!string.IsNullOrWhiteSpace(FiltroProduto.Text))
-                FiltroProduto.Text=string.Empty;
+                FiltroProduto.Text = string.Empty;
 
             RecarregarProdutos();
 
@@ -61,7 +61,7 @@ public partial class ProdutosPedidoPage : ContentPage
 
     private async void RecarregarProdutos()
     {
-        var pop = new PopupPage(new ViewModels.Shared.PopupViewModel { PopupMessage="Aguarde..." });
+        var pop = new PopupPage(new ViewModels.Shared.PopupViewModel { PopupMessage = "Aguarde..." });
         this.ShowPopup(pop);
         try
         {
@@ -84,7 +84,7 @@ public partial class ProdutosPedidoPage : ContentPage
         var textoFiltro = FiltroProduto.Text;
         var lst = model.FiltrarProdutos(textoFiltro);
 
-        var totalItensSource = ListaProdutos.ItemsSource!=null ? ListaProdutos.ItemsSource.Cast<object>().Count() : 0;
+        var totalItensSource = ListaProdutos.ItemsSource != null ? ListaProdutos.ItemsSource.Cast<object>().Count() : 0;
 
         if (lst.Count > totalItensSource)
         {
@@ -97,16 +97,26 @@ public partial class ProdutosPedidoPage : ContentPage
     {
         try
         {
-            var userDetailStr = new UserBasicInfo();
-            if (Preferences.ContainsKey(nameof(App.UserDetails)))
-            { }
+            Vendedor saler;
+            if (App.VendedorSelecionado != null)
+            {
+                var codigo = App.VendedorSelecionado.CodigoVendedor;
+                saler = App.VendedorRepository.GetByCodigo(codigo);
+            }
+            else
+            {
 
-            string userDetails = Preferences.Get(nameof(App.UserDetails), "");
-            userDetailStr = JsonConvert.DeserializeObject<UserBasicInfo>(userDetails);
+                var userDetailStr = new UserBasicInfo();
+                if (Preferences.ContainsKey(nameof(App.UserDetails)))
+                { }
 
-            var saler = App.VendedorRepository.GetByCodigo(userDetailStr.Codigo);
+                string userDetails = Preferences.Get(nameof(App.UserDetails), "");
+                userDetailStr = JsonConvert.DeserializeObject<UserBasicInfo>(userDetails);
 
-            if (saler.Id==0)
+                saler = App.VendedorRepository.GetByCodigo(userDetailStr.Codigo);
+            }
+
+            if (saler.Id == 0)
             {
                 var totalVendedores = App.VendedorRepository.GetTotal();
                 if (totalVendedores == 0)
@@ -117,10 +127,10 @@ public partial class ProdutosPedidoPage : ContentPage
 
             var tipoTabela = saler.TabPreco;
             var codigoProduto = produto.CdProduto;
-            var usuario = App.UserRepository.GetByCodigo(userDetailStr.Codigo);
+            var usuario = App.UserRepository.GetByCodigo(saler.CdRca);
             var tbPrecos = App.TabelaPrecoRepository.Get(produto.CdProduto, model.Pedido.FilialMinerthal, tipoTabela, model.Pedido.TipoVenda);
 
-            if (tbPrecos==null || !tbPrecos.Any())
+            if (tbPrecos == null || !tbPrecos.Any())
                 throw new CustomExceptions($"Não foram encontradas as faixas de valores para o produto {produto.CodigoProduto}-{produto.DsProduto}");
 
             var precoProduto = tbPrecos.FirstOrDefault().VlVvenda;
@@ -129,7 +139,7 @@ public partial class ProdutosPedidoPage : ContentPage
             var qtdMin = tbPrecos.Min(x => x.QtdMin);
             var qtdMax = tbPrecos.Max(x => x.QtdMax);
 
-            var produtoPrecoMaximo = precoProduto+valorMaximo;
+            var produtoPrecoMaximo = precoProduto + valorMaximo;
 
             return (valorMinimo, valorMaximo, precoProduto, qtdMin, qtdMax, produtoPrecoMaximo, tbPrecos);
 
@@ -166,35 +176,35 @@ public partial class ProdutosPedidoPage : ContentPage
         await Task.Delay(1000);
         try
         {
-            if (produto!=null)
+            if (produto != null)
             {
                 var ordem = 0;
                 if (model.Pedido.ItensPedido.Any())
                     ordem = model.Pedido.ItensPedido.Max(x => x.Ordem);
 
-                var (ValorMinimo, ValorMaximo, PrecoProduto, QtdMin, QtdMax, ProdutoPrecoMaximo, TbPrecosProduto)= await RecuperarValoresComissoes(produto);
+                var (ValorMinimo, ValorMaximo, PrecoProduto, QtdMin, QtdMax, ProdutoPrecoMaximo, TbPrecosProduto) = await RecuperarValoresComissoes(produto);
 
                 //var index = model.Pedido.ItensPedido.FindIndex(x => x.CodProduto == produto.CdProduto);
 
                 //if (index<0)
                 //{
 
-                model.ItemDeCalculoCarrinho= new ItensDto
+                model.ItemDeCalculoCarrinho = new ItensDto
                 {
                     CodProduto = produto.CdProduto,
                     ImagemProduto = produto.ImagemProduto,
                     Produto = produto,
-                    CodigoNomeProduto= produto.CodigoProduto,
-                    Ordem = (byte)(ordem+1),
-                    FreteUnidade = produto.VlPeso==25 ? model.Pedido.ValorFrete25 : model.Pedido.ValorFrete30,
+                    CodigoNomeProduto = produto.CodigoProduto,
+                    Ordem = (byte)(ordem + 1),
+                    FreteUnidade = produto.VlPeso == 25 ? model.Pedido.ValorFrete25 : model.Pedido.ValorFrete30,
                     ValorDescontoMinimo = ValorMinimo,
-                    ValorDescontoMaximo =ValorMaximo,
+                    ValorDescontoMaximo = ValorMaximo,
                     ValorBrutoProduto = PrecoProduto,
-                    ValorCombinado= PrecoProduto,
-                    QuantidadeMin =QtdMin,
-                    QuantidadeMax =QtdMax,
+                    ValorCombinado = PrecoProduto,
+                    QuantidadeMin = QtdMin,
+                    QuantidadeMax = QtdMax,
                     TbPrecosProduto = TbPrecosProduto,
-                    Quantidade=1,
+                    Quantidade = 1,
                     ProdutoPesp = produto.ProdutoPesp
                 };
 
