@@ -1484,8 +1484,10 @@ namespace MinerthalSalesApp.Infra.Services
         }
 
         bool IsLoadingSellers = false;
+
         private void CarregarDadosDoAppVendedoresAsync()
         {
+            int totalVendedoores = 0;
             int total = 0;
             if (!IsLoadingSellers)
             {
@@ -1494,14 +1496,14 @@ namespace MinerthalSalesApp.Infra.Services
                     IsLoadingSellers = true;
                     var listaDeVendedores = App.VendedorRepository.GetByCodigoSupervisor(App.UserDetails.Codigo);
 
-                    total += 1;
                     if (listaDeVendedores != null && listaDeVendedores.Any())
                     {
+                        totalVendedoores = listaDeVendedores.Count();
                         foreach (var vendedor in listaDeVendedores)
                         {
                             var lista = new List<CustomDictionary>();
                             foreach (ApiQueriesIdsEnum query in (ApiQueriesIdsEnum[])Enum.GetValues(typeof(ApiQueriesIdsEnum)))
-                            {
+                          {
                                 var _filter = (byte)query switch
                                 {
                                     1 => true,
@@ -1521,16 +1523,23 @@ namespace MinerthalSalesApp.Infra.Services
                                 });
                             }
                             CarregarDadosVendedorDaApiAsync(lista, vendedor.CdRca);
+                            total += 1;
                         }
-
                     }
-                    IsLoadingSellers = false;
+
                 }
                 catch (Exception ex)
                 {
-                    IsLoadingSellers = false;
-                    throw;
+                    if (total == totalVendedoores)
+                    {
+                        IsLoadingSellers = false;
+                    }
+                    else
+                    {
+                        total += 1;
+                    }
                 }
+                IsLoadingSellers = false;
             }
         }
     }

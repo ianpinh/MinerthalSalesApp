@@ -626,7 +626,10 @@ namespace MinerthalSalesApp.Infra.Services
                     };
 
                     using WSPEDIDOSERVICEPECASOAPClient client = new WSPEDIDOSERVICEPECASOAPClient();
-                    var codCliente = $"{cliente.A1Cod}{cliente.A1Loja}";
+
+                    var codCliente = $"{pedido.CodigoCliente}{pedido.CodigoLoja}";
+
+                    //var codCliente = $"{cliente.A1Cod}{cliente.A1Loja}";
                     var xml = SerializeToXml(_order);
 
                     var _retorno = await client.ADDPEDIDOPECAAsync(codCliente, pedido.FilialMinerthal, Guid.NewGuid().ToString(), _order).ConfigureAwait(true);
