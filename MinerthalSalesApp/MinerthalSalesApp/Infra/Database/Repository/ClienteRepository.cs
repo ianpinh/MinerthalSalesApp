@@ -147,8 +147,6 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             }
         }
 
-
-
         public Cliente GetByCodigo(string codCliente)
         {
             try
