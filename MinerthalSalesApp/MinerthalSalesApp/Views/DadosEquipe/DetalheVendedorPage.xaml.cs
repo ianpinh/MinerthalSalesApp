@@ -1,7 +1,10 @@
 using MinerthalSalesApp.Controls;
 using MinerthalSalesApp.Customs.Exceptions;
 using MinerthalSalesApp.Infra.Database.Tables;
+using MinerthalSalesApp.Models;
+using MinerthalSalesApp.ViewModels.Shared;
 using MinerthalSalesApp.Views.Clients;
+using MinerthalSalesApp.Views.Dashboard;
 using MinerthalSalesApp.Views.Startup;
 using Newtonsoft.Json;
 namespace MinerthalSalesApp.Views.DadosEquipe;
@@ -23,6 +26,7 @@ public partial class DetalheVendedorPage : ContentPage
 		if (!string.IsNullOrWhiteSpace(_vendedorStr))
 		{
 			var dadosVendedor = JsonConvert.DeserializeObject<Vendedor>(_vendedorStr);
+			var user = App.UserRepository.GetByCodigo(dadosVendedor.CdRca);
 			if (dadosVendedor != null)
 			{
 				var lstClinetes = await App.ServicoDeCarregamentoDasBases.PesquisarClienteAsync(dadosVendedor.CdRca);
@@ -31,10 +35,12 @@ public partial class DetalheVendedorPage : ContentPage
 					Clientes = lstClinetes,
 					CodigoVendedor = dadosVendedor.CdRca,
 					VendedorId = dadosVendedor.Id,
+					NomeVendedor = user.SellerName
 				};
 
 				App.VendedorSelecionado = vendedorSelecionado;
-				await Shell.Current.GoToAsync($"//{nameof(ClientsPage)}");
+                AppConstant.AddFlyoutMenusDetails();
+                //await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
 			}
 
 
@@ -90,7 +96,9 @@ public partial class DetalheVendedorPage : ContentPage
 			string userDetailStr = JsonConvert.SerializeObject(userDetails);
 			Preferences.Set(nameof(App.UserDetails), userDetailStr);
 			App.UserDetails = userDetails;
-			AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+
+            var model = new FlyoutHeaderControlViewModel();
+            AppShell.Current.FlyoutHeader = new FlyoutHeaderControl(model);
 		}
 
 		//var totalAtualizacoes = App.AtualizacaoRepository.GetTotal();

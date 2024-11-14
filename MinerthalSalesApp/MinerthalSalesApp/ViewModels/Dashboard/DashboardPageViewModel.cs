@@ -21,7 +21,9 @@ namespace MinerthalSalesApp.ViewModels.Dashboard
 		{
 			_popupAppService = popupAppService ?? throw new ArgumentNullException(nameof(popupAppService));
 			_alertService = alertService ?? throw new ArgumentNullException(nameof(alertService));
-			AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+
+            var model = new FlyoutHeaderControlViewModel();
+            AppShell.Current.FlyoutHeader = new FlyoutHeaderControl(model);
 
 			IsEquipeButtonVisible = false;
 			VisibleOnlyForManagers = false;

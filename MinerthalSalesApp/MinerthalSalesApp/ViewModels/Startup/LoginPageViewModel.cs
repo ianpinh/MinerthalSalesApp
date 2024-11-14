@@ -140,7 +140,8 @@ namespace MinerthalSalesApp.ViewModels.Startup
 			}
 			finally
 			{
-				AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+                var model = new FlyoutHeaderControlViewModel();
+                AppShell.Current.FlyoutHeader = new FlyoutHeaderControl(model);
 			}
 		}
 

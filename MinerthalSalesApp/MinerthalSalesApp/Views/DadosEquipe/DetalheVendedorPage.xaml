@@ -347,7 +347,7 @@
                             CommandParameter="{Binding DadosJson}"
                             HeightRequest="60"
                             HorizontalOptions="Center"
-                            Text="Novo Pedido"
+                            Text="Entrar"
                             TextColor="{AppThemeBinding Light=white,
                                                         Dark=black}"
                             VerticalOptions="Center"

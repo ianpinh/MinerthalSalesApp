@@ -6,6 +6,7 @@ using MinerthalSalesApp.Views.Products;
 using MinerthalSalesApp.Views.Orders;
 using MinerthalSalesApp.Views.Pesquisa;
 using MinerthalSalesApp.Views.DadosEquipe;
+using MinerthalSalesApp.ViewModels.Shared;
 
 namespace MinerthalSalesApp.Models
 {
@@ -13,9 +14,9 @@ namespace MinerthalSalesApp.Models
     {
         public async static void AddFlyoutMenusDetails(string route = default)
         {
-         
 
-            Shell.Current.FlyoutHeader = new FlyoutHeaderControl();
+            var model = new FlyoutHeaderControlViewModel();
+            Shell.Current.FlyoutHeader = new FlyoutHeaderControl(model);
 
             //var adminDashboardInfo = Shell.Current.Items.Where(f => f.Route == nameof(AdminDashboardPage)).FirstOrDefault();
             //if (adminDashboardInfo != null) Shell.Current.Items.Remove(adminDashboardInfo);
