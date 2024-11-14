@@ -1,19 +1,18 @@
+using MinerthalSalesApp.ViewModels.Shared;
+
 namespace MinerthalSalesApp.Controls;
 public partial class FlyoutHeaderControl : StackLayout
 {
-	public FlyoutHeaderControl()
-	{
-		InitializeComponent();
+    private FlyoutHeaderControlViewModel _model;
+    public FlyoutHeaderControl(FlyoutHeaderControlViewModel model)
+    {
+        InitializeComponent();
+        _model = model;
+        BindingContext = _model;
+    }
 
-		if (App.UserDetails != null)
-		{
-			lblUserName.Text = App.UserDetails.FullName;
-			lblUserCodigo.Text = App.UserDetails.Codigo;
-			//lblUserRole.Text = App.UserDetails.RoleText;
-
-			
-		}
-	}
-
-	
+    public void UpdateBindindContext()
+    {
+        _model.UpdadteLoginUser();
+    }
 }

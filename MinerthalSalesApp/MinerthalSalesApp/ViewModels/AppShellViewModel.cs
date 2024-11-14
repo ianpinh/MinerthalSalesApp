@@ -3,6 +3,7 @@ using MinerthalSalesApp.Controls;
 using MinerthalSalesApp.Customs.Exceptions;
 using MinerthalSalesApp.Infra.Database.Tables;
 using MinerthalSalesApp.Models;
+using MinerthalSalesApp.ViewModels.Shared;
 using MinerthalSalesApp.Views.Dashboard;
 using MinerthalSalesApp.Views.Startup;
 using Newtonsoft.Json;
@@ -70,8 +71,12 @@ namespace MinerthalSalesApp.ViewModels
         async Task SignInManager()
         {
             App.VendedorSelecionado = null;
+
             IsManagerButtonVisible = false;
-            await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
+
+            var model = new FlyoutHeaderControlViewModel();
+            AppShell.Current.FlyoutHeader = new FlyoutHeaderControl(model);
+            // await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
             //if (!string.IsNullOrWhiteSpace(App.UserDetails.UserInfoManager))
             //{
             //	var userDetails = JsonConvert.DeserializeObject<UserBasicInfo>(App.UserDetails.UserInfoManager);
@@ -126,7 +131,9 @@ namespace MinerthalSalesApp.ViewModels
                 string userDetailStr = JsonConvert.SerializeObject(userDetails);
                 Preferences.Set(nameof(App.UserDetails), userDetailStr);
                 App.UserDetails = userDetails;
-                AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
+
+                var model = new FlyoutHeaderControlViewModel();
+                AppShell.Current.FlyoutHeader = new FlyoutHeaderControl(model);
             }
 
 

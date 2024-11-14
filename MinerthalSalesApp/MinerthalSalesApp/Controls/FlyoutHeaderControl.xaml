@@ -8,8 +8,12 @@
         <Label
             x:Name="lblUserName"
             FontAttributes="Bold"
-            FontSize="13" />
+            FontSize="13"
+            Text="{Binding LblUserName}" />
         <!--<Label VerticalTextAlignment="Center" FontAttributes="Bold" x:Name="lblUserRole" FontSize="16" />-->
     </StackLayout>
-    <Label x:Name="lblUserCodigo" FontSize="11" />
+    <Label
+        x:Name="lblUserCodigo"
+        FontSize="11"
+        Text="{Binding LblUserCodigo}" />
 </StackLayout>
