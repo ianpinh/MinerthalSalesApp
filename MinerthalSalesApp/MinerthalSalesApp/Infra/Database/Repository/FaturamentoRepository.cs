@@ -367,7 +367,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 return new List<Faturamento>();
 
             var hoje = DateTime.Today;
-            var titulosAvencer = titulos.Where(x => x.DataDeVencimento>=hoje && x.DataDeVencimento.Value.Month==hoje.Month).OrderBy(x => x.DataDeVencimento).ToList();
+            var titulosAvencer = titulos.Where(x => x.DataDeVencimento>=hoje).OrderBy(x => x.DataDeVencimento).ToList();
             //var titulosAvencer = titulos/*.Where(x => x.DataDeVencimento>=hoje && x.DataDeVencimento.Value.Month==hoje.Month)*/.OrderBy(x => x.DataDeVencimento).ToList();
 
             return titulosAvencer;
