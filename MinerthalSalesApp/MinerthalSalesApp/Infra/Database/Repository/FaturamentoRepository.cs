@@ -124,39 +124,49 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                var hoje = DateTime.Today;
-                var command = $@"SELECT F.* 
-                                       ,(SELECT C.A1Nome FROM {NomeTabelaCliente} C WHERE C.A1Loja = (SELECT substr(F.CdCliente,7,2)) 
-                                        AND C.A1Cod = (SELECT substr(F.CdCliente,0,7))) AS NomeCliente 
-                                        FROM {NomeTabelaFaturamento} F                                        
-                                        WHERE F.DtVenc <'{hoje.Year}-{hoje.Month}-{hoje.Day}';";
-                var retorno = _context.ExcecutarSelect(command);
 
-                if (retorno == null)
+                var titulos = GetAll();
+                if (titulos == null || titulos.Count == 0)
                     return new List<Faturamento>();
 
-                var lstuser = new List<Faturamento>();
-                foreach (var item in retorno)
-                {
-                    lstuser.Add(new Faturamento
-                    {
-                        NomeCliente = item.NomeCliente?.ToString(),
-                        Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
-                        CdCliente = item.CdCliente.ToString(),
-                        NrDocum = item.NrDocum.ToString(),
-                        NrParcel = item.NrParcel.ToString(),
-                        DtEmissao = item.DtEmissao.ToString(),
-                        DtVenc = item.DtVenc.ToString(),
-                        TpCobran = item.TpCobran.ToString(),
-                        CdRca = item.CdRca.ToString(),
-                        CdRcaxxx = item.CdRcaxxx.ToString(),
-                        QtDiaatr = item.QtDiaatr != null ? Convert.ToInt32(item.QtDiaatr) : 0,
-                        Juros = item.Juros != null ? Convert.ToDecimal(item.Juros) : 0M,
-                        VlDocum = item.VlDocum != null ? Convert.ToDecimal(item.VlDocum) : 0M,
-                        VlJuro = item.VlJuro != null ? Convert.ToDecimal(item.VlJuro) : 0M,
-                    });
-                }
-                return lstuser;
+                var hoje = DateTime.Today;
+                var titulosAvencer = titulos.Where(x => x.DataDeVencimento < hoje).OrderBy(x => x.DataDeVencimento).ToList();
+                //var titulosAvencer = titulos/*.Where(x => x.DataDeVencimento>=hoje && x.DataDeVencimento.Value.Month==hoje.Month)*/.OrderBy(x => x.DataDeVencimento).ToList();
+
+                return titulosAvencer;
+                //var hoje = DateTime.Today;
+                //var command = $@"SELECT F.* 
+                //                       ,(SELECT C.A1Nome FROM {NomeTabelaCliente} C WHERE C.A1Loja = (SELECT substr(F.CdCliente,7,2)) 
+                //                        AND C.A1Cod = (SELECT substr(F.CdCliente,0,7))) AS NomeCliente 
+                //                        FROM {NomeTabelaFaturamento} F                                        
+                //                        WHERE F.DtVenc <'{hoje.Year}-{hoje.Month}-{hoje.Day}';";
+                //var retorno = _context.ExcecutarSelect(command);
+
+                //if (retorno == null)
+                //    return new List<Faturamento>();
+
+                //var lstuser = new List<Faturamento>();
+                //foreach (var item in retorno)
+                //{
+                //    lstuser.Add(new Faturamento
+                //    {
+                //        NomeCliente = item.NomeCliente?.ToString(),
+                //        Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                //        CdCliente = item.CdCliente.ToString(),
+                //        NrDocum = item.NrDocum.ToString(),
+                //        NrParcel = item.NrParcel.ToString(),
+                //        DtEmissao = item.DtEmissao.ToString(),
+                //        DtVenc = item.DtVenc.ToString(),
+                //        TpCobran = item.TpCobran.ToString(),
+                //        CdRca = item.CdRca.ToString(),
+                //        CdRcaxxx = item.CdRcaxxx.ToString(),
+                //        QtDiaatr = item.QtDiaatr != null ? Convert.ToInt32(item.QtDiaatr) : 0,
+                //        Juros = item.Juros != null ? Convert.ToDecimal(item.Juros) : 0M,
+                //        VlDocum = item.VlDocum != null ? Convert.ToDecimal(item.VlDocum) : 0M,
+                //        VlJuro = item.VlJuro != null ? Convert.ToDecimal(item.VlJuro) : 0M,
+                //    });
+                //}
+                //return lstuser;
             }
             catch (Exception)
             {
@@ -357,7 +367,8 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 return new List<Faturamento>();
 
             var hoje = DateTime.Today;
-            var titulosAvencer = titulos/*.Where(x => x.DataDeVencimento>=hoje && x.DataDeVencimento.Value.Month==hoje.Month)*/.OrderBy(x => x.DataDeVencimento).ToList();
+            var titulosAvencer = titulos.Where(x => x.DataDeVencimento>=hoje && x.DataDeVencimento.Value.Month==hoje.Month).OrderBy(x => x.DataDeVencimento).ToList();
+            //var titulosAvencer = titulos/*.Where(x => x.DataDeVencimento>=hoje && x.DataDeVencimento.Value.Month==hoje.Month)*/.OrderBy(x => x.DataDeVencimento).ToList();
 
             return titulosAvencer;
 
