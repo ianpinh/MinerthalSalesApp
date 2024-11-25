@@ -170,7 +170,7 @@ namespace MinerthalSalesApp.Infra.Database.Tables
                 var _phone = "";
                 string _tel = LimpaCepCpfCnpj(A1Telex);
                 if (_tel.Length == 9)
-                    _phone= Convert.ToUInt64(_tel).ToString(@"00000\-0000");
+                    _phone = Convert.ToUInt64(_tel).ToString(@"00000\-0000");
                 else
                     _phone = Convert.ToUInt64(_tel).ToString(@"0000\-0000");
 

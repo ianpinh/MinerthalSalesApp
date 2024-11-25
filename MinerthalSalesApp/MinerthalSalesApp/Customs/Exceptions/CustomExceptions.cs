@@ -5,9 +5,9 @@ namespace MinerthalSalesApp.Customs.Exceptions
     public class CustomExceptions : Exception
     {
         public ApiMinertalTypes? ErroLancadoPor { get; private set; }
-        public CustomExceptions(string mensagem, ApiMinertalTypes? erroLancadoPor = default ): base(mensagem)
+        public CustomExceptions(string mensagem, ApiMinertalTypes? erroLancadoPor = default) : base(mensagem)
         {
-            ErroLancadoPor=erroLancadoPor;
+            ErroLancadoPor = erroLancadoPor;
         }
 
         public CustomExceptions(string mensagem, Exception innerException) : base(mensagem, innerException)

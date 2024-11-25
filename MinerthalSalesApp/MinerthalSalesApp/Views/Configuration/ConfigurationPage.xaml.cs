@@ -17,7 +17,7 @@ public partial class ConfigurationPage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
         _alertService = App.AlertService;
-        _servicoAtualizacaoBases=App.ServicoDeCarregamentoDasBases;
+        _servicoAtualizacaoBases = App.ServicoDeCarregamentoDasBases;
     }
 
     protected override void OnDisappearing()
@@ -67,12 +67,12 @@ public partial class ConfigurationPage : ContentPage
         var totalFiliais = App.FilialRepository.GetTotal();
         var totalBancos = App.BancoRepository.GetTotal();
 
-        LblProdutos.Text =$"Atualizar Produtos-  {totalProdutos}";
-        LblPlanos.Text =$"Atualizar Planos -  {totalPlanos}";
-        LblPClientes.Text =$"Atualizar Clientes -  {totalClientes}";
-        LblRanking.Text =$"Atualizar Ranking -  {totalRanking}";
-        LblFiliais.Text =$"Atualizar Filiais -  {totalFiliais}";
-        LblBanco.Text =$"Atualizar Bancos -  {totalBancos}";
-        LblTabelaPrecos.Text =$"Atualizar Tabela de Preços -  {totalTbPrecos}";
+        LblProdutos.Text = $"Atualizar Produtos-  {totalProdutos}";
+        LblPlanos.Text = $"Atualizar Planos -  {totalPlanos}";
+        LblPClientes.Text = $"Atualizar Clientes -  {totalClientes}";
+        LblRanking.Text = $"Atualizar Ranking -  {totalRanking}";
+        LblFiliais.Text = $"Atualizar Filiais -  {totalFiliais}";
+        LblBanco.Text = $"Atualizar Bancos -  {totalBancos}";
+        LblTabelaPrecos.Text = $"Atualizar Tabela de Preços -  {totalTbPrecos}";
     }
 }

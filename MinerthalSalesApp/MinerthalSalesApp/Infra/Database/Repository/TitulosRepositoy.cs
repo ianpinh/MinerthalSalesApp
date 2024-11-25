@@ -12,7 +12,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public TitulosRepositoy(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         private void Init(string tableName)
@@ -28,7 +28,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void SaveTitulos(List<Titulo> titulos)
         {
-            if (titulos!=null && titulos.Any())
+            if (titulos != null && titulos.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine($"DELETE FROM {NomeTabelaTitulo};");
@@ -47,7 +47,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     scriptCommand.AppendLine(commandInsert);
                 }
 
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
@@ -68,17 +68,17 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 lstPlanos.Add(new Titulo
                 {
-                    Id= Convert.ToInt32(item.Id),
-                    CdRca=item.CdRca.ToString(),
-                    CdRcaxxx=item.CdRcaxxx.ToString(),
-                    QtFatSc=item.QtFatSc!=null ? Convert.ToDecimal(item.QtFatSc) : 0M,
-                    QtFatCabsupl=item.QtFatCabsupl!=null ? Convert.ToDecimal(item.QtFatCabsupl) : 0M,
+                    Id = Convert.ToInt32(item.Id),
+                    CdRca = item.CdRca.ToString(),
+                    CdRcaxxx = item.CdRcaxxx.ToString(),
+                    QtFatSc = item.QtFatSc != null ? Convert.ToDecimal(item.QtFatSc) : 0M,
+                    QtFatCabsupl = item.QtFatCabsupl != null ? Convert.ToDecimal(item.QtFatCabsupl) : 0M,
                 });
             }
 
             return lstPlanos;
         }
-     
+
         public List<Titulo> RecuperarTodosTitulosDoCliente(string codCliente)
         {
             var command = $@"SELECT * FROM {NomeTabelaTitulo} WHERE CdCliente='{codCliente}'";
@@ -94,11 +94,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 lstPlanos.Add(new Titulo
                 {
-                    Id= Convert.ToInt32(item.Id),
-                    CdRca=item.CdRca.ToString(),
-                    CdRcaxxx=item.CdRcaxxx.ToString(),
-                    QtFatSc=item.QtFatSc!=null ? Convert.ToDecimal(item.QtFatSc) : 0M,
-                    QtFatCabsupl=item.QtFatCabsupl!=null ? Convert.ToDecimal(item.QtFatCabsupl) : 0M,
+                    Id = Convert.ToInt32(item.Id),
+                    CdRca = item.CdRca.ToString(),
+                    CdRcaxxx = item.CdRcaxxx.ToString(),
+                    QtFatSc = item.QtFatSc != null ? Convert.ToDecimal(item.QtFatSc) : 0M,
+                    QtFatCabsupl = item.QtFatCabsupl != null ? Convert.ToDecimal(item.QtFatCabsupl) : 0M,
                 });
             }
 

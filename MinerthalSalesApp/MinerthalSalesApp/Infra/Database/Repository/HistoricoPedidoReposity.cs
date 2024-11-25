@@ -15,7 +15,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public HistoricoPedidoReposity(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         private void Init(string tableName)
@@ -113,28 +113,28 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new HistoricoDePedidos
             {
-                Id= retorno.Id!=null ? Convert.ToInt32(retorno.Id) : 0,
-                CdCliente=retorno.CdCliente.ToString(),
-                NrPedido=retorno.NrPedido.ToString(),
-                DtPedido=retorno.dtPedido.ToString(),
-                TpPedido=retorno.TpPedido.ToString(),
-                NrNota=retorno.NrNota.ToString(),
-                DtEmissao=retorno.DtEmissao.ToString(),
-                TxObs1=retorno.TxObs1.ToString(),
-                X5Chave=retorno.X5Chave.ToString(),
-                NrCarreg=retorno.NrCarreg.ToString(),
-                CdTipocob=retorno.CdTipocob.ToString(),
-                CdPlano=retorno.CdPlano.ToString(),
-                DsPlano=retorno.DsPlano.ToString(),
-                PedidoMaxima=retorno.PedidoMaxima.ToString(),
-                ZyMinum=retorno.ZyMinum.ToString(),
-                DtSaidaMerc=retorno.DtSaidaMerc.ToString(),
-                Transportador=retorno.Transportador.ToString(),
-                Credito=retorno.Credito.ToString(),
-                Ordem=retorno.Ordem.ToString(),
-                CdRcaxxx=retorno.CdRcaxxx.ToString(),
-                VlFinal=retorno.VlFinal!=null ? Convert.ToDecimal(retorno.VlFinal) : 0M,
-                VlTotal=retorno.VlTotal!=null ? Convert.ToDecimal(retorno.VlTotal) : 0M
+                Id = retorno.Id != null ? Convert.ToInt32(retorno.Id) : 0,
+                CdCliente = retorno.CdCliente.ToString(),
+                NrPedido = retorno.NrPedido.ToString(),
+                DtPedido = retorno.dtPedido.ToString(),
+                TpPedido = retorno.TpPedido.ToString(),
+                NrNota = retorno.NrNota.ToString(),
+                DtEmissao = retorno.DtEmissao.ToString(),
+                TxObs1 = retorno.TxObs1.ToString(),
+                X5Chave = retorno.X5Chave.ToString(),
+                NrCarreg = retorno.NrCarreg.ToString(),
+                CdTipocob = retorno.CdTipocob.ToString(),
+                CdPlano = retorno.CdPlano.ToString(),
+                DsPlano = retorno.DsPlano.ToString(),
+                PedidoMaxima = retorno.PedidoMaxima.ToString(),
+                ZyMinum = retorno.ZyMinum.ToString(),
+                DtSaidaMerc = retorno.DtSaidaMerc.ToString(),
+                Transportador = retorno.Transportador.ToString(),
+                Credito = retorno.Credito.ToString(),
+                Ordem = retorno.Ordem.ToString(),
+                CdRcaxxx = retorno.CdRcaxxx.ToString(),
+                VlFinal = retorno.VlFinal != null ? Convert.ToDecimal(retorno.VlFinal) : 0M,
+                VlTotal = retorno.VlTotal != null ? Convert.ToDecimal(retorno.VlTotal) : 0M
             };
         }
 
@@ -152,37 +152,37 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 try
                 {
                     var historico = new HistoricoDePedidos();
-                    historico.Id= item.Id!=null ? Convert.ToInt32(item.Id) : 0;
-                    historico.CdCliente=item.CdCliente!=null ? item.CdCliente.ToString() : "";
-                    historico.NrPedido=item.NrPedido!=null ? item.NrPedido.ToString() : "";
-                    historico.DtPedido=item.DtPedido!=null ? item.DtPedido.ToString() : "";
-                    historico.TpPedido=item.TpPedido!=null ? item.TpPedido.ToString() : "";
-                    historico.NrNota=item.NrNota!=null ? item.NrNota.ToString() : "";
-                    historico.DtEmissao=item.DtEmissao!=null ? item.DtEmissao.ToString() : "";
-                    historico.TxObs1=item.TxObs1!=null ? item.TxObs1.ToString() : "";
-                    historico.X5Chave=item.X5Chave!=null ? item.X5Chave.ToString() : "";
-                    historico.NrCarreg=item.NrCarreg!=null ? item.NrCarreg.ToString() : "";
-                    historico.CdTipocob=item.CdTipocob!=null ? item.CdTipocob.ToString() : "";
-                    historico.CdPlano=item.CdPlano!=null ? item.CdPlano.ToString() : "";
-                    historico.DsPlano=item.DsPlano!=null ? item.DsPlano.ToString() : "";
-                    historico.PedidoMaxima=item.PedidoMaxima!=null ? item.PedidoMaxima.ToString() : "";
-                    historico.ZyMinum=item.ZyMinum!=null ? item.ZyMinum.ToString() : "";
-                    historico.DtSaidaMerc=item.DtSaidaMerc!=null ? item.DtSaidaMerc.ToString() : "";
-                    historico.Transportador=item.Transportador!=null ? item.Transportador.ToString() : "";
-                    historico.Credito=item.Credito!=null ? item.Credito.ToString() : "";
-                    historico.Ordem=item.Ordem!=null ? item.Ordem.ToString() : "";
-                    historico.CdRcaxxx=item.CdRcaxxx!=null ? item.CdRcaxxx.ToString() : "";
-                    historico.VlFinal=item.VlFinal!=null ? Convert.ToDecimal(item.VlFinal) : 0M;
-                    historico.VlTotal=item.VlTotal!=null ? Convert.ToDecimal(item.VlTotal) : 0;
+                    historico.Id = item.Id != null ? Convert.ToInt32(item.Id) : 0;
+                    historico.CdCliente = item.CdCliente != null ? item.CdCliente.ToString() : "";
+                    historico.NrPedido = item.NrPedido != null ? item.NrPedido.ToString() : "";
+                    historico.DtPedido = item.DtPedido != null ? item.DtPedido.ToString() : "";
+                    historico.TpPedido = item.TpPedido != null ? item.TpPedido.ToString() : "";
+                    historico.NrNota = item.NrNota != null ? item.NrNota.ToString() : "";
+                    historico.DtEmissao = item.DtEmissao != null ? item.DtEmissao.ToString() : "";
+                    historico.TxObs1 = item.TxObs1 != null ? item.TxObs1.ToString() : "";
+                    historico.X5Chave = item.X5Chave != null ? item.X5Chave.ToString() : "";
+                    historico.NrCarreg = item.NrCarreg != null ? item.NrCarreg.ToString() : "";
+                    historico.CdTipocob = item.CdTipocob != null ? item.CdTipocob.ToString() : "";
+                    historico.CdPlano = item.CdPlano != null ? item.CdPlano.ToString() : "";
+                    historico.DsPlano = item.DsPlano != null ? item.DsPlano.ToString() : "";
+                    historico.PedidoMaxima = item.PedidoMaxima != null ? item.PedidoMaxima.ToString() : "";
+                    historico.ZyMinum = item.ZyMinum != null ? item.ZyMinum.ToString() : "";
+                    historico.DtSaidaMerc = item.DtSaidaMerc != null ? item.DtSaidaMerc.ToString() : "";
+                    historico.Transportador = item.Transportador != null ? item.Transportador.ToString() : "";
+                    historico.Credito = item.Credito != null ? item.Credito.ToString() : "";
+                    historico.Ordem = item.Ordem != null ? item.Ordem.ToString() : "";
+                    historico.CdRcaxxx = item.CdRcaxxx != null ? item.CdRcaxxx.ToString() : "";
+                    historico.VlFinal = item.VlFinal != null ? Convert.ToDecimal(item.VlFinal) : 0M;
+                    historico.VlTotal = item.VlTotal != null ? Convert.ToDecimal(item.VlTotal) : 0;
                     lstHistorico.Add(historico);
                 }
                 catch (Exception ex)
                 {
                     App.LogRepository.Add(new Log
                     {
-                        Data=DateTime.Now,
-                        ErrorDetail=ex.Message,
-                        Command=command
+                        Data = DateTime.Now,
+                        ErrorDetail = ex.Message,
+                        Command = command
                     });
                 }
             }
@@ -204,31 +204,31 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 lstHistorico.Add(new HistoricoDePedidos
                 {
-                    Id= item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    CdCliente=item.CdCliente.ToString(),
-                    NrPedido=item.NrPedido.ToString(),
-                    DtPedido=item.dtPedido.ToString(),
-                    TpPedido=item.TpPedido.ToString(),
-                    NrNota=item.NrNota.ToString(),
-                    DtEmissao=item.DtEmissao.ToString(),
-                    TxObs1=item.TxObs1.ToString(),
-                    X5Chave=item.X5Chave.ToString(),
-                    NrCarreg=item.NrCarreg.ToString(),
-                    CdTipocob=item.CdTipocob.ToString(),
-                    CdPlano=item.CdPlano.ToString(),
-                    DsPlano=item.DsPlano.ToString(),
-                    PedidoMaxima=item.PedidoMaxima.ToString(),
-                    ZyMinum=item.ZyMinum.ToString(),
-                    DtSaidaMerc=item.DtSaidaMerc.ToString(),
-                    Transportador=item.Transportador.ToString(),
-                    Credito=item.Credito.ToString(),
-                    Ordem=item.Ordem.ToString(),
-                    CdRcaxxx=item.CdRcaxxx.ToString(),
-                    VlFinal=item.VlFinal!=null ? Convert.ToDecimal(item.VlFinal) : 0M,
-                    VlTotal=item.VlTotal!=null ? Convert.ToDecimal(item.VlTotal) : 0M
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    CdCliente = item.CdCliente.ToString(),
+                    NrPedido = item.NrPedido.ToString(),
+                    DtPedido = item.dtPedido.ToString(),
+                    TpPedido = item.TpPedido.ToString(),
+                    NrNota = item.NrNota.ToString(),
+                    DtEmissao = item.DtEmissao.ToString(),
+                    TxObs1 = item.TxObs1.ToString(),
+                    X5Chave = item.X5Chave.ToString(),
+                    NrCarreg = item.NrCarreg.ToString(),
+                    CdTipocob = item.CdTipocob.ToString(),
+                    CdPlano = item.CdPlano.ToString(),
+                    DsPlano = item.DsPlano.ToString(),
+                    PedidoMaxima = item.PedidoMaxima.ToString(),
+                    ZyMinum = item.ZyMinum.ToString(),
+                    DtSaidaMerc = item.DtSaidaMerc.ToString(),
+                    Transportador = item.Transportador.ToString(),
+                    Credito = item.Credito.ToString(),
+                    Ordem = item.Ordem.ToString(),
+                    CdRcaxxx = item.CdRcaxxx.ToString(),
+                    VlFinal = item.VlFinal != null ? Convert.ToDecimal(item.VlFinal) : 0M,
+                    VlTotal = item.VlTotal != null ? Convert.ToDecimal(item.VlTotal) : 0M
                 });
             }
-            return lstHistorico!=null && lstHistorico.Any() ? lstHistorico.OrderByDescending(x => x.DataPedido).Take(50).ToList() : new List<HistoricoDePedidos>();
+            return lstHistorico != null && lstHistorico.Any() ? lstHistorico.OrderByDescending(x => x.DataPedido).Take(50).ToList() : new List<HistoricoDePedidos>();
 
         }
 
@@ -237,12 +237,12 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var mesAnterior = DateTime.Today.AddMonths(-1);
             var lista = GetAll();
             var historico = lista.Where(x => x.DataPedido.Value >= mesAnterior).ToList();
-            return lista!=null && lista.Any() ? lista.OrderByDescending(x => x.DataPedido).Take(20).ToList() : new List<HistoricoDePedidos>();
+            return lista != null && lista.Any() ? lista.OrderByDescending(x => x.DataPedido).Take(20).ToList() : new List<HistoricoDePedidos>();
         }
 
         public void Add(HistoricoDePedidos historico)
         {
-            if (historico!=null)
+            if (historico != null)
             {
                 var scriptCommand = new StringBuilder();
 
@@ -300,7 +300,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<HistoricoDePedidos> historico)
         {
-            if (historico!=null && historico.Any())
+            if (historico != null && historico.Any())
             {
                 var scriptCommand = new StringBuilder();
 
@@ -394,28 +394,28 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 lstHistorico.Add(new HistoricoDePedidos
                 {
-                    Id= item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    CdCliente=item.CdCliente.ToString(),
-                    NrPedido=item.NrPedido.ToString(),
-                    DtPedido=item.dtPedido.ToString(),
-                    TpPedido=item.TpPedido.ToString(),
-                    NrNota=item.NrNota.ToString(),
-                    DtEmissao=item.DtEmissao.ToString(),
-                    TxObs1=item.TxObs1.ToString(),
-                    X5Chave=item.X5Chave.ToString(),
-                    NrCarreg=item.NrCarreg.ToString(),
-                    CdTipocob=item.CdTipocob.ToString(),
-                    CdPlano=item.CdPlano.ToString(),
-                    DsPlano=item.DsPlano.ToString(),
-                    PedidoMaxima=item.PedidoMaxima.ToString(),
-                    ZyMinum=item.ZyMinum.ToString(),
-                    DtSaidaMerc=item.DtSaidaMerc.ToString(),
-                    Transportador=item.Transportador.ToString(),
-                    Credito=item.Credito.ToString(),
-                    Ordem=item.Ordem.ToString(),
-                    CdRcaxxx=item.CdRcaxxx.ToString(),
-                    VlFinal=item.VlFinal!=null ? Convert.ToDecimal(item.VlFinal) : 0M,
-                    VlTotal=item.VlTotal!=null ? Convert.ToDecimal(item.VlTotal) : 0M
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    CdCliente = item.CdCliente.ToString(),
+                    NrPedido = item.NrPedido.ToString(),
+                    DtPedido = item.dtPedido.ToString(),
+                    TpPedido = item.TpPedido.ToString(),
+                    NrNota = item.NrNota.ToString(),
+                    DtEmissao = item.DtEmissao.ToString(),
+                    TxObs1 = item.TxObs1.ToString(),
+                    X5Chave = item.X5Chave.ToString(),
+                    NrCarreg = item.NrCarreg.ToString(),
+                    CdTipocob = item.CdTipocob.ToString(),
+                    CdPlano = item.CdPlano.ToString(),
+                    DsPlano = item.DsPlano.ToString(),
+                    PedidoMaxima = item.PedidoMaxima.ToString(),
+                    ZyMinum = item.ZyMinum.ToString(),
+                    DtSaidaMerc = item.DtSaidaMerc.ToString(),
+                    Transportador = item.Transportador.ToString(),
+                    Credito = item.Credito.ToString(),
+                    Ordem = item.Ordem.ToString(),
+                    CdRcaxxx = item.CdRcaxxx.ToString(),
+                    VlFinal = item.VlFinal != null ? Convert.ToDecimal(item.VlFinal) : 0M,
+                    VlTotal = item.VlTotal != null ? Convert.ToDecimal(item.VlTotal) : 0M
                 });
             }
             return lstHistorico;
@@ -424,7 +424,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void SaveHistorico(List<HistoricoDePedidos> historico)
         {
-            if (historico!=null && historico.Any())
+            if (historico != null && historico.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine($"DELETE FROM {NomeTabelaHistoricoPedidos};");
@@ -495,7 +495,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var fields = retorno as IDictionary<string, object>;
             var _total = fields["COUNT(*)"];
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
 
         }
@@ -514,37 +514,37 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 try
                 {
                     var historico = new HistoricoDePedidos();
-                    historico.Id= item.Id!=null ? Convert.ToInt32(item.Id) : 0;
-                    historico.CdCliente=item.CdCliente!=null ? item.CdCliente.ToString() : "";
-                    historico.NrPedido=item.NrPedido!=null ? item.NrPedido.ToString() : "";
-                    historico.DtPedido=item.DtPedido!=null ? item.DtPedido.ToString() : "";
-                    historico.TpPedido=item.TpPedido!=null ? item.TpPedido.ToString() : "";
-                    historico.NrNota=item.NrNota!=null ? item.NrNota.ToString() : "";
-                    historico.DtEmissao=item.DtEmissao!=null ? item.DtEmissao.ToString() : "";
-                    historico.TxObs1=item.TxObs1!=null ? item.TxObs1.ToString() : "";
-                    historico.X5Chave=item.X5Chave!=null ? item.X5Chave.ToString() : "";
-                    historico.NrCarreg=item.NrCarreg!=null ? item.NrCarreg.ToString() : "";
-                    historico.CdTipocob=item.CdTipocob!=null ? item.CdTipocob.ToString() : "";
-                    historico.CdPlano=item.CdPlano!=null ? item.CdPlano.ToString() : "";
-                    historico.DsPlano=item.DsPlano!=null ? item.DsPlano.ToString() : "";
-                    historico.PedidoMaxima=item.PedidoMaxima!=null ? item.PedidoMaxima.ToString() : "";
-                    historico.ZyMinum=item.ZyMinum!=null ? item.ZyMinum.ToString() : "";
-                    historico.DtSaidaMerc=item.DtSaidaMerc!=null ? item.DtSaidaMerc.ToString() : "";
-                    historico.Transportador=item.Transportador!=null ? item.Transportador.ToString() : "";
-                    historico.Credito=item.Credito!=null ? item.Credito.ToString() : "";
-                    historico.Ordem=item.Ordem!=null ? item.Ordem.ToString() : "";
-                    historico.CdRcaxxx=item.CdRcaxxx!=null ? item.CdRcaxxx.ToString() : "";
-                    historico.VlFinal=item.VlFinal!=null ? Convert.ToDecimal(item.VlFinal) : 0M;
-                    historico.VlTotal=item.VlTotal!=null ? Convert.ToDecimal(item.VlTotal) : 0;
+                    historico.Id = item.Id != null ? Convert.ToInt32(item.Id) : 0;
+                    historico.CdCliente = item.CdCliente != null ? item.CdCliente.ToString() : "";
+                    historico.NrPedido = item.NrPedido != null ? item.NrPedido.ToString() : "";
+                    historico.DtPedido = item.DtPedido != null ? item.DtPedido.ToString() : "";
+                    historico.TpPedido = item.TpPedido != null ? item.TpPedido.ToString() : "";
+                    historico.NrNota = item.NrNota != null ? item.NrNota.ToString() : "";
+                    historico.DtEmissao = item.DtEmissao != null ? item.DtEmissao.ToString() : "";
+                    historico.TxObs1 = item.TxObs1 != null ? item.TxObs1.ToString() : "";
+                    historico.X5Chave = item.X5Chave != null ? item.X5Chave.ToString() : "";
+                    historico.NrCarreg = item.NrCarreg != null ? item.NrCarreg.ToString() : "";
+                    historico.CdTipocob = item.CdTipocob != null ? item.CdTipocob.ToString() : "";
+                    historico.CdPlano = item.CdPlano != null ? item.CdPlano.ToString() : "";
+                    historico.DsPlano = item.DsPlano != null ? item.DsPlano.ToString() : "";
+                    historico.PedidoMaxima = item.PedidoMaxima != null ? item.PedidoMaxima.ToString() : "";
+                    historico.ZyMinum = item.ZyMinum != null ? item.ZyMinum.ToString() : "";
+                    historico.DtSaidaMerc = item.DtSaidaMerc != null ? item.DtSaidaMerc.ToString() : "";
+                    historico.Transportador = item.Transportador != null ? item.Transportador.ToString() : "";
+                    historico.Credito = item.Credito != null ? item.Credito.ToString() : "";
+                    historico.Ordem = item.Ordem != null ? item.Ordem.ToString() : "";
+                    historico.CdRcaxxx = item.CdRcaxxx != null ? item.CdRcaxxx.ToString() : "";
+                    historico.VlFinal = item.VlFinal != null ? Convert.ToDecimal(item.VlFinal) : 0M;
+                    historico.VlTotal = item.VlTotal != null ? Convert.ToDecimal(item.VlTotal) : 0;
                     lstHistorico.Add(historico);
                 }
                 catch (Exception ex)
                 {
                     App.LogRepository.Add(new Log
                     {
-                        Data=DateTime.Now,
-                        ErrorDetail=ex.Message,
-                        Command=command
+                        Data = DateTime.Now,
+                        ErrorDetail = ex.Message,
+                        Command = command
                     });
                 }
             }
@@ -570,7 +570,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 var cdCliente = "";
                 var clienteLoja = "";
-                if (item.CdCliente!=null)
+                if (item.CdCliente != null)
                 {
                     string codigo = item.CdCliente.ToString();
                     cdCliente = codigo.Substring(0, 6);
@@ -584,39 +584,39 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 try
                 {
                     var historico = new HistoricoDePedidos();
-                    historico.Id= item.Id!=null ? Convert.ToInt32(item.Id) : 0;
-                    historico.CdCliente=item.CdCliente!=null ? item.CdCliente.ToString() : "";
-                    historico.NrPedido=item.NrPedido!=null ? item.NrPedido.ToString() : "";
-                    historico.DtPedido=item.DtPedido!=null ? item.DtPedido.ToString() : "";
-                    historico.TpPedido=item.TpPedido!=null ? item.TpPedido.ToString() : "";
-                    historico.NrNota=item.NrNota!=null ? item.NrNota.ToString() : "";
-                    historico.DtEmissao=item.DtEmissao!=null ? item.DtEmissao.ToString() : "";
-                    historico.TxObs1=item.TxObs1!=null ? item.TxObs1.ToString() : "";
-                    historico.X5Chave=item.X5Chave!=null ? item.X5Chave.ToString() : "";
-                    historico.NrCarreg=item.NrCarreg!=null ? item.NrCarreg.ToString() : "";
-                    historico.CdTipocob=item.CdTipocob!=null ? item.CdTipocob.ToString() : "";
-                    historico.CdPlano=item.CdPlano!=null ? item.CdPlano.ToString() : "";
-                    historico.DsPlano=item.DsPlano!=null ? item.DsPlano.ToString() : "";
-                    historico.PedidoMaxima=item.PedidoMaxima!=null ? item.PedidoMaxima.ToString() : "";
-                    historico.ZyMinum=item.ZyMinum!=null ? item.ZyMinum.ToString() : "";
-                    historico.DtSaidaMerc=item.DtSaidaMerc!=null ? item.DtSaidaMerc.ToString() : "";
-                    historico.Transportador=item.Transportador!=null ? item.Transportador.ToString() : "";
-                    historico.Credito=item.Credito!=null ? item.Credito.ToString() : "";
-                    historico.Ordem=item.Ordem!=null ? item.Ordem.ToString() : "";
-                    historico.CdRcaxxx=item.CdRcaxxx!=null ? item.CdRcaxxx.ToString() : "";
-                    historico.VlFinal=item.VlFinal!=null ? Convert.ToDecimal(item.VlFinal) : 0M;
-                    historico.VlTotal=item.VlTotal!=null ? Convert.ToDecimal(item.VlTotal) : 0;
-                    historico.NomeCliente=_cliente!=null ? _cliente.A1Nome.ToString() : "";
-                    historico.Municipio=_cliente!=null ? _cliente.A1Mune.ToString() : "";
+                    historico.Id = item.Id != null ? Convert.ToInt32(item.Id) : 0;
+                    historico.CdCliente = item.CdCliente != null ? item.CdCliente.ToString() : "";
+                    historico.NrPedido = item.NrPedido != null ? item.NrPedido.ToString() : "";
+                    historico.DtPedido = item.DtPedido != null ? item.DtPedido.ToString() : "";
+                    historico.TpPedido = item.TpPedido != null ? item.TpPedido.ToString() : "";
+                    historico.NrNota = item.NrNota != null ? item.NrNota.ToString() : "";
+                    historico.DtEmissao = item.DtEmissao != null ? item.DtEmissao.ToString() : "";
+                    historico.TxObs1 = item.TxObs1 != null ? item.TxObs1.ToString() : "";
+                    historico.X5Chave = item.X5Chave != null ? item.X5Chave.ToString() : "";
+                    historico.NrCarreg = item.NrCarreg != null ? item.NrCarreg.ToString() : "";
+                    historico.CdTipocob = item.CdTipocob != null ? item.CdTipocob.ToString() : "";
+                    historico.CdPlano = item.CdPlano != null ? item.CdPlano.ToString() : "";
+                    historico.DsPlano = item.DsPlano != null ? item.DsPlano.ToString() : "";
+                    historico.PedidoMaxima = item.PedidoMaxima != null ? item.PedidoMaxima.ToString() : "";
+                    historico.ZyMinum = item.ZyMinum != null ? item.ZyMinum.ToString() : "";
+                    historico.DtSaidaMerc = item.DtSaidaMerc != null ? item.DtSaidaMerc.ToString() : "";
+                    historico.Transportador = item.Transportador != null ? item.Transportador.ToString() : "";
+                    historico.Credito = item.Credito != null ? item.Credito.ToString() : "";
+                    historico.Ordem = item.Ordem != null ? item.Ordem.ToString() : "";
+                    historico.CdRcaxxx = item.CdRcaxxx != null ? item.CdRcaxxx.ToString() : "";
+                    historico.VlFinal = item.VlFinal != null ? Convert.ToDecimal(item.VlFinal) : 0M;
+                    historico.VlTotal = item.VlTotal != null ? Convert.ToDecimal(item.VlTotal) : 0;
+                    historico.NomeCliente = _cliente != null ? _cliente.A1Nome.ToString() : "";
+                    historico.Municipio = _cliente != null ? _cliente.A1Mune.ToString() : "";
                     lstHistorico.Add(historico);
                 }
                 catch (Exception ex)
                 {
                     App.LogRepository.Add(new Log
                     {
-                        Data=DateTime.Now,
-                        ErrorDetail=ex.Message,
-                        Command=command
+                        Data = DateTime.Now,
+                        ErrorDetail = ex.Message,
+                        Command = command
                     });
                 }
             }
@@ -639,7 +639,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 var cdCliente = "";
                 var clienteLoja = "";
-                if (item.CdCliente!=null)
+                if (item.CdCliente != null)
                 {
                     string codigo = item.CdCliente.ToString();
                     cdCliente = codigo.Substring(0, 6);
@@ -652,50 +652,50 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 try
                 {
                     var historico = new HistoricoDePedidos();
-                    historico.Id= item.Id!=null ? Convert.ToInt32(item.Id) : 0;
-                    historico.CdCliente=item.CdCliente!=null ? item.CdCliente.ToString() : "";
-                    historico.NrPedido=item.NrPedido!=null ? item.NrPedido.ToString() : "";
-                    historico.DtPedido=item.DtPedido!=null ? item.DtPedido.ToString() : "";
-                    historico.TpPedido=item.TpPedido!=null ? item.TpPedido.ToString() : "";
-                    historico.NrNota=item.NrNota!=null ? item.NrNota.ToString() : "";
-                    historico.DtEmissao=item.DtEmissao!=null ? item.DtEmissao.ToString() : "";
-                    historico.TxObs1=item.TxObs1!=null ? item.TxObs1.ToString() : "";
-                    historico.X5Chave=item.X5Chave!=null ? item.X5Chave.ToString() : "";
-                    historico.NrCarreg=item.NrCarreg!=null ? item.NrCarreg.ToString() : "";
-                    historico.CdTipocob=item.CdTipocob!=null ? item.CdTipocob.ToString() : "";
-                    historico.CdPlano=item.CdPlano!=null ? item.CdPlano.ToString() : "";
-                    historico.DsPlano=item.DsPlano!=null ? item.DsPlano.ToString() : "";
-                    historico.PedidoMaxima=item.PedidoMaxima!=null ? item.PedidoMaxima.ToString() : "";
-                    historico.ZyMinum=item.ZyMinum!=null ? item.ZyMinum.ToString() : "";
-                    historico.DtSaidaMerc=item.DtSaidaMerc!=null ? item.DtSaidaMerc.ToString() : "";
-                    historico.Transportador=item.Transportador!=null ? item.Transportador.ToString() : "";
-                    historico.Credito=item.Credito!=null ? item.Credito.ToString() : "";
-                    historico.Ordem=item.Ordem!=null ? item.Ordem.ToString() : "";
-                    historico.CdRcaxxx=item.CdRcaxxx!=null ? item.CdRcaxxx.ToString() : "";
-                    historico.VlFinal=item.VlFinal!=null ? Convert.ToDecimal(item.VlFinal) : 0M;
-                    historico.VlTotal=item.VlTotal!=null ? Convert.ToDecimal(item.VlTotal) : 0;
-                    historico.NomeCliente=_cliente!=null ? _cliente.A1Nome.ToString() : "";
-                    historico.Municipio=_cliente!=null ? _cliente.A1Mune.ToString() : "";
+                    historico.Id = item.Id != null ? Convert.ToInt32(item.Id) : 0;
+                    historico.CdCliente = item.CdCliente != null ? item.CdCliente.ToString() : "";
+                    historico.NrPedido = item.NrPedido != null ? item.NrPedido.ToString() : "";
+                    historico.DtPedido = item.DtPedido != null ? item.DtPedido.ToString() : "";
+                    historico.TpPedido = item.TpPedido != null ? item.TpPedido.ToString() : "";
+                    historico.NrNota = item.NrNota != null ? item.NrNota.ToString() : "";
+                    historico.DtEmissao = item.DtEmissao != null ? item.DtEmissao.ToString() : "";
+                    historico.TxObs1 = item.TxObs1 != null ? item.TxObs1.ToString() : "";
+                    historico.X5Chave = item.X5Chave != null ? item.X5Chave.ToString() : "";
+                    historico.NrCarreg = item.NrCarreg != null ? item.NrCarreg.ToString() : "";
+                    historico.CdTipocob = item.CdTipocob != null ? item.CdTipocob.ToString() : "";
+                    historico.CdPlano = item.CdPlano != null ? item.CdPlano.ToString() : "";
+                    historico.DsPlano = item.DsPlano != null ? item.DsPlano.ToString() : "";
+                    historico.PedidoMaxima = item.PedidoMaxima != null ? item.PedidoMaxima.ToString() : "";
+                    historico.ZyMinum = item.ZyMinum != null ? item.ZyMinum.ToString() : "";
+                    historico.DtSaidaMerc = item.DtSaidaMerc != null ? item.DtSaidaMerc.ToString() : "";
+                    historico.Transportador = item.Transportador != null ? item.Transportador.ToString() : "";
+                    historico.Credito = item.Credito != null ? item.Credito.ToString() : "";
+                    historico.Ordem = item.Ordem != null ? item.Ordem.ToString() : "";
+                    historico.CdRcaxxx = item.CdRcaxxx != null ? item.CdRcaxxx.ToString() : "";
+                    historico.VlFinal = item.VlFinal != null ? Convert.ToDecimal(item.VlFinal) : 0M;
+                    historico.VlTotal = item.VlTotal != null ? Convert.ToDecimal(item.VlTotal) : 0;
+                    historico.NomeCliente = _cliente != null ? _cliente.A1Nome.ToString() : "";
+                    historico.Municipio = _cliente != null ? _cliente.A1Mune.ToString() : "";
 
-                    if (resumo!=null && resumo.Count()>0)
+                    if (resumo != null && resumo.Count() > 0)
                     {
                         foreach (var res in resumo)
                         {
                             var resumoPedido = new ResumoPedido
                             {
-                                Id=Convert.ToInt32(res.Id),
-                                NrPedido=res.NrPedido.ToString(),
-                                CdProduto=res.CdProduto.ToString(),
-                                DsProduto=res.DsProduto.ToString(),
-                                NumLote=res.NumLote.ToString(),
-                                CdRcaxxx=res.CdRcaxxx.ToString(),
-                                ImagemProduto=res.ImagemProduto.ToString(),
-                                QtProduto=res.QtProduto!=null ? Convert.ToInt32(res.QtProduto) : 0,
-                                QtAtend=res.QtAtend!=null ? Convert.ToInt32(res.QtAtend) : 0,
-                                VlVenda=res.VlVenda!=null ? Convert.ToDecimal(res.VlVenda) : 0M,
-                                VlUnit=res.VlUnit!=null ? Convert.ToDecimal(res.VlUnit) : 0M,
-                                VlFrete=res.VlFrete!=null ? Convert.ToDecimal(res.VlFrete) : 0M,
-                                CdPercComiss=res.CdPercComiss!=null ? Convert.ToDecimal(res.CdPercComiss) : 0M
+                                Id = Convert.ToInt32(res.Id),
+                                NrPedido = res.NrPedido.ToString(),
+                                CdProduto = res.CdProduto.ToString(),
+                                DsProduto = res.DsProduto.ToString(),
+                                NumLote = res.NumLote.ToString(),
+                                CdRcaxxx = res.CdRcaxxx.ToString(),
+                                ImagemProduto = res.ImagemProduto.ToString(),
+                                QtProduto = res.QtProduto != null ? Convert.ToInt32(res.QtProduto) : 0,
+                                QtAtend = res.QtAtend != null ? Convert.ToInt32(res.QtAtend) : 0,
+                                VlVenda = res.VlVenda != null ? Convert.ToDecimal(res.VlVenda) : 0M,
+                                VlUnit = res.VlUnit != null ? Convert.ToDecimal(res.VlUnit) : 0M,
+                                VlFrete = res.VlFrete != null ? Convert.ToDecimal(res.VlFrete) : 0M,
+                                CdPercComiss = res.CdPercComiss != null ? Convert.ToDecimal(res.CdPercComiss) : 0M
                             };
 
                             historico.ResumoDoPedido.Add(resumoPedido);
@@ -709,9 +709,9 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 {
                     App.LogRepository.Add(new Log
                     {
-                        Data=DateTime.Now,
-                        ErrorDetail=ex.Message,
-                        Command=command
+                        Data = DateTime.Now,
+                        ErrorDetail = ex.Message,
+                        Command = command
                     });
                 }
             }
@@ -845,7 +845,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             }
         }
 
-       
+
 
         private string RecuperarNomeDaTabelaResumoPedido()
         {
@@ -866,6 +866,6 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             }
         }
 
-       
+
     }
 }

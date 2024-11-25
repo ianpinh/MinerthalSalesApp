@@ -8,9 +8,9 @@ public partial class ProdutoEditarPage : ContentPage
     private Produto _model;
     private readonly AppTheme theme;
     public ProdutoEditarPage(ProdutoEditarViewModel viewModel)
-	{
-		InitializeComponent();
-		BindingContext = viewModel;
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
 
     }
 

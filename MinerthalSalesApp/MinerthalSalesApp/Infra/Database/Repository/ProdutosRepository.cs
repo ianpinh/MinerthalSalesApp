@@ -14,7 +14,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public ProdutosRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
         private void Init()
@@ -71,38 +71,38 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new Produto
             {
-                Id=retorno.Id!=null ? Convert.ToInt32(retorno.Id) : 0,
-                CdProduto=retorno.CdProduto.ToString(),
-                CdPraux=retorno.CdPraux.ToString(),
-                DsEmabala=retorno.DsEmabala.ToString(),
-                DsProduto=retorno.DsProduto.ToString(),
-                NmUnidade=retorno.NmUnidade.ToString(),
-                NmEmbalag=retorno.NmEmbalag.ToString(),
-                QtUnidemb=retorno.QtUnidemb.ToString(),
-                InBloqven=retorno.InBloqven.ToString(),
-                QtEmbmast=retorno.QtEmbmast.ToString(),
-                Txobs=retorno.Txobs.ToString(),
-                QtEstoque=retorno.QtEstoque.ToString(),
-                CdDepto=retorno.CdDepto.ToString(),
-                CdSecao=retorno.CdSecao.ToString(),
-                CdFornec=retorno.CdFornec.ToString(),
-                CdBarra=retorno.CdBarra.ToString(),
-                NrCor=retorno.NrCor.ToString(),
-                InFraci=retorno.InFraci.ToString(),
-                QtMultip=retorno.QtMultip.ToString(),
-                InMix=retorno.InMix.ToString(),
-                CdFilial=retorno.CdFilial.ToString(),
-                CdPrinc=retorno.CdPrinc.ToString(),
-                DtUltalt=retorno.DtUltalt.ToString(),
-                DtULTentr=retorno.DtULTentr.ToString(),
-                CdFabric=retorno.CdFabric.ToString(),
-                CdCategoria=retorno.CdCategoria.ToString(),
-                CdSubcategoria=retorno.CdSubcategoria.ToString(),
-                CdRcaxxX=retorno.CdRcaxxX!=null ? Convert.ToInt32(retorno.CdRcaxxX) : 0,
-                VlPeso=retorno.VlPeso!=null ? Convert.ToDecimal(retorno.VlPeso) : 0M,
-                VlPrectab=retorno.VlPrectab!=null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
-                VlPercom=retorno.VlPercom!=null ? Convert.ToDecimal(retorno.VlPercom) : 0M,
-                TxPercom=retorno.TxPercom!=null ? Convert.ToDecimal(retorno.TxPercom) : 0M,
+                Id = retorno.Id != null ? Convert.ToInt32(retorno.Id) : 0,
+                CdProduto = retorno.CdProduto.ToString(),
+                CdPraux = retorno.CdPraux.ToString(),
+                DsEmabala = retorno.DsEmabala.ToString(),
+                DsProduto = retorno.DsProduto.ToString(),
+                NmUnidade = retorno.NmUnidade.ToString(),
+                NmEmbalag = retorno.NmEmbalag.ToString(),
+                QtUnidemb = retorno.QtUnidemb.ToString(),
+                InBloqven = retorno.InBloqven.ToString(),
+                QtEmbmast = retorno.QtEmbmast.ToString(),
+                Txobs = retorno.Txobs.ToString(),
+                QtEstoque = retorno.QtEstoque.ToString(),
+                CdDepto = retorno.CdDepto.ToString(),
+                CdSecao = retorno.CdSecao.ToString(),
+                CdFornec = retorno.CdFornec.ToString(),
+                CdBarra = retorno.CdBarra.ToString(),
+                NrCor = retorno.NrCor.ToString(),
+                InFraci = retorno.InFraci.ToString(),
+                QtMultip = retorno.QtMultip.ToString(),
+                InMix = retorno.InMix.ToString(),
+                CdFilial = retorno.CdFilial.ToString(),
+                CdPrinc = retorno.CdPrinc.ToString(),
+                DtUltalt = retorno.DtUltalt.ToString(),
+                DtULTentr = retorno.DtULTentr.ToString(),
+                CdFabric = retorno.CdFabric.ToString(),
+                CdCategoria = retorno.CdCategoria.ToString(),
+                CdSubcategoria = retorno.CdSubcategoria.ToString(),
+                CdRcaxxX = retorno.CdRcaxxX != null ? Convert.ToInt32(retorno.CdRcaxxX) : 0,
+                VlPeso = retorno.VlPeso != null ? Convert.ToDecimal(retorno.VlPeso) : 0M,
+                VlPrectab = retorno.VlPrectab != null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
+                VlPercom = retorno.VlPercom != null ? Convert.ToDecimal(retorno.VlPercom) : 0M,
+                TxPercom = retorno.TxPercom != null ? Convert.ToDecimal(retorno.TxPercom) : 0M,
             };
         }
         public IEnumerable<Produto> GetAll()
@@ -118,38 +118,38 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lstuser.Add(new Produto
                 {
-                    Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    CdProduto=item.CdProduto.ToString(),
-                    CdPraux=item.CdPraux.ToString(),
-                    DsEmabala=item.DsEmabala.ToString(),
-                    DsProduto=item.DsProduto.ToString(),
-                    NmUnidade=item.NmUnidade.ToString(),
-                    NmEmbalag=item.NmEmbalag.ToString(),
-                    QtUnidemb=item.QtUnidemb.ToString(),
-                    InBloqven=item.InBloqven.ToString(),
-                    QtEmbmast=item.QtEmbmast.ToString(),
-                    Txobs=item.Txobs.ToString(),
-                    QtEstoque=item.QtEstoque.ToString(),
-                    CdDepto=item.CdDepto.ToString(),
-                    CdSecao=item.CdSecao.ToString(),
-                    CdFornec=item.CdFornec.ToString(),
-                    CdBarra=item.CdBarra.ToString(),
-                    NrCor=item.NrCor.ToString(),
-                    InFraci=item.InFraci.ToString(),
-                    QtMultip=item.QtMultip.ToString(),
-                    InMix=item.InMix.ToString(),
-                    CdFilial=item.CdFilial.ToString(),
-                    CdPrinc=item.CdPrinc.ToString(),
-                    DtUltalt=item.DtUltalt.ToString(),
-                    DtULTentr=item.DtULTentr.ToString(),
-                    CdFabric=item.CdFabric.ToString(),
-                    CdCategoria=item.CdCategoria.ToString(),
-                    CdSubcategoria=item.CdSubcategoria.ToString(),
-                    CdRcaxxX=item.CdRcaxxX!=null ? Convert.ToInt32(item.CdRcaxxX) : 0,
-                    VlPeso=item.VlPeso!=null ? Convert.ToDecimal(item.VlPeso) : 0M,
-                    VlPrectab=item.VlPrectab!=null ? Convert.ToDecimal(item.VlPrectab) : 0M,
-                    VlPercom=item.VlPercom!=null ? Convert.ToDecimal(item.VlPercom) : 0M,
-                    TxPercom=item.TxPercom!=null ? Convert.ToDecimal(item.TxPercom) : 0M,
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    CdProduto = item.CdProduto.ToString(),
+                    CdPraux = item.CdPraux.ToString(),
+                    DsEmabala = item.DsEmabala.ToString(),
+                    DsProduto = item.DsProduto.ToString(),
+                    NmUnidade = item.NmUnidade.ToString(),
+                    NmEmbalag = item.NmEmbalag.ToString(),
+                    QtUnidemb = item.QtUnidemb.ToString(),
+                    InBloqven = item.InBloqven.ToString(),
+                    QtEmbmast = item.QtEmbmast.ToString(),
+                    Txobs = item.Txobs.ToString(),
+                    QtEstoque = item.QtEstoque.ToString(),
+                    CdDepto = item.CdDepto.ToString(),
+                    CdSecao = item.CdSecao.ToString(),
+                    CdFornec = item.CdFornec.ToString(),
+                    CdBarra = item.CdBarra.ToString(),
+                    NrCor = item.NrCor.ToString(),
+                    InFraci = item.InFraci.ToString(),
+                    QtMultip = item.QtMultip.ToString(),
+                    InMix = item.InMix.ToString(),
+                    CdFilial = item.CdFilial.ToString(),
+                    CdPrinc = item.CdPrinc.ToString(),
+                    DtUltalt = item.DtUltalt.ToString(),
+                    DtULTentr = item.DtULTentr.ToString(),
+                    CdFabric = item.CdFabric.ToString(),
+                    CdCategoria = item.CdCategoria.ToString(),
+                    CdSubcategoria = item.CdSubcategoria.ToString(),
+                    CdRcaxxX = item.CdRcaxxX != null ? Convert.ToInt32(item.CdRcaxxX) : 0,
+                    VlPeso = item.VlPeso != null ? Convert.ToDecimal(item.VlPeso) : 0M,
+                    VlPrectab = item.VlPrectab != null ? Convert.ToDecimal(item.VlPrectab) : 0M,
+                    VlPercom = item.VlPercom != null ? Convert.ToDecimal(item.VlPercom) : 0M,
+                    TxPercom = item.TxPercom != null ? Convert.ToDecimal(item.TxPercom) : 0M,
                 });
             }
             return lstuser;
@@ -168,38 +168,38 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lstuser.Add(new Produto
                 {
-                    Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    CdProduto=item.CdProduto.ToString(),
-                    CdPraux=item.CdPraux.ToString(),
-                    DsEmabala=item.DsEmabala.ToString(),
-                    DsProduto=item.DsProduto.ToString(),
-                    NmUnidade=item.NmUnidade.ToString(),
-                    NmEmbalag=item.NmEmbalag.ToString(),
-                    QtUnidemb=item.QtUnidemb.ToString(),
-                    InBloqven=item.InBloqven.ToString(),
-                    QtEmbmast=item.QtEmbmast.ToString(),
-                    Txobs=item.Txobs.ToString(),
-                    QtEstoque=item.QtEstoque.ToString(),
-                    CdDepto=item.CdDepto.ToString(),
-                    CdSecao=item.CdSecao.ToString(),
-                    CdFornec=item.CdFornec.ToString(),
-                    CdBarra=item.CdBarra.ToString(),
-                    NrCor=item.NrCor.ToString(),
-                    InFraci=item.InFraci.ToString(),
-                    QtMultip=item.QtMultip.ToString(),
-                    InMix=item.InMix.ToString(),
-                    CdFilial=item.CdFilial.ToString(),
-                    CdPrinc=item.CdPrinc.ToString(),
-                    DtUltalt=item.DtUltalt.ToString(),
-                    DtULTentr=item.DtULTentr.ToString(),
-                    CdFabric=item.CdFabric.ToString(),
-                    CdCategoria=item.CdCategoria.ToString(),
-                    CdSubcategoria=item.CdSubcategoria.ToString(),
-                    CdRcaxxX=item.CdRcaxxX!=null ? Convert.ToInt32(item.CdRcaxxX) : 0,
-                    VlPeso=item.VlPeso!=null ? Convert.ToDecimal(item.VlPeso) : 0M,
-                    VlPrectab=item.VlPrectab!=null ? Convert.ToDecimal(item.VlPrectab) : 0M,
-                    VlPercom=item.VlPercom!=null ? Convert.ToDecimal(item.VlPercom) : 0M,
-                    TxPercom=item.TxPercom!=null ? Convert.ToDecimal(item.TxPercom) : 0M,
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    CdProduto = item.CdProduto.ToString(),
+                    CdPraux = item.CdPraux.ToString(),
+                    DsEmabala = item.DsEmabala.ToString(),
+                    DsProduto = item.DsProduto.ToString(),
+                    NmUnidade = item.NmUnidade.ToString(),
+                    NmEmbalag = item.NmEmbalag.ToString(),
+                    QtUnidemb = item.QtUnidemb.ToString(),
+                    InBloqven = item.InBloqven.ToString(),
+                    QtEmbmast = item.QtEmbmast.ToString(),
+                    Txobs = item.Txobs.ToString(),
+                    QtEstoque = item.QtEstoque.ToString(),
+                    CdDepto = item.CdDepto.ToString(),
+                    CdSecao = item.CdSecao.ToString(),
+                    CdFornec = item.CdFornec.ToString(),
+                    CdBarra = item.CdBarra.ToString(),
+                    NrCor = item.NrCor.ToString(),
+                    InFraci = item.InFraci.ToString(),
+                    QtMultip = item.QtMultip.ToString(),
+                    InMix = item.InMix.ToString(),
+                    CdFilial = item.CdFilial.ToString(),
+                    CdPrinc = item.CdPrinc.ToString(),
+                    DtUltalt = item.DtUltalt.ToString(),
+                    DtULTentr = item.DtULTentr.ToString(),
+                    CdFabric = item.CdFabric.ToString(),
+                    CdCategoria = item.CdCategoria.ToString(),
+                    CdSubcategoria = item.CdSubcategoria.ToString(),
+                    CdRcaxxX = item.CdRcaxxX != null ? Convert.ToInt32(item.CdRcaxxX) : 0,
+                    VlPeso = item.VlPeso != null ? Convert.ToDecimal(item.VlPeso) : 0M,
+                    VlPrectab = item.VlPrectab != null ? Convert.ToDecimal(item.VlPrectab) : 0M,
+                    VlPercom = item.VlPercom != null ? Convert.ToDecimal(item.VlPercom) : 0M,
+                    TxPercom = item.TxPercom != null ? Convert.ToDecimal(item.TxPercom) : 0M,
                 });
             }
             return lstuser;
@@ -228,17 +228,17 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 var tipoVendaPadrao = "2";
                 foreach (var item in lista)
                 {
-                    var precos = tabelaPreco.Where(x => x.CdProduto ==item.CdProduto).ToList();
+                    var precos = tabelaPreco.Where(x => x.CdProduto == item.CdProduto).ToList();
                     var tbPrecos = App.TabelaPrecoRepository.Get(item.CdProduto, filialPadrao, tipoTabela, tipoVendaPadrao);
 
-                    if (precos!=null && precos.Any())
+                    if (precos != null && precos.Any())
                     {
-                        var valorProduto = tbPrecos!=null && tbPrecos.Any() ? tbPrecos.Max(x => x.VlVvenda) : precos.Max(s => s.VlVvenda);
-                        item.ValorCombinado= valorProduto;
-                        item.VlPrectab= valorProduto;
+                        var valorProduto = tbPrecos != null && tbPrecos.Any() ? tbPrecos.Max(x => x.VlVvenda) : precos.Max(s => s.VlVvenda);
+                        item.ValorCombinado = valorProduto;
+                        item.VlPrectab = valorProduto;
 
                         var index = produtos.FindIndex(x => x.Id == item.Id);
-                        if (index<0)
+                        if (index < 0)
                             produtos.Add(item);
                     }
                 }
@@ -259,50 +259,51 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new Produto
             {
-                Id=retorno.Id!=null ? Convert.ToInt32(retorno.Id) : 0,
-                CdProduto=retorno.CdProduto.ToString(),
-                CdPraux=retorno.CdPraux.ToString(),
-                DsEmabala=retorno.DsEmabala.ToString(),
-                DsProduto=retorno.DsProduto.ToString(),
-                NmUnidade=retorno.NmUnidade.ToString(),
-                NmEmbalag=retorno.NmEmbalag.ToString(),
-                QtUnidemb=retorno.QtUnidemb.ToString(),
-                InBloqven=retorno.InBloqven.ToString(),
-                QtEmbmast=retorno.QtEmbmast.ToString(),
-                Txobs=retorno.Txobs.ToString(),
-                QtEstoque=retorno.QtEstoque.ToString(),
-                CdDepto=retorno.CdDepto.ToString(),
-                CdSecao=retorno.CdSecao.ToString(),
-                CdFornec=retorno.CdFornec.ToString(),
-                CdBarra=retorno.CdBarra.ToString(),
-                NrCor=retorno.NrCor.ToString(),
-                InFraci=retorno.InFraci.ToString(),
-                QtMultip=retorno.QtMultip.ToString(),
-                InMix=retorno.InMix.ToString(),
-                CdFilial=retorno.CdFilial.ToString(),
-                CdPrinc=retorno.CdPrinc.ToString(),
-                DtUltalt=retorno.DtUltalt.ToString(),
-                DtULTentr=retorno.DtULTentr.ToString(),
-                CdFabric=retorno.CdFabric.ToString(),
-                CdCategoria=retorno.CdCategoria.ToString(),
-                CdSubcategoria=retorno.CdSubcategoria.ToString(),
-                CdRcaxxX=retorno.CdRcaxxX!=null ? Convert.ToInt32(retorno.CdRcaxxX) : 0,
-                VlPeso=retorno.VlPeso!=null ? Convert.ToDecimal(retorno.VlPeso) : 0M,
-                VlPrectab=retorno.VlPrectab!=null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
-                VlPercom=retorno.VlPercom!=null ? Convert.ToDecimal(retorno.VlPercom) : 0M,
-                TxPercom=retorno.TxPercom!=null ? Convert.ToDecimal(retorno.TxPercom) : 0M,
+                Id = retorno.Id != null ? Convert.ToInt32(retorno.Id) : 0,
+                CdProduto = retorno.CdProduto.ToString(),
+                CdPraux = retorno.CdPraux.ToString(),
+                DsEmabala = retorno.DsEmabala.ToString(),
+                DsProduto = retorno.DsProduto.ToString(),
+                NmUnidade = retorno.NmUnidade.ToString(),
+                NmEmbalag = retorno.NmEmbalag.ToString(),
+                QtUnidemb = retorno.QtUnidemb.ToString(),
+                InBloqven = retorno.InBloqven.ToString(),
+                QtEmbmast = retorno.QtEmbmast.ToString(),
+                Txobs = retorno.Txobs.ToString(),
+                QtEstoque = retorno.QtEstoque.ToString(),
+                CdDepto = retorno.CdDepto.ToString(),
+                CdSecao = retorno.CdSecao.ToString(),
+                CdFornec = retorno.CdFornec.ToString(),
+                CdBarra = retorno.CdBarra.ToString(),
+                NrCor = retorno.NrCor.ToString(),
+                InFraci = retorno.InFraci.ToString(),
+                QtMultip = retorno.QtMultip.ToString(),
+                InMix = retorno.InMix.ToString(),
+                CdFilial = retorno.CdFilial.ToString(),
+                CdPrinc = retorno.CdPrinc.ToString(),
+                DtUltalt = retorno.DtUltalt.ToString(),
+                DtULTentr = retorno.DtULTentr.ToString(),
+                CdFabric = retorno.CdFabric.ToString(),
+                CdCategoria = retorno.CdCategoria.ToString(),
+                CdSubcategoria = retorno.CdSubcategoria.ToString(),
+                CdRcaxxX = retorno.CdRcaxxX != null ? Convert.ToInt32(retorno.CdRcaxxX) : 0,
+                VlPeso = retorno.VlPeso != null ? Convert.ToDecimal(retorno.VlPeso) : 0M,
+                VlPrectab = retorno.VlPrectab != null ? Convert.ToDecimal(retorno.VlPrectab) : 0M,
+                VlPercom = retorno.VlPercom != null ? Convert.ToDecimal(retorno.VlPercom) : 0M,
+                TxPercom = retorno.TxPercom != null ? Convert.ToDecimal(retorno.TxPercom) : 0M,
             };
         }
 
         public void SaveProduto(List<Produto> produto)
         {
-            if (produto!=null && produto.Any())
+            if (produto != null && produto.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine("DELETE FROM Produto;");
 
                 foreach (var item in produto)
                 {
+                    var desProduto = item.DsProduto.Contains("'") ? item.DsProduto.Replace("'", "''") : item.DsProduto;
                     var commandInsert = $@"INSERT INTO [Produto](
                                                      CdProduto
                                                     ,CdPraux
@@ -339,7 +340,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                      '{item.CdProduto}'
                                                     ,'{item.CdPraux}'
                                                     ,'{item.DsEmabala}'
-                                                    ,'{item.DsProduto}'
+                                                    ,'{desProduto}'
                                                     ,'{item.NmUnidade}'
                                                     ,'{item.NmEmbalag}'
                                                     ,'{item.QtUnidemb}'
@@ -370,7 +371,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     scriptCommand.AppendLine(commandInsert);
                 }
 
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
@@ -378,6 +379,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void Add(Produto produto)
         {
+            var desProduto = produto.DsProduto.Contains("'") ? produto.DsProduto.Replace("'", "''") : produto.DsProduto;
             var commandInsert = $@"INSERT INTO [Produto](
                                                      CdProduto
                                                     ,CdPraux
@@ -414,7 +416,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                      '{produto.CdProduto}'
                                                     ,'{produto.CdPraux}'
                                                     ,'{produto.DsEmabala}'
-                                                    ,'{produto.DsProduto}'
+                                                    ,'{desProduto}'
                                                     ,'{produto.NmUnidade}'
                                                     ,'{produto.NmEmbalag}'
                                                     ,'{produto.QtUnidemb}'
@@ -447,11 +449,12 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<Produto> produto)
         {
-            if (produto!=null && produto.Any())
+            if (produto != null && produto.Any())
             {
                 var scriptCommand = new StringBuilder();
                 foreach (var item in produto)
                 {
+                    var desProduto = item.DsProduto.Contains("'") ? item.DsProduto.Replace("'", "''") : item.DsProduto;
                     var commandInsert = $@"INSERT INTO [Produto](
                                                      CdProduto
                                                     ,CdPraux
@@ -488,7 +491,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                      '{item.CdProduto}'
                                                     ,'{item.CdPraux}'
                                                     ,'{item.DsEmabala}'
-                                                    ,'{item.DsProduto}'
+                                                    ,'{desProduto}'
                                                     ,'{item.NmUnidade}'
                                                     ,'{item.NmEmbalag}'
                                                     ,'{item.QtUnidemb}'
@@ -544,7 +547,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var _total = fields["COUNT(*)"];
 
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
 

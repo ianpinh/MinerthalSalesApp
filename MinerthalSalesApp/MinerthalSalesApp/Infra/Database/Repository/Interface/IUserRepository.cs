@@ -4,21 +4,21 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
 {
     public interface IUserRepository
     {
-         List<Usuario> GetAll();
+        List<Usuario> GetAll();
 
-         Usuario GetByCpf(string cpf);
+        Usuario GetByCpf(string cpf);
 
-         Usuario GetByCodigo(string codigo);
+        Usuario GetByCodigo(string codigo);
 
-         void SaveUsuers(List<Usuario> users);
+        void SaveUsuers(List<Usuario> users);
 
-         void Add(Usuario user);
+        void Add(Usuario user);
 
-         void AddRange(List<Usuario> users);
+        void AddRange(List<Usuario> users);
 
-         void Delete(int id);
+        void Delete(int id);
 
-         int GetTotal();
+        int GetTotal();
         void CriarTabela();
     }
 }

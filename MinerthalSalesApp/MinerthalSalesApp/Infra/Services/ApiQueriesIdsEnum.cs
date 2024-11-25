@@ -17,14 +17,14 @@ namespace MinerthalSalesApp.Infra.Services
         FvTitulos = 4,
 
         [Description("HIST_ITEM(Compras históricas por item)")]
-        HistItem =5,
+        HistItem = 5,
 
         [Description("PRODUTOS")]
         Produtos = 6,
 
         [Description("HISTORICO DE PEDIDOS")]
         HistoricoDePedidos = 7,
-     
+
         [Description("PE_RCA(REPRESENTANTES / VENDEDORES)")]
         PeRca = 8,
 
@@ -65,6 +65,6 @@ namespace MinerthalSalesApp.Infra.Services
         VendasPorTrimestre = 20,
 
         [Description("BANCOS")]
-        Bancos= 21
+        Bancos = 21
     }
 }

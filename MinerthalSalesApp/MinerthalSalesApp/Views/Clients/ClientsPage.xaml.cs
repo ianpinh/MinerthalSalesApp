@@ -4,7 +4,6 @@ using MinerthalSalesApp.Infra.Database.Tables;
 using MinerthalSalesApp.Models;
 using MinerthalSalesApp.ViewModels.Clients;
 using Newtonsoft.Json;
-using System.Security.AccessControl;
 using System.ServiceModel.Channels;
 
 namespace MinerthalSalesApp.Views.Clients;
@@ -23,7 +22,7 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
     }
     public ClientsPage()
     {
-        
+
     }
 
     protected async override void OnAppearing()
@@ -40,10 +39,10 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
         ListaClientes.SelectedItem = null;
         await Task.Delay(1500);
 
-        Loaded+=(s, e) =>
+        Loaded += (s, e) =>
         {
             if (!string.IsNullOrWhiteSpace(FiltroCliente.Text))
-                FiltroCliente.Text=string.Empty;
+                FiltroCliente.Text = string.Empty;
 
             RecarregarClientes();
 
@@ -54,20 +53,20 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
 
     private async void RecarregarClientes()
     {
-        var pop = new PopupPage(new ViewModels.Shared.PopupViewModel { PopupMessage="Aguarde..." });
+        var pop = new PopupPage(new ViewModels.Shared.PopupViewModel { PopupMessage = "Aguarde..." });
         this.ShowPopup(pop);
         try
         {
             var clientes = await _model.FiltrarClientesAsync(string.Empty);
-            var totalItensSource = ListaClientes.ItemsSource!=null ? ListaClientes.ItemsSource.Cast<object>().Count() : 0;
-			ListaClientes.ItemsSource = clientes;
-			//if (clientes.Count() > totalItensSource)
-			//{
-			//    ListaClientes.ItemsSource = clientes;
-			//    await Task.Delay(1000);
-			//    //FiltroCliente.Focus();
-			//}
-		}
+            var totalItensSource = ListaClientes.ItemsSource != null ? ListaClientes.ItemsSource.Cast<object>().Count() : 0;
+            ListaClientes.ItemsSource = clientes;
+            //if (clientes.Count() > totalItensSource)
+            //{
+            //    ListaClientes.ItemsSource = clientes;
+            //    await Task.Delay(1000);
+            //    //FiltroCliente.Focus();
+            //}
+        }
         catch (Exception ex)
         {
             await DisplayAlert("Clientes", $"Erro ao recarregar a tela de clientes.  Erro:{ex.Message}", "Ok");
@@ -143,12 +142,12 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
 
     private async void BtnSelectedCliente_Clicked(object sender, EventArgs e)
     {
-        var pop = new PopupPage(new ViewModels.Shared.PopupViewModel { PopupMessage="Aguarde..." });
+        var pop = new PopupPage(new ViewModels.Shared.PopupViewModel { PopupMessage = "Aguarde..." });
         this.ShowPopup(pop);
         try
         {
             var btn = sender as Button;
-            btn.BorderColor= Color.FromArgb("#2b4661");
+            btn.BorderColor = Color.FromArgb("#2b4661");
 
             //var codCliente = btn.CommandParameter.ToString();
 
@@ -163,7 +162,7 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
 
             var codCliente = parametrosSeparados[0].Trim();
             var lojaCliente = parametrosSeparados[1].Trim();
-            var model = App.ClienteRepository.GetByCodigo(codCliente+lojaCliente);
+            var model = App.ClienteRepository.GetByCodigo(codCliente + lojaCliente);
             var viewModel = new ClientsPageDetailViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases, model);
             await Navigation.PushAsync(new ClientsPageDetail(viewModel));
         }
@@ -186,7 +185,7 @@ public partial class ClientsPage : ContentPage, IAsyncInitialization
 
     void ClearSessionValue(ClientViewModel model)
     {
-        
+
         var session = DependencyService.Get<ISession>();
         SecureStorage.Remove(clientePageKey);
 

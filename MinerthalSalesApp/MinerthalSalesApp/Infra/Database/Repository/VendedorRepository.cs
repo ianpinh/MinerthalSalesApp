@@ -1,8 +1,6 @@
 ﻿using MinerthalSalesApp.Infra.Database.Base;
 using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Database.Tables;
-using Newtonsoft.Json;
-using System.ComponentModel.Design.Serialization;
 using System.Text;
 
 namespace MinerthalSalesApp.Infra.Database.Repository

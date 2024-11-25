@@ -7,7 +7,7 @@ namespace MinerthalSalesApp.Infra.Database.Tables
     [Table("Produto")]
     public class Produto
     {
-        [PrimaryKey,AutoIncrement, Column("Id")]
+        [PrimaryKey, AutoIncrement, Column("Id")]
         public int Id { get; set; }
 
 

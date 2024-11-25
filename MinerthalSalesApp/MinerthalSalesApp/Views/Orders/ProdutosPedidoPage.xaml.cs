@@ -6,7 +6,6 @@ using MinerthalSalesApp.Models.Dtos;
 using MinerthalSalesApp.ViewModels.Orders;
 using MinerthalSalesApp.ViewModels.Shared;
 using Newtonsoft.Json;
-using SQLitePCL;
 
 namespace MinerthalSalesApp.Views.Orders;
 

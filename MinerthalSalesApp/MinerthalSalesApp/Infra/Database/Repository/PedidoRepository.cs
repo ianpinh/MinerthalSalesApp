@@ -1,9 +1,7 @@
-﻿using Microsoft.Data.Sqlite;
-using MinerthalSalesApp.Customs.CustomHelpers;
+﻿using MinerthalSalesApp.Customs.CustomHelpers;
 using MinerthalSalesApp.Infra.Database.Base;
 using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Database.Tables;
-using System.Data.Common;
 using System.Text;
 
 namespace MinerthalSalesApp.Infra.Database.Repository
@@ -11,8 +9,8 @@ namespace MinerthalSalesApp.Infra.Database.Repository
     public class PedidoRepository : IPedidoRepository
     {
         private readonly IAppthalContext _context;
-        private string NomeTabelaPedido=>RecuperarNomeDaTabelaPedido();
-        private string NomeTabelaCarrinho=>RecuperarNomeDaTabelaCarrinho();
+        private string NomeTabelaPedido => RecuperarNomeDaTabelaPedido();
+        private string NomeTabelaCarrinho => RecuperarNomeDaTabelaCarrinho();
 
         public PedidoRepository(IAppthalContext context)
         {
@@ -70,7 +68,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         private void InitPedidoVendedor(string nomeTabela)
         {
-                var command = $@"CREATE TABLE IF NOT EXISTS {nomeTabela}(
+            var command = $@"CREATE TABLE IF NOT EXISTS {nomeTabela}(
                                                   Id UNIQUEIDENTIFIER PRIMARY KEY  NOT NULL
                                                  ,CodigoCliente VARCHAR(20)
                                                  ,CodigoLoja VARCHAR(20)
@@ -93,28 +91,28 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                  ,ValorFrete25 DECIMAL(7,2)
                                                  ,ValorParcelas DECIMAL(7,2)
                                                  ,ValorFrete30 DECIMAL(7,2));";
-                _context.ExcecutarComandoCrud(command);
+            _context.ExcecutarComandoCrud(command);
 
 
-                var checkColumnCommand = $"PRAGMA table_info({nomeTabela});";
-                var columns = _context.ExecutarComandoConsulta(checkColumnCommand);
+            var checkColumnCommand = $"PRAGMA table_info({nomeTabela});";
+            var columns = _context.ExecutarComandoConsulta(checkColumnCommand);
 
-                bool columnExists = false;
-                foreach (var column in columns)
+            bool columnExists = false;
+            foreach (var column in columns)
+            {
+                if (column["name"].ToString() == "CodigoLoja")
                 {
-                    if (column["name"].ToString() == "CodigoLoja")
-                    {
-                        columnExists = true;
-                        break;
-                    }
+                    columnExists = true;
+                    break;
                 }
+            }
 
-                // Adicionar a coluna se ela não existir
-                if (!columnExists)
-                {
-                    var addColumnCommand = $"ALTER TABLE {nomeTabela} ADD COLUMN CodigoLoja VARCHAR(20);";
-                    _context.ExcecutarComandoCrud(addColumnCommand);
-                }
+            // Adicionar a coluna se ela não existir
+            if (!columnExists)
+            {
+                var addColumnCommand = $"ALTER TABLE {nomeTabela} ADD COLUMN CodigoLoja VARCHAR(20);";
+                _context.ExcecutarComandoCrud(addColumnCommand);
+            }
         }
 
         private void InitCarrinhoVendedor(string nomeTabela)
@@ -137,7 +135,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             _context.ExcecutarComandoCrud(command);
         }
 
-        private  string RecuperarNomeDaTabelaPedido()
+        private string RecuperarNomeDaTabelaPedido()
         {
             try
             {
@@ -174,7 +172,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             }
         }
 
-       
+
 
 
         public List<Pedido> GetAll()

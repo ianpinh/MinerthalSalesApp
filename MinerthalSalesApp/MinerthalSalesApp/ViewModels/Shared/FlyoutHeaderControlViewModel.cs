@@ -13,7 +13,7 @@
             else if (App.UserDetails != null)
             {
                 LblUserName = App.UserDetails.FullName;
-                LblUserCodigo= App.UserDetails.Codigo;
+                LblUserCodigo = App.UserDetails.Codigo;
             }
         }
         private string lblUserName;
@@ -49,7 +49,7 @@
                 LblUserName = App.VendedorSelecionado.NomeVendedor;
                 LblUserCodigo = App.VendedorSelecionado.CodigoVendedor;
             }
-            else if(App.UserDetails != null)
+            else if (App.UserDetails != null)
             {
                 LblUserName = App.UserDetails.FullName;
                 LblUserCodigo = App.UserDetails.Codigo;

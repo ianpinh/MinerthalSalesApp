@@ -1,9 +1,9 @@
-﻿using MinerthalSalesApp.Infra.Database.Base;
+﻿using MinerthalSalesApp.Customs.CustomHelpers;
+using MinerthalSalesApp.Infra.Database.Base;
 using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Database.Tables;
 using System.Globalization;
 using System.Text;
-using MinerthalSalesApp.Customs.CustomHelpers;
 
 namespace MinerthalSalesApp.Infra.Database.Repository
 {
@@ -13,7 +13,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public RankingRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
 
@@ -39,7 +39,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 throw;
             }
         }
-       
+
         public List<Ranking> GetAll()
         {
             try
@@ -55,14 +55,14 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 {
                     lstuser.Add(new Ranking
                     {
-                        Codigo =item.Codigo.ToString(),
-                        NomeRC =item.NomeRC.ToString(),
-                        PontosVolume =item.PontosVolume!=null ? (decimal)item.PontosVolume : 0M,
-                        PontosProd =item.PontosProd!=null ? (decimal)item.PontosProd : 0M,
-                        PontsCliAtendido =item.PontsCliAtendido!=null ? (decimal)item.PontsCliAtendido : 0M,
-                        PontosCliNovo =item.PontosCliNovo!=null ? (decimal)item.PontosCliNovo : 0M,
-                        PontosCliRecuperados =item.PontosCliRecuperados!=null ? (decimal)item.PontosCliRecuperados : 0M,
-                        PosicaoRanking =item.PosicaoRanking!=null ? (decimal)item.PosicaoRanking : 0M
+                        Codigo = item.Codigo.ToString(),
+                        NomeRC = item.NomeRC.ToString(),
+                        PontosVolume = item.PontosVolume != null ? (decimal)item.PontosVolume : 0M,
+                        PontosProd = item.PontosProd != null ? (decimal)item.PontosProd : 0M,
+                        PontsCliAtendido = item.PontsCliAtendido != null ? (decimal)item.PontsCliAtendido : 0M,
+                        PontosCliNovo = item.PontosCliNovo != null ? (decimal)item.PontosCliNovo : 0M,
+                        PontosCliRecuperados = item.PontosCliRecuperados != null ? (decimal)item.PontosCliRecuperados : 0M,
+                        PosicaoRanking = item.PosicaoRanking != null ? (decimal)item.PosicaoRanking : 0M
                     });
                 }
                 return lstuser;
@@ -85,14 +85,14 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 return new Ranking
                 {
-                    Codigo =retorno.Codigo.ToString(),
-                    NomeRC =retorno.NomeRC.ToString(),
-                    PontosVolume =retorno.PontosVolume!=null ? (decimal)retorno.PontosVolume : 0M,
-                    PontosProd =retorno.PontosProd!=null ? (decimal)retorno.PontosProd : 0M,
-                    PontsCliAtendido =retorno.PontsCliAtendido!=null ? (decimal)retorno.PontsCliAtendido : 0M,
-                    PontosCliNovo =retorno.PontosCliNovo!=null ? (decimal)retorno.PontosCliNovo : 0M,
-                    PontosCliRecuperados =retorno.PontosCliRecuperados!=null ? (decimal)retorno.PontosCliRecuperados : 0M,
-                    PosicaoRanking =retorno.PosicaoRanking!=null ? (decimal)retorno.PosicaoRanking : 0M
+                    Codigo = retorno.Codigo.ToString(),
+                    NomeRC = retorno.NomeRC.ToString(),
+                    PontosVolume = retorno.PontosVolume != null ? (decimal)retorno.PontosVolume : 0M,
+                    PontosProd = retorno.PontosProd != null ? (decimal)retorno.PontosProd : 0M,
+                    PontsCliAtendido = retorno.PontsCliAtendido != null ? (decimal)retorno.PontsCliAtendido : 0M,
+                    PontosCliNovo = retorno.PontosCliNovo != null ? (decimal)retorno.PontosCliNovo : 0M,
+                    PontosCliRecuperados = retorno.PontosCliRecuperados != null ? (decimal)retorno.PontosCliRecuperados : 0M,
+                    PosicaoRanking = retorno.PosicaoRanking != null ? (decimal)retorno.PosicaoRanking : 0M
                 };
             }
             catch (Exception)
@@ -105,7 +105,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                if (ranking!=null && ranking.Any())
+                if (ranking != null && ranking.Any())
                 {
                     var scriptCommand = new StringBuilder();
                     scriptCommand.AppendLine("DELETE FROM Ranking;");
@@ -175,7 +175,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<Ranking> ranking)
         {
-            if (ranking !=null && ranking.Count>0)
+            if (ranking != null && ranking.Count > 0)
                 foreach (var item in ranking)
                     Add(item);
         }
@@ -200,7 +200,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 var fields = retorno as IDictionary<string, object>;
                 var _total = fields["COUNT(*)"];
 
-                _=int.TryParse(_total.ToString(), out int total);
+                _ = int.TryParse(_total.ToString(), out int total);
                 return total;
             }
             catch (Exception)

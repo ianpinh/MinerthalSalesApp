@@ -10,7 +10,7 @@ namespace MinerthalSalesApp.Customs
 
         public CalculoPedidoHelper(PedidoViewModel model)
         {
-            _model=model;
+            _model = model;
         }
 
         private decimal CalcularComissaoDaVenda()
@@ -19,7 +19,7 @@ namespace MinerthalSalesApp.Customs
             try
             {
                 foreach (var item in _model.Pedido.ItensPedido)
-                    comissao += ((item.Quantidade * item.ValorCombinado) * (item.Comissao/100));
+                    comissao += ((item.Quantidade * item.ValorCombinado) * (item.Comissao / 100));
             }
             catch (Exception)
             {

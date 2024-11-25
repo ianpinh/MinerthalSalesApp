@@ -6,7 +6,7 @@ namespace MinerthalSalesApp.Models.Dtos
     {
         public PedidosLocaisDto()
         {
-                Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
         }
         public Guid Id { get; private set; }
         public OrderDto Pedido { get; set; } = new OrderDto();

@@ -25,9 +25,9 @@ namespace MinerthalSalesApp.ViewModels.Orders
         {
             theme = Application.Current.RequestedTheme;
             _alertService = alertService ?? throw new ArgumentNullException(nameof(alertService));
-            _servicoDeCarregamentoDasBases=servicoDeCarregamentoDasBases;
-            Pedido= pedido;
-            CarregarCliente(pedido.CodigoCliente+pedido.CodigoLoja);
+            _servicoDeCarregamentoDasBases = servicoDeCarregamentoDasBases;
+            Pedido = pedido;
+            CarregarCliente(pedido.CodigoCliente + pedido.CodigoLoja);
             CarregarListagens();
         }
 
@@ -120,7 +120,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
             {
                 if (result)
                 {
-                    Pedido =new OrderDto();
+                    Pedido = new OrderDto();
                     _alertService.ShowAlertAsync("Carrinho", "Pedido excluido", "OK");
 
                     Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
@@ -196,10 +196,10 @@ namespace MinerthalSalesApp.ViewModels.Orders
 
             if (bancos.Any())
             {
-                lst=bancos.Select(x => new DictionaryDto
+                lst = bancos.Select(x => new DictionaryDto
                 {
-                    Key=x.CdTipoCob,
-                    Value=x.DsTipocob
+                    Key = x.CdTipoCob,
+                    Value = x.DsTipocob
                 }).ToList();
             }
             return lst;
@@ -234,17 +234,17 @@ namespace MinerthalSalesApp.ViewModels.Orders
 
                 foreach (var item in lista)
                 {
-                    var precos = tabelaPreco.Where(x => x.CdProduto ==item.CdProduto).ToList();
+                    var precos = tabelaPreco.Where(x => x.CdProduto == item.CdProduto).ToList();
                     var tbPrecos = App.TabelaPrecoRepository.Get(item.CdProduto, Pedido.FilialMinerthal, tipoTabela, Pedido.TipoVenda);
 
-                    if (precos!=null && precos.Any())
+                    if (precos != null && precos.Any())
                     {
-                        var valorProduto = tbPrecos!=null && tbPrecos.Any() ? tbPrecos.Max(x => x.VlVvenda) : precos.Max(s => s.VlVvenda);
-                        item.ValorCombinado= valorProduto;
-                        item.VlPrectab= valorProduto;
+                        var valorProduto = tbPrecos != null && tbPrecos.Any() ? tbPrecos.Max(x => x.VlVvenda) : precos.Max(s => s.VlVvenda);
+                        item.ValorCombinado = valorProduto;
+                        item.VlPrectab = valorProduto;
 
                         var index = produtos.FindIndex(x => x.Id == item.Id);
-                        if (index<0)
+                        if (index < 0)
                             produtos.Add(item);
                     }
                 }
@@ -270,7 +270,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
             loadingProducts.GetAwaiter().GetResult();
 
             var totalProdutos = App.ProdutosRepository.GetTotal();
-            if (totalProdutos<=0)
+            if (totalProdutos <= 0)
                 RecarregarListaDeProdutos();
         }
 
@@ -283,7 +283,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
                 ListaTipoPedido = _ListaTipoPedido();
                 ListaTipoVenda = _ListaTipoVenda();
                 ListaTipoCobranca = _ListaTipoCobranca();
-                ListaProdutos= _ListaProdutos();
+                ListaProdutos = _ListaProdutos();
             }
             catch (Exception ex)
             {

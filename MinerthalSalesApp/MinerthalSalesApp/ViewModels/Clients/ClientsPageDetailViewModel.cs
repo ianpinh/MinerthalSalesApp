@@ -15,7 +15,7 @@ namespace MinerthalSalesApp.ViewModels.Clients
         {
             _alertService = alertService ?? throw new ArgumentNullException(nameof(alertService));
             _servicoDeCarregamentoDasBases = servicoDeCarregamentoDasBases ?? throw new ArgumentNullException(nameof(servicoDeCarregamentoDasBases));
-            Cliente =cliente;
+            Cliente = cliente;
         }
 
         [RelayCommand]

@@ -5,9 +5,9 @@ namespace MinerthalSalesApp;
 
 public partial class PopupPage : Popup
 {
-	public PopupPage(PopupViewModel model)
-	{
-		InitializeComponent();
-		BindingContext=model;
-	}
+    public PopupPage(PopupViewModel model)
+    {
+        InitializeComponent();
+        BindingContext = model;
+    }
 }

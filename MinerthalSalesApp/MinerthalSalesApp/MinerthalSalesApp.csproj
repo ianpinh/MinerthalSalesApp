@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-maccatalyst;net8.0-android34.0</TargetFrameworks>
+		<CheckEolWorkloads>false</CheckEolWorkloads>
+	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android34.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -149,19 +151,19 @@
 	
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="Dapper" Version="2.1.35" />
-		<PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.4" />
-		<PackageReference Include="System.ServiceModel.Duplex" Version="4.10.*" />
-		<PackageReference Include="System.ServiceModel.Federation" Version="4.10.*" />
-		<PackageReference Include="System.ServiceModel.Http" Version="4.10.*" />
-		<PackageReference Include="System.ServiceModel.NetTcp" Version="4.10.*" />
-		<PackageReference Include="System.ServiceModel.Security" Version="4.10.*" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+		<PackageReference Include="System.ServiceModel.Duplex" Version="6.0.0" />
+		<PackageReference Include="System.ServiceModel.Federation" Version="8.1.0" />
+		<PackageReference Include="System.ServiceModel.Http" Version="8.1.0" />
+		<PackageReference Include="System.ServiceModel.NetTcp" Version="8.1.0" />
+		<PackageReference Include="System.ServiceModel.Security" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -340,5 +342,13 @@
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMinerthalSalesAppHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.100" />
+	</ItemGroup>
 
 </Project>

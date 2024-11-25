@@ -4,56 +4,56 @@ using System.Runtime.CompilerServices;
 namespace MinerthalSalesApp.ViewModels
 {
     public partial class BaseViewModel : INotifyPropertyChanged
-	{
+    {
 
-		private bool isBusy;
-		public bool IsBusy
-		{
-			get => isBusy;
-			set
-			{
-				isBusy = value;
-				OnPropertyChanged();
-				OnPropertyChanged(nameof(IsBusy));
-			}
-		}
+        private bool isBusy;
+        public bool IsBusy
+        {
+            get => isBusy;
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsBusy));
+            }
+        }
 
-		private string busyText;
+        private string busyText;
         public string BusyText
         {
             get => busyText;
-			set
-			{
-				busyText = value;
-				OnPropertyChanged();
-				OnPropertyChanged(nameof(BusyText));
-			}
-		}
+            set
+            {
+                busyText = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(BusyText));
+            }
+        }
 
 
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-		public async Task ExecuteAsync(Func<Task> operation, string? busyText = null)
-		{
-			IsBusy = true;
-			BusyText = busyText ?? "Processing...";
-			try
-			{
-				await operation?.Invoke();
-			}
-			catch (Exception ex)
-			{
-				throw;
-			}
-			finally
-			{
-				IsBusy = false;
-				BusyText = "Processing...";
-			}
-		}
-	}
+        public async Task ExecuteAsync(Func<Task> operation, string? busyText = null)
+        {
+            IsBusy = true;
+            BusyText = busyText ?? "Processing...";
+            try
+            {
+                await operation?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                IsBusy = false;
+                BusyText = "Processing...";
+            }
+        }
+    }
 
     //public abstract class ObservableViewModelBase : ObservableObject, INotifyPropertyChanged
     //{

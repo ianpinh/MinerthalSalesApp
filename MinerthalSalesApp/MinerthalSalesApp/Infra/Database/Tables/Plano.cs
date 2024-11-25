@@ -2,7 +2,7 @@
 
 namespace MinerthalSalesApp.Infra.Database.Tables
 {
-   
+
     public class Plano
     {
         public int Id { get; set; }

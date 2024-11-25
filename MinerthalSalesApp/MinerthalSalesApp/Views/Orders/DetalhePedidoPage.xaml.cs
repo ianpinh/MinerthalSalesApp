@@ -40,17 +40,17 @@ public partial class DetalhePedidoPage : ContentPage
 
             await DisplayAlert("Enviar Pedido", $"Status: {pedidoTransmisao.sucesso}.  Menssagem retorno: {pedidoTransmisao.Mensagem}", "Ok");
 
-            if (pedidoTransmisao.sucesso=="Sucesso")
+            if (pedidoTransmisao.sucesso == "Sucesso")
             {
                 //App.CartRepository.DeleteByPedido(pedidoId);
                 App.PedidoRepository.DeleteById(pedidoId);
 
                 var stack = Shell.Current.Navigation.NavigationStack;
                 FecharPaginasAbertas();
-				var model = new MeusPedidosViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases);
+                var model = new MeusPedidosViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases);
                 await model.AtualizarPedidosTrasmitidos();
                 await Navigation.PushAsync(new MeusPedidosPage(model));
-			}
+            }
         }
         catch (Exception ex)
         {
@@ -65,9 +65,9 @@ public partial class DetalhePedidoPage : ContentPage
             var btn = (Button)sender;
             var order = btn.CommandParameter as OrderDto;
             App.PedidoRepository.DeleteById(order.Id);
-			var model = new MeusPedidosViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases);
-			await Navigation.PushAsync(new MeusPedidosPage(model));
-		}
+            var model = new MeusPedidosViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases);
+            await Navigation.PushAsync(new MeusPedidosPage(model));
+        }
         catch (Exception ex)
         {
             await DisplayAlert("Enviar Pedido", $"Erro: {ex.Message}", "Ok");
@@ -88,15 +88,15 @@ public partial class DetalhePedidoPage : ContentPage
             await DisplayAlert("Enviar Pedido", $"Erro: {ex.Message}", "Ok");
         }
     }
-    
+
     private async void BtnExcluirItemPedido_Clicked(object sender, EventArgs e)
     {
         try
         {
             var _object = (Button)sender;
-            _=int.TryParse(_object.CommandParameter.ToString(), out int _id);
+            _ = int.TryParse(_object.CommandParameter.ToString(), out int _id);
 
-            if (_id>0)
+            if (_id > 0)
                 App.CartRepository.DeleteById(_id);
 
             FecharPaginasAbertas();

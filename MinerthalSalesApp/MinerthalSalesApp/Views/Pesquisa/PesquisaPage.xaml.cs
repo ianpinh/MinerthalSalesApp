@@ -1,6 +1,5 @@
 using CommunityToolkit.Maui.Views;
 using MinerthalSalesApp.ViewModels.Pesquisa;
-using MinerthalSalesApp.ViewModels.Shared;
 
 namespace MinerthalSalesApp.Views.Pesquisa;
 
@@ -10,7 +9,7 @@ public partial class PesquisaPage : ContentPage
     public PesquisaPage(PesquisaViewModel pesquisaViewModel)
     {
         InitializeComponent();
-        model=pesquisaViewModel;
+        model = pesquisaViewModel;
         BindingContext = model;
         ImgUserLoading.IsAnimationPlaying = true;
     }
@@ -20,52 +19,52 @@ public partial class PesquisaPage : ContentPage
         var _expander = (Expander)sender;
         if (_expander.IsExpanded)
         {
-            model.ExpandedImageTitulosaVencer="chevron_up.png";
+            model.ExpandedImageTitulosaVencer = "chevron_up.png";
         }
         else
         {
             model.ExpandedImageTitulosaVencer = "chevron_down.png";
         }
     }
-    
+
     private void Expander_ExpandedChangedTitulosaVencer(object sender, CommunityToolkit.Maui.Core.ExpandedChangedEventArgs e)
     {
         var _expander = (Expander)sender;
         if (_expander.IsExpanded)
         {
-            model.ExpandedImageTitulosaVencer="chevron_up.png";
+            model.ExpandedImageTitulosaVencer = "chevron_up.png";
         }
         else
         {
-            model.ExpandedImageTitulosaVencer= "chevron_down.png";
+            model.ExpandedImageTitulosaVencer = "chevron_down.png";
         }
     }
 
     private void Expander_ExpandedChangedInadimplentes(object sender, CommunityToolkit.Maui.Core.ExpandedChangedEventArgs e)
     {
-        
+
         var _expander = (Expander)sender;
         if (_expander.IsExpanded)
         {
-            model.ExpandedImageInadimplentes="chevron_up.png";
+            model.ExpandedImageInadimplentes = "chevron_up.png";
         }
         else
         {
-            model.ExpandedImageInadimplentes= "chevron_down.png";
+            model.ExpandedImageInadimplentes = "chevron_down.png";
         }
     }
- 
+
     private void Expander_ExpandedChangedPedidosEmAberto(object sender, CommunityToolkit.Maui.Core.ExpandedChangedEventArgs e)
     {
 
         var _expander = (Expander)sender;
         if (_expander.IsExpanded)
         {
-            model.ExpandedImagePedidosEmAberto="chevron_up.png";
+            model.ExpandedImagePedidosEmAberto = "chevron_up.png";
         }
         else
         {
-            model.ExpandedImagePedidosEmAberto= "chevron_down.png";
+            model.ExpandedImagePedidosEmAberto = "chevron_down.png";
         }
     }
 
@@ -75,11 +74,11 @@ public partial class PesquisaPage : ContentPage
         var _expander = (Expander)sender;
         if (_expander.IsExpanded)
         {
-            model.ExpandedImageCarregamentos="chevron_up.png";
+            model.ExpandedImageCarregamentos = "chevron_up.png";
         }
         else
         {
-            model.ExpandedImageCarregamentos= "chevron_down.png";
+            model.ExpandedImageCarregamentos = "chevron_down.png";
         }
     }
 
@@ -93,7 +92,7 @@ public partial class PesquisaPage : ContentPage
         }
         else
         {
-            model.ExpandedImageMetaMensal= "chevron_down.png";
+            model.ExpandedImageMetaMensal = "chevron_down.png";
         }
     }
 

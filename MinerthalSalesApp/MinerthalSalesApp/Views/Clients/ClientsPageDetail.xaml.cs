@@ -14,7 +14,7 @@ namespace MinerthalSalesApp.Views.Clients;
 [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
 {
- 
+
     private ClientsPageDetailViewModel _model;
     private readonly AppTheme theme;
     IPopupAppService _popupAppService;
@@ -23,15 +23,13 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
     public ClientsPageDetail(ClientsPageDetailViewModel model)
     {
         _model = model;
-        _popupAppService=App.PopupAppService;
+        _popupAppService = App.PopupAppService;
         InitializeComponent();
         BindingContext = _model;
         var codigo = $"{_model.Cliente.A1Cod}-{_model.Cliente.A1Loja}";
         Cliente.Text = codigo;
         codigoCli = codigo;
         Initialize(codigo);
-      
-        
     }
 
     protected override void OnAppearing()
@@ -59,7 +57,7 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
 
     }
 
-   
+
 
     private void Initialize(string codigo)
     {
@@ -140,33 +138,33 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
         }
         else
         {*/
-            var _popupModel = new PopupViewModel { PopupMessage = "Carregando novo pedido..." };
-            var pop = new PopupPage(_popupModel);
+        var _popupModel = new PopupViewModel { PopupMessage = "Carregando novo pedido..." };
+        var pop = new PopupPage(_popupModel);
 
-            await Task.Delay(500);
-            _popupAppService.ShowPopup(pop);
+        await Task.Delay(500);
+        _popupAppService.ShowPopup(pop);
 
-            try
-            {
-                var btn = sender as Button;
+        try
+        {
+            var btn = sender as Button;
             //var codCliente = btn.CommandParameter.ToString();
             var codigo = $"{_model.Cliente.A1Cod}{_model.Cliente.A1Loja}";
             var codCliente = codigo.Substring(0, 6);
             var codLoja = codigo.Substring(codigo.Length - 2);
-            var order = new Models.Dtos.OrderDto {Id=Guid.NewGuid(), CodigoCliente=codigo };
+            var order = new Models.Dtos.OrderDto { Id = Guid.NewGuid(), CodigoCliente = codigo };
             var pedidoViewModel = new PedidoViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases, order);
             Microsoft.Maui.Storage.Preferences.Set("pedidoViewModel", JsonConvert.SerializeObject(pedidoViewModel));
             await Navigation.PushAsync(new PedidoPage(pedidoViewModel));
             //Navigation.RemovePage(this);
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Pedido", ex.Message, "Ok");
-            }
-            finally
-            {
-                _popupAppService.ClosePopup(pop);
-            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Pedido", ex.Message, "Ok");
+        }
+        finally
+        {
+            _popupAppService.ClosePopup(pop);
+        }
         //}
     }
 
@@ -194,7 +192,7 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
         var lista = App.FaturamentoRepository.GetByCodigo(a[0] + a[1]);
         if (lista != null && lista.Any())
         {
-            lista=lista.Select(c => { c.StatusVencimento = CorStatusVencimento(c.DtVenc); return c; }).OrderBy(x=>x.DataDeVencimento).ToList();
+            lista = lista.Select(c => { c.StatusVencimento = CorStatusVencimento(c.DtVenc); return c; }).OrderBy(x => x.DataDeVencimento).ToList();
             InvoicingList.ItemsSource = lista;
             InvoicingList.VerticalScrollBarVisibility = ScrollBarVisibility.Always;
         }
@@ -246,7 +244,7 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
     //CARREGAR HISTÓRICO DO CLIENTE
     private async void BtnHistorico_Clicked(object sender, EventArgs e)
     {
-        var pop = new PopupPage(new PopupViewModel { PopupMessage="aguarde..." });
+        var pop = new PopupPage(new PopupViewModel { PopupMessage = "aguarde..." });
         this.ShowPopup(pop);
         await Task.Delay(1000);
         try
@@ -267,5 +265,5 @@ public partial class ClientsPageDetail : ContentPage, IAsyncInitialization
     }
 
 
-  
+
 }

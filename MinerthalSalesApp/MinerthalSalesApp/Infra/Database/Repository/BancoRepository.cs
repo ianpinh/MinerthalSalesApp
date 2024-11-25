@@ -10,7 +10,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public BancoRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
         private void Init()
@@ -37,7 +37,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 throw;
             }
         }
-       
+
         public Banco GetById(int id)
         {
             var command = $@"SELECT * FROM Banco WHERE Id = {id};";
@@ -48,18 +48,18 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new Banco
             {
-                Id=retorno.Id!=null ? Convert.ToInt32(retorno.Id) : 0,
-                CdTipoCob=retorno.CdTipoCob.ToString(),
-                DsTipocob=retorno.DsTipocob.ToString(),
-                NvCobranc=retorno.NvCobranc.ToString(),
-                InVendan=retorno.InVendan.ToString(),
-                InUtiliz=retorno.InUtiliz.ToString(),
-                InUtplano=retorno.InUtplano.ToString(),
-                TxAcresc=retorno.TxAcresc.ToString(),
-                QtPrzmax=retorno.QtPrzmax.ToString(),
-                InBoleto=retorno.InBoleto.ToString(),
-                VlMinped=retorno.VlMinped.ToString(),
-                CdRcaxxx=retorno.CdRcaxxx!=null ? Convert.ToInt32(retorno.CdRcaxxx) : 0,
+                Id = retorno.Id != null ? Convert.ToInt32(retorno.Id) : 0,
+                CdTipoCob = retorno.CdTipoCob.ToString(),
+                DsTipocob = retorno.DsTipocob.ToString(),
+                NvCobranc = retorno.NvCobranc.ToString(),
+                InVendan = retorno.InVendan.ToString(),
+                InUtiliz = retorno.InUtiliz.ToString(),
+                InUtplano = retorno.InUtplano.ToString(),
+                TxAcresc = retorno.TxAcresc.ToString(),
+                QtPrzmax = retorno.QtPrzmax.ToString(),
+                InBoleto = retorno.InBoleto.ToString(),
+                VlMinped = retorno.VlMinped.ToString(),
+                CdRcaxxx = retorno.CdRcaxxx != null ? Convert.ToInt32(retorno.CdRcaxxx) : 0,
             };
         }
         public Banco RecuperarNomeTipoCobranca(string cdTipocob)
@@ -74,18 +74,18 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 return new Banco
                 {
-                    Id=retorno.Id!=null ? Convert.ToInt32(retorno.Id) : 0,
-                    CdTipoCob=retorno.CdTipoCob.ToString(),
-                    DsTipocob=retorno.DsTipocob.ToString(),
-                    NvCobranc=retorno.NvCobranc.ToString(),
-                    InVendan=retorno.InVendan.ToString(),
-                    InUtiliz=retorno.InUtiliz.ToString(),
-                    InUtplano=retorno.InUtplano.ToString(),
-                    TxAcresc=retorno.TxAcresc.ToString(),
-                    QtPrzmax=retorno.QtPrzmax.ToString(),
-                    InBoleto=retorno.InBoleto.ToString(),
-                    VlMinped=retorno.VlMinped.ToString(),
-                    CdRcaxxx=retorno.CdRcaxxx!=null ? Convert.ToInt32(retorno.CdRcaxxx) : 0,
+                    Id = retorno.Id != null ? Convert.ToInt32(retorno.Id) : 0,
+                    CdTipoCob = retorno.CdTipoCob.ToString(),
+                    DsTipocob = retorno.DsTipocob.ToString(),
+                    NvCobranc = retorno.NvCobranc.ToString(),
+                    InVendan = retorno.InVendan.ToString(),
+                    InUtiliz = retorno.InUtiliz.ToString(),
+                    InUtplano = retorno.InUtplano.ToString(),
+                    TxAcresc = retorno.TxAcresc.ToString(),
+                    QtPrzmax = retorno.QtPrzmax.ToString(),
+                    InBoleto = retorno.InBoleto.ToString(),
+                    VlMinped = retorno.VlMinped.ToString(),
+                    CdRcaxxx = retorno.CdRcaxxx != null ? Convert.ToInt32(retorno.CdRcaxxx) : 0,
                 };
             }
             catch (Exception)
@@ -106,18 +106,18 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lstuser.Add(new Banco
                 {
-                    Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    CdTipoCob=item.CdTipoCob.ToString(),
-                    DsTipocob=item.DsTipocob.ToString(),
-                    NvCobranc=item.NvCobranc.ToString(),
-                    InVendan=item.InVendan.ToString(),
-                    InUtiliz=item.InUtiliz.ToString(),
-                    InUtplano=item.InUtplano.ToString(),
-                    TxAcresc=item.TxAcresc.ToString(),
-                    QtPrzmax=item.QtPrzmax.ToString(),
-                    InBoleto=item.InBoleto.ToString(),
-                    VlMinped=item.VlMinped.ToString(),
-                    CdRcaxxx=item.CdRcaxxx!=null ? Convert.ToInt32(item.CdRcaxxx) : 0,
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    CdTipoCob = item.CdTipoCob.ToString(),
+                    DsTipocob = item.DsTipocob.ToString(),
+                    NvCobranc = item.NvCobranc.ToString(),
+                    InVendan = item.InVendan.ToString(),
+                    InUtiliz = item.InUtiliz.ToString(),
+                    InUtplano = item.InUtplano.ToString(),
+                    TxAcresc = item.TxAcresc.ToString(),
+                    QtPrzmax = item.QtPrzmax.ToString(),
+                    InBoleto = item.InBoleto.ToString(),
+                    VlMinped = item.VlMinped.ToString(),
+                    CdRcaxxx = item.CdRcaxxx != null ? Convert.ToInt32(item.CdRcaxxx) : 0,
                 });
             }
             return lstuser;
@@ -137,18 +137,18 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lstuser.Add(new Banco
                 {
-                    Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    CdTipoCob=item.CdTipoCob.ToString(),
-                    DsTipocob=item.DsTipocob.ToString(),
-                    NvCobranc=item.NvCobranc.ToString(),
-                    InVendan=item.InVendan.ToString(),
-                    InUtiliz=item.InUtiliz.ToString(),
-                    InUtplano=item.InUtplano.ToString(),
-                    TxAcresc=item.TxAcresc.ToString(),
-                    QtPrzmax=item.QtPrzmax.ToString(),
-                    InBoleto=item.InBoleto.ToString(),
-                    VlMinped=item.VlMinped.ToString(),
-                    CdRcaxxx=item.CdRcaxxx!=null ? Convert.ToInt32(item.CdRcaxxx) : 0,
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    CdTipoCob = item.CdTipoCob.ToString(),
+                    DsTipocob = item.DsTipocob.ToString(),
+                    NvCobranc = item.NvCobranc.ToString(),
+                    InVendan = item.InVendan.ToString(),
+                    InUtiliz = item.InUtiliz.ToString(),
+                    InUtplano = item.InUtplano.ToString(),
+                    TxAcresc = item.TxAcresc.ToString(),
+                    QtPrzmax = item.QtPrzmax.ToString(),
+                    InBoleto = item.InBoleto.ToString(),
+                    VlMinped = item.VlMinped.ToString(),
+                    CdRcaxxx = item.CdRcaxxx != null ? Convert.ToInt32(item.CdRcaxxx) : 0,
                 });
             }
             return lstuser;
@@ -156,7 +156,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public void Add(Banco banco)
         {
 
-            if (banco!=null)
+            if (banco != null)
             {
                 var scriptCommand = new StringBuilder();
                 var commandInsert = $@"INSERT INTO [Banco](
@@ -185,14 +185,14 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                         , {banco.CdRcaxxx});";
                 scriptCommand.AppendLine(commandInsert);
 
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
         }
         public void AddRange(List<Banco> bancos)
         {
-            if (bancos!=null && bancos.Any())
+            if (bancos != null && bancos.Any())
             {
                 var scriptCommand = new StringBuilder();
 
@@ -224,7 +224,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                         , {item.CdRcaxxx});";
                     scriptCommand.AppendLine(commandInsert);
                 }
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
@@ -246,7 +246,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public void SaveProduto(List<Banco> bancos)
         {
-            if (bancos!=null && bancos.Any())
+            if (bancos != null && bancos.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine("DELETE FROM Banco;");
@@ -279,7 +279,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                         , {item.CdRcaxxx});";
                     scriptCommand.AppendLine(commandInsert);
                 }
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
@@ -296,7 +296,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var fields = retorno as IDictionary<string, object>;
             var _total = fields["COUNT(*)"];
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
 

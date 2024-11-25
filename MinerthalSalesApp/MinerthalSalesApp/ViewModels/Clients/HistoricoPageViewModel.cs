@@ -2,14 +2,14 @@
 using MinerthalSalesApp.Models;
 namespace MinerthalSalesApp.ViewModels.Clients
 {
-    public  partial class HistoricoPageViewModel : BaseViewModel, IAsyncInitialization
+    public partial class HistoricoPageViewModel : BaseViewModel, IAsyncInitialization
     {
         public Task Initialization { get; private set; }
         public HistoricoPageViewModel(string clienteLoja)
         {
             Initialization = InitializeAsync(clienteLoja);
         }
-      
+
         private async Task InitializeAsync(string clienteLoja)
         {
             await _listarHistoricoPedido(clienteLoja);
@@ -42,24 +42,24 @@ namespace MinerthalSalesApp.ViewModels.Clients
                     foreach (var item in pedidos)
                     {
                         var cdCliente = item.CdCliente;
-                        
-                        var cliente =  App.ClienteRepository.GetByCodigo(cdCliente);
-                        var tpCobranca =  App.BancoRepository.RecuperarNomeTipoCobranca(item.CdTipocob);
-                        var resumo =  App.ResumoPedidoRepository.GetByNumPedido(item.NrPedido);
+
+                        var cliente = App.ClienteRepository.GetByCodigo(cdCliente);
+                        var tpCobranca = App.BancoRepository.RecuperarNomeTipoCobranca(item.CdTipocob);
+                        var resumo = App.ResumoPedidoRepository.GetByNumPedido(item.NrPedido);
 
 
-                        if (cliente!=null)
+                        if (cliente != null)
                         {
                             item.NomeCliente = cliente.A1Nome;
                             item.Loja = cliente.A1Loja;
-                            item.ClienteCodigo =cliente.A1Cod;
+                            item.ClienteCodigo = cliente.A1Cod;
                         }
 
-                        if (tpCobranca!=null && tpCobranca!=null)
+                        if (tpCobranca != null && tpCobranca != null)
                             item.NomeTipoCobranca = tpCobranca.DsTipocob;
 
 
-                        if(resumo!=null && resumo.Count>0)
+                        if (resumo != null && resumo.Count > 0)
                         {
                             item.ResumoDoPedido = resumo;
                         }

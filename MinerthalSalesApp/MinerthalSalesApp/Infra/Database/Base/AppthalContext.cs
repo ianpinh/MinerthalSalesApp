@@ -16,7 +16,7 @@ namespace MinerthalSalesApp.Infra.Database.Base
             _dbPath = dbPath;
             connectionStringBuilder = new SqliteConnectionStringBuilder
             {
-                DataSource =dbPath
+                DataSource = dbPath
             };
         }
 
@@ -26,13 +26,13 @@ namespace MinerthalSalesApp.Infra.Database.Base
 
             var cont = 0;
             using var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
-            if (connection.State!=System.Data.ConnectionState.Open)
+            if (connection.State != System.Data.ConnectionState.Open)
                 connection.Open();
 
             using var transaction = connection.BeginTransaction();
             try
             {
-                cont =connection.Execute(command);
+                cont = connection.Execute(command);
                 transaction.Commit();
             }
             catch (Exception ex)
@@ -47,51 +47,51 @@ namespace MinerthalSalesApp.Infra.Database.Base
                 var _command = command.Contains("'") ? command.Replace("'", "") : command;
                 App.LogRepository.Add(new Log
                 {
-                    Data=DateTime.Now,
-                    ErrorDetail =ex.Message,
+                    Data = DateTime.Now,
+                    ErrorDetail = ex.Message,
                     Command = _command
                 });
-                cont=1;
+                cont = 1;
             }
             return cont;
 
         }
-		public int ExcecutarComandoCrudNoCommit(string command)
-		{
+        public int ExcecutarComandoCrudNoCommit(string command)
+        {
 
-			var cont = 0;
-			using var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
-			if (connection.State != System.Data.ConnectionState.Open)
-				connection.Open();
-			try
-			{
-				cont = connection.Execute(command);
-			}
-			catch (Exception ex)
-			{
-				if (ex.Message.Contains("no such table: Log"))
-					App.LogRepository.CriarTabela();
-				else if (ex.Message.Contains("no such table: Atualizacoes"))
-					App.AtualizacaoRepository.CriarTabela();
+            var cont = 0;
+            using var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
+            if (connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
+            try
+            {
+                cont = connection.Execute(command);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("no such table: Log"))
+                    App.LogRepository.CriarTabela();
+                else if (ex.Message.Contains("no such table: Atualizacoes"))
+                    App.AtualizacaoRepository.CriarTabela();
 
-				var _command = command.Contains("'") ? command.Replace("'", "") : command;
-				App.LogRepository.Add(new Log
-				{
-					Data = DateTime.Now,
-					ErrorDetail = ex.Message,
-					Command = _command
-				});
-				cont = 1;
-			}
-			return cont;
+                var _command = command.Contains("'") ? command.Replace("'", "") : command;
+                App.LogRepository.Add(new Log
+                {
+                    Data = DateTime.Now,
+                    ErrorDetail = ex.Message,
+                    Command = _command
+                });
+                cont = 1;
+            }
+            return cont;
 
-		}
-		public IEnumerable<dynamic> ExcecutarSelect(string command)
+        }
+        public IEnumerable<dynamic> ExcecutarSelect(string command)
         {
             try
             {
                 using var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
-                if (connection.State!=System.Data.ConnectionState.Open)
+                if (connection.State != System.Data.ConnectionState.Open)
                     connection.Open();
 
                 return connection.Query<dynamic>(command);
@@ -133,7 +133,7 @@ namespace MinerthalSalesApp.Infra.Database.Base
             try
             {
                 using var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
-                if (connection.State!=System.Data.ConnectionState.Open)
+                if (connection.State != System.Data.ConnectionState.Open)
                     connection.Open();
 
                 return connection.QueryFirstOrDefault<dynamic>(command);

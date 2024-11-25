@@ -120,14 +120,18 @@ public partial class App : Application
 
 
     static DateTime lastHour = DateTime.Now;
-    static int tempoAtualizacaoBanco = 2;
+    static int tempoAtualizacaoBanco = 30;
     async Task BuildDatabase()
     {
         try
         {
-            DeleteAllTables();
-            await ServicoDeCarregamentoDasBases.AtualizarBaseDeDados(Models.Enums.ApiMinertalTypes.Usuarios);
-            UpdateDatabase();
+            var hasInternetConnection = await ServicoDeRede.IsInternectConnected();
+            if (hasInternetConnection)
+            {
+                //DeleteAllTables();
+                await ServicoDeCarregamentoDasBases.AtualizarBaseDeDados(Models.Enums.ApiMinertalTypes.Usuarios);
+                UpdateDatabase();
+            }
         }
         catch (Exception ex)
         {

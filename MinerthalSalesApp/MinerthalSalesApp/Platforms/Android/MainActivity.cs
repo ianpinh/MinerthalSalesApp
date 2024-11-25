@@ -36,7 +36,7 @@ class BackPress : OnBackPressedCallback
         var current = Microsoft.Maui.ApplicationModel.Platform.CurrentActivity;
         var callingActive = Microsoft.Maui.ApplicationModel.Platform.CurrentActivity.CallingActivity;
         var navigation = Microsoft.Maui.Controls.Application.Current?.MainPage?.Navigation;
-        var lastPageNavigation = navigation.NavigationStack.Count>0 && navigation.NavigationStack[navigation.NavigationStack.Count-1]!=null ? navigation.NavigationStack[navigation.NavigationStack.Count-1] .ToString(): string.Empty;
+        var lastPageNavigation = navigation.NavigationStack.Count > 0 && navigation.NavigationStack[navigation.NavigationStack.Count - 1] != null ? navigation.NavigationStack[navigation.NavigationStack.Count - 1].ToString() : string.Empty;
 
 
         if (shell.Contains("AdminDashboardPage"))
@@ -53,12 +53,12 @@ class BackPress : OnBackPressedCallback
         }
         else if (lastPageNavigation.Contains("ProdutosPedidoPage") || shell.Contains("ProdutosPedidoPage"))
         {
-           // Shell.Current.GoToAsync($"//{nameof(PedidoPage)}");
+            // Shell.Current.GoToAsync($"//{nameof(PedidoPage)}");
         }
         else if (lastPageNavigation.Contains("PedidoPage") || shell.Contains("PedidoPage"))
         {
             Shell.Current.GoToAsync($"//{nameof(ClientsPage)}");
-          
+
         }
         else if (lastPageNavigation.Contains("CarrinhoPage") || shell.Contains("CarrinhoPage"))
         {
@@ -74,12 +74,12 @@ class BackPress : OnBackPressedCallback
             }));
             // Shell.Current.GoToAsync($"//{nameof(ProdutosPedidoPage)}");
         }
-      
-        else if (( lastPageNavigation.Contains("MeusPedidosPage") ||shell.Contains("MeusPedidosPage"))
-                ||(lastPageNavigation.Contains("ClientsPage") || shell.Contains("ClientsPage"))
-                ||(lastPageNavigation.Contains("AtualizacaoPage") || shell.Contains("AtualizacaoPage"))
-                ||(lastPageNavigation.Contains("RankingPage") || shell.Contains("RankingPage"))
-                ||(lastPageNavigation.Contains("ProdutosPage") || shell.Contains("ProdutosPage")))
+
+        else if ((lastPageNavigation.Contains("MeusPedidosPage") || shell.Contains("MeusPedidosPage"))
+                || (lastPageNavigation.Contains("ClientsPage") || shell.Contains("ClientsPage"))
+                || (lastPageNavigation.Contains("AtualizacaoPage") || shell.Contains("AtualizacaoPage"))
+                || (lastPageNavigation.Contains("RankingPage") || shell.Contains("RankingPage"))
+                || (lastPageNavigation.Contains("ProdutosPage") || shell.Contains("ProdutosPage")))
         {
             Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
         }

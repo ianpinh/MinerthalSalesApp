@@ -1,7 +1,4 @@
-﻿using MinerthalSalesApp.Infra.Services;
-using MinerthalSalesApp.ViewModels;
-
-namespace MinerthalSalesApp.Models.Servicos.Clientes
+﻿namespace MinerthalSalesApp.Models.Servicos.Clientes
 {
     //public class ClientServiceApplication : BaseViewModel, IClientServiceApplication
     //{

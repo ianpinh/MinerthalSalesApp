@@ -56,7 +56,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
                 {
                     Data = DateTime.Now,
                     Descricao = ex.Message,
-                    Pagina ="",
+                    Pagina = "",
                 });
             }
         }
@@ -107,8 +107,8 @@ namespace MinerthalSalesApp.ViewModels.Startup
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(TotalAtualizado));
 
-                int _total = (int)(totalAtualizado*100);
-                TotalAtualizadoPercentual= $"{_total}%";
+                int _total = (int)(totalAtualizado * 100);
+                TotalAtualizadoPercentual = $"{_total}%";
             }
         }
 
@@ -137,8 +137,8 @@ namespace MinerthalSalesApp.ViewModels.Startup
 
                 if (IsEnabled)
                 {
-                    MessageUpdate="Bem vindo ao AppThal";
-                    _ =NavegarParaHome();
+                    MessageUpdate = "Bem vindo ao AppThal";
+                    _ = NavegarParaHome();
                 }
             }
         }
@@ -156,16 +156,16 @@ namespace MinerthalSalesApp.ViewModels.Startup
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(TotalAtualizacoesRealizadas));
                 CalcularPercenturalAtualizacao();
-                IsEnabled = (TotalAtualizacoesRealizadas-TotalErros) == TotalAtualizacoes;
+                IsEnabled = (TotalAtualizacoesRealizadas - TotalErros) == TotalAtualizacoes;
 
             }
         }
 
         private void CalcularPercenturalAtualizacao()
         {
-            var totalRealizado = TotalAtualizacoesRealizadas-TotalErros;
-            var percentual = (totalRealizado * 100)/TotalAtualizacoes;
-            TotalAtualizado = (percentual/100M);
+            var totalRealizado = TotalAtualizacoesRealizadas - TotalErros;
+            var percentual = (totalRealizado * 100) / TotalAtualizacoes;
+            TotalAtualizado = (percentual / 100M);
         }
 
         private int totalErros = 0;
@@ -177,7 +177,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
                 totalErros = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(TotalErros));
-                IsEnabled = (TotalAtualizacoesRealizadas-TotalErros) == TotalAtualizacoes;
+                IsEnabled = (TotalAtualizacoesRealizadas - TotalErros) == TotalAtualizacoes;
                 CalcularPercenturalAtualizacao();
             }
         }
@@ -200,13 +200,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => totalUsuarios;
             set
             {
-                if (value>0 && !TotalUsuarios.Equals(value))
+                if (value > 0 && !TotalUsuarios.Equals(value))
                 {
                     totalUsuarios = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalUsuarios));
-                    ImageSourceLoadingUsuario =imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    ImageSourceLoadingUsuario = imagFinished;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.Usuarios);
                 }
             }
@@ -231,14 +231,14 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => totalClientes;
             set
             {
-                if (value>0 && !TotalClientes.Equals(value))
+                if (value > 0 && !TotalClientes.Equals(value))
                 {
                     totalClientes = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalClientes));
 
                     ImageSourceLoadingCliente = imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.Cliente);
                 }
             }
@@ -263,14 +263,14 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => totalFiliais;
             set
             {
-                if (value>0 && !TotalFiliais.Equals(value))
+                if (value > 0 && !TotalFiliais.Equals(value))
                 {
                     totalFiliais = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalFiliais));
 
                     ImageSourceLoadingFilial = imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.Filiais);
                 }
             }
@@ -296,13 +296,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => totalPlanos;
             set
             {
-                if (value>0 && !TotalPlanos.Equals(value))
+                if (value > 0 && !TotalPlanos.Equals(value))
                 {
                     totalPlanos = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalPlanos));
-                    ImageSourceLoadingPlano= imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    ImageSourceLoadingPlano = imagFinished;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.Planos);
                 }
             }
@@ -317,7 +317,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => imageSourceLoadingBanco;
             set
             {
-                imageSourceLoadingBanco   = value;
+                imageSourceLoadingBanco = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ImageSourceLoadingBanco));
             }
@@ -328,13 +328,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => totalBancos;
             set
             {
-                if (value>0 && !TotalBancos.Equals(value))
+                if (value > 0 && !TotalBancos.Equals(value))
                 {
                     totalBancos = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalBancos));
                     ImageSourceLoadingBanco = imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.Bancos);
                 }
             }
@@ -361,13 +361,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => totalPedidos;
             set
             {
-                if (value>0 && !TotalPedidos.Equals(value))
+                if (value > 0 && !TotalPedidos.Equals(value))
                 {
                     totalPedidos = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalPedidos));
                     imageSourceLoadingPedidos = imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.MeusPedidos);
                 }
             }
@@ -394,13 +394,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => totalTbPrecos;
             set
             {
-                if (value>0 && !TotalTbPrecos.Equals(value))
+                if (value > 0 && !TotalTbPrecos.Equals(value))
                 {
                     totalTbPrecos = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalTbPrecos));
-                    ImageSourceLoadingPreco= imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    ImageSourceLoadingPreco = imagFinished;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.TabelaDePrecos);
                 }
             }
@@ -416,7 +416,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => imageSourceLoadingProduto;
             set
             {
-                imageSourceLoadingProduto= value;
+                imageSourceLoadingProduto = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ImageSourceLoadingProduto));
             }
@@ -427,13 +427,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => totalProdutos;
             set
             {
-                if (value>0 && !TotalProdutos.Equals(value))
+                if (value > 0 && !TotalProdutos.Equals(value))
                 {
                     totalProdutos = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalProdutos));
-                    ImageSourceLoadingProduto=imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    ImageSourceLoadingProduto = imagFinished;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.Produtos);
                 }
             }
@@ -459,13 +459,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => totalRanking;
             set
             {
-                if (value>0 && !TotalRanking.Equals(value))
+                if (value > 0 && !TotalRanking.Equals(value))
                 {
                     totalRanking = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalRanking));
-                    ImageSourceLoadingRanking =imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    ImageSourceLoadingRanking = imagFinished;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.Ranking);
                 }
             }
@@ -480,7 +480,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => imageSourceLoadingVendedor;
             set
             {
-                imageSourceLoadingVendedor  = value;
+                imageSourceLoadingVendedor = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ImageSourceLoadingVendedor));
             }
@@ -493,13 +493,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             set
 
             {
-                if (value>0 && !TotalVendedores.Equals(value))
+                if (value > 0 && !TotalVendedores.Equals(value))
                 {
                     totalVendedores = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalVendedores));
-                    ImageSourceLoadingVendedor= imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    ImageSourceLoadingVendedor = imagFinished;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.Vendedor);
                 }
             }
@@ -515,7 +515,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => imageSourceLoadingHistoricoPedido;
             set
             {
-                imageSourceLoadingHistoricoPedido  = value;
+                imageSourceLoadingHistoricoPedido = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ImageSourceLoadingHistoricoPedido));
             }
@@ -528,13 +528,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             set
 
             {
-                if (value>0 && !totalHistoricoPedidos.Equals(value))
+                if (value > 0 && !totalHistoricoPedidos.Equals(value))
                 {
                     totalHistoricoPedidos = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalHistoricoPedidos));
-                    ImageSourceLoadingHistoricoPedido= imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    ImageSourceLoadingHistoricoPedido = imagFinished;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.HistoricoPedido);
                 }
             }
@@ -550,7 +550,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
             get => imageSourceLoadingResumoPedido;
             set
             {
-                imageSourceLoadingResumoPedido  = value;
+                imageSourceLoadingResumoPedido = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ImageSourceLoadingResumoPedido));
             }
@@ -563,13 +563,13 @@ namespace MinerthalSalesApp.ViewModels.Startup
             set
 
             {
-                if (value>0 && !totalResumoPedidos.Equals(value))
+                if (value > 0 && !totalResumoPedidos.Equals(value))
                 {
                     totalResumoPedidos = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalResumoPedidos));
-                    ImageSourceLoadingResumoPedido= imagFinished;
-                    TotalAtualizacoesRealizadas+=1;
+                    ImageSourceLoadingResumoPedido = imagFinished;
+                    TotalAtualizacoesRealizadas += 1;
                     SalvarLog(ApiMinertalTypes.ResumoPedido);
                 }
             }

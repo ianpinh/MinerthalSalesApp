@@ -50,7 +50,7 @@ namespace MinerthalSalesApp.Infra.Database.Tables
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     dtEmissao = value;
-                    Emissao =RecuperarDataEmissao();
+                    Emissao = RecuperarDataEmissao();
                 }
             }
         }

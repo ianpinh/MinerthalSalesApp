@@ -51,18 +51,18 @@ namespace MinerthalSalesApp.Infra.Database.Tables
 
         public DateTime? DataDeVencimento => RecuperarDataVencimento();
 
-        public string NomeCliente { get; set; }=string.Empty;
+        public string NomeCliente { get; set; } = string.Empty;
 
         [Ignore]
         public Color StatusVencimento { get; set; }
         [Ignore]
         public string ValorDocumento => VlDocum.ToString("N2", CultureInfo.CreateSpecificCulture("pt-BR"));
-        public string ValorJuros=> Juros.ToString("N2", CultureInfo.CreateSpecificCulture("pt-BR"));
-        public string ValorTotal => (VlDocum+Juros).ToString("N2", CultureInfo.CreateSpecificCulture("pt-BR"));
+        public string ValorJuros => Juros.ToString("N2", CultureInfo.CreateSpecificCulture("pt-BR"));
+        public string ValorTotal => (VlDocum + Juros).ToString("N2", CultureInfo.CreateSpecificCulture("pt-BR"));
 
         private DateTime? RecuperarDataEmissao()
         {
-            if (DateTime.TryParse(DtEmissao, CultureInfo.CreateSpecificCulture("pt-BR"),out DateTime data))
+            if (DateTime.TryParse(DtEmissao, CultureInfo.CreateSpecificCulture("pt-BR"), out DateTime data))
                 return data;
 
             return null;

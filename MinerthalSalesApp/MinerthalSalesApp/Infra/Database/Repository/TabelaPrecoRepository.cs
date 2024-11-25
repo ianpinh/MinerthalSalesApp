@@ -12,7 +12,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public TabelaPrecoRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
         private void Init()
@@ -44,19 +44,19 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new TabelaPreco
             {
-                Id=Convert.ToInt32(retorno.Id),
-                CdProduto=retorno.CdProduto.ToString(),
-                IdTabPrec=retorno.IdTabPrec.ToString(),
-                CdFilial=retorno.CdFilial.ToString(),
-                CdRcaxxx=retorno.CdRcaxxx.ToString(),
-                DtValIni=retorno.DtValIni.ToString(),
-                DtValFin=retorno.DtValFin.ToString(),
-                QtdMin= retorno.QtdMin !=null ? Convert.ToInt32(retorno.Id) : 0,
-                QtdMax= retorno.QtdMax !=null ? Convert.ToInt32(retorno.Id) : 0,
-                PerComissao=retorno.PerComissao!=null ? Convert.ToDecimal(retorno.PerComissao) : 0M,
-                VlVvenda=retorno.VlVvenda!=null ? Convert.ToDecimal(retorno.VlVvenda) : 0M,
-                PerMin=retorno.PerMin!=null ? Convert.ToDecimal(retorno.PerMin) : 0M,
-                PerMax=retorno.PerMax!=null ? Convert.ToDecimal(retorno.PerMax) : 0M
+                Id = Convert.ToInt32(retorno.Id),
+                CdProduto = retorno.CdProduto.ToString(),
+                IdTabPrec = retorno.IdTabPrec.ToString(),
+                CdFilial = retorno.CdFilial.ToString(),
+                CdRcaxxx = retorno.CdRcaxxx.ToString(),
+                DtValIni = retorno.DtValIni.ToString(),
+                DtValFin = retorno.DtValFin.ToString(),
+                QtdMin = retorno.QtdMin != null ? Convert.ToInt32(retorno.Id) : 0,
+                QtdMax = retorno.QtdMax != null ? Convert.ToInt32(retorno.Id) : 0,
+                PerComissao = retorno.PerComissao != null ? Convert.ToDecimal(retorno.PerComissao) : 0M,
+                VlVvenda = retorno.VlVvenda != null ? Convert.ToDecimal(retorno.VlVvenda) : 0M,
+                PerMin = retorno.PerMin != null ? Convert.ToDecimal(retorno.PerMin) : 0M,
+                PerMax = retorno.PerMax != null ? Convert.ToDecimal(retorno.PerMax) : 0M
             };
         }
 
@@ -73,19 +73,19 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lst.Add(new TabelaPreco
                 {
-                    Id=Convert.ToInt32(item.Id),
-                    CdProduto=item.CdProduto.ToString(),
-                    IdTabPrec=item.IdTabPrec.ToString(),
-                    CdFilial=item.CdFilial.ToString(),
-                    CdRcaxxx=item.CdRcaxxx.ToString(),
-                    DtValIni=item.DtValIni.ToString(),
-                    DtValFin=item.DtValFin.ToString(),
-                    QtdMin= item.QtdMin !=null ? Convert.ToInt32(item.Id) : 0,
-                    QtdMax= item.QtdMax !=null ? Convert.ToInt32(item.Id) : 0,
-                    PerComissao=item.PerComissao!=null ? Convert.ToDecimal(item.PerComissao) : 0M,
-                    VlVvenda=item.VlVvenda!=null ? Convert.ToDecimal(item.VlVvenda) : 0M,
-                    PerMin=item.PerMin!=null ? Convert.ToDecimal(item.PerMin) : 0M,
-                    PerMax=item.PerMax!=null ? Convert.ToDecimal(item.PerMax) : 0M
+                    Id = Convert.ToInt32(item.Id),
+                    CdProduto = item.CdProduto.ToString(),
+                    IdTabPrec = item.IdTabPrec.ToString(),
+                    CdFilial = item.CdFilial.ToString(),
+                    CdRcaxxx = item.CdRcaxxx.ToString(),
+                    DtValIni = item.DtValIni.ToString(),
+                    DtValFin = item.DtValFin.ToString(),
+                    QtdMin = item.QtdMin != null ? Convert.ToInt32(item.Id) : 0,
+                    QtdMax = item.QtdMax != null ? Convert.ToInt32(item.Id) : 0,
+                    PerComissao = item.PerComissao != null ? Convert.ToDecimal(item.PerComissao) : 0M,
+                    VlVvenda = item.VlVvenda != null ? Convert.ToDecimal(item.VlVvenda) : 0M,
+                    PerMin = item.PerMin != null ? Convert.ToDecimal(item.PerMin) : 0M,
+                    PerMax = item.PerMax != null ? Convert.ToDecimal(item.PerMax) : 0M
                 });
             }
             return lst;
@@ -124,7 +124,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<TabelaPreco> tbpreco)
         {
-            if (tbpreco!=null && tbpreco.Any())
+            if (tbpreco != null && tbpreco.Any())
             {
                 var scriptCommand = new StringBuilder();
 
@@ -203,19 +203,19 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lst.Add(new TabelaPreco
                 {
-                    Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    CdProduto=item.CdProduto!=null ? item.CdProduto.ToString() : "",
-                    IdTabPrec=item.IdTabPrec!=null ? item.IdTabPrec.ToString() : "",
-                    CdFilial=item.CdFilial!=null ? item.CdFilial.ToString() : "",
-                    CdRcaxxx=item.CdRcaxxx!=null ? item.CdRcaxxx.ToString() : "",
-                    DtValIni=item.DtValIni!=null ? item.DtValIni.ToString() : "",
-                    DtValFin=item.DtValFin!=null ? item.DtValFin.ToString() : "",
-                    QtdMin= item.QtdMin !=null ? Convert.ToInt32(item.QtdMin) : 0,
-                    QtdMax= item.QtdMax !=null ? Convert.ToInt32(item.QtdMax) : 0,
-                    PerComissao=item.PerComissao!=null ? Convert.ToDecimal(item.PerComissao) : 0M,
-                    VlVvenda=item.VlVvenda!=null ? Convert.ToDecimal(item.VlVvenda) : 0M,
-                    PerMin=item.PerMin!=null ? Convert.ToDecimal(item.PerMin) : 0M,
-                    PerMax=item.PerMax!=null ? Convert.ToDecimal(item.PerMax) : 0M
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    CdProduto = item.CdProduto != null ? item.CdProduto.ToString() : "",
+                    IdTabPrec = item.IdTabPrec != null ? item.IdTabPrec.ToString() : "",
+                    CdFilial = item.CdFilial != null ? item.CdFilial.ToString() : "",
+                    CdRcaxxx = item.CdRcaxxx != null ? item.CdRcaxxx.ToString() : "",
+                    DtValIni = item.DtValIni != null ? item.DtValIni.ToString() : "",
+                    DtValFin = item.DtValFin != null ? item.DtValFin.ToString() : "",
+                    QtdMin = item.QtdMin != null ? Convert.ToInt32(item.QtdMin) : 0,
+                    QtdMax = item.QtdMax != null ? Convert.ToInt32(item.QtdMax) : 0,
+                    PerComissao = item.PerComissao != null ? Convert.ToDecimal(item.PerComissao) : 0M,
+                    VlVvenda = item.VlVvenda != null ? Convert.ToDecimal(item.VlVvenda) : 0M,
+                    PerMin = item.PerMin != null ? Convert.ToDecimal(item.PerMin) : 0M,
+                    PerMax = item.PerMax != null ? Convert.ToDecimal(item.PerMax) : 0M
                 });
             }
             return lst;
@@ -231,7 +231,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             CustomExceptions.LancarExcecaoQuando(!diValid, "Data de início da validade da tabela de preço inválida");
             CustomExceptions.LancarExcecaoQuando(!dfValid, "Data de final da validade da tabela de preço inválida");
-            CustomExceptions.LancarExcecaoQuando(DateTime.Compare(dataAtual, datainicial) <0, $"A tabela de preços pra esse produto tem iníncio em {tabela.DtValIni} ");
+            CustomExceptions.LancarExcecaoQuando(DateTime.Compare(dataAtual, datainicial) < 0, $"A tabela de preços pra esse produto tem iníncio em {tabela.DtValIni} ");
             CustomExceptions.LancarExcecaoQuando(DateTime.Compare(dataAtual, datafinal) > 0, $"A tabela de preços pra esse produto venceu em {tabela.DtValFin} ");
         }
 
@@ -245,13 +245,13 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var _total = fields["COUNT(*)"];
 
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
 
         public void SaveTabelaPreco(List<TabelaPreco> tbpreco)
         {
-            if (tbpreco!=null && tbpreco.Any())
+            if (tbpreco != null && tbpreco.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine("DELETE FROM TabelaPreco;");
@@ -293,7 +293,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 _context.ExcecutarComandoCrud(command);
             }
         }
-     
+
         public void CriarTabela()
         {
             Init();

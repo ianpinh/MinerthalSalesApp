@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-namespace MinerthalSalesApp.ViewModels.Shared
+﻿namespace MinerthalSalesApp.ViewModels.Shared
 {
     public partial class SharedLoadingViewModel : BaseViewModel
     {

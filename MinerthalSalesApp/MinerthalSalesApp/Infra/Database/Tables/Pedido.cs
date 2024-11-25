@@ -2,8 +2,8 @@
 
 namespace MinerthalSalesApp.Infra.Database.Tables
 {
- 
-   [Table("Pedido")]
+
+    [Table("Pedido")]
     public class Pedido
     {
         [PrimaryKey, Column("Id")]
@@ -22,7 +22,7 @@ namespace MinerthalSalesApp.Infra.Database.Tables
 
         [Column("TipoPedido")]
         public string TipoPedido { get; set; }
-      
+
         [Column("TipoVenda")]
         public string TipoVenda { get; set; }
 
@@ -52,7 +52,7 @@ namespace MinerthalSalesApp.Infra.Database.Tables
 
         [Column("Observacao")]
         public string Observacao { get; set; }
-        
+
         [Column("PercentualDesconto")]
         public decimal PercentualDesconto { get; set; }
 

@@ -2,23 +2,23 @@
 
 namespace MinerthalSalesApp.Infra.Database.Repository.Interface
 {
-     public interface IPlanosRepository
+    public interface IPlanosRepository
     {
-         List<Plano> GetAll();
+        List<Plano> GetAll();
 
-         void Add(Plano plano);
+        void Add(Plano plano);
 
-         void AddRange(List<Plano> planos);
+        void AddRange(List<Plano> planos);
 
-         void DeleteById(int id);
+        void DeleteById(int id);
 
-         void DeleteAll();
+        void DeleteAll();
 
-         void Save(List<Plano> planos);
+        void Save(List<Plano> planos);
 
-         Plano GetByCode(string planoPagamento);
+        Plano GetByCode(string planoPagamento);
 
-         int GetTotal();
+        int GetTotal();
         void CriarTabela();
     }
 }

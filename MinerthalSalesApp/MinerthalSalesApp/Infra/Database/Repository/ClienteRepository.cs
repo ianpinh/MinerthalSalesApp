@@ -8,11 +8,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 {
     public class ClienteRepository : IClienteRepository
     {
-        private string NomeTabelaCliente=> RecuperarNomeDaTabela();
+        private string NomeTabelaCliente => RecuperarNomeDaTabela();
         private readonly IAppthalContext _context;
         public ClienteRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
         private void Init(string nomeTabelaCliente)
         {
@@ -68,30 +68,30 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 {
                     lstuser.Add(new Cliente
                     {
-                        A1Cgc=item.A1Cgc.ToString(),
-                        A1Cod=item.A1Cod.ToString(),
-                        A1Loja=item.A1Loja.ToString(),
-                        A1Nome=item.A1Nome.ToString(),
-                        A1Nreduz=item.A1Nreduz.ToString(),
-                        A1Nomprp1=item.A1Nomprp1.ToString(),
-                        A1Nomprp2=item.A1Nomprp2.ToString(),
-                        A1Tipo=item.A1Tipo.ToString(),
-                        A1Pessoa=item.A1Pessoa.ToString(),
-                        A1Msblql=item.A1Msblql.ToString(),
-                        A1Condpag=item.A1Condpag.ToString(),
-                        A1Inscr=item.A1Inscr.ToString(),
-                        A1Observ=item.A1Observ.ToString(),
-                        A1Ddd=item.A1Ddd.ToString(),
-                        A1Telex=item.A1Telex.ToString(),
-                        A1Email=item.A1Email.ToString(),
-                        A1Este=item.A1Este.ToString(),
-                        A1Mune=item.A1Mune.ToString(),
-                        A1Bairroe=item.A1Bairroe.ToString(),
-                        A1Endent=item.A1Endent.ToString(),
-                        A1Ultcom=item.A1Ultcom.ToString(),
-                        LcDisponivel=item.LcDisponivel!=null ? (decimal)item.LcDisponivel : 0M,
-                        AVencer=item.AVencer!=null ? (decimal)item.AVencer : 0M,
-                        A1Atr=item.A1Atr!=null ? (decimal)item.A1Atr : 0M
+                        A1Cgc = item.A1Cgc.ToString(),
+                        A1Cod = item.A1Cod.ToString(),
+                        A1Loja = item.A1Loja.ToString(),
+                        A1Nome = item.A1Nome.ToString(),
+                        A1Nreduz = item.A1Nreduz.ToString(),
+                        A1Nomprp1 = item.A1Nomprp1.ToString(),
+                        A1Nomprp2 = item.A1Nomprp2.ToString(),
+                        A1Tipo = item.A1Tipo.ToString(),
+                        A1Pessoa = item.A1Pessoa.ToString(),
+                        A1Msblql = item.A1Msblql.ToString(),
+                        A1Condpag = item.A1Condpag.ToString(),
+                        A1Inscr = item.A1Inscr.ToString(),
+                        A1Observ = item.A1Observ.ToString(),
+                        A1Ddd = item.A1Ddd.ToString(),
+                        A1Telex = item.A1Telex.ToString(),
+                        A1Email = item.A1Email.ToString(),
+                        A1Este = item.A1Este.ToString(),
+                        A1Mune = item.A1Mune.ToString(),
+                        A1Bairroe = item.A1Bairroe.ToString(),
+                        A1Endent = item.A1Endent.ToString(),
+                        A1Ultcom = item.A1Ultcom.ToString(),
+                        LcDisponivel = item.LcDisponivel != null ? (decimal)item.LcDisponivel : 0M,
+                        AVencer = item.AVencer != null ? (decimal)item.AVencer : 0M,
+                        A1Atr = item.A1Atr != null ? (decimal)item.A1Atr : 0M
                     });
                 }
                 return lstuser;
@@ -114,31 +114,31 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 return new Cliente
                 {
-                    A1Cgc=retorno.A1Cgc.ToString(),
-                    A1Cod=retorno.A1Cod.ToString(),
-                    A1Loja=retorno.A1Loja.ToString(),
-                    A1Nome=retorno.A1Nome.ToString(),
-                    A1Nreduz=retorno.A1Nreduz.ToString(),
-                    A1Nomprp1=retorno.A1Nomprp1.ToString(),
-                    A1Nomprp2=retorno.A1Nomprp2.ToString(),
-                    A1Tipo=retorno.A1Tipo.ToString(),
-                    A1Pessoa=retorno.A1Pessoa.ToString(),
-                    A1Msblql=retorno.A1Msblql.ToString(),
-                    A1Condpag=retorno.A1Condpag.ToString(),
-                    A1Inscr=retorno.A1Inscr.ToString(),
-                    A1Observ=retorno.A1Observ.ToString(),
-                    A1Ddd=retorno.A1Ddd.ToString(),
-                    A1Telex=retorno.A1Telex.ToString(),
-                    A1Email=retorno.A1Email.ToString(),
-                    A1Este=retorno.A1Este.ToString(),
-                    A1Mune=retorno.A1Mune.ToString(),
-                    A1Bairroe=retorno.A1Bairroe.ToString(),
-                    A1Endent=retorno.A1Endent.ToString(),
-                    A1Ultcom=retorno.A1Ultcom.ToString(),
-                    A1Lc=retorno.A1Lc!=null ? (decimal)retorno.A1Lc : 0M,
-                    LcDisponivel=retorno.LcDisponivel!=null ? (decimal)retorno.LcDisponivel : 0M,
-                    AVencer=retorno.AVencer!=null ? (decimal)retorno.AVencer : 0M,
-                    A1Atr=retorno.A1Atr!=null ? (decimal)retorno.A1Atr : 0M
+                    A1Cgc = retorno.A1Cgc.ToString(),
+                    A1Cod = retorno.A1Cod.ToString(),
+                    A1Loja = retorno.A1Loja.ToString(),
+                    A1Nome = retorno.A1Nome.ToString(),
+                    A1Nreduz = retorno.A1Nreduz.ToString(),
+                    A1Nomprp1 = retorno.A1Nomprp1.ToString(),
+                    A1Nomprp2 = retorno.A1Nomprp2.ToString(),
+                    A1Tipo = retorno.A1Tipo.ToString(),
+                    A1Pessoa = retorno.A1Pessoa.ToString(),
+                    A1Msblql = retorno.A1Msblql.ToString(),
+                    A1Condpag = retorno.A1Condpag.ToString(),
+                    A1Inscr = retorno.A1Inscr.ToString(),
+                    A1Observ = retorno.A1Observ.ToString(),
+                    A1Ddd = retorno.A1Ddd.ToString(),
+                    A1Telex = retorno.A1Telex.ToString(),
+                    A1Email = retorno.A1Email.ToString(),
+                    A1Este = retorno.A1Este.ToString(),
+                    A1Mune = retorno.A1Mune.ToString(),
+                    A1Bairroe = retorno.A1Bairroe.ToString(),
+                    A1Endent = retorno.A1Endent.ToString(),
+                    A1Ultcom = retorno.A1Ultcom.ToString(),
+                    A1Lc = retorno.A1Lc != null ? (decimal)retorno.A1Lc : 0M,
+                    LcDisponivel = retorno.LcDisponivel != null ? (decimal)retorno.LcDisponivel : 0M,
+                    AVencer = retorno.AVencer != null ? (decimal)retorno.AVencer : 0M,
+                    A1Atr = retorno.A1Atr != null ? (decimal)retorno.A1Atr : 0M
                 };
             }
             catch (Exception)
@@ -159,31 +159,31 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
                 return new Cliente
                 {
-                    A1Cgc=retorno.A1Cgc.ToString(),
-                    A1Cod=retorno.A1Cod.ToString(),
-                    A1Loja=retorno.A1Loja.ToString(),
-                    A1Nome=retorno.A1Nome.ToString(),
-                    A1Nreduz=retorno.A1Nreduz.ToString(),
-                    A1Nomprp1=retorno.A1Nomprp1.ToString(),
-                    A1Nomprp2=retorno.A1Nomprp2.ToString(),
-                    A1Tipo=retorno.A1Tipo.ToString(),
-                    A1Pessoa=retorno.A1Pessoa.ToString(),
-                    A1Msblql=retorno.A1Msblql.ToString(),
-                    A1Condpag=retorno.A1Condpag.ToString(),
-                    A1Inscr=retorno.A1Inscr.ToString(),
-                    A1Observ=retorno.A1Observ.ToString(),
-                    A1Ddd=retorno.A1Ddd.ToString(),
-                    A1Telex=retorno.A1Telex.ToString(),
-                    A1Email=retorno.A1Email.ToString(),
-                    A1Este=retorno.A1Este.ToString(),
-                    A1Mune=retorno.A1Mune.ToString(),
-                    A1Bairroe=retorno.A1Bairroe.ToString(),
-                    A1Endent=retorno.A1Endent.ToString(),
-                    A1Ultcom=retorno.A1Ultcom.ToString(),
-                    A1Lc=retorno.A1Lc!=null ? (decimal)retorno.A1Lc : 0M,
-                    LcDisponivel=retorno.LcDisponivel!=null ? (decimal)retorno.LcDisponivel : 0M,
-                    AVencer=retorno.AVencer!=null ? (decimal)retorno.AVencer : 0M,
-                    A1Atr=retorno.A1Atr!=null ? (decimal)retorno.A1Atr : 0M
+                    A1Cgc = retorno.A1Cgc.ToString(),
+                    A1Cod = retorno.A1Cod.ToString(),
+                    A1Loja = retorno.A1Loja.ToString(),
+                    A1Nome = retorno.A1Nome.ToString(),
+                    A1Nreduz = retorno.A1Nreduz.ToString(),
+                    A1Nomprp1 = retorno.A1Nomprp1.ToString(),
+                    A1Nomprp2 = retorno.A1Nomprp2.ToString(),
+                    A1Tipo = retorno.A1Tipo.ToString(),
+                    A1Pessoa = retorno.A1Pessoa.ToString(),
+                    A1Msblql = retorno.A1Msblql.ToString(),
+                    A1Condpag = retorno.A1Condpag.ToString(),
+                    A1Inscr = retorno.A1Inscr.ToString(),
+                    A1Observ = retorno.A1Observ.ToString(),
+                    A1Ddd = retorno.A1Ddd.ToString(),
+                    A1Telex = retorno.A1Telex.ToString(),
+                    A1Email = retorno.A1Email.ToString(),
+                    A1Este = retorno.A1Este.ToString(),
+                    A1Mune = retorno.A1Mune.ToString(),
+                    A1Bairroe = retorno.A1Bairroe.ToString(),
+                    A1Endent = retorno.A1Endent.ToString(),
+                    A1Ultcom = retorno.A1Ultcom.ToString(),
+                    A1Lc = retorno.A1Lc != null ? (decimal)retorno.A1Lc : 0M,
+                    LcDisponivel = retorno.LcDisponivel != null ? (decimal)retorno.LcDisponivel : 0M,
+                    AVencer = retorno.AVencer != null ? (decimal)retorno.AVencer : 0M,
+                    A1Atr = retorno.A1Atr != null ? (decimal)retorno.A1Atr : 0M
                 };
             }
             catch (Exception)
@@ -196,7 +196,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                if (clientes!=null && clientes.Any())
+                if (clientes != null && clientes.Any())
                 {
                     var scriptCommand = new StringBuilder();
                     scriptCommand.AppendLine($"DELETE FROM {NomeTabelaCliente};");
@@ -275,7 +275,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 throw;
             }
         }
-        public void SaveClientesVendedor(List<Cliente> clientes,string codigoVendedor)
+        public void SaveClientesVendedor(List<Cliente> clientes, string codigoVendedor)
         {
             try
             {
@@ -422,7 +422,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<Cliente> clientes)
         {
-            if (clientes!=null && clientes.Any())
+            if (clientes != null && clientes.Any())
             {
                 var scriptCommand = new StringBuilder();
 
@@ -510,7 +510,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 var fields = retorno as IDictionary<string, object>;
                 var _total = fields["COUNT(*)"];
 
-                _=int.TryParse(_total.ToString(), out int total);
+                _ = int.TryParse(_total.ToString(), out int total);
                 return total;
             }
             catch (Exception)
@@ -579,31 +579,31 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 {
                     var _cliente = new Cliente
                     {
-                        A1Cgc=retorno.A1Cgc.ToString(),
-                        A1Cod=retorno.A1Cod.ToString(),
-                        A1Loja=retorno.A1Loja.ToString(),
-                        A1Nome=retorno.A1Nome.ToString(),
-                        A1Nreduz=retorno.A1Nreduz.ToString(),
-                        A1Nomprp1=retorno.A1Nomprp1.ToString(),
-                        A1Nomprp2=retorno.A1Nomprp2.ToString(),
-                        A1Tipo=retorno.A1Tipo.ToString(),
-                        A1Pessoa=retorno.A1Pessoa.ToString(),
-                        A1Msblql=retorno.A1Msblql.ToString(),
-                        A1Condpag=retorno.A1Condpag.ToString(),
-                        A1Inscr=retorno.A1Inscr.ToString(),
-                        A1Observ=retorno.A1Observ.ToString(),
-                        A1Ddd=retorno.A1Ddd.ToString(),
-                        A1Telex=retorno.A1Telex.ToString(),
-                        A1Email=retorno.A1Email.ToString(),
-                        A1Este=retorno.A1Este.ToString(),
-                        A1Mune=retorno.A1Mune.ToString(),
-                        A1Bairroe=retorno.A1Bairroe.ToString(),
-                        A1Endent=retorno.A1Endent.ToString(),
-                        A1Ultcom=retorno.A1Ultcom.ToString(),
-                        A1Lc=retorno.A1Lc!=null ? (decimal)retorno.A1Lc : 0M,
-                        LcDisponivel=retorno.LcDisponivel!=null ? (decimal)retorno.LcDisponivel : 0M,
-                        AVencer=retorno.AVencer!=null ? (decimal)retorno.AVencer : 0M,
-                        A1Atr=retorno.A1Atr!=null ? (decimal)retorno.A1Atr : 0M
+                        A1Cgc = retorno.A1Cgc.ToString(),
+                        A1Cod = retorno.A1Cod.ToString(),
+                        A1Loja = retorno.A1Loja.ToString(),
+                        A1Nome = retorno.A1Nome.ToString(),
+                        A1Nreduz = retorno.A1Nreduz.ToString(),
+                        A1Nomprp1 = retorno.A1Nomprp1.ToString(),
+                        A1Nomprp2 = retorno.A1Nomprp2.ToString(),
+                        A1Tipo = retorno.A1Tipo.ToString(),
+                        A1Pessoa = retorno.A1Pessoa.ToString(),
+                        A1Msblql = retorno.A1Msblql.ToString(),
+                        A1Condpag = retorno.A1Condpag.ToString(),
+                        A1Inscr = retorno.A1Inscr.ToString(),
+                        A1Observ = retorno.A1Observ.ToString(),
+                        A1Ddd = retorno.A1Ddd.ToString(),
+                        A1Telex = retorno.A1Telex.ToString(),
+                        A1Email = retorno.A1Email.ToString(),
+                        A1Este = retorno.A1Este.ToString(),
+                        A1Mune = retorno.A1Mune.ToString(),
+                        A1Bairroe = retorno.A1Bairroe.ToString(),
+                        A1Endent = retorno.A1Endent.ToString(),
+                        A1Ultcom = retorno.A1Ultcom.ToString(),
+                        A1Lc = retorno.A1Lc != null ? (decimal)retorno.A1Lc : 0M,
+                        LcDisponivel = retorno.LcDisponivel != null ? (decimal)retorno.LcDisponivel : 0M,
+                        AVencer = retorno.AVencer != null ? (decimal)retorno.AVencer : 0M,
+                        A1Atr = retorno.A1Atr != null ? (decimal)retorno.A1Atr : 0M
                     };
                     lst.Add(_cliente);
                 }

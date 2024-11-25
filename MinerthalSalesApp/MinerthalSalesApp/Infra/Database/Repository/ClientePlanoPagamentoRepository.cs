@@ -5,12 +5,12 @@ using System.Text;
 
 namespace MinerthalSalesApp.Infra.Database.Repository
 {
-    public class ClientePlanoPagamentoRepository: IClientePlanoPagamentoRepository
+    public class ClientePlanoPagamentoRepository : IClientePlanoPagamentoRepository
     {
         private readonly IAppthalContext _context;
         public ClientePlanoPagamentoRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
         private void Init()
@@ -41,11 +41,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new ClientePlanoPagamento
             {
-                Id=retorno.Id!=null ? Convert.ToInt32(retorno.Id) : 0,
-                CdCliente=retorno.CdCliente.ToString(),
-                Loja=retorno.Loja.ToString(),
-                CdPlpag=retorno.CdPlpag.ToString(),
-                CdRcaxxx=retorno.CdRcaxxx!=null ? Convert.ToInt32(retorno.CdRcaxxx) : 0,
+                Id = retorno.Id != null ? Convert.ToInt32(retorno.Id) : 0,
+                CdCliente = retorno.CdCliente.ToString(),
+                Loja = retorno.Loja.ToString(),
+                CdPlpag = retorno.CdPlpag.ToString(),
+                CdRcaxxx = retorno.CdRcaxxx != null ? Convert.ToInt32(retorno.CdRcaxxx) : 0,
             };
         }
         public List<ClientePlanoPagamento> GetAll()
@@ -61,18 +61,18 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lstuser.Add(new ClientePlanoPagamento
                 {
-                    Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    CdCliente=item.CdCliente.ToString(),
-                    Loja=item.Loja.ToString(),
-                    CdPlpag=item.CdPlpag.ToString(),
-                    CdRcaxxx=item.CdRcaxxx!=null ? Convert.ToInt32(item.CdRcaxxx) : 0,
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    CdCliente = item.CdCliente.ToString(),
+                    Loja = item.Loja.ToString(),
+                    CdPlpag = item.CdPlpag.ToString(),
+                    CdRcaxxx = item.CdRcaxxx != null ? Convert.ToInt32(item.CdRcaxxx) : 0,
                 });
             }
             return lstuser;
         }
         public void Add(ClientePlanoPagamento plano)
         {
-            if (plano!=null)
+            if (plano != null)
             {
                 var scriptCommand = new StringBuilder();
 
@@ -88,14 +88,14 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                             ,'{plano.CdRcaxxx}');";
                 scriptCommand.AppendLine(commandInsert);
 
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
         }
         public void AddRange(List<ClientePlanoPagamento> planos)
         {
-            if (planos!=null && planos.Any())
+            if (planos != null && planos.Any())
             {
                 var scriptCommand = new StringBuilder();
 
@@ -113,7 +113,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                             ,'{item.CdRcaxxx}');";
                     scriptCommand.AppendLine(commandInsert);
                 }
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
@@ -130,7 +130,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public void Save(List<ClientePlanoPagamento> plano)
         {
-            if (plano!=null && plano.Any())
+            if (plano != null && plano.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine("DELETE FROM ClientePlanoPagamento;");
@@ -149,7 +149,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                             ,'{item.CdRcaxxx}');";
                     scriptCommand.AppendLine(commandInsert);
                 }
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
