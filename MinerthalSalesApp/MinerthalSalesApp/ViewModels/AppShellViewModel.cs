@@ -4,10 +4,8 @@ using MinerthalSalesApp.Customs.Exceptions;
 using MinerthalSalesApp.Infra.Database.Tables;
 using MinerthalSalesApp.Models;
 using MinerthalSalesApp.ViewModels.Shared;
-using MinerthalSalesApp.Views.Dashboard;
 using MinerthalSalesApp.Views.Startup;
 using Newtonsoft.Json;
-using System.Text;
 namespace MinerthalSalesApp.ViewModels
 {
     public partial class AppShellViewModel : BaseViewModel
@@ -74,8 +72,9 @@ namespace MinerthalSalesApp.ViewModels
 
             IsManagerButtonVisible = false;
 
-            var model = new FlyoutHeaderControlViewModel();
-            AppShell.Current.FlyoutHeader = new FlyoutHeaderControl(model);
+            //var model = new FlyoutHeaderControlViewModel();
+            //AppShell.Current.FlyoutHeader = new FlyoutHeaderControl(model);
+            AppConstant.AddFlyoutMenusDetails();
             // await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
             //if (!string.IsNullOrWhiteSpace(App.UserDetails.UserInfoManager))
             //{

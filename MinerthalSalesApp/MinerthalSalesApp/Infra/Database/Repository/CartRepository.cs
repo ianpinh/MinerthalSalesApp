@@ -11,7 +11,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public CartRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             //Init();
         }
         private void Init(string nomeTabela)
@@ -47,20 +47,20 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lstCart.Add(new Carrinho
                 {
-                    Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    PedidoId=item.PedidoId!=null ? Guid.Parse(item.PedidoId) : Guid.Empty,
-                    ProdutoId=item.ProdutoId!=null ? Convert.ToInt32(item.ProdutoId) : 0,
-                    Quantidade=item.Quantidade!=null ? Convert.ToInt32(item.Quantidade) : 0,
-                    CodProduto=item.CodProduto.ToString(),
-                    CodigoNomeProduto=item.CodigoNomeProduto.ToString(),
-                    ImagemProduto=item.ImagemProduto.ToString(),
-                    ValorProduto=item.ValorProduto!=null ? Convert.ToDecimal(item.ValorProduto) : 0M,
-                    ValorCombinado=item.ValorCombinado!=null ? Convert.ToDecimal(item.ValorCombinado) : 0M,
-                    Frete=item.Frete!=null ? Convert.ToDecimal(item.Frete) : 0M,
-                    Comissao=item.Comissao!=null ? Convert.ToDecimal(item.Comissao) : 0M,
-                    Desconto=item.Desconto!=null ? Convert.ToDecimal(item.Desconto) : 0M,
-                    Encargos=item.Encargos!=null ? Convert.ToDecimal(item.Encargos) : 0M,
-                    TaxaEncargos=item.TaxaEncargos!=null ? Convert.ToDecimal(item.TaxaEncargos) : 0M
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    PedidoId = item.PedidoId != null ? Guid.Parse(item.PedidoId) : Guid.Empty,
+                    ProdutoId = item.ProdutoId != null ? Convert.ToInt32(item.ProdutoId) : 0,
+                    Quantidade = item.Quantidade != null ? Convert.ToInt32(item.Quantidade) : 0,
+                    CodProduto = item.CodProduto.ToString(),
+                    CodigoNomeProduto = item.CodigoNomeProduto.ToString(),
+                    ImagemProduto = item.ImagemProduto.ToString(),
+                    ValorProduto = item.ValorProduto != null ? Convert.ToDecimal(item.ValorProduto) : 0M,
+                    ValorCombinado = item.ValorCombinado != null ? Convert.ToDecimal(item.ValorCombinado) : 0M,
+                    Frete = item.Frete != null ? Convert.ToDecimal(item.Frete) : 0M,
+                    Comissao = item.Comissao != null ? Convert.ToDecimal(item.Comissao) : 0M,
+                    Desconto = item.Desconto != null ? Convert.ToDecimal(item.Desconto) : 0M,
+                    Encargos = item.Encargos != null ? Convert.ToDecimal(item.Encargos) : 0M,
+                    TaxaEncargos = item.TaxaEncargos != null ? Convert.ToDecimal(item.TaxaEncargos) : 0M
                 });
             }
             return lstCart;
@@ -91,7 +91,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                  ,'{cart.ImagemProduto}'
                                                  , {cart.ValorProduto.ToStringInvariant("0.00")}
                                                  , {cart.ValorCombinado.ToStringInvariant("0.00")}
-                                                 , { cart.Frete.ToStringInvariant("0.00")}
+                                                 , {cart.Frete.ToStringInvariant("0.00")}
                                                  , {cart.Comissao.ToStringInvariant("0.00")}
                                                  , {cart.Desconto.ToStringInvariant("0.00")}
                                                  , {cart.Encargos.ToStringInvariant("0.00")}
@@ -101,7 +101,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<Carrinho> cart)
         {
-            if (cart !=null && cart.Count>0)
+            if (cart != null && cart.Count > 0)
                 foreach (var item in cart)
                     Add(item);
         }
@@ -137,20 +137,20 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lstCart.Add(new Carrinho
                 {
-                    Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    PedidoId=item.PedidoId!=null ? Guid.Parse(item.PedidoId) : Guid.Empty,
-                    ProdutoId=item.ProdutoId!=null ? Convert.ToInt32(item.ProdutoId) : 0,
-                    Quantidade=item.Quantidade!=null ? Convert.ToInt32(item.Quantidade) : 0,
-                    CodProduto=item.CodProduto.ToString(),
-                    CodigoNomeProduto=item.CodigoNomeProduto.ToString(),
-                    ImagemProduto=item.ImagemProduto.ToString(),
-                    ValorProduto=item.ValorProduto!=null ? Convert.ToDecimal(item.ValorProduto) : 0M,
-                    ValorCombinado=item.ValorCombinado!=null ? Convert.ToDecimal(item.ValorCombinado) : 0M,
-                    Frete=item.Frete!=null ? Convert.ToDecimal(item.Frete) : 0M,
-                    Comissao=item.Comissao!=null ? Convert.ToDecimal(item.Comissao) : 0M,
-                    Desconto=item.Desconto!=null ? Convert.ToDecimal(item.Desconto) : 0M,
-                    Encargos=item.Encargos!=null ? Convert.ToDecimal(item.Encargos) : 0M,
-                    TaxaEncargos=item.TaxaEncargos!=null ? Convert.ToDecimal(item.TaxaEncargos) : 0M
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    PedidoId = item.PedidoId != null ? Guid.Parse(item.PedidoId) : Guid.Empty,
+                    ProdutoId = item.ProdutoId != null ? Convert.ToInt32(item.ProdutoId) : 0,
+                    Quantidade = item.Quantidade != null ? Convert.ToInt32(item.Quantidade) : 0,
+                    CodProduto = item.CodProduto.ToString(),
+                    CodigoNomeProduto = item.CodigoNomeProduto.ToString(),
+                    ImagemProduto = item.ImagemProduto.ToString(),
+                    ValorProduto = item.ValorProduto != null ? Convert.ToDecimal(item.ValorProduto) : 0M,
+                    ValorCombinado = item.ValorCombinado != null ? Convert.ToDecimal(item.ValorCombinado) : 0M,
+                    Frete = item.Frete != null ? Convert.ToDecimal(item.Frete) : 0M,
+                    Comissao = item.Comissao != null ? Convert.ToDecimal(item.Comissao) : 0M,
+                    Desconto = item.Desconto != null ? Convert.ToDecimal(item.Desconto) : 0M,
+                    Encargos = item.Encargos != null ? Convert.ToDecimal(item.Encargos) : 0M,
+                    TaxaEncargos = item.TaxaEncargos != null ? Convert.ToDecimal(item.TaxaEncargos) : 0M
                 });
             }
             return lstCart;
@@ -166,7 +166,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var fields = retorno as IDictionary<string, object>;
             var _total = fields["COUNT(*)"];
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
 

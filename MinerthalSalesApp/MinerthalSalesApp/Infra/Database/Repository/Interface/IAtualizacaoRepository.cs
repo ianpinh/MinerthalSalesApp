@@ -17,11 +17,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
         DateTime? GetLastLog(string tabela);
 
         int GetTotal();
-        
+
         void DeleteAllTables(string dropCommand);
 
-		void ClearAllTables();
+        void ClearAllTables();
 
-		void CriarTabela();
+        void CriarTabela();
     }
 }

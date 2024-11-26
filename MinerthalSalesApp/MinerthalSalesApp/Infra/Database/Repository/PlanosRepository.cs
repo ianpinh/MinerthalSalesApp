@@ -11,7 +11,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public PlanosRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
 
@@ -54,23 +54,23 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 try
                 {
                     var plano = new Plano();
-                    plano.Id= item.Id!=null ? Convert.ToInt32(item.Id) : 0;
-                    plano.CdPlano=item.CdPlano!=null ? item.CdPlano.ToString() : "";
-                    plano.DsPlano=item.DsPlano!=null ? item.DsPlano.ToString() : "";
-                    plano.QtDiaPrz=item.QtDiaPrz!=null ? item.QtDiaPrz.ToString() : "";
-                    plano.NrColPrec=item.NrColPrec!=null ? item.NrColPrec.ToString() : "";
-                    plano.NvPlano=item.NvPlano!=null ? item.NvPlano.ToString() : "";
-                    plano.QtMaxParc=item.QtMaxParc!=null ? item.QtMaxParc.ToString() : "";
-                    plano.TpPrazo=item.TpPrazo!=null ? item.TpPrazo.ToString() : "";
-                    plano.InEspec=item.InEspec!=null ? item.InEspec.ToString() : "";
-                    plano.TxObs=item.TxObs!=null ? item.TxObs.ToString() : "";
-                    plano.NrItmin=item.NrItmin!=null ? item.NrItmin.ToString() : "";
-                    plano.TpVenda=item.TpVenda!=null ? item.TpVenda.ToString() : "";
-                    plano.CdRcaxxx= item.CdRcaxxx!=null ? Convert.ToInt32(item.CdRcaxxx) : 0;
-                    plano.TxPerFin= item.TxPerFin!=null ? (decimal)item.TxPerFin : 0M;
-                    plano.VlMinped= item.VlMinped!=null ? Convert.ToInt32(item.VlMinped) : 0M;
-                    plano.VlDescpl= item.VlDescpl!=null ? Convert.ToInt32(item.VlDescpl) : 0M;
-                    plano.TxPerfinProd=item.TxPerfinProd!=null ? Convert.ToInt32(item.TxPerfinProd) : 0M;
+                    plano.Id = item.Id != null ? Convert.ToInt32(item.Id) : 0;
+                    plano.CdPlano = item.CdPlano != null ? item.CdPlano.ToString() : "";
+                    plano.DsPlano = item.DsPlano != null ? item.DsPlano.ToString() : "";
+                    plano.QtDiaPrz = item.QtDiaPrz != null ? item.QtDiaPrz.ToString() : "";
+                    plano.NrColPrec = item.NrColPrec != null ? item.NrColPrec.ToString() : "";
+                    plano.NvPlano = item.NvPlano != null ? item.NvPlano.ToString() : "";
+                    plano.QtMaxParc = item.QtMaxParc != null ? item.QtMaxParc.ToString() : "";
+                    plano.TpPrazo = item.TpPrazo != null ? item.TpPrazo.ToString() : "";
+                    plano.InEspec = item.InEspec != null ? item.InEspec.ToString() : "";
+                    plano.TxObs = item.TxObs != null ? item.TxObs.ToString() : "";
+                    plano.NrItmin = item.NrItmin != null ? item.NrItmin.ToString() : "";
+                    plano.TpVenda = item.TpVenda != null ? item.TpVenda.ToString() : "";
+                    plano.CdRcaxxx = item.CdRcaxxx != null ? Convert.ToInt32(item.CdRcaxxx) : 0;
+                    plano.TxPerFin = item.TxPerFin != null ? (decimal)item.TxPerFin : 0M;
+                    plano.VlMinped = item.VlMinped != null ? Convert.ToInt32(item.VlMinped) : 0M;
+                    plano.VlDescpl = item.VlDescpl != null ? Convert.ToInt32(item.VlDescpl) : 0M;
+                    plano.TxPerfinProd = item.TxPerfinProd != null ? Convert.ToInt32(item.TxPerfinProd) : 0M;
                     lstPlanos.Add(plano);
                 }
                 catch (Exception)
@@ -85,7 +85,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void Add(Plano plano)
         {
-            if (plano!=null)
+            if (plano != null)
             {
                 var scriptCommand = new StringBuilder();
 
@@ -134,7 +134,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<Plano> planos)
         {
-            if (planos!=null && planos.Any())
+            if (planos != null && planos.Any())
             {
                 var scriptCommand = new StringBuilder();
                 foreach (var item in planos)
@@ -196,7 +196,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void Save(List<Plano> planos)
         {
-            if (planos!=null && planos.Any())
+            if (planos != null && planos.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine("DELETE FROM Plano;");
@@ -255,23 +255,23 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new Plano
             {
-                Id= Convert.ToInt32(retorno.Id),
-                CdPlano=retorno.CdPlano.ToString(),
-                DsPlano=retorno.DsPlano.ToString(),
-                QtDiaPrz=retorno.QtDiaPrz.ToString(),
-                NrColPrec=retorno.NrColPrec.ToString(),
-                NvPlano=retorno.NvPlano.ToString(),
-                QtMaxParc=retorno.QtMaxParc.ToString(),
-                TpPrazo=retorno.TpPrazo.ToString(),
-                InEspec=retorno.InEspec.ToString(),
-                TxObs=retorno.TxObs.ToString(),
-                NrItmin=retorno.NrItmin.ToString(),
-                TpVenda=retorno.TpVenda.ToString(),
-                CdRcaxxx=retorno.CdRcaxxx!=null ? Convert.ToInt32(retorno.CdRcaxxx) : 0,
-                TxPerFin=retorno.TxPerFin!=null ? (decimal)retorno.TxPerFin : 0M,
-                VlMinped=retorno.VlMinped!=null ? Convert.ToInt32(retorno.VlMinped) : 0M,
-                VlDescpl=retorno.VlDescpl!=null ? Convert.ToInt32(retorno.VlDescpl) : 0M,
-                TxPerfinProd=retorno.TxPerfinProd!=null ? Convert.ToInt32(retorno.TxPerfinProd) : 0M,
+                Id = Convert.ToInt32(retorno.Id),
+                CdPlano = retorno.CdPlano.ToString(),
+                DsPlano = retorno.DsPlano.ToString(),
+                QtDiaPrz = retorno.QtDiaPrz.ToString(),
+                NrColPrec = retorno.NrColPrec.ToString(),
+                NvPlano = retorno.NvPlano.ToString(),
+                QtMaxParc = retorno.QtMaxParc.ToString(),
+                TpPrazo = retorno.TpPrazo.ToString(),
+                InEspec = retorno.InEspec.ToString(),
+                TxObs = retorno.TxObs.ToString(),
+                NrItmin = retorno.NrItmin.ToString(),
+                TpVenda = retorno.TpVenda.ToString(),
+                CdRcaxxx = retorno.CdRcaxxx != null ? Convert.ToInt32(retorno.CdRcaxxx) : 0,
+                TxPerFin = retorno.TxPerFin != null ? (decimal)retorno.TxPerFin : 0M,
+                VlMinped = retorno.VlMinped != null ? Convert.ToInt32(retorno.VlMinped) : 0M,
+                VlDescpl = retorno.VlDescpl != null ? Convert.ToInt32(retorno.VlDescpl) : 0M,
+                TxPerfinProd = retorno.TxPerfinProd != null ? Convert.ToInt32(retorno.TxPerfinProd) : 0M,
             };
         }
 
@@ -286,7 +286,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var fields = retorno as IDictionary<string, object>;
             var _total = fields["COUNT(*)"];
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
 

@@ -4,20 +4,20 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
 {
     public interface IClienteRepository
     {
-         List<Cliente> GetAll();
-         Cliente GetByCpf(string cpf);
+        List<Cliente> GetAll();
+        Cliente GetByCpf(string cpf);
 
-         Cliente GetByCodigo(string codCliente);
+        Cliente GetByCodigo(string codCliente);
 
         void SaveClientes(List<Cliente> clientes);
 
-         void Add(Cliente cliente);
+        void Add(Cliente cliente);
 
-         void AddRange(List<Cliente> cliente);
+        void AddRange(List<Cliente> cliente);
 
-         void Delete(int id);
+        void Delete(int id);
 
-         int GetTotal();
+        int GetTotal();
 
         void CriarTabela();
 

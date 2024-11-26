@@ -67,6 +67,22 @@ namespace MinerthalSalesApp.ViewModels.Clients
         }
 
 
+        private bool clientEmptyList;
+        private bool ClientEmptyList
+        {
+            get => clientEmptyList;
+            set
+            {
+                if (!clientEmptyList.Equals(value))
+                {
+                    clientEmptyList = value;
+
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ClientEmptyList));
+                }
+            }
+        }
+
         private List<Cliente> items;
         public List<Cliente> Items
         {
@@ -91,13 +107,13 @@ namespace MinerthalSalesApp.ViewModels.Clients
 
                 clientes = App.ClienteRepository.GetAll();
                 if (!clientes.Any())
-                    await _alertService.ShowAlertAsync("Clientes", $"Não foi possível carregar a listagem de clientes.", "OK");
+                    await _alertService.ShowAlertAsync("Clientes", $"Vendedor não possui clientes.", "OK");
 
 
                 if (Items != null) Items.Clear();
 
                 Items = clientes;//new ObservableCollection<Cliente>(clientes);
-
+                ClientEmptyList = clientes.Count() > 0;
             }
             catch (Exception ex)
             {
@@ -112,10 +128,14 @@ namespace MinerthalSalesApp.ViewModels.Clients
             {
                 if (Items != null) Items.Clear();
                 var clientes = App.ClienteRepository.GetAll();
+               
                 if (clientes.Any())
                     Items = clientes;// new ObservableCollection<Cliente>(clientes);
                 else
                     await _alertService.ShowAlertAsync("Clientes", $"Não foi possível carregar a listagem de clientes.", "OK");
+
+
+                ClientEmptyList = clientes.Count() > 0;
             }
             catch (Exception ex)
             {
@@ -230,6 +250,22 @@ namespace MinerthalSalesApp.ViewModels.Clients
             }
         }
 
+        private bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get => isRefreshing;
+            set
+            {
+                isRefreshing = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+        public ICommand RefreshCommand => new Command(async () =>
+        {
+            await ListarClientes();
+            IsRefreshing = false;
 
+        });
     }
 }

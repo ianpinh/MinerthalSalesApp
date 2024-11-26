@@ -2,7 +2,6 @@ using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.Input;
 using MinerthalSalesApp.Models.Dtos;
 using MinerthalSalesApp.ViewModels.Orders;
-using System.Windows.Input;
 
 namespace MinerthalSalesApp.Views.Orders;
 
@@ -13,7 +12,7 @@ public partial class MeusPedidosPage : ContentPage
     public MeusPedidosPage(MeusPedidosViewModel viewModel)
     {
 
-        _viewModel=viewModel;
+        _viewModel = viewModel;
         BindingContext = _viewModel;
         InitializeComponent();
         ListarPedidosViewModel();
@@ -72,13 +71,13 @@ public partial class MeusPedidosPage : ContentPage
 
         ListaPedidos.ItemsSource = _viewModel.PedidosPendentes;
 
-        PedidosPendentesContent.IsVisible=true;
+        PedidosPendentesContent.IsVisible = true;
     }
 
     private void BtnPedidosEnviados_Clicked(object sender, EventArgs e)
     {
         SetInvisibelContent();
-        MeusPedidosContent.IsVisible=true;
+        MeusPedidosContent.IsVisible = true;
     }
 
     private async void BtnEnviarPedidosPendentes_Clicked(object sender, EventArgs e)
@@ -98,8 +97,8 @@ public partial class MeusPedidosPage : ContentPage
 
     private void SetInvisibelContent()
     {
-        MeusPedidosContent.IsVisible=false;
-        PedidosPendentesContent.IsVisible=false;
+        MeusPedidosContent.IsVisible = false;
+        PedidosPendentesContent.IsVisible = false;
     }
 
     private void ListaPedidos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -153,7 +152,7 @@ public partial class MeusPedidosPage : ContentPage
     {
         var btn = sender as Button;
         var id = new Guid(btn.CommandParameter.ToString());
-        if (_viewModel!=null)
+        if (_viewModel != null)
         {
             var model = _viewModel.PedidosPendentes.FirstOrDefault(x => x.Id.Equals(id));
             await Navigation.PushAsync(new DetalhePedidoPage(model));
@@ -163,7 +162,7 @@ public partial class MeusPedidosPage : ContentPage
 
     private async void BtnReenviarPedidos_Clicked(object sender, EventArgs e)
     {
-        var popup = new PopupPage(new ViewModels.Shared.PopupViewModel { PopupMessage="Enviando pedidos..." });
+        var popup = new PopupPage(new ViewModels.Shared.PopupViewModel { PopupMessage = "Enviando pedidos..." });
         this.ShowPopup(popup);
         await Task.Delay(1000);
         try

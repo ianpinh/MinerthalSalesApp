@@ -200,7 +200,7 @@ namespace MinerthalSalesApp.ViewModels.Orders
             if (pedido.PercentualJuros > 0)
                 if (pedido.PlanoPagamento.Equals("88"))
                 {
-                    foreach(var item in carrinho) 
+                    foreach (var item in carrinho)
                     {
                         totalEncargos += item.Encargos;
                     }

@@ -9,7 +9,7 @@ namespace MinerthalSalesApp.Infra.Services
         public int TotalReg { get; set; }
         public List<string[]> NamesFields { get; set; } = new List<string[]>();
     }
-    
+
     public class ResponseApiBanco : MinerthalResponseBase
     {
         public List<Banco> Details { get; set; } = new List<Banco>();
@@ -18,11 +18,11 @@ namespace MinerthalSalesApp.Infra.Services
     {
         public List<ClientePlanoPagamento> Details { get; set; } = new List<ClientePlanoPagamento>();
     }
-    public class ResponseApiPlano: MinerthalResponseBase
+    public class ResponseApiPlano : MinerthalResponseBase
     {
         public List<Plano> Details { get; set; } = new List<Plano>();
     }
-    public class ResponseApiProduto: MinerthalResponseBase
+    public class ResponseApiProduto : MinerthalResponseBase
     {
         public List<Produto> Details { get; set; } = new List<Produto>();
     }
@@ -30,19 +30,19 @@ namespace MinerthalSalesApp.Infra.Services
     {
         public List<Cliente> Details { get; set; } = new List<Cliente>();
     }
-    public class ResponseApiUsuario: MinerthalResponseBase
+    public class ResponseApiUsuario : MinerthalResponseBase
     {
         public List<Usuario> Details { get; set; } = new List<Usuario>();
     }
-    public class ResponseApiFaturamento: MinerthalResponseBase
+    public class ResponseApiFaturamento : MinerthalResponseBase
     {
         public List<Faturamento> Details { get; set; } = new List<Faturamento>();
     }
-    public class ResponseApiPedido: MinerthalResponseBase
+    public class ResponseApiPedido : MinerthalResponseBase
     {
         public List<Pedido> Details { get; set; } = new List<Pedido>();
     }
-    public class ResponseApiRanking: MinerthalResponseBase
+    public class ResponseApiRanking : MinerthalResponseBase
     {
         public List<Ranking> Details { get; set; } = new List<Ranking>();
     }
@@ -51,7 +51,7 @@ namespace MinerthalSalesApp.Infra.Services
         public List<TabelaPreco> Details { get; set; } = new List<TabelaPreco>();
     }
 
-    public class ResponseApiVendedor: MinerthalResponseBase
+    public class ResponseApiVendedor : MinerthalResponseBase
     {
         public List<Vendedor> Details { get; set; } = new List<Vendedor>();
     }
@@ -60,12 +60,12 @@ namespace MinerthalSalesApp.Infra.Services
     {
         public List<MeusPedidos> Details { get; set; } = new List<MeusPedidos>();
     }
-    public class ResponseApiFilial: MinerthalResponseBase
+    public class ResponseApiFilial : MinerthalResponseBase
     {
         public List<Filial> Details { get; set; } = new List<Filial>();
     }
 
-    public class ResponseApiHistoricoPedido: MinerthalResponseBase
+    public class ResponseApiHistoricoPedido : MinerthalResponseBase
     {
         public List<HistoricoDePedidos> Details { get; set; } = new List<HistoricoDePedidos>();
     }
@@ -75,12 +75,12 @@ namespace MinerthalSalesApp.Infra.Services
         public List<ResumoPedido> Details { get; set; } = new List<ResumoPedido>();
     }
 
-    public class ResponseApiTitulos: MinerthalResponseBase
+    public class ResponseApiTitulos : MinerthalResponseBase
     {
         public List<Titulo> Details { get; set; } = new List<Titulo>();
     }
 
-    public class ResponseApiVisitas: MinerthalResponseBase
+    public class ResponseApiVisitas : MinerthalResponseBase
     {
         public List<Visita> Details { get; set; } = new List<Visita>();
     }

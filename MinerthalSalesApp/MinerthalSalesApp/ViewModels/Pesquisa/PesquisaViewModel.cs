@@ -22,39 +22,39 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
         private void Initialize()
         {
             CarregarPesquisa();
-            ExpandedImageInadimplentes="chevron_down.png";
-            ExpandedImageTitulosaVencer="chevron_down.png";
+            ExpandedImageInadimplentes = "chevron_down.png";
+            ExpandedImageTitulosaVencer = "chevron_down.png";
             ExpandedImageTitulosVencidos = "chevron_down.png";
-            ExpandedImagePedidosEmAberto="chevron_down.png";
-            ExpandedImageCarregamentos="chevron_down.png";
+            ExpandedImagePedidosEmAberto = "chevron_down.png";
+            ExpandedImageCarregamentos = "chevron_down.png";
             ExpandedImageMetaMensal = "chevron_down.png";
 
-            IsExpandedTitulosAVencer  =false;
+            IsExpandedTitulosAVencer = false;
             IsExpandedTitulosVencidos = false;
-            IsExpandedInadimplentes  =false;
-            IsExpandedPedidosAberto  =false;
-            IsExpandedCarregamentos  =false;
+            IsExpandedInadimplentes = false;
+            IsExpandedPedidosAberto = false;
+            IsExpandedCarregamentos = false;
             IsExpandedMetaMensal = false;
         }
 
         private void CarregarPesquisa()
         {
             var inadimplentes = App.ClienteRepository.RecuperarClientesInadimplentes();
-            var titulosVencidos= App.FaturamentoRepository.RecuperarTitulosVencidos();
+            var titulosVencidos = App.FaturamentoRepository.RecuperarTitulosVencidos();
             var titulosAvencer = App.FaturamentoRepository.RecuperarTitulosAVencer();
             var pedidosEmAberto = App.HistoricoPedidoReposity.PedidosEmAberto();
             var carregamentos = App.HistoricoPedidoReposity.CarregamentoDePedidos();
             var metasMensais = App.MetaMensalRepository.GetAll();
 
-            PesquisaDto.TitulosaVencer=titulosAvencer;
-            PesquisaDto.ClientesInadinplentes=inadimplentes;
+            PesquisaDto.TitulosaVencer = titulosAvencer;
+            PesquisaDto.ClientesInadinplentes = inadimplentes;
             PesquisaDto.TitulosVencidos = titulosVencidos;
 
-            if(pedidosEmAberto.Count>0)
-            PesquisaDto.PedidosEmAberto=pedidosEmAberto.OrderByDescending(x=>x.DataPedido).Take(20).ToList();
+            if (pedidosEmAberto.Count > 0)
+                PesquisaDto.PedidosEmAberto = pedidosEmAberto.OrderByDescending(x => x.DataPedido).Take(20).ToList();
 
-            if(carregamentos.Count>0)
-            PesquisaDto.Carregamentos=carregamentos.OrderByDescending(x=>x.DataPedido).Take(20).ToList();
+            if (carregamentos.Count > 0)
+                PesquisaDto.Carregamentos = carregamentos.OrderByDescending(x => x.DataPedido).Take(20).ToList();
 
             if (metasMensais.Count() > 0)
                 PesquisaDto.MetaMensal = metasMensais.OrderByDescending(x => x.Ano).ToList();

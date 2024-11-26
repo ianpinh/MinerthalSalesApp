@@ -1,12 +1,12 @@
 ﻿using MinerthalSalesApp.Controls;
+using MinerthalSalesApp.ViewModels.Shared;
 using MinerthalSalesApp.Views.Clients;
+using MinerthalSalesApp.Views.DadosEquipe;
 using MinerthalSalesApp.Views.Dashboard;
-using MinerthalSalesApp.Views.Ranking;
-using MinerthalSalesApp.Views.Products;
 using MinerthalSalesApp.Views.Orders;
 using MinerthalSalesApp.Views.Pesquisa;
-using MinerthalSalesApp.Views.DadosEquipe;
-using MinerthalSalesApp.ViewModels.Shared;
+using MinerthalSalesApp.Views.Products;
+using MinerthalSalesApp.Views.Ranking;
 
 namespace MinerthalSalesApp.Models
 {
@@ -80,7 +80,7 @@ namespace MinerthalSalesApp.Models
                    }
                     };
 
-					var item = Shell.Current.Items.Where(x => x.Title == flyoutItem.Title).FirstOrDefault();
+                    var item = Shell.Current.Items.Where(x => x.Title == flyoutItem.Title).FirstOrDefault();
 
 
                     //if (!Shell.Current.Items.Contains(flyoutItem))
@@ -265,7 +265,7 @@ namespace MinerthalSalesApp.Models
         {
             try
             {
-                
+
                 var openedPages = Shell.Current.Navigation.NavigationStack.ToList();
                 foreach (var item in openedPages)
                 {
@@ -275,7 +275,7 @@ namespace MinerthalSalesApp.Models
                             Shell.Current.Navigation.RemovePage(item);
 
                         if (item.GetType().Equals(typeof(ProdutosPedidoPage)))
-                           Shell.Current.Navigation.RemovePage(item);
+                            Shell.Current.Navigation.RemovePage(item);
 
                         if (item.GetType().Equals(typeof(CarrinhoPage)))
                             Shell.Current.Navigation.RemovePage(item);

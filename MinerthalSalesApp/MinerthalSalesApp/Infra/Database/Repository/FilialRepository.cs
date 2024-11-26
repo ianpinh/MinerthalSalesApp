@@ -10,7 +10,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public FilialRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
         private void Init()
@@ -34,11 +34,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new Filial
             {
-                Id=Convert.ToInt32(retorno.Id),
-                CdFilial=retorno.CdFilial.ToString(),
-                NmFilial=retorno.NmFilial.ToString(),
-                NrRegiao=retorno.NrRegiao.ToString(),
-                CdRcaxxx=retorno.CdRcaxxx.ToString()
+                Id = Convert.ToInt32(retorno.Id),
+                CdFilial = retorno.CdFilial.ToString(),
+                NmFilial = retorno.NmFilial.ToString(),
+                NrRegiao = retorno.NrRegiao.ToString(),
+                CdRcaxxx = retorno.CdRcaxxx.ToString()
             };
 
         }
@@ -57,11 +57,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lst.Add(new Filial
                 {
-                    Id=Convert.ToInt32(item.Id),
-                    CdFilial=item.CdFilial,
-                    NmFilial=item.NmFilial,
-                    NrRegiao=item.NrRegiao,
-                    CdRcaxxx=item.CdRcaxxx
+                    Id = Convert.ToInt32(item.Id),
+                    CdFilial = item.CdFilial,
+                    NmFilial = item.NmFilial,
+                    NrRegiao = item.NrRegiao,
+                    CdRcaxxx = item.CdRcaxxx
                 });
             }
 
@@ -70,7 +70,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public int Add(Filial filial)
         {
-            if (filial!=null)
+            if (filial != null)
             {
                 var commandInsert = $@"INSERT INTO [Filial](
                                                    CdFilial
@@ -89,7 +89,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<Filial> filial)
         {
-            if (filial!=null && filial.Any())
+            if (filial != null && filial.Any())
             {
                 var scriptCommand = new StringBuilder();
 
@@ -126,10 +126,10 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var fields = retorno as IDictionary<string, object>;
             var _total = fields["COUNT(*)"];
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
-      
+
         public void DeleteAll()
         {
             var command = $"Delete from Filial;";
@@ -144,7 +144,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void SaveFilial(List<Filial> filial)
         {
-            if (filial!=null && filial.Any())
+            if (filial != null && filial.Any())
             {
                 var scriptCommand = new StringBuilder();
 
@@ -163,7 +163,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     scriptCommand.AppendLine(commandInsert);
                 }
 
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
@@ -179,11 +179,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new Filial
             {
-                Id=Convert.ToInt32(retorno.Id),
-                CdFilial=retorno.CdFilial,
-                NmFilial=retorno.NmFilial,
-                NrRegiao=retorno.NrRegiao,
-                CdRcaxxx=retorno.CdRcaxxx
+                Id = Convert.ToInt32(retorno.Id),
+                CdFilial = retorno.CdFilial,
+                NmFilial = retorno.NmFilial,
+                NrRegiao = retorno.NrRegiao,
+                CdRcaxxx = retorno.CdRcaxxx
             };
         }
 

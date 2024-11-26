@@ -5,7 +5,7 @@ namespace MinerthalSalesApp.Infra.Database.Tables
     [Table("Carrinho")]
     public class Carrinho
     {
-        [PrimaryKey,AutoIncrement, Column("Id")]
+        [PrimaryKey, AutoIncrement, Column("Id")]
         public int Id { get; set; }
 
 
@@ -34,7 +34,7 @@ namespace MinerthalSalesApp.Infra.Database.Tables
         public decimal Frete { get; set; }
 
         [Column("Comissao")]
-        public decimal Comissao{ get; set; }
+        public decimal Comissao { get; set; }
 
         [Column("Desconto")]
         public decimal Desconto { get; set; }

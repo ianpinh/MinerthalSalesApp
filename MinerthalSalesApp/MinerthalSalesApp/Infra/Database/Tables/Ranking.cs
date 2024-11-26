@@ -10,7 +10,7 @@ namespace MinerthalSalesApp.Infra.Database.Tables
 
         [PrimaryKey, AutoIncrement, Column("Id")]
         public int Id { get; set; }
-       
+
         [JsonProperty("COD")]
         public string Codigo { get; set; } = string.Empty;
 
@@ -46,13 +46,13 @@ namespace MinerthalSalesApp.Infra.Database.Tables
 
         [Ignore]
         public string PProdFormatada => PontosProd.ToString("N2", CultureInfo.CreateSpecificCulture("pt-BR"));
-        
+
         [Ignore]
         public string PVolumeFormatada => PontosVolume.ToString("N2", CultureInfo.CreateSpecificCulture("pt-BR"));
 
         [Ignore]
         public decimal PercentRanking { get; set; }
 
-       
+
     }
 }

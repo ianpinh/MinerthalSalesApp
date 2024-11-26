@@ -7,11 +7,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 {
     public class VisitasRepository : IVisitasRepository
     {
-        private string NomeTabelaVisita=> RecuperarNomeDaTabela();
+        private string NomeTabelaVisita => RecuperarNomeDaTabela();
         private readonly IAppthalContext _context;
         public VisitasRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
         private void Init(string tableName)
         {
@@ -30,7 +30,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public void SaveVisitasAsync(List<Visita> visitas)
         {
-            if (visitas!=null && visitas.Any())
+            if (visitas != null && visitas.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine($"DELETE FROM {NomeTabelaVisita};");
@@ -85,15 +85,15 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lst.Add(new Visita
                 {
-                    CdCliente=item.CdClient.ToString(),
-                    DtReg=item.DtReg.ToString(),
-                    IsClienteNovo=item.IsClient.ToString(),
-                    ProximaVisita=item.ProximaV.ToString(),
-                    NmCliente=item.NmClient.ToString(),
-                    Ocorrencia=item.Ocorrenc.ToString(),
-                    Cidade=item.Cidade.ToString(),
-                    Uf=item.Uf.ToString(),
-                    CdRcaxxx=item.CdRcaxxx.ToString()
+                    CdCliente = item.CdClient.ToString(),
+                    DtReg = item.DtReg.ToString(),
+                    IsClienteNovo = item.IsClient.ToString(),
+                    ProximaVisita = item.ProximaV.ToString(),
+                    NmCliente = item.NmClient.ToString(),
+                    Ocorrencia = item.Ocorrenc.ToString(),
+                    Cidade = item.Cidade.ToString(),
+                    Uf = item.Uf.ToString(),
+                    CdRcaxxx = item.CdRcaxxx.ToString()
                 });
             }
 
@@ -114,16 +114,16 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 try
                 {
                     var visita = new Visita();
-                    visita.Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0;
-                    visita.CdCliente=item.CdCliente!=null ? item.CdCliente.ToString() : "";
-                    visita.DtReg=item.DtReg!=null ? item.DtReg.ToString() : "";
-                    visita.IsClienteNovo=item.IsClienteNovo!=null ? item.IsClienteNovo.ToString() : "";
-                    visita.ProximaVisita=item.ProximaVisita!=null ? item.ProximaVisita.ToString() : "";
-                    visita.NmCliente=item.NmCliente!=null ? item.NmCliente.ToString() : "";
-                    visita.Ocorrencia=item.Ocorrencia!=null ? item.Ocorrencia.ToString() : "";
-                    visita.Cidade=item.Cidade!=null ? item.Cidade.ToString() : "";
-                    visita.Uf=item.Uf!=null ? item.Uf.ToString() : "";
-                    visita.CdRcaxxx=item.CdRcaxxx!=null ? item.CdRcaxxx.ToString() : "";
+                    visita.Id = item.Id != null ? Convert.ToInt32(item.Id) : 0;
+                    visita.CdCliente = item.CdCliente != null ? item.CdCliente.ToString() : "";
+                    visita.DtReg = item.DtReg != null ? item.DtReg.ToString() : "";
+                    visita.IsClienteNovo = item.IsClienteNovo != null ? item.IsClienteNovo.ToString() : "";
+                    visita.ProximaVisita = item.ProximaVisita != null ? item.ProximaVisita.ToString() : "";
+                    visita.NmCliente = item.NmCliente != null ? item.NmCliente.ToString() : "";
+                    visita.Ocorrencia = item.Ocorrencia != null ? item.Ocorrencia.ToString() : "";
+                    visita.Cidade = item.Cidade != null ? item.Cidade.ToString() : "";
+                    visita.Uf = item.Uf != null ? item.Uf.ToString() : "";
+                    visita.CdRcaxxx = item.CdRcaxxx != null ? item.CdRcaxxx.ToString() : "";
                     lst.Add(visita);
                 }
                 catch (Exception ex)

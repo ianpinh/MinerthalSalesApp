@@ -1,7 +1,7 @@
 ﻿namespace MinerthalSalesApp.Handlers
 {
-	public class BorderlessEntry : Entry
-	{
-		
-	}
+    public class BorderlessEntry : Entry
+    {
+
+    }
 }

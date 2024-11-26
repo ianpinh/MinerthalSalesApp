@@ -2,7 +2,6 @@
 using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Database.Tables;
 using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MinerthalSalesApp.Infra.Database.Repository
 {

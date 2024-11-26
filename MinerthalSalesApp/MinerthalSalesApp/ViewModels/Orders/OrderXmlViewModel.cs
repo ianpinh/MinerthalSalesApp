@@ -1,7 +1,4 @@
 ﻿using MinerthalSalesApp.Infra.Database.Tables;
-using MinerthalSalesApp.Models.Dtos;
-using Newtonsoft.Json;
-using System.Globalization;
 using System.Text;
 
 namespace MinerthalSalesApp.ViewModels.Orders

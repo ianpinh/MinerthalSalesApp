@@ -80,14 +80,14 @@ namespace MinerthalSalesApp.Models.Dtos
         public string FreteUnidadeString => FreteUnidade.ToString("c", _culture);
         public string ValorBrutoProduToString => ValorBrutoProduto.ToString("c", _culture);
         public string ValorCombinadoString => ValorCombinado.ToString("c", _culture);
-        public string ValorDesconToString=> ValorDesconto.ToString("c", _culture);
+        public string ValorDesconToString => ValorDesconto.ToString("c", _culture);
 
 
         private decimal CalcularSubTotal()
         {
             var produtos = Quantidade * ValorCombinado;
             var fretes = Quantidade * FreteUnidade;
-            return produtos+fretes;
+            return produtos + fretes;
         }
         private decimal CalcularValorTotalProduto()
         {
@@ -104,8 +104,8 @@ namespace MinerthalSalesApp.Models.Dtos
             var valorTotal = (Quantidade * ValorCombinado);
             if (Desconto > 0)
                 valorTotal = (valorTotal / (1 + (Desconto / 100)));
-            if (TaxaPlano>0)
-                valorTotal+=(valorTotal*(TaxaPlano/100));
+            if (TaxaPlano > 0)
+                valorTotal += (valorTotal * (TaxaPlano / 100));
 
             valorTotal += (Quantidade * FreteUnidade);
             return valorTotal;
@@ -113,14 +113,14 @@ namespace MinerthalSalesApp.Models.Dtos
 
         private decimal CalcularTaxa()
         {
-            var _valorTotal = (Quantidade * ValorCombinado)+(Quantidade * FreteUnidade);
-            return TaxaPlano>0 ? _valorTotal*(TaxaPlano/100) : 0M;
+            var _valorTotal = (Quantidade * ValorCombinado) + (Quantidade * FreteUnidade);
+            return TaxaPlano > 0 ? _valorTotal * (TaxaPlano / 100) : 0M;
         }
 
         private decimal CalculoDesconto()
         {
             var _valorTotal = (Quantidade * ValorCombinado);
-            return Desconto >0 ? _valorTotal  - _valorTotal / (1 + (Desconto / 100)) : 0M;
+            return Desconto > 0 ? _valorTotal - _valorTotal / (1 + (Desconto / 100)) : 0M;
         }
 
         public List<TabelaPreco> TbPrecosProduto { get; set; } = new List<TabelaPreco>();
@@ -129,13 +129,13 @@ namespace MinerthalSalesApp.Models.Dtos
         {
             var faixaComissao = 0M;
             var totalDescontos = 100 * (1 - (((ValorCombinado) / ValorBrutoProduto)));
-            
 
-                foreach (var item in TbPrecosProduto)
+
+            foreach (var item in TbPrecosProduto)
             {
-                if ((totalDescontos >=  item.PerMin) && (totalDescontos <=item.PerMax))
+                if ((totalDescontos >= item.PerMin) && (totalDescontos <= item.PerMax))
                 {
-                    faixaComissao=item.PerComissao;
+                    faixaComissao = item.PerComissao;
                     break;
                 }
             }

@@ -12,7 +12,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public LogRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
 
@@ -84,7 +84,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         {
             try
             {
-                if (logs!=null && logs.Count>0)
+                if (logs != null && logs.Count > 0)
                     foreach (var item in logs)
                         Add(item);
             }
@@ -153,7 +153,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 var fields = retorno as IDictionary<string, object>;
                 var _total = fields["COUNT(*)"];
 
-                _=int.TryParse(_total.ToString(), out int total);
+                _ = int.TryParse(_total.ToString(), out int total);
                 return total;
             }
             catch (Exception)

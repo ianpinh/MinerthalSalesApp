@@ -11,7 +11,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public ResumoPedidoRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
         private void Init(string nomeTabela)
         {
@@ -42,19 +42,19 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new ResumoPedido
             {
-                Id=Convert.ToInt32(retorno.Id),
-                NrPedido=retorno.NrPedido.ToString(),
-                CdProduto=retorno.CdProduto.ToString(),
-                DsProduto=retorno.DsProduto.ToString(),
-                NumLote=retorno.NumLote.ToString(),
-                CdRcaxxx=retorno.CdRcaxxx.ToString(),
-                ImagemProduto=retorno.ImagemProduto.ToString(),
-                QtProduto=retorno.QtProduto!=null ? Convert.ToInt32(retorno.QtProduto) : 0,
-                QtAtend=retorno.QtAtend!=null ? Convert.ToInt32(retorno.QtAtend) : 0,
-                VlVenda=retorno.VlVenda!=null ? Convert.ToDecimal(retorno.VlVenda) : 0M,
-                VlUnit=retorno.VlUnit!=null ? Convert.ToDecimal(retorno.VlUnit) : 0M,
-                VlFrete=retorno.VlFrete!=null ? Convert.ToDecimal(retorno.VlFrete) : 0M,
-                CdPercComiss=retorno.CdPercComiss!=null ? Convert.ToDecimal(retorno.CdPercComiss) : 0M
+                Id = Convert.ToInt32(retorno.Id),
+                NrPedido = retorno.NrPedido.ToString(),
+                CdProduto = retorno.CdProduto.ToString(),
+                DsProduto = retorno.DsProduto.ToString(),
+                NumLote = retorno.NumLote.ToString(),
+                CdRcaxxx = retorno.CdRcaxxx.ToString(),
+                ImagemProduto = retorno.ImagemProduto.ToString(),
+                QtProduto = retorno.QtProduto != null ? Convert.ToInt32(retorno.QtProduto) : 0,
+                QtAtend = retorno.QtAtend != null ? Convert.ToInt32(retorno.QtAtend) : 0,
+                VlVenda = retorno.VlVenda != null ? Convert.ToDecimal(retorno.VlVenda) : 0M,
+                VlUnit = retorno.VlUnit != null ? Convert.ToDecimal(retorno.VlUnit) : 0M,
+                VlFrete = retorno.VlFrete != null ? Convert.ToDecimal(retorno.VlFrete) : 0M,
+                CdPercComiss = retorno.CdPercComiss != null ? Convert.ToDecimal(retorno.CdPercComiss) : 0M
             };
         }
         public List<ResumoPedido> GetAll()
@@ -71,19 +71,19 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lstRenumo.Add(new ResumoPedido
                 {
-                    Id=Convert.ToInt32(item.Id),
-                    NrPedido=item.NrPedido.ToString(),
-                    CdProduto=item.CdProduto.ToString(),
-                    DsProduto=item.DsProduto.ToString(),
-                    NumLote=item.NumLote.ToString(),
-                    CdRcaxxx=item.CdRcaxxx.ToString(),
-                    ImagemProduto=item.ImagemProduto.ToString(),
-                    QtProduto=item.QtProduto!=null ? Convert.ToInt32(item.QtProduto) : 0,
-                    QtAtend=item.QtAtend!=null ? Convert.ToInt32(item.QtAtend) : 0,
-                    VlVenda=item.VlVenda!=null ? Convert.ToDecimal(item.VlVenda) : 0M,
-                    VlUnit=item.VlUnit!=null ? Convert.ToDecimal(item.VlUnit) : 0M,
-                    VlFrete=item.VlFrete!=null ? Convert.ToDecimal(item.VlFrete) : 0M,
-                    CdPercComiss=item.CdPercComiss!=null ? Convert.ToDecimal(item.CdPercComiss) : 0M
+                    Id = Convert.ToInt32(item.Id),
+                    NrPedido = item.NrPedido.ToString(),
+                    CdProduto = item.CdProduto.ToString(),
+                    DsProduto = item.DsProduto.ToString(),
+                    NumLote = item.NumLote.ToString(),
+                    CdRcaxxx = item.CdRcaxxx.ToString(),
+                    ImagemProduto = item.ImagemProduto.ToString(),
+                    QtProduto = item.QtProduto != null ? Convert.ToInt32(item.QtProduto) : 0,
+                    QtAtend = item.QtAtend != null ? Convert.ToInt32(item.QtAtend) : 0,
+                    VlVenda = item.VlVenda != null ? Convert.ToDecimal(item.VlVenda) : 0M,
+                    VlUnit = item.VlUnit != null ? Convert.ToDecimal(item.VlUnit) : 0M,
+                    VlFrete = item.VlFrete != null ? Convert.ToDecimal(item.VlFrete) : 0M,
+                    CdPercComiss = item.CdPercComiss != null ? Convert.ToDecimal(item.CdPercComiss) : 0M
                 });
             }
 
@@ -91,7 +91,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public void Add(ResumoPedido resumo)
         {
-            if (resumo!=null)
+            if (resumo != null)
             {
                 var commandInsert = $@"INSERT INTO [{NomeTabelaResumoPedido}](
                                                     NrPedido 
@@ -124,7 +124,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public void AddRange(List<ResumoPedido> resumoPedidos)
         {
-            if (resumoPedidos!=null && resumoPedidos.Any())
+            if (resumoPedidos != null && resumoPedidos.Any())
             {
                 var scriptCommand = new StringBuilder();
 
@@ -194,19 +194,19 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             {
                 lstRenumo.Add(new ResumoPedido
                 {
-                    Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                    NrPedido=item.NrPedido.ToString(),
-                    CdProduto=item.CdProduto.ToString(),
-                    DsProduto=item.DsProduto.ToString(),
-                    NumLote=item.NumLote.ToString(),
-                    CdRcaxxx=item.CdRcaxxx.ToString(),
-                    ImagemProduto=item.ImagemProduto.ToString(),
-                    QtProduto=item.QtProduto!=null ? Convert.ToInt32(item.QtProduto) : 0,
-                    QtAtend=item.QtAtend!=null ? Convert.ToInt32(item.QtAtend) : 0,
-                    VlVenda=item.VlVenda!=null ? Convert.ToDecimal(item.VlVenda) : 0M,
-                    VlUnit=item.VlUnit!=null ? Convert.ToDecimal(item.VlUnit) : 0M,
-                    VlFrete=item.VlFrete!=null ? Convert.ToDecimal(item.VlFrete) : 0M,
-                    CdPercComiss=item.CdPercComiss!=null ? Convert.ToDecimal(item.CdPercComiss) : 0M
+                    Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                    NrPedido = item.NrPedido.ToString(),
+                    CdProduto = item.CdProduto.ToString(),
+                    DsProduto = item.DsProduto.ToString(),
+                    NumLote = item.NumLote.ToString(),
+                    CdRcaxxx = item.CdRcaxxx.ToString(),
+                    ImagemProduto = item.ImagemProduto.ToString(),
+                    QtProduto = item.QtProduto != null ? Convert.ToInt32(item.QtProduto) : 0,
+                    QtAtend = item.QtAtend != null ? Convert.ToInt32(item.QtAtend) : 0,
+                    VlVenda = item.VlVenda != null ? Convert.ToDecimal(item.VlVenda) : 0M,
+                    VlUnit = item.VlUnit != null ? Convert.ToDecimal(item.VlUnit) : 0M,
+                    VlFrete = item.VlFrete != null ? Convert.ToDecimal(item.VlFrete) : 0M,
+                    CdPercComiss = item.CdPercComiss != null ? Convert.ToDecimal(item.CdPercComiss) : 0M
                 });
             }
 
@@ -215,7 +215,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         }
         public void SavePedido(List<ResumoPedido> resumoPedidos)
         {
-            if (resumoPedidos!=null && resumoPedidos.Any())
+            if (resumoPedidos != null && resumoPedidos.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine($"DELETE FROM {NomeTabelaResumoPedido};");
@@ -268,7 +268,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var fields = retorno as IDictionary<string, object>;
             var _total = fields["COUNT(*)"];
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
         public List<ResumoPedido> GetByNumPedido(string numeroPedido)
@@ -286,27 +286,27 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 try
                 {
                     var resumo = new ResumoPedido();
-                    resumo.Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0;
-                    resumo.NrPedido=item.NrPedido.ToString();
-                    resumo.CdProduto=item.CdProduto.ToString();
-                    resumo.DsProduto=item.DsProduto.ToString();
-                    resumo.NumLote=item.NumLote.ToString();
-                    resumo.CdRcaxxx=item.CdRcaxxx.ToString();
-                    resumo.ImagemProduto=item.ImagemProduto.ToString();
-                    resumo.QtProduto=item.QtProduto!=null ? Convert.ToInt32(item.QtProduto) : 0;
-                    resumo.QtAtend=item.QtAtend!=null ? Convert.ToInt32(item.QtAtend) : 0;
-                    resumo.VlUnit=item.VlUnit!=null ? Convert.ToDecimal(item.VlUnit) : 0M;
-                    resumo.VlVenda=item.VlVenda!=null ? Convert.ToDecimal(item.VlVenda) : 0M;
-                    resumo.VlFrete=item.VlFrete!=null ? Convert.ToDecimal(item.VlFrete) : 0M;
-                    resumo.CdPercComiss=item.CdPercComiss!=null ? Convert.ToDecimal(item.CdPercComiss) : 0M;
+                    resumo.Id = item.Id != null ? Convert.ToInt32(item.Id) : 0;
+                    resumo.NrPedido = item.NrPedido.ToString();
+                    resumo.CdProduto = item.CdProduto.ToString();
+                    resumo.DsProduto = item.DsProduto.ToString();
+                    resumo.NumLote = item.NumLote.ToString();
+                    resumo.CdRcaxxx = item.CdRcaxxx.ToString();
+                    resumo.ImagemProduto = item.ImagemProduto.ToString();
+                    resumo.QtProduto = item.QtProduto != null ? Convert.ToInt32(item.QtProduto) : 0;
+                    resumo.QtAtend = item.QtAtend != null ? Convert.ToInt32(item.QtAtend) : 0;
+                    resumo.VlUnit = item.VlUnit != null ? Convert.ToDecimal(item.VlUnit) : 0M;
+                    resumo.VlVenda = item.VlVenda != null ? Convert.ToDecimal(item.VlVenda) : 0M;
+                    resumo.VlFrete = item.VlFrete != null ? Convert.ToDecimal(item.VlFrete) : 0M;
+                    resumo.CdPercComiss = item.CdPercComiss != null ? Convert.ToDecimal(item.CdPercComiss) : 0M;
                     lstRenumo.Add(resumo);
                 }
                 catch (Exception ex)
                 {
                     App.LogRepository.Add(new Log
                     {
-                        Data=DateTime.Now,
-                        Descricao=ex.Message
+                        Data = DateTime.Now,
+                        Descricao = ex.Message
                     });
                 }
             }

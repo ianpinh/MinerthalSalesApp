@@ -4,9 +4,9 @@ namespace MinerthalSalesApp.Views.Ranking;
 
 public partial class RankingPage : ContentPage
 {
-	public RankingPage(RankingViewModel viewModel)
-	{
-		BindingContext = viewModel;
-		InitializeComponent();
-	}
+    public RankingPage(RankingViewModel viewModel)
+    {
+        BindingContext = viewModel;
+        InitializeComponent();
+    }
 }

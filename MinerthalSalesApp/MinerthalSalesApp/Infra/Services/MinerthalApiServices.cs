@@ -6,10 +6,8 @@ using MinerthalSalesApp.ViewModels;
 using MinerthalSalesApp.ViewModels.Orders;
 using Newtonsoft.Json;
 using ServiceMinerthal;
-using System.Globalization;
 using System.Net;
 using System.Net.Mime;
-using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -27,7 +25,7 @@ namespace MinerthalSalesApp.Infra.Services
 
         }
 
-        public string ApiRequestServiceAsync(string queryId, bool filter,string codigoVendedor)
+        public string ApiRequestServiceAsync(string queryId, bool filter, string codigoVendedor)
         {
             try
             {
@@ -115,6 +113,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 ServicoDeRede.IsInternectConnected();
                 var userDetailStr = AppUser();
+                var userCod = App.VendedorSelecionado != null ? App.VendedorSelecionado.CodigoVendedor : userDetailStr.Codigo;
                 var paramsToSend = new
                 {
                     cEmp = "01",
@@ -129,7 +128,7 @@ namespace MinerthalSalesApp.Infra.Services
                         pagina = 1,
                         RegistrosPag = registrosPorPagina,
                         Filter = filter,
-                        MV_PAR01 = UserDetailStr.Codigo
+                        MV_PAR01 = userCod //UserDetailStr.Codigo
                     }
                 };
                 var _requestJson = JsonConvert.SerializeObject(paramsToSend);
@@ -240,7 +239,7 @@ namespace MinerthalSalesApp.Infra.Services
 
                     return responseBody.Result;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     if (attempts <= 15)
                     {
@@ -385,7 +384,7 @@ namespace MinerthalSalesApp.Infra.Services
                         {
                             foreach (var p in _parcelas)
                             {
-                                sbParcelas.Append($"{p.Value.Substring(0,10)};");
+                                sbParcelas.Append($"{p.Value.Substring(0, 10)};");
                             }
 
                             var _valorPedidoComJuros = valorPedidoParcela;
@@ -550,7 +549,7 @@ namespace MinerthalSalesApp.Infra.Services
                     {
                         foreach (var p in _parcelas)
                         {
-                            sbParcelas.Append($"{p.Value.Substring(0,10)};");
+                            sbParcelas.Append($"{p.Value.Substring(0, 10)};");
                         }
 
                         var _valorPedidoComJuros = valorPedidoParcela;

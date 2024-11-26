@@ -1,4 +1,3 @@
-using CommunityToolkit.Maui.Views;
 using MinerthalSalesApp.Infra.Database.Tables;
 using MinerthalSalesApp.ViewModels.Products;
 
@@ -10,7 +9,7 @@ public partial class ProdutosPage : ContentPage
 
     public ProdutosPage(ProdutosPageViewModel viewModel)
     {
-        _model=viewModel;
+        _model = viewModel;
         BindingContext = _model;
         InitializeComponent();
     }

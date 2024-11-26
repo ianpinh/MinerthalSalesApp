@@ -5,13 +5,13 @@ using System.Text;
 
 namespace MinerthalSalesApp.Infra.Database.Repository
 {
-	public class AtualizacaoRepository : IAtualizacaoRepository
+    public class AtualizacaoRepository : IAtualizacaoRepository
     {
         private readonly IAppthalContext _context;
 
         public AtualizacaoRepository(IAppthalContext context)
         {
-            _context = context?? throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
 
         }
@@ -64,7 +64,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<Atualizacoes> logs)
         {
-            if (logs !=null && logs.Count>0)
+            if (logs != null && logs.Count > 0)
                 foreach (var item in logs)
                     Add(item);
         }
@@ -104,7 +104,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 var fields = retorno as IDictionary<string, object>;
                 var _total = fields["COUNT(*)"];
 
-                _=int.TryParse(_total.ToString(), out int total);
+                _ = int.TryParse(_total.ToString(), out int total);
                 return total;
             }
             catch (Exception)
@@ -130,32 +130,32 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             Init();
         }
 
-		public void ClearAllTables()
-		{
+        public void ClearAllTables()
+        {
             try
             {
-				var sb = new StringBuilder();
-				sb.AppendLine("delete from Atualizacoes; delete from sqlite_sequence where name = 'Atualizacoes'");
-				sb.AppendLine("delete from HistoricoDePedidos; delete from sqlite_sequence where name = 'HistoricoDePedidos'");
-				sb.AppendLine("delete from ResumoPedido; delete from sqlite_sequence where name = 'ResumoPedido'");
-				sb.AppendLine("delete from Carrinho; delete from sqlite_sequence where name = 'Carrinho'");
-				sb.AppendLine("delete from MeusPedidos; delete from sqlite_sequence where name = 'MeusPedidos'");
-				sb.AppendLine("delete from Titulo; delete from sqlite_sequence where name = 'Titulo'");
-				sb.AppendLine("delete from Cliente; delete from sqlite_sequence where name = 'Cliente'");
-				sb.AppendLine("delete from Pedido; delete from sqlite_sequence where name = 'Pedido'");
-				sb.AppendLine("delete from Faturamento; delete from sqlite_sequence where name = 'Faturamento'");
-				sb.AppendLine("delete from Visita; delete from sqlite_sequence where name = 'Visita'");
+                var sb = new StringBuilder();
+                sb.AppendLine("delete from Atualizacoes; delete from sqlite_sequence where name = 'Atualizacoes'");
+                sb.AppendLine("delete from HistoricoDePedidos; delete from sqlite_sequence where name = 'HistoricoDePedidos'");
+                sb.AppendLine("delete from ResumoPedido; delete from sqlite_sequence where name = 'ResumoPedido'");
+                sb.AppendLine("delete from Carrinho; delete from sqlite_sequence where name = 'Carrinho'");
+                sb.AppendLine("delete from MeusPedidos; delete from sqlite_sequence where name = 'MeusPedidos'");
+                sb.AppendLine("delete from Titulo; delete from sqlite_sequence where name = 'Titulo'");
+                sb.AppendLine("delete from Cliente; delete from sqlite_sequence where name = 'Cliente'");
+                sb.AppendLine("delete from Pedido; delete from sqlite_sequence where name = 'Pedido'");
+                sb.AppendLine("delete from Faturamento; delete from sqlite_sequence where name = 'Faturamento'");
+                sb.AppendLine("delete from Visita; delete from sqlite_sequence where name = 'Visita'");
                 var clearCommand = sb.ToString();
 
-				_context.ExcecutarComandoCrudNoCommit(clearCommand);
-			}
+                _context.ExcecutarComandoCrudNoCommit(clearCommand);
+            }
             catch (Exception)
             {
 
                 throw;
             }
-		}
-	}
+        }
+    }
 }
 
 

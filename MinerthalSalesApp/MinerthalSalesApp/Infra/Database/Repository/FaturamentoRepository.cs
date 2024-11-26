@@ -8,14 +8,14 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 {
     public class FaturamentoRepository : IFaturamentoRepository
     {
-        private string NomeTabelaFaturamento=> RecuperarNomeDaTabela();
+        private string NomeTabelaFaturamento => RecuperarNomeDaTabela();
         private string NomeTabelaCliente => RecuperarNomeDaTabelaCliente();
         private readonly IAppthalContext _context;
         public FaturamentoRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-       
+
         private void Init(string nomeTabela)
         {
             try
@@ -97,19 +97,19 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     lstuser.Add(new Faturamento
                     {
                         NomeCliente = item.NomeCliente?.ToString(),
-                        Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0,
-                        CdCliente=item.CdCliente.ToString(),
-                        NrDocum=item.NrDocum.ToString(),
-                        NrParcel=item.NrParcel.ToString(),
-                        DtEmissao=item.DtEmissao.ToString(),
-                        DtVenc=item.DtVenc.ToString(),
-                        TpCobran=item.TpCobran.ToString(),
-                        CdRca=item.CdRca.ToString(),
-                        CdRcaxxx=item.CdRcaxxx.ToString(),
-                        QtDiaatr=item.QtDiaatr!=null ? Convert.ToInt32(item.QtDiaatr) : 0,
-                        Juros=item.Juros!=null ? Convert.ToDecimal(item.Juros) : 0M,
-                        VlDocum=item.VlDocum!=null ? Convert.ToDecimal(item.VlDocum) : 0M,
-                        VlJuro=item.VlJuro!=null ? Convert.ToDecimal(item.VlJuro) : 0M,
+                        Id = item.Id != null ? Convert.ToInt32(item.Id) : 0,
+                        CdCliente = item.CdCliente.ToString(),
+                        NrDocum = item.NrDocum.ToString(),
+                        NrParcel = item.NrParcel.ToString(),
+                        DtEmissao = item.DtEmissao.ToString(),
+                        DtVenc = item.DtVenc.ToString(),
+                        TpCobran = item.TpCobran.ToString(),
+                        CdRca = item.CdRca.ToString(),
+                        CdRcaxxx = item.CdRcaxxx.ToString(),
+                        QtDiaatr = item.QtDiaatr != null ? Convert.ToInt32(item.QtDiaatr) : 0,
+                        Juros = item.Juros != null ? Convert.ToDecimal(item.Juros) : 0M,
+                        VlDocum = item.VlDocum != null ? Convert.ToDecimal(item.VlDocum) : 0M,
+                        VlJuro = item.VlJuro != null ? Convert.ToDecimal(item.VlJuro) : 0M,
                     });
                 }
                 return lstuser;
@@ -190,19 +190,19 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 {
                     var teste = new Faturamento();
 
-                    teste.Id=item.Id!=null ? Convert.ToInt32(item.Id) : 0;
-                    teste.CdCliente=item.CdCliente!=null ? item.CdCliente.ToString() : "";
-                    teste.NrDocum=item.NrDocum!=null ? item.NrDocum.ToString() : "";
-                    teste.NrParcel=item.NrParcel!=null ? item.NrParcel.ToString() : "";
-                    teste.DtEmissao=item.DtEmissao!=null ? item.DtEmissao.ToString() : "";
-                    teste.DtVenc=item.DtVenc!=null ? item.DtVenc.ToString() : "";
-                    teste.TpCobran=item.TpCobran!=null ? item.TpCobran.ToString() : "";
-                    teste.CdRca=item.CdRca!=null ? item.CdRca.ToString() : "";
-                    teste.CdRcaxxx=item.CdRcaxxx!=null ? item.CdRcaxxx.ToString() : "";
-                    teste.QtDiaatr=item.QtDiaatr!=null ? Convert.ToInt32(item.QtDiaatr) : 0;
-                    teste.Juros=item.Juros!=null ? Convert.ToDecimal(item.Juros) : 0M;
-                    teste.VlDocum=item.VlDocum!=null ? Convert.ToDecimal(item.VlDocum) : 0M;
-                    teste.VlJuro=item.VlJuro!=null ? Convert.ToDecimal(item.VlJuro) : 0M;
+                    teste.Id = item.Id != null ? Convert.ToInt32(item.Id) : 0;
+                    teste.CdCliente = item.CdCliente != null ? item.CdCliente.ToString() : "";
+                    teste.NrDocum = item.NrDocum != null ? item.NrDocum.ToString() : "";
+                    teste.NrParcel = item.NrParcel != null ? item.NrParcel.ToString() : "";
+                    teste.DtEmissao = item.DtEmissao != null ? item.DtEmissao.ToString() : "";
+                    teste.DtVenc = item.DtVenc != null ? item.DtVenc.ToString() : "";
+                    teste.TpCobran = item.TpCobran != null ? item.TpCobran.ToString() : "";
+                    teste.CdRca = item.CdRca != null ? item.CdRca.ToString() : "";
+                    teste.CdRcaxxx = item.CdRcaxxx != null ? item.CdRcaxxx.ToString() : "";
+                    teste.QtDiaatr = item.QtDiaatr != null ? Convert.ToInt32(item.QtDiaatr) : 0;
+                    teste.Juros = item.Juros != null ? Convert.ToDecimal(item.Juros) : 0M;
+                    teste.VlDocum = item.VlDocum != null ? Convert.ToDecimal(item.VlDocum) : 0M;
+                    teste.VlJuro = item.VlJuro != null ? Convert.ToDecimal(item.VlJuro) : 0M;
 
                     lstuser.Add(teste);
                 }
@@ -216,7 +216,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void SaveFaturamento(List<Faturamento> fatura)
         {
-            if (fatura!=null && fatura.Any())
+            if (fatura != null && fatura.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine($"DELETE FROM {NomeTabelaFaturamento};");
@@ -292,7 +292,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void AddRange(List<Faturamento> fatura)
         {
-            if (fatura!=null && fatura.Any())
+            if (fatura != null && fatura.Any())
             {
                 var scriptCommand = new StringBuilder();
                 foreach (var item in fatura)
@@ -351,7 +351,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var fields = retorno as IDictionary<string, object>;
             var _total = fields["COUNT(*)"];
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
 
@@ -363,11 +363,11 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public List<Faturamento> RecuperarTitulosAVencer()
         {
             var titulos = GetAll();
-            if (titulos==null || titulos.Count==0)
+            if (titulos == null || titulos.Count == 0)
                 return new List<Faturamento>();
 
             var hoje = DateTime.Today;
-            var titulosAvencer = titulos.Where(x => x.DataDeVencimento>=hoje).OrderBy(x => x.DataDeVencimento).ToList();
+            var titulosAvencer = titulos.Where(x => x.DataDeVencimento >= hoje).OrderBy(x => x.DataDeVencimento).ToList();
             //var titulosAvencer = titulos/*.Where(x => x.DataDeVencimento>=hoje && x.DataDeVencimento.Value.Month==hoje.Month)*/.OrderBy(x => x.DataDeVencimento).ToList();
 
             return titulosAvencer;

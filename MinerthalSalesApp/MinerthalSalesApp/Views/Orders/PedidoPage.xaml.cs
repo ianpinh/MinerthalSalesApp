@@ -399,7 +399,7 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
 
                     // Calcular o prazo médio
                     decimal prazoMedio = somaDias / parcelas.Count;
-                    totalEncargos = (iten.ValorCombinado * (1 + (_model.PlanoPadraoCliente.TxPerFin * prazoMedio)/100)) - iten.ValorCombinado;
+                    totalEncargos = (iten.ValorCombinado * (1 + (_model.PlanoPadraoCliente.TxPerFin * prazoMedio) / 100)) - iten.ValorCombinado;
                 }
                 else
                 {
@@ -724,7 +724,7 @@ public partial class PedidoPage : ContentPage, IAsyncInitialization
             {
                 var guid = Guid.Parse(item.Key);
                 DateTime.TryParse(item.Value, out DateTime dateTime);
-               // AdicionarParcelasNoGrid(item.OptionalInteger, guid, dateTime);
+                // AdicionarParcelasNoGrid(item.OptionalInteger, guid, dateTime);
             }
         }
 

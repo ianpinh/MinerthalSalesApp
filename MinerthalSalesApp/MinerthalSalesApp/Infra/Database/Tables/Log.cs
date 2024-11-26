@@ -1,6 +1,4 @@
-﻿using System.Collections.Specialized;
-
-namespace MinerthalSalesApp.Infra.Database.Tables
+﻿namespace MinerthalSalesApp.Infra.Database.Tables
 {
     //[Table("Log")]
     public class Log

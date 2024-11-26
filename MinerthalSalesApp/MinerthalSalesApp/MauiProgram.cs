@@ -1,12 +1,14 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+using MinerthalSalesApp.Controls;
 using MinerthalSalesApp.Infra.Database.Base;
 using MinerthalSalesApp.Infra.Database.Repository;
 using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Services;
 using MinerthalSalesApp.ViewModels;
 using MinerthalSalesApp.ViewModels.Clients;
+using MinerthalSalesApp.ViewModels.DadosEquipe;
 using MinerthalSalesApp.ViewModels.Dashboard;
 using MinerthalSalesApp.ViewModels.Orders;
 using MinerthalSalesApp.ViewModels.Pesquisa;
@@ -24,8 +26,6 @@ using MinerthalSalesApp.Views.Products;
 using MinerthalSalesApp.Views.Ranking;
 using MinerthalSalesApp.Views.Shared;
 using MinerthalSalesApp.Views.Startup;
-using MinerthalSalesApp.ViewModels.DadosEquipe;
-using MinerthalSalesApp.Controls;
 
 namespace MinerthalSalesApp;
 
@@ -49,12 +49,12 @@ public static class MauiProgram
             .ConfigureLifecycleEvents(events =>
             {
 #if ANDROID
-             events.AddAndroid(android => android
-                        .OnActivityResult((activity, requestCode, resultCode, data) => LogEvent(nameof(AndroidLifecycle.OnActivityResult), requestCode.ToString()))
-                        .OnStart((activity) => LogEvent(nameof(AndroidLifecycle.OnStart)))
-                        .OnCreate((activity, bundle) => LogEvent(nameof(AndroidLifecycle.OnCreate)))
-                        .OnBackPressed((activity) => LogEvent(nameof(AndroidLifecycle.OnBackPressed)) && false)
-                        .OnStop((activity) => LogEvent(nameof(AndroidLifecycle.OnStop))));
+                events.AddAndroid(android => android
+                           .OnActivityResult((activity, requestCode, resultCode, data) => LogEvent(nameof(AndroidLifecycle.OnActivityResult), requestCode.ToString()))
+                           .OnStart((activity) => LogEvent(nameof(AndroidLifecycle.OnStart)))
+                           .OnCreate((activity, bundle) => LogEvent(nameof(AndroidLifecycle.OnCreate)))
+                           .OnBackPressed((activity) => LogEvent(nameof(AndroidLifecycle.OnBackPressed)) && false)
+                           .OnStop((activity) => LogEvent(nameof(AndroidLifecycle.OnStop))));
 #endif
 
 #if IOS
@@ -143,7 +143,7 @@ public static class MauiProgram
         //Database
         builder.Services.AddSingleton<IMinerthalApiServices, MinerthalApiServices>();
         builder.Services.AddSingleton<IServicoDeCarregamentoDasBases, ServicoDeCarregamentoDasBases>();
-        
+
         builder.Services.AddSingleton<IUserRepository, UserRepository>();
         builder.Services.AddSingleton<ILogRepository, LogRepository>();
         builder.Services.AddSingleton<IAtualizacaoRepository, AtualizacaoRepository>();
@@ -172,7 +172,7 @@ public static class MauiProgram
 
         string databaseName = "minerthal.db3";
         var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), databaseName);
-		builder.Services.AddSingleton<DatabaseContext>();
+        builder.Services.AddSingleton<DatabaseContext>();
         builder.Services.AddSingleton<IAppthalContext>(new AppthalContext(dbPath));
         //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<UserRepository>());
         //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<AtualizacaoRepository>(s, dbPath));

@@ -21,15 +21,15 @@ public partial class CarrinhoPage : ContentPage
         var index = model.Pedido.ItensPedido.FindIndex(x => x.Ordem == model.Pedido.ItensPedido.Max(x => x.Ordem));
         //model.ItemDeCalculoCarrinho = model.Pedido.ItensPedido[index];
 
-        Quantidade.Text=model.ItemDeCalculoCarrinho.Quantidade.ToString();
-        ValorCombinado.Text= model.ItemDeCalculoCarrinho.ValorBrutoProduto.ToString("N2");
-        Frete.Text= model.ItemDeCalculoCarrinho.FreteUnidade.ToString("N2");
+        Quantidade.Text = model.ItemDeCalculoCarrinho.Quantidade.ToString();
+        ValorCombinado.Text = model.ItemDeCalculoCarrinho.ValorBrutoProduto.ToString("N2");
+        Frete.Text = model.ItemDeCalculoCarrinho.FreteUnidade.ToString("N2");
         model.ItemDeCalculoCarrinho.CalcularComissaoTotal();
 
         BindingContext = model;
         CarregarDadosVendedor();
         CalcularItem();
-        isInitial=false;
+        isInitial = false;
         App.AtualizarModel(model);
     }
 
@@ -67,8 +67,8 @@ public partial class CarrinhoPage : ContentPage
         var valorCombinado = ConvertValueToDecimal(ValorCombinado.Text);
         _ = int.TryParse(Quantidade.Text, out int quantidade);
 
-        quantidade+=1;
-        Quantidade.Text=quantidade.ToString();
+        quantidade += 1;
+        Quantidade.Text = quantidade.ToString();
         SalvarItemCarrinho();
         CalcularItem();
         ValidarQuantidadeValor();
@@ -80,8 +80,8 @@ public partial class CarrinhoPage : ContentPage
         var valorCombinado = ConvertValueToDecimal(ValorCombinado.Text);
         _ = int.TryParse(Quantidade.Text, out int quantidade);
 
-        quantidade-=1;
-        Quantidade.Text=quantidade.ToString();
+        quantidade -= 1;
+        Quantidade.Text = quantidade.ToString();
         SalvarItemCarrinho();
         CalcularItem();
         ValidarQuantidadeValor();
@@ -89,7 +89,7 @@ public partial class CarrinhoPage : ContentPage
 
     private void EntryValor_TextChanged(object sender, TextChangedEventArgs e)
     {
-        _=int.TryParse(Quantidade.Text, out int quantidade);
+        _ = int.TryParse(Quantidade.Text, out int quantidade);
 
         int _valueA = 0, _valueB = 0;
         if (!string.IsNullOrWhiteSpace(e.OldTextValue))
@@ -104,11 +104,11 @@ public partial class CarrinhoPage : ContentPage
 
             var tempValue = decimal.Parse(_valueB.ToString(), cultureInfo);
             var newValue = 0M;
-            if (tempValue>0)
-                newValue=tempValue/100;
+            if (tempValue > 0)
+                newValue = tempValue / 100;
 
 
-            textbox.Text= newValue.ToString("N2", cultureInfo);
+            textbox.Text = newValue.ToString("N2", cultureInfo);
             textbox.CursorPosition = 10;
             SalvarItemCarrinho();
             CalcularItem();
@@ -126,7 +126,7 @@ public partial class CarrinhoPage : ContentPage
             valorCombinado = ConvertValueToDecimal(Total.Text);
         }
 
-        valorCombinado +=0.01M;
+        valorCombinado += 0.01M;
         ValorCombinado.Text = valorCombinado.ToString("N2", cultureInfo);
         SalvarItemCarrinho();
         CalcularItem();
@@ -136,10 +136,10 @@ public partial class CarrinhoPage : ContentPage
     private void RemoveValor_Clicked(object sender, EventArgs e)
     {
         var valorCombinado = ConvertValueToDecimal(ValorCombinado.Text);
-        _=int.TryParse(Quantidade.Text, out int quantidade);
+        _ = int.TryParse(Quantidade.Text, out int quantidade);
 
-        valorCombinado-=0.01M;
-        ValorCombinado.Text =valorCombinado.ToString("N2", cultureInfo);
+        valorCombinado -= 0.01M;
+        ValorCombinado.Text = valorCombinado.ToString("N2", cultureInfo);
         SalvarItemCarrinho();
         CalcularItem();
         ValidarQuantidadeValor();
@@ -149,7 +149,7 @@ public partial class CarrinhoPage : ContentPage
     {
 
         var subtotalFrete = model.ItemDeCalculoCarrinho.Quantidade * model.ItemDeCalculoCarrinho.FreteUnidade;
-        var valorCorrenteProduto = model.ItemDeCalculoCarrinho.ValorCombinado >0 ? model.ItemDeCalculoCarrinho.ValorCombinado : model.ItemDeCalculoCarrinho.ValorBrutoProduto;
+        var valorCorrenteProduto = model.ItemDeCalculoCarrinho.ValorCombinado > 0 ? model.ItemDeCalculoCarrinho.ValorCombinado : model.ItemDeCalculoCarrinho.ValorBrutoProduto;
 
         var subTotalProduto = model.ItemDeCalculoCarrinho.Quantidade * valorCorrenteProduto;
         var subtotal = subTotalProduto + subtotalFrete;
@@ -158,7 +158,7 @@ public partial class CarrinhoPage : ContentPage
         var totalDescontos = 0M;
         var totalEncargos = 0M;
 
-        if (model.PlanoPadraoCliente.TxPerFin>0)
+        if (model.PlanoPadraoCliente.TxPerFin > 0)
         {
             if (model.PlanoPadraoCliente.CdPlano.Equals("88"))
             {
@@ -172,7 +172,7 @@ public partial class CarrinhoPage : ContentPage
                 // Para cada parcela, calcular a diferença de dias
                 foreach (var item in parcelas)
                 {
-                    DateTime dataConvertida = DateTime.ParseExact(item.Value.Substring(0,10), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    DateTime dataConvertida = DateTime.ParseExact(item.Value.Substring(0, 10), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
                     // Calcular a diferença de dias entre a data da parcela e a data de referência (primeira parcela)
                     decimal diasDiferenca = (decimal)(dataConvertida - dataReferencia).TotalDays;
@@ -183,38 +183,38 @@ public partial class CarrinhoPage : ContentPage
 
                 // Calcular o prazo médio
                 decimal prazoMedio = somaDias / parcelas.Count;
-                totalEncargos = (subtotal * (1 + (model.PlanoPadraoCliente.TxPerFin * prazoMedio)/100)) - subtotal;
+                totalEncargos = (subtotal * (1 + (model.PlanoPadraoCliente.TxPerFin * prazoMedio) / 100)) - subtotal;
             }
             else
             {
                 totalEncargos = subtotal * (model.PlanoPadraoCliente.TxPerFin / 100);
             }
         }
-        
+
         if (model.PlanoPadraoCliente.VlDescpl > 0)
             totalDescontos = subTotalProduto - (subTotalProduto / (1 + (model.PlanoPadraoCliente.VlDescpl / 100)));
-                //subtotal * (model.PlanoPadraoCliente.VlDescpl/100);
+        //subtotal * (model.PlanoPadraoCliente.VlDescpl/100);
 
         //var totalGeral = (subtotal+totalEncargos)-totalDescontos;
-        var totalGeral = ((subTotalProduto / (1+(model.PlanoPadraoCliente.VlDescpl / 100))) + totalEncargos + subtotalFrete);
+        var totalGeral = ((subTotalProduto / (1 + (model.PlanoPadraoCliente.VlDescpl / 100))) + totalEncargos + subtotalFrete);
         var valorComissao = 0M;
-        if (faixaComissao>0)
-            valorComissao = (subTotalProduto / (1 + (model.PlanoPadraoCliente.VlDescpl / 100))) * (faixaComissao/100);
+        if (faixaComissao > 0)
+            valorComissao = (subTotalProduto / (1 + (model.PlanoPadraoCliente.VlDescpl / 100))) * (faixaComissao / 100);
 
         Frete.Text = subtotalFrete.ToString("c", cultureInfo);
         SubTotal.Text = subtotal.ToString("c", cultureInfo);
-        Encargos.Text=totalEncargos.ToString("c", cultureInfo);
+        Encargos.Text = totalEncargos.ToString("c", cultureInfo);
         Descontos.Text = totalDescontos.ToString("c", cultureInfo);
         Total.Text = totalGeral.ToString("c", cultureInfo);
-        Comissao.Text=string.Format("{0:N2}%", faixaComissao, cultureInfo);// faixaComissao.ToString("N2", cultureInfo);
-        ValComissao.Text=valorComissao.ToString("c", cultureInfo);// faixaComissao.ToString("N2", cultureInfo);
+        Comissao.Text = string.Format("{0:N2}%", faixaComissao, cultureInfo);// faixaComissao.ToString("N2", cultureInfo);
+        ValComissao.Text = valorComissao.ToString("c", cultureInfo);// faixaComissao.ToString("N2", cultureInfo);
 
     }
 
     private decimal ConvertValueToDecimal(string value)
     {
         int.TryParse(value.Replace(",", "").Replace(".", ""), out int _valorombinado);
-        return _valorombinado/100M;
+        return _valorombinado / 100M;
     }
 
     private void CarregarDadosVendedor()
@@ -279,7 +279,7 @@ public partial class CarrinhoPage : ContentPage
                 AdicionarItemDeCalculoCarrinhoAoPedido();
                 Navigation.PushAsync(new ProdutosPedidoPage(model));
                 Navigation.RemovePage(this);
-                model.ItemDeCalculoCarrinho=new Models.Dtos.ItensDto();
+                model.ItemDeCalculoCarrinho = new Models.Dtos.ItensDto();
             }
         }
         catch (Exception)
@@ -297,7 +297,7 @@ public partial class CarrinhoPage : ContentPage
     private void SalvarItemCarrinho()
     {
         var valorCombinado = ConvertValueToDecimal(ValorCombinado.Text);
-        _ =int.TryParse(Quantidade.Text.Replace(",", "").Replace(".", ""), out int quantidade);
+        _ = int.TryParse(Quantidade.Text.Replace(",", "").Replace(".", ""), out int quantidade);
 
 
         var totalFrete = quantidade * model.ItemDeCalculoCarrinho.FreteUnidade;
@@ -307,8 +307,8 @@ public partial class CarrinhoPage : ContentPage
             model.ItemDeCalculoCarrinho.TaxaDesconto = model.PlanoPadraoCliente.VlDescpl;
         }
 
-        model.ItemDeCalculoCarrinho.Quantidade=quantidade;
-        model.ItemDeCalculoCarrinho.ValorCombinado= valorCombinado;
+        model.ItemDeCalculoCarrinho.Quantidade = quantidade;
+        model.ItemDeCalculoCarrinho.ValorCombinado = valorCombinado;
         model.ItemDeCalculoCarrinho.Frete = totalFrete;
         model.ItemDeCalculoCarrinho.CalcularComissaoTotal();
 
@@ -319,7 +319,7 @@ public partial class CarrinhoPage : ContentPage
     private void AdicionarItemDeCalculoCarrinhoAoPedido()
     {
         var index = model.Pedido.ItensPedido.FindIndex(x => x.CodProduto == model.ItemDeCalculoCarrinho.CodProduto);
-        if (index>=0)
+        if (index >= 0)
             model.Pedido.ItensPedido[index] = model.ItemDeCalculoCarrinho;
         else
             model.Pedido.ItensPedido.Add(model.ItemDeCalculoCarrinho);
@@ -332,12 +332,12 @@ public partial class CarrinhoPage : ContentPage
         var valorMaximo = model.ItemDeCalculoCarrinho.ValorBrutoProduto - (model.ItemDeCalculoCarrinho.ValorBrutoProduto * (model.ItemDeCalculoCarrinho.ValorDescontoMinimo / 100));
         var valorMinimo = model.ItemDeCalculoCarrinho.ValorBrutoProduto - (model.ItemDeCalculoCarrinho.ValorBrutoProduto * (model.ItemDeCalculoCarrinho.ValorDescontoMaximo / 100));
 
-        if (valorCombinado>valorMaximo)
+        if (valorCombinado > valorMaximo)
         {
             DisplayAlert("Carrinho", "O Valor do produto ultrapassa o limite máximo", "OK");
             valido = false;
         }
-        else if (valorCombinado< valorMinimo)
+        else if (valorCombinado < valorMinimo)
         {
             DisplayAlert("Carrinho", "O Valor de desconto ultrapassa o limite mínimo", "OK");
             valido = false;
@@ -358,13 +358,13 @@ public partial class CarrinhoPage : ContentPage
         if (quantidade > qdtMax)
         {
             DisplayAlert("Carrinho", "A quantidade ultrapassa o limite máximo", "OK");
-            Quantidade.Text= model.ItemDeCalculoCarrinho.QuantidadeMin.ToString();
+            Quantidade.Text = model.ItemDeCalculoCarrinho.QuantidadeMin.ToString();
             valido = false;
         }
         else if (quantidade < qdtMin)
         {
             DisplayAlert("Carrinho", "A quantidade ultrapassa o limite mínimo", "OK");
-            Quantidade.Text= model.ItemDeCalculoCarrinho.QuantidadeMin.ToString();
+            Quantidade.Text = model.ItemDeCalculoCarrinho.QuantidadeMin.ToString();
             valido = false;
         }
 
@@ -374,17 +374,17 @@ public partial class CarrinhoPage : ContentPage
 
 
 
-        if (valorombinado>valorMaximo)
+        if (valorombinado > valorMaximo)
         {
             DisplayAlert("Carrinho", "O Valor do produto ultrapassa o limite máximo", "OK");
-            ValorCombinado.Text= model.ItemDeCalculoCarrinho.ValorBrutoProduto.ToString("N2", cultureInfo);
+            ValorCombinado.Text = model.ItemDeCalculoCarrinho.ValorBrutoProduto.ToString("N2", cultureInfo);
             valido = false;
 
         }
-        else if (valorombinado< valorMinimo)
+        else if (valorombinado < valorMinimo)
         {
             DisplayAlert("Carrinho", "O Valor de desconto ultrapassa o limite mínimo", "OK");
-            ValorCombinado.Text= model.ItemDeCalculoCarrinho.ValorBrutoProduto.ToString("N2", cultureInfo);
+            ValorCombinado.Text = model.ItemDeCalculoCarrinho.ValorBrutoProduto.ToString("N2", cultureInfo);
             valido = false;
         }
 
@@ -402,7 +402,7 @@ public partial class CarrinhoPage : ContentPage
         var valido = true;
         var quantidade = model.ItemDeCalculoCarrinho.Quantidade;
         var valorombinado = model.ItemDeCalculoCarrinho.ValorCombinado;
-        
+
 
 
         //QUANTIDADE
@@ -425,12 +425,12 @@ public partial class CarrinhoPage : ContentPage
 
 
 
-        if (valorombinado>valorMaximo)
+        if (valorombinado > valorMaximo)
         {
             DisplayAlert("Carrinho", $"O Valor do produto ultrapassa o limite máximo: {valorMaximo:N2}", "OK");
             valido = false;
         }
-        else if (valorombinado< valorMinimo)
+        else if (valorombinado < valorMinimo)
         {
             DisplayAlert("Carrinho", $"O Valor de desconto ultrapassa o limite mínimo: {valorMinimo:N2}", "OK");
             valido = false;
@@ -497,7 +497,7 @@ public partial class CarrinhoPage : ContentPage
             {
                 await Navigation.PushAsync(new ProdutosPedidoPage(model));
                 Navigation.RemovePage(this);
-                model.ItemDeCalculoCarrinho=new Models.Dtos.ItensDto();
+                model.ItemDeCalculoCarrinho = new Models.Dtos.ItensDto();
             }
         }
         catch (Exception ex)

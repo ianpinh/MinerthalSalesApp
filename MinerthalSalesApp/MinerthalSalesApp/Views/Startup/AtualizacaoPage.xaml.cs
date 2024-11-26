@@ -12,7 +12,7 @@ public partial class AtualizacaoPage : ContentPage
     {
         InitializeComponent();
         _model = model;
-        BindingContext =_model;
+        BindingContext = _model;
     }
 
     protected override void OnAppearing()
@@ -21,8 +21,8 @@ public partial class AtualizacaoPage : ContentPage
         int total = 0;
         if (!_isBusy)
         {
-            _isBusy=true;
-            Loaded+=async (s, e) =>
+            _isBusy = true;
+            Loaded += async (s, e) =>
             {
                 await Task.Run(() =>
               {
@@ -31,11 +31,11 @@ public partial class AtualizacaoPage : ContentPage
 
                 if (total > 0)
                 {
-                   
+
                     //var dashview = new DashboardPageViewModel(App.PopupAppService, App.AlertService);
                     //await Navigation.PushAsync(new AdminDashboardPage(dashview, App.PopupAppService));
                     await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
-                    _isBusy=false;
+                    _isBusy = false;
                 }
             };
 

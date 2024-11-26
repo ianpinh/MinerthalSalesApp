@@ -10,7 +10,7 @@ namespace MinerthalSalesApp.Infra.Services
         Task AtualizarBaseDeDados(ApiMinertalTypes tipo);
         int AtualizarBaseDeDadosPrimeiraCarga(AtualizacaoViewModel model);
 
-		Task AtualizarBaseDeDados();
+        Task AtualizarBaseDeDados();
         void AtualizarBaseDeDadosVendedores();
 
 

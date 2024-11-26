@@ -11,7 +11,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         private readonly IAppthalContext _context;
         public MeusPedidosRepository(IAppthalContext context)
         {
-            _context = context??throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
         private void Init()
@@ -65,7 +65,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
             return new MeusPedidos
             {
-                Id=Convert.ToInt32(retorno.Id),
+                Id = Convert.ToInt32(retorno.Id),
                 CdProduto = retorno.CdProduto.ToString(),
                 CdPraux = retorno.CdPraux.ToString(),
                 DsEmabala = retorno.DsEmabala.ToString(),
@@ -92,10 +92,10 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 CdFabric = retorno.CdFabric.ToString(),
                 CdCategoria = retorno.CdCategoria.ToString(),
                 CdSubcategoria = retorno.CdSubcategoria.ToString(),
-                VlPeso =  retorno.VlPeso!=null ? Convert.ToDecimal(retorno.VlPeso) : 0M,
-                CdRcaxxx =  retorno.CdRcaxxx!=null ? Convert.ToDecimal(retorno.CdRcaxxx) : 0M,
-                TxPercom = retorno.TxPercom!=null ? Convert.ToDecimal(retorno.TxPercom) : 0M,
-                VlPrecTab = retorno.VlPrecTab!=null ? Convert.ToDecimal(retorno.VlPrecTab) : 0M,
+                VlPeso = retorno.VlPeso != null ? Convert.ToDecimal(retorno.VlPeso) : 0M,
+                CdRcaxxx = retorno.CdRcaxxx != null ? Convert.ToDecimal(retorno.CdRcaxxx) : 0M,
+                TxPercom = retorno.TxPercom != null ? Convert.ToDecimal(retorno.TxPercom) : 0M,
+                VlPrecTab = retorno.VlPrecTab != null ? Convert.ToDecimal(retorno.VlPrecTab) : 0M,
                 VlPercom = retorno.VlPercom != null ? Convert.ToDecimal(retorno.VlPercom) : 0M
             };
         }
@@ -116,39 +116,39 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 {
                     var _pedido = new MeusPedidos();
 
-                    _pedido.Id=Convert.ToInt32(item.Id);
-                        _pedido.CdProduto = item.CdProduto.ToString();
-                        _pedido.CdPraux = item.CdPraux.ToString();
-                        _pedido.DsEmabala = item.DsEmabala.ToString();
-                        _pedido.DsProduto = item.DsProduto.ToString();
-                        _pedido.NmUnidade = item.NmUnidade.ToString();
-                        _pedido.NmEmbalag = item.NmEmbalag.ToString();
-                        _pedido.QtUnidemb = item.QtUnidemb.ToString();
-                        _pedido.InBloqVen = item.InBloqVen.ToString();
-                        _pedido.QtEmbMast = item.QtEmbMast.ToString();
-                        _pedido.TxObs = item.TxObs.ToString();
-                        _pedido.QtEstoque = item.QtEstoque.ToString();
-                        _pedido.CdDepto = item.CdDepto.ToString();
-                        _pedido.CdSecao = item.CdSecao.ToString();
-                        _pedido.CdBarra = item.CdBarra.ToString();
-                        _pedido.InFraci = item.InFraci.ToString();
-                        _pedido.QtMultip = item.QtMultip.ToString();
-                        _pedido.InMix = item.InMix.ToString();
-                        _pedido.CdFilial = item.CdFilial.ToString();
-                        _pedido.CdPrinc = item.CdPrinc.ToString();
-                        _pedido.CdFornec = item.CdFornec.ToString();
-                        _pedido.NrCor = item.NrCor.ToString();
-                        _pedido.DtUltalt = item.DtUltalt.ToString();
-                        _pedido.DtUltentr = item.DtUltentr.ToString();
-                        _pedido.CdFabric = item.CdFabric.ToString();
-                        _pedido.CdCategoria = item.CdCategoria.ToString();
-                        _pedido.CdSubcategoria = item.CdSubcategoria.ToString();
-                        _pedido.CdRcaxxx =  item.CdRcaxxx!=null ? Convert.ToInt32(item.CdRcaxxx) : 0;
-                        _pedido.VlPeso =  item.VlPeso!=null ? Convert.ToInt32(item.VlPeso) : 0M;
-                        _pedido.TxPercom = item.TxPercom!=null ? Convert.ToDecimal(item.TxPercom) : 0M;
-                        _pedido.VlPrecTab = item.VlPrecTab!=null ? Convert.ToDecimal(item.VlPrecTab) : 0M;
-                        _pedido.VlPercom = item.VlPercom !=null ? Convert.ToDecimal(item.VlPercom) : 0;
-                    
+                    _pedido.Id = Convert.ToInt32(item.Id);
+                    _pedido.CdProduto = item.CdProduto.ToString();
+                    _pedido.CdPraux = item.CdPraux.ToString();
+                    _pedido.DsEmabala = item.DsEmabala.ToString();
+                    _pedido.DsProduto = item.DsProduto.ToString();
+                    _pedido.NmUnidade = item.NmUnidade.ToString();
+                    _pedido.NmEmbalag = item.NmEmbalag.ToString();
+                    _pedido.QtUnidemb = item.QtUnidemb.ToString();
+                    _pedido.InBloqVen = item.InBloqVen.ToString();
+                    _pedido.QtEmbMast = item.QtEmbMast.ToString();
+                    _pedido.TxObs = item.TxObs.ToString();
+                    _pedido.QtEstoque = item.QtEstoque.ToString();
+                    _pedido.CdDepto = item.CdDepto.ToString();
+                    _pedido.CdSecao = item.CdSecao.ToString();
+                    _pedido.CdBarra = item.CdBarra.ToString();
+                    _pedido.InFraci = item.InFraci.ToString();
+                    _pedido.QtMultip = item.QtMultip.ToString();
+                    _pedido.InMix = item.InMix.ToString();
+                    _pedido.CdFilial = item.CdFilial.ToString();
+                    _pedido.CdPrinc = item.CdPrinc.ToString();
+                    _pedido.CdFornec = item.CdFornec.ToString();
+                    _pedido.NrCor = item.NrCor.ToString();
+                    _pedido.DtUltalt = item.DtUltalt.ToString();
+                    _pedido.DtUltentr = item.DtUltentr.ToString();
+                    _pedido.CdFabric = item.CdFabric.ToString();
+                    _pedido.CdCategoria = item.CdCategoria.ToString();
+                    _pedido.CdSubcategoria = item.CdSubcategoria.ToString();
+                    _pedido.CdRcaxxx = item.CdRcaxxx != null ? Convert.ToInt32(item.CdRcaxxx) : 0;
+                    _pedido.VlPeso = item.VlPeso != null ? Convert.ToInt32(item.VlPeso) : 0M;
+                    _pedido.TxPercom = item.TxPercom != null ? Convert.ToDecimal(item.TxPercom) : 0M;
+                    _pedido.VlPrecTab = item.VlPrecTab != null ? Convert.ToDecimal(item.VlPrecTab) : 0M;
+                    _pedido.VlPercom = item.VlPercom != null ? Convert.ToDecimal(item.VlPercom) : 0;
+
                     lst.Add(_pedido);
                 }
                 catch (Exception ex)
@@ -174,7 +174,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
 
         public void Add(MeusPedidos pedido)
         {
-            if (pedido!=null)
+            if (pedido != null)
             {
                 var scriptCommand = new StringBuilder();
 
@@ -244,7 +244,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                   , {pedido.VlPercom.ToStringInvariant("0.00")});";
                 scriptCommand.AppendLine(commandInsert);
 
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
@@ -253,7 +253,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public void AddRange(List<MeusPedidos> meusPedidos)
         {
 
-            if (meusPedidos!=null && meusPedidos.Any())
+            if (meusPedidos != null && meusPedidos.Any())
             {
                 var scriptCommand = new StringBuilder();
 
@@ -326,7 +326,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                     scriptCommand.AppendLine(commandInsert);
                 }
 
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }
@@ -342,13 +342,13 @@ namespace MinerthalSalesApp.Infra.Database.Repository
             var fields = retorno as IDictionary<string, object>;
             var _total = fields["COUNT(*)"];
 
-            _=int.TryParse(_total.ToString(), out int total);
+            _ = int.TryParse(_total.ToString(), out int total);
             return total;
         }
 
         public void SaveMeusPedidos(List<MeusPedidos> pedidos)
         {
-            if (pedidos!=null && pedidos.Any())
+            if (pedidos != null && pedidos.Any())
             {
                 var scriptCommand = new StringBuilder();
                 scriptCommand.AppendLine("DELETE FROM MeusPedidos;");
@@ -403,15 +403,15 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                             ,'{item.CdSecao}'
                                                             ,'{item.CdBarra}'
                                                             ,'{item.InFraci}'
-                                                            ,'{item.QtMultip }'
+                                                            ,'{item.QtMultip}'
                                                             ,'{item.InMix}'
-                                                            ,'{item.CdFilial }'
+                                                            ,'{item.CdFilial}'
                                                             ,'{item.CdPrinc}'
-                                                            ,'{item.CdFornec }'
+                                                            ,'{item.CdFornec}'
                                                             ,'{item.NrCor}'
-                                                            ,'{item.DtUltalt }'
+                                                            ,'{item.DtUltalt}'
                                                             ,'{item.DtUltentr}'
-                                                            ,'{item.CdFabric }'
+                                                            ,'{item.CdFabric}'
                                                             ,'{item.CdCategoria}'
                                                             ,'{item.CdSubcategoria}'
                                                             ,'{item.VlPeso}'
@@ -421,7 +421,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                                                             , {item.VlPercom.ToStringInvariant("0.00")});";
                     scriptCommand.AppendLine(commandInsert);
                 }
-               
+
                 var command = scriptCommand.ToString();
                 _context.ExcecutarComandoCrud(command);
             }

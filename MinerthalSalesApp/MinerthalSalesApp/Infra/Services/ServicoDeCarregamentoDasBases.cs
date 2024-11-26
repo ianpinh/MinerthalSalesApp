@@ -69,7 +69,6 @@ namespace MinerthalSalesApp.Infra.Services
                         App.FilialRepository.SaveFilial(_model.Details);
                         success = true;
                     }
-
                 }
 
                 if (tipo.Equals(ApiQueriesIdsEnum.Bancos))
@@ -1503,7 +1502,7 @@ namespace MinerthalSalesApp.Infra.Services
                         {
                             var lista = new List<CustomDictionary>();
                             foreach (ApiQueriesIdsEnum query in (ApiQueriesIdsEnum[])Enum.GetValues(typeof(ApiQueriesIdsEnum)))
-                          {
+                            {
                                 var _filter = (byte)query switch
                                 {
                                     1 => true,

@@ -11,7 +11,7 @@ public partial class AdminDashboardPage : ContentPage
     {
         InitializeComponent();
         this.BindingContext = viewModel;
-        _popupAppService=popupAppService;
+        _popupAppService = popupAppService;
     }
 
     protected async override void OnAppearing()

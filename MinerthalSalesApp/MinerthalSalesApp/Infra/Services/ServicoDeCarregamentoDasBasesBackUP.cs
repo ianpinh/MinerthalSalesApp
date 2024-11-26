@@ -11,7 +11,7 @@ namespace MinerthalSalesApp.Infra.Services
         private readonly IMinerthalApiServices _minerthal;
         public ServicoDeCarregamentoDasBasesBackUP(IMinerthalApiServices minerthalApiServices)
         {
-            _minerthal= minerthalApiServices??throw new ArgumentNullException(nameof(minerthalApiServices));
+            _minerthal = minerthalApiServices ?? throw new ArgumentNullException(nameof(minerthalApiServices));
         }
 
         bool IsLoading { get; set; } = false;
@@ -54,112 +54,112 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 if (!IsLoading)
                 {
-                    IsLoading=true;
+                    IsLoading = true;
                     //await CarregarUsuariosAsync();
-                    model.TotalUsuarios=2;// App.UserRepository.GetTotal();
+                    model.TotalUsuarios = 2;// App.UserRepository.GetTotal();
                     try
                     {
-                        _=CarregarRankingAsync();
+                        _ = CarregarRankingAsync();
                         var totalRanking = 2;
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalRanking =totalRanking;// App.RankingRepository.GetTotal();
+                        model.TotalRanking = totalRanking;// App.RankingRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalRanking = 2;
                     }
 
                     try
                     {
                         var totalClientes = await CarregarClientesAsync();
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalClientes =totalClientes;// App.ClienteRepository.GetTotal();
+                        model.TotalClientes = totalClientes;// App.ClienteRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalClientes = 2;
                     }
 
                     try
                     {
                         var totalTabela = await CarregarTabelaDePrecosAsync();
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalTbPrecos =totalTabela;//; App.TabelaPrecoRepository.GetTotal();
+                        model.TotalTbPrecos = totalTabela;//; App.TabelaPrecoRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalTbPrecos = 2;
                     }
 
                     try
                     {
-                        _=CarregarFaturamentoAsync();
+                        _ = CarregarFaturamentoAsync();
                         var totalFaturamentos = 2;
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalFaturamento = totalFaturamentos;
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalFaturamento = 2;
                     }
 
                     try
                     {
                         var totalProdutos = await CarregarProdutosAsync();
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalProdutos = totalProdutos;//App.ProdutosRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalProdutos =2;
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
+                        model.TotalProdutos = 2;
                     }
 
                     try
                     {
                         var totalFiliais = await CarregarFiliaisAsync();
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalFiliais=totalFiliais;// App.FilialRepository.GetTotal();
+                        model.TotalFiliais = totalFiliais;// App.FilialRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalFiliais =2;
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
+                        model.TotalFiliais = 2;
                     }
 
                     try
                     {
 
-                        _=CarregarMeusPedidosAsync();
+                        _ = CarregarMeusPedidosAsync();
                         var totalPedidos = 2;
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalPedidos =totalPedidos;// App.PedidoRepository.GetTotal();
+                        model.TotalPedidos = totalPedidos;// App.PedidoRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalPedidos =2;
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
+                        model.TotalPedidos = 2;
                     }
 
                     try
                     {
                         var totalVendedores = await CarregarVendedoresAsync();
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalVendedores =totalVendedores;// App.VendedorRepository.GetTotal();
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
+                        model.TotalVendedores = totalVendedores;// App.VendedorRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalVendedores = 2;
                     }
 
@@ -167,53 +167,53 @@ namespace MinerthalSalesApp.Infra.Services
                     {
 
                         var totalPlanos = await CarregarPlanosAsync();
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalPlanos=totalPlanos;// App.PlanosRepository.GetTotal();
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
+                        model.TotalPlanos = totalPlanos;// App.PlanosRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalPlanos =2;
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
+                        model.TotalPlanos = 2;
                     }
 
                     try
                     {
                         var totalBancos = await CarregarBancosAsync();
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalBancos=totalBancos;// App.BancoRepository.GetTotal();
+                        model.TotalBancos = totalBancos;// App.BancoRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalBancos = 2;
                     }
 
                     try
                     {
-                        _=CarregarHistoricoPedidoAsync();
+                        _ = CarregarHistoricoPedidoAsync();
                         var totalHistoricoPedido = 2;
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalHistoricoPedidos= totalHistoricoPedido;// App.HistoricoPedidoReposity.GetTotal();
+                        model.TotalHistoricoPedidos = totalHistoricoPedido;// App.HistoricoPedidoReposity.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalHistoricoPedidos =2;
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
+                        model.TotalHistoricoPedidos = 2;
                     }
 
                     try
                     {
-                        _=CarregarResumoPedidoAsync();
+                        _ = CarregarResumoPedidoAsync();
                         var totalResumoPedido = 2;
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
-                        model.TotalResumoPedidos=totalResumoPedido;// App.ResumoPedidoRepository.GetTotal();
+                        model.TotalResumoPedidos = totalResumoPedido;// App.ResumoPedidoRepository.GetTotal();
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalResumoPedidos = 2;
                     }
                 }
@@ -224,30 +224,30 @@ namespace MinerthalSalesApp.Infra.Services
                 {
                     var exc = (CustomExceptions)ex;
 
-                    if (exc.ErroLancadoPor==ApiMinertalTypes.Bancos)
-                        model.ImageSourceLoadingBanco=model.imagError;
-                    else if (exc.ErroLancadoPor== ApiMinertalTypes.Filiais)
-                        model.ImageSourceLoadingFilial=model.imagError;
-                    else if (exc.ErroLancadoPor==  ApiMinertalTypes.Usuarios)
-                        model.ImageSourceLoadingUsuario =model.imagError;
-                    else if (exc.ErroLancadoPor==  ApiMinertalTypes.TabelaDePrecos)
-                        model.ImageSourceLoadingPreco=model.imagError;
-                    else if (exc.ErroLancadoPor==  ApiMinertalTypes.Planos)
-                        model.ImageSourceLoadingPlano=model.imagError;
-                    else if (exc.ErroLancadoPor==  ApiMinertalTypes.Cliente)
-                        model.ImageSourceLoadingCliente=model.imagError;
-                    else if (exc.ErroLancadoPor==  ApiMinertalTypes.Vendedor)
-                        model.ImageSourceLoadingVendedor=model.imagError;
-                    else if (exc.ErroLancadoPor==  ApiMinertalTypes.Ranking)
-                        model.ImageSourceLoadingRanking=model.imagError;
-                    else if (exc.ErroLancadoPor==  ApiMinertalTypes.Produtos)
-                        model.ImageSourceLoadingProduto=model.imagError;
-                    else if (exc.ErroLancadoPor==  ApiMinertalTypes.HistoricoPedido)
-                        model.ImageSourceLoadingHistoricoPedido=model.imagError;
-                    else if (exc.ErroLancadoPor==  ApiMinertalTypes.ResumoPedido)
-                        model.ImageSourceLoadingResumoPedido=model.imagError;
+                    if (exc.ErroLancadoPor == ApiMinertalTypes.Bancos)
+                        model.ImageSourceLoadingBanco = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.Filiais)
+                        model.ImageSourceLoadingFilial = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.Usuarios)
+                        model.ImageSourceLoadingUsuario = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.TabelaDePrecos)
+                        model.ImageSourceLoadingPreco = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.Planos)
+                        model.ImageSourceLoadingPlano = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.Cliente)
+                        model.ImageSourceLoadingCliente = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.Vendedor)
+                        model.ImageSourceLoadingVendedor = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.Ranking)
+                        model.ImageSourceLoadingRanking = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.Produtos)
+                        model.ImageSourceLoadingProduto = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.HistoricoPedido)
+                        model.ImageSourceLoadingHistoricoPedido = model.imagError;
+                    else if (exc.ErroLancadoPor == ApiMinertalTypes.ResumoPedido)
+                        model.ImageSourceLoadingResumoPedido = model.imagError;
 
-                    model.TotalResumoPedidos+=1;
+                    model.TotalResumoPedidos += 1;
                 }
 
             }
@@ -262,7 +262,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 if (!IsLoading)
                 {
-                    IsLoading=true;
+                    IsLoading = true;
 
                     await CarregarUsuariosAsync();
 
@@ -276,62 +276,62 @@ namespace MinerthalSalesApp.Infra.Services
                     var vendedores = CarregarVendedoresAsync().GetAwaiter();
                     var planos = CarregarPlanosAsync().GetAwaiter();
                     var bancos = CarregarBancosAsync().GetAwaiter();
-                    var tabPrecos = _=CarregarTabelaDePrecosAsync().GetAwaiter();
+                    var tabPrecos = _ = CarregarTabelaDePrecosAsync().GetAwaiter();
 
 
                     clientes.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     tabPrecos.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     faturamentos.OnCompleted(() =>
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                     });
                     produtos.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     filiais.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     ranking.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     meusPedidos.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     vendedores.OnCompleted(() =>
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     planos.OnCompleted(() =>
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     bancos.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
@@ -346,7 +346,7 @@ namespace MinerthalSalesApp.Infra.Services
             }
             finally
             {
-                IsLoading=false;
+                IsLoading = false;
             }
         }
 
@@ -359,10 +359,10 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 if (!IsLoading)
                 {
-                    IsLoading=true;
+                    IsLoading = true;
 
                     //await CarregarUsuariosAsync();
-                    model.TotalUsuarios=1; App.UserRepository.GetTotal();
+                    model.TotalUsuarios = 1; App.UserRepository.GetTotal();
 
                     var tabPrecos = CarregarTabelaDePrecosAsync();
                     var clientes = CarregarClientesAsync();
@@ -400,9 +400,9 @@ namespace MinerthalSalesApp.Infra.Services
                     {
                         if (tabPrecos.IsCompleted)
                         {
-                            totalFinalised+=1;
+                            totalFinalised += 1;
                             IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalTbPrecos =tabPrecos.Result;// App.TabelaPrecoRepository.GetTotal();
+                            model.TotalTbPrecos = tabPrecos.Result;// App.TabelaPrecoRepository.GetTotal();
                         }
                         //tabPrecos.OnCompleted(() =>
                         //{
@@ -417,7 +417,7 @@ namespace MinerthalSalesApp.Infra.Services
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalTbPrecos = 1;
                     }
 
@@ -425,16 +425,16 @@ namespace MinerthalSalesApp.Infra.Services
                     {
                         if (clientes.IsCompleted)
                         {
-                            totalFinalised+=1;
+                            totalFinalised += 1;
                             IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalClientes =clientes.Result;// App.ClienteRepository.GetTotal();
+                            model.TotalClientes = clientes.Result;// App.ClienteRepository.GetTotal();
                         }
                         //clientes.OnCompleted(() =>{});
 
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalClientes = 1;
                     }
 
@@ -445,7 +445,7 @@ namespace MinerthalSalesApp.Infra.Services
 
                         if (faturamentos.IsCompleted)
                         {
-                            totalFinalised+=1; //IsLoading.Finised(totalCalls, totalFinalised);
+                            totalFinalised += 1; //IsLoading.Finised(totalCalls, totalFinalised);
                             IsLoadingFinised(totalCalls, totalFinalised);
                             model.TotalFaturamento = faturamentos.Result;
                         }
@@ -453,7 +453,7 @@ namespace MinerthalSalesApp.Infra.Services
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalFaturamento = 1;
                     }
 
@@ -462,15 +462,15 @@ namespace MinerthalSalesApp.Infra.Services
                         //produtos.OnCompleted(() => { });
                         if (produtos.IsCompleted)
                         {
-                            totalFinalised+=1;
+                            totalFinalised += 1;
                             IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalProdutos =produtos.Result;// App.ProdutosRepository.GetTotal();
+                            model.TotalProdutos = produtos.Result;// App.ProdutosRepository.GetTotal();
                         }
 
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalProdutos = 1;
                     }
 
@@ -479,15 +479,15 @@ namespace MinerthalSalesApp.Infra.Services
                         //filiais.OnCompleted(() =>{ });
                         if (filiais.IsCompleted)
                         {
-                            totalFinalised+=1;
+                            totalFinalised += 1;
                             IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalFiliais=filiais.Result;// App.FilialRepository.GetTotal();
+                            model.TotalFiliais = filiais.Result;// App.FilialRepository.GetTotal();
                         }
 
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalFiliais = 1;
                     }
 
@@ -496,15 +496,15 @@ namespace MinerthalSalesApp.Infra.Services
                         //ranking.OnCompleted(() =>{  });
                         if (produtos.IsCompleted)
                         {
-                            totalFinalised+=1;
+                            totalFinalised += 1;
                             IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalRanking =ranking.Result;// App.RankingRepository.GetTotal();
+                            model.TotalRanking = ranking.Result;// App.RankingRepository.GetTotal();
                         }
 
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalRanking = 1;
                     }
 
@@ -513,15 +513,15 @@ namespace MinerthalSalesApp.Infra.Services
                         //meusPedidos.OnCompleted(() =>{ });
                         if (produtos.IsCompleted)
                         {
-                            totalFinalised+=1;
+                            totalFinalised += 1;
                             IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalPedidos =meusPedidos.Result;// App.PedidoRepository.GetTotal();
+                            model.TotalPedidos = meusPedidos.Result;// App.PedidoRepository.GetTotal();
                         }
 
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalPedidos = 1;
                     }
 
@@ -530,14 +530,14 @@ namespace MinerthalSalesApp.Infra.Services
                         //vendedores.OnCompleted(() =>{ });
                         if (vendedores.IsCompleted)
                         {
-                            totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalVendedores =vendedores.Result;// App.VendedorRepository.GetTotal();
+                            totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
+                            model.TotalVendedores = vendedores.Result;// App.VendedorRepository.GetTotal();
                         }
 
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalVendedores = 1;
                     }
 
@@ -546,14 +546,14 @@ namespace MinerthalSalesApp.Infra.Services
                         //planos.OnCompleted(() =>{ });
                         if (planos.IsCompleted)
                         {
-                            totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalPlanos=planos.Result;// App.PlanosRepository.GetTotal();
+                            totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
+                            model.TotalPlanos = planos.Result;// App.PlanosRepository.GetTotal();
                         }
 
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalPlanos = 1;
                     }
 
@@ -562,15 +562,15 @@ namespace MinerthalSalesApp.Infra.Services
                         if (bancos.IsCompleted)
                         {
                             //bancos.OnCompleted(() =>{ });
-                            totalFinalised+=1;
+                            totalFinalised += 1;
                             IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalBancos=bancos.Result;// App.BancoRepository.GetTotal();
+                            model.TotalBancos = bancos.Result;// App.BancoRepository.GetTotal();
 
                         }
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalBancos = 1;
                     }
 
@@ -579,15 +579,15 @@ namespace MinerthalSalesApp.Infra.Services
                         //historicoPedidos.OnCompleted(() =>{ });
                         if (historicoPedidos.IsCompleted)
                         {
-                            totalFinalised+=1;
+                            totalFinalised += 1;
                             IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalHistoricoPedidos=historicoPedidos.Result;// App.HistoricoPedidoReposity.GetTotal();
+                            model.TotalHistoricoPedidos = historicoPedidos.Result;// App.HistoricoPedidoReposity.GetTotal();
                         }
 
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalHistoricoPedidos = 1;
                     }
 
@@ -596,15 +596,15 @@ namespace MinerthalSalesApp.Infra.Services
                         //resumoPedido.OnCompleted(() =>{ });
                         if (resumoPedido.IsCompleted)
                         {
-                            totalFinalised+=1;
+                            totalFinalised += 1;
                             IsLoadingFinised(totalCalls, totalFinalised);
-                            model.TotalResumoPedidos=resumoPedido.Result;// App.HistoricoPedidoReposity.GetTotal();
+                            model.TotalResumoPedidos = resumoPedido.Result;// App.HistoricoPedidoReposity.GetTotal();
                         }
 
                     }
                     catch (Exception)
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                         model.TotalResumoPedidos = 1;
                     }
 
@@ -620,34 +620,34 @@ namespace MinerthalSalesApp.Infra.Services
                     switch (exc.ErroLancadoPor)
                     {
                         case ApiMinertalTypes.Bancos:
-                            model.ImageSourceLoadingBanco=model.imagError;
+                            model.ImageSourceLoadingBanco = model.imagError;
                             break;
                         case ApiMinertalTypes.Filiais:
-                            model.ImageSourceLoadingFilial=model.imagError;
+                            model.ImageSourceLoadingFilial = model.imagError;
                             break;
                         case ApiMinertalTypes.Usuarios:
-                            model.ImageSourceLoadingUsuario =model.imagError;
+                            model.ImageSourceLoadingUsuario = model.imagError;
                             break;
                         case ApiMinertalTypes.TabelaDePrecos:
-                            model.ImageSourceLoadingPreco=model.imagError;
+                            model.ImageSourceLoadingPreco = model.imagError;
                             break;
                         case ApiMinertalTypes.Planos:
-                            model.ImageSourceLoadingPlano=model.imagError;
+                            model.ImageSourceLoadingPlano = model.imagError;
                             break;
                         case ApiMinertalTypes.Cliente:
-                            model.ImageSourceLoadingCliente=model.imagError;
+                            model.ImageSourceLoadingCliente = model.imagError;
                             break;
                         case ApiMinertalTypes.Vendedor:
-                            model.ImageSourceLoadingVendedor=model.imagError;
+                            model.ImageSourceLoadingVendedor = model.imagError;
                             break;
                         case ApiMinertalTypes.Ranking:
-                            model.ImageSourceLoadingRanking=model.imagError;
+                            model.ImageSourceLoadingRanking = model.imagError;
                             break;
                         case ApiMinertalTypes.Produtos:
-                            model.ImageSourceLoadingProduto=model.imagError;
+                            model.ImageSourceLoadingProduto = model.imagError;
                             break;
                         case ApiMinertalTypes.HistoricoPedido:
-                            model.ImageSourceLoadingHistoricoPedido=model.imagError;
+                            model.ImageSourceLoadingHistoricoPedido = model.imagError;
                             break;
                     }
 
@@ -664,7 +664,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 if (!IsLoading)
                 {
-                    IsLoading=true;
+                    IsLoading = true;
 
                     // await CarregarUsuariosAsync();
 
@@ -677,61 +677,61 @@ namespace MinerthalSalesApp.Infra.Services
                     var vendedores = CarregarVendedoresAsync().GetAwaiter();
                     var planos = CarregarPlanosAsync().GetAwaiter();
                     var bancos = CarregarBancosAsync().GetAwaiter();
-                    var tabPrecos = _=CarregarTabelaDePrecosAsync().GetAwaiter();
+                    var tabPrecos = _ = CarregarTabelaDePrecosAsync().GetAwaiter();
 
                     clientes.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     tabPrecos.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     faturamentos.OnCompleted(() =>
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
                     });
                     produtos.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     filiais.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     ranking.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     meusPedidos.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     vendedores.OnCompleted(() =>
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     planos.OnCompleted(() =>
                     {
-                        totalFinalised+=1; IsLoadingFinised(totalCalls, totalFinalised);
+                        totalFinalised += 1; IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
                     bancos.OnCompleted(() =>
                     {
-                        totalFinalised+=1;
+                        totalFinalised += 1;
                         IsLoadingFinised(totalCalls, totalFinalised);
 
                     });
@@ -746,7 +746,7 @@ namespace MinerthalSalesApp.Infra.Services
             }
             finally
             {
-                IsLoading=false;
+                IsLoading = false;
             }
         }
         public async Task<int> CarregarClientesAsync()
@@ -771,7 +771,7 @@ namespace MinerthalSalesApp.Infra.Services
                 if (lista != null && lista.Any())
                     App.UserRepository.SaveUsuers(lista);
 
-                return lista!=null ? lista.Count : 0;
+                return lista != null ? lista.Count : 0;
             }
             catch (Exception ex)
             {
@@ -797,7 +797,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var fatura = await PesquisarFaturamento();
                 App.FaturamentoRepository.SaveFaturamento(fatura);
-                return fatura!=null ? fatura.Count() : 0;
+                return fatura != null ? fatura.Count() : 0;
             }
             catch (Exception ex)
             {
@@ -819,7 +819,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var produtos = await PesquisarProduto();
                 App.ProdutosRepository.SaveProduto(produtos);
-                total = produtos!=null ? produtos.Count : 0;
+                total = produtos != null ? produtos.Count : 0;
             }
             catch (Exception ex)
             {
@@ -841,7 +841,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var filiais = await PesquisarFilial();
                 App.FilialRepository.SaveFilial(filiais);
-                total =filiais!=null ? filiais.Count : 0;
+                total = filiais != null ? filiais.Count : 0;
             }
             catch (Exception ex)
 
@@ -864,7 +864,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var ranking = await PesquisarRanking();
                 App.RankingRepository.SaveRanking(ranking);
-                total =  ranking!=null ? ranking.Count : 0;
+                total = ranking != null ? ranking.Count : 0;
             }
             catch (Exception ex)
             {
@@ -886,7 +886,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var pedidos = await PesquisarMeusPedidos();
                 App.MeusPedidosRepository.SaveMeusPedidos(pedidos);
-                return pedidos!=null ? pedidos.Count() : 0;
+                return pedidos != null ? pedidos.Count() : 0;
             }
             catch (Exception ex)
             {
@@ -908,7 +908,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var lista = await PesquisarTabelaPreco();
                 App.TabelaPrecoRepository.SaveTabelaPreco(lista);
-                total= lista!=null ? lista.Count() : 0;
+                total = lista != null ? lista.Count() : 0;
             }
             catch (Exception ex)
             {
@@ -930,7 +930,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var lista = await PesquisarVendedores();
                 App.VendedorRepository.SaveVendedor(lista);
-                total = lista!=null ? lista.Count() : 0;
+                total = lista != null ? lista.Count() : 0;
             }
             catch (Exception ex)
             {
@@ -952,7 +952,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var lista = await PesquisarPlanos();
                 App.PlanosRepository.Save(lista);
-                total= lista!=null ? lista.Count() : 0;
+                total = lista != null ? lista.Count() : 0;
             }
             catch (Exception ex)
             {
@@ -974,7 +974,7 @@ namespace MinerthalSalesApp.Infra.Services
             {
                 var lista = await PesquisarBanco();
                 App.BancoRepository.SaveProduto(lista);
-                total = lista!=null ? lista.Count() : 0;
+                total = lista != null ? lista.Count() : 0;
             }
             catch (Exception ex)
             {
@@ -999,7 +999,7 @@ namespace MinerthalSalesApp.Infra.Services
                 var faturamento = CarregarFaturamentoAsync();
                 await Task.WhenAll(clientes, faturamento);
 
-                total= clientes.Result + faturamento.Result;
+                total = clientes.Result + faturamento.Result;
             }
             catch (Exception ex)
             {
@@ -1032,7 +1032,7 @@ namespace MinerthalSalesApp.Infra.Services
                 });
                 //throw new CustomExceptions($"Erro ao carregar a listagem de pedidos. Erro: {ex.Message}", ApiMinertalTypes.HistoricoPedido);
             }
-            return lista!=null ? lista.Count() : 0;
+            return lista != null ? lista.Count() : 0;
         }
 
         private async Task<int> CarregarResumoPedidoAsync()
@@ -1054,7 +1054,7 @@ namespace MinerthalSalesApp.Infra.Services
                 });
                 //throw new CustomExceptions($"Erro ao carregar a listagem de resumo dos pedidos. Erro: {ex.Message}", ApiMinertalTypes.ResumoPedido);
             }
-            return lista!=null ? lista.Count() : 0;
+            return lista != null ? lista.Count() : 0;
         }
 
         private async Task<List<Plano>> PesquisarPlanos()
@@ -1069,8 +1069,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiPlano>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -1093,8 +1093,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiCliente>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -1118,8 +1118,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiProduto>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -1144,8 +1144,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiFilial>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -1170,8 +1170,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiTabelaPreco>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -1195,8 +1195,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiVendedor>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -1220,8 +1220,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiFaturamento>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -1246,8 +1246,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiMeusPedidos>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
 
                 return obj;
@@ -1270,8 +1270,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiUsuario>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -1292,8 +1292,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiRanking>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -1316,8 +1316,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiBanco>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -1340,8 +1340,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiHistoricoPedido>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
             }
@@ -1363,8 +1363,8 @@ namespace MinerthalSalesApp.Infra.Services
                 if (!string.IsNullOrWhiteSpace(model))
                 {
                     var _model = JsonConvert.DeserializeObject<ResponseApiResumoPedido>(model);
-                    if (_model!=null && _model.Details.Any())
-                        obj= _model.Details;
+                    if (_model != null && _model.Details.Any())
+                        obj = _model.Details;
                 }
                 return obj;
 
@@ -1379,7 +1379,7 @@ namespace MinerthalSalesApp.Infra.Services
         {
             try
             {
-                return  _minerthal.ApiRequestServiceAsync(queryId, filter);
+                return _minerthal.ApiRequestServiceAsync(queryId, filter);
             }
             catch (Exception)
             {
@@ -1389,7 +1389,7 @@ namespace MinerthalSalesApp.Infra.Services
 
         private void IsLoadingFinised(int totalCall, int totalFinalized)
         {
-            if (totalCall==totalFinalized)
+            if (totalCall == totalFinalized)
                 IsLoading = false;
         }
 
