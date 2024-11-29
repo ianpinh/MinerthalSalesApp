@@ -35,45 +35,45 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
-	  <ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
-	  <ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
+		<ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
+		<ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
-	  <ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
-	  <ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
+		<ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
+		<ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
-	  <ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
-	  <ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
+		<ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
+		<ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
-	  <ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
-	  <ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
+		<ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
+		<ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android33.0|AnyCPU'">
-	  <ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
-	  <ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
+		<ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
+		<ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
 
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android33.0|AnyCPU'">
-	  <ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
-	  <ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
+		<ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
+		<ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
 
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
-	  <ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
+		<ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
+		<ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
-	  <ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
+		<ApplicationId>com.minerthalsuplementos.appthal</ApplicationId>
+		<ApplicationIdGuid>7db23381-e909-4a17-b6db-dfe4218a7793</ApplicationIdGuid>
 	</PropertyGroup>
 
 
@@ -90,68 +90,68 @@
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<MauiAsset Include="Resources\Raw\" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
 
 	<ItemGroup>
-	  <Compile Remove="ViewModels\Pedido\**" />
-	  <EmbeddedResource Remove="ViewModels\Pedido\**" />
-	  <MauiCss Remove="ViewModels\Pedido\**" />
-	  <MauiXaml Remove="ViewModels\Pedido\**" />
-	  <None Remove="ViewModels\Pedido\**" />
+		<Compile Remove="ViewModels\Pedido\" />
+		<EmbeddedResource Remove="ViewModels\Pedido\" />
+		<MauiCss Remove="ViewModels\Pedido\" />
+		<MauiXaml Remove="ViewModels\Pedido\" />
+		<None Remove="ViewModels\Pedido\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\raking.png" />
+		<MauiImage Remove="Resources\Images\raking.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="hs_err_pid13656.log" />
-	  <None Remove="Resources\Images\branch.png" />
-	  <None Remove="Resources\Images\carrinho_comprs.png" />
-	  <None Remove="Resources\Images\checklist.png" />
-	  <None Remove="Resources\Images\check_btn.png" />
-	  <None Remove="Resources\Images\clientes_icon.png" />
-	  <None Remove="Resources\Images\close_btn.png" />
-	  <None Remove="Resources\Images\data_table.png" />
-	  <None Remove="Resources\Images\db_update.png" />
-	  <None Remove="Resources\Images\devlibery.png" />
-	  <None Remove="Resources\Images\edit_add.png" />
-	  <None Remove="Resources\Images\edit_remove_mini.png" />
-	  <None Remove="Resources\Images\exec.png" />
-	  <None Remove="Resources\Images\financial.png" />
-	  <None Remove="Resources\Images\follow_up.png" />
-	  <None Remove="Resources\Images\historico.png" />
-	  <None Remove="Resources\Images\IconExplorer.png" />
-	  <None Remove="Resources\Images\icons_back.png" />
-	  <None Remove="Resources\Images\icons_back_mini.png" />
-	  <None Remove="Resources\Images\input_box.png" />
-	  <None Remove="Resources\Images\invisible_eye.png" />
-	  <None Remove="Resources\Images\kfind.png" />
-	  <None Remove="Resources\Images\kfm_home.png" />
-	  <None Remove="Resources\Images\kuser.png" />
-	  <None Remove="Resources\Images\lists.png" />
-	  <None Remove="Resources\Images\miscellaneous.png" />
-	  <None Remove="Resources\Images\Network Service.png" />
-	  <None Remove="Resources\Images\network_btn.png" />
-	  <None Remove="Resources\Images\neworder.png" />
-	  <None Remove="Resources\Images\note_btn.png" />
-	  <None Remove="Resources\Images\office.png" />
-	  <None Remove="Resources\Images\playlist.png" />
-	  <None Remove="Resources\Images\trashcan_empty.png" />
-	  <None Remove="Resources\Images\utils.png" />
-	  <None Remove="Resources\Images\visible_eye.png" />
-	  <None Remove="Resources\Images\visitas.png" />
-	  <None Remove="Resources\Images\Write Document.png" />
+		<None Remove="hs_err_pid13656.log" />
+		<None Remove="Resources\Images\branch.png" />
+		<None Remove="Resources\Images\carrinho_comprs.png" />
+		<None Remove="Resources\Images\checklist.png" />
+		<None Remove="Resources\Images\check_btn.png" />
+		<None Remove="Resources\Images\clientes_icon.png" />
+		<None Remove="Resources\Images\close_btn.png" />
+		<None Remove="Resources\Images\data_table.png" />
+		<None Remove="Resources\Images\db_update.png" />
+		<None Remove="Resources\Images\devlibery.png" />
+		<None Remove="Resources\Images\edit_add.png" />
+		<None Remove="Resources\Images\edit_remove_mini.png" />
+		<None Remove="Resources\Images\exec.png" />
+		<None Remove="Resources\Images\financial.png" />
+		<None Remove="Resources\Images\follow_up.png" />
+		<None Remove="Resources\Images\historico.png" />
+		<None Remove="Resources\Images\IconExplorer.png" />
+		<None Remove="Resources\Images\icons_back.png" />
+		<None Remove="Resources\Images\icons_back_mini.png" />
+		<None Remove="Resources\Images\input_box.png" />
+		<None Remove="Resources\Images\invisible_eye.png" />
+		<None Remove="Resources\Images\kfind.png" />
+		<None Remove="Resources\Images\kfm_home.png" />
+		<None Remove="Resources\Images\kuser.png" />
+		<None Remove="Resources\Images\lists.png" />
+		<None Remove="Resources\Images\miscellaneous.png" />
+		<None Remove="Resources\Images\Network Service.png" />
+		<None Remove="Resources\Images\network_btn.png" />
+		<None Remove="Resources\Images\neworder.png" />
+		<None Remove="Resources\Images\note_btn.png" />
+		<None Remove="Resources\Images\office.png" />
+		<None Remove="Resources\Images\playlist.png" />
+		<None Remove="Resources\Images\trashcan_empty.png" />
+		<None Remove="Resources\Images\utils.png" />
+		<None Remove="Resources\Images\visible_eye.png" />
+		<None Remove="Resources\Images\visitas.png" />
+		<None Remove="Resources\Images\Write Document.png" />
 	</ItemGroup>
 
 
 
-	
+
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="Dapper" Version="2.1.35" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
@@ -169,188 +169,192 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\FlyoutHeaderControl.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="PopupPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Clients\ClienteGerais.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Clients\ClienteOutros.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Clients\ClienteTituloPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Clients\ClientsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Clients\ClientsPageDetail.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Clients\HistoricoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Configuration\ConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\DadosEquipe\DadosEquipePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\DadosEquipe\DetalheVendedorPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Dashboard\AdminDashboardPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Dashboard\DashboardPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Orders\CarrinhoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Orders\GeraisPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Orders\MeusPedidosPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Orders\PedidoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Orders\ProdutosPedidoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Orders\ResumoPedidoDetalhePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Pesquisa\PesquisaPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Products\ProdutoEditarPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Products\ProdutosPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Ranking\RankingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Shared\SharedLoadingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Startup\AtualizacaoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Startup\LoadingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Startup\LoginPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Controls\FlyoutHeaderControl.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="PopupPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Clients\ClienteGerais.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Clients\ClienteOutros.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Clients\ClienteTituloPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Clients\ClientsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Clients\ClientsPageDetail.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Clients\HistoricoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Configuration\ConfigurationPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\DadosEquipe\DadosEquipePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\DadosEquipe\DetalheVendedorPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Dashboard\AdminDashboardPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Dashboard\DashboardPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Orders\CarrinhoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Orders\GeraisPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Orders\MeusPedidosPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Orders\PedidoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Orders\ProdutosPedidoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Orders\ResumoPedidoDetalhePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pesquisa\PesquisaPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Products\ProdutoEditarPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Products\ProdutosPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Ranking\RankingPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Shared\SharedLoadingPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Startup\AtualizacaoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Startup\LoadingPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Startup\LoginPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\Salers\" />
-	  <Folder Include="Models\Servicos\Vendedores\" />
-	  <Folder Include="Platforms\Android\CustomRenderers\" />
+		<Folder Include="Models\Salers\" />
+		<Folder Include="Models\Servicos\Vendedores\" />
+		<Folder Include="Platforms\Android\CustomRenderers\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\appicon.svg">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiIcon>
-	  <MauiIcon Include="Resources\AppIcon\appiconfg.svg">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </MauiIcon>
-	  <MauiIcon Include="Resources\AppIcon\logo.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </MauiIcon>
-	  <MauiIcon Include="Resources\AppIcon\logosvg.svg">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </MauiIcon>
-	  <MauiIcon Include="Resources\AppIcon\logo_old.svg">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </MauiIcon>
+		<MauiIcon Include="Resources\AppIcon\appicon.svg">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiIcon>
+		<MauiIcon Include="Resources\AppIcon\appiconfg.svg">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiIcon>
+		<MauiIcon Include="Resources\AppIcon\logo.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiIcon>
+		<MauiIcon Include="Resources\AppIcon\logosvg.svg">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiIcon>
+		<MauiIcon Include="Resources\AppIcon\logo_old.svg">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiIcon>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\Orders\CarrinhoPage.xaml.cs">
-	    <DependentUpon>CarrinhoPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Orders\MeusPedidosPage.xaml.cs">
-	    <DependentUpon>MeusPedidosPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Orders\PedidoPage.xaml.cs">
-	    <DependentUpon>PedidoPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Orders\ResumoPedidoDetalhePage.xaml.cs">
-	    <DependentUpon>ResumoPedidoDetalhePage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Products\ProdutoEditarPage.xaml.cs">
-	    <DependentUpon>ProdutoEditarPage.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="Views\Orders\CarrinhoPage.xaml.cs">
+			<DependentUpon>CarrinhoPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Orders\MeusPedidosPage.xaml.cs">
+			<DependentUpon>MeusPedidosPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Orders\PedidoPage.xaml.cs">
+			<DependentUpon>PedidoPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Orders\ResumoPedidoDetalhePage.xaml.cs">
+			<DependentUpon>ResumoPedidoDetalhePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Products\ProdutoEditarPage.xaml.cs">
+			<DependentUpon>ProdutoEditarPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Update="Resources\Images\about_us.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\busca.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\clients.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\company_logo.jpg">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\contact_us.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\dashboard.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\lock.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\logo_aniversario_minertal.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\more_icon.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\orders.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\products.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\team.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
-	  <MauiImage Update="Resources\Images\user.png">
-	    <CopyToOutputDirectory></CopyToOutputDirectory>
-	  </MauiImage>
+		<MauiImage Update="Resources\Images\about_us.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\busca.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\clients.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\company_logo.jpg">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\contact_us.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\dashboard.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\lock.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\logo_aniversario_minertal.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\more_icon.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\orders.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\products.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\team.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\user.png">
+			<CopyToOutputDirectory></CopyToOutputDirectory>
+		</MauiImage>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Resources\Images\minerthalicon.png">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
+		<None Update="Resources\Images\minerthalicon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMinerthalSalesAppHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties XamarinHotReloadDebuggerTimeoutExceptionMinerthalSalesAppHideInfoBar="True" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+		<PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.83" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.100" />
+		<PackageReference Update="Microsoft.Maui.Controls" Version="8.0.83" />
 	</ItemGroup>
 
 </Project>
