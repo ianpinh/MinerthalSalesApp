@@ -120,7 +120,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
                     else
                     {
                         var totalAtualizacoes = App.AtualizacaoRepository.GetTotal();
-                        if (totalAtualizacoes > 1)
+                        if (totalAtualizacoes > 2)
                             AppConstant.AddFlyoutMenusDetails();
                         else
                             Shell.Current.GoToAsync($"//{nameof(AtualizacaoPage)}");
@@ -129,7 +129,7 @@ namespace MinerthalSalesApp.ViewModels.Startup
                 else
                 {
                     var totalAtualizacoes = App.AtualizacaoRepository.GetTotal();
-                    if (totalAtualizacoes > 1)
+                    if (totalAtualizacoes > 2)
                         AppConstant.AddFlyoutMenusDetails();
                     else
                         Shell.Current.GoToAsync($"//{nameof(AtualizacaoPage)}");

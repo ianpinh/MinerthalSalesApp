@@ -14,6 +14,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public FaturamentoRepository(IAppthalContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            Init(NomeTabelaFaturamento);
         }
 
         private void Init(string nomeTabela)

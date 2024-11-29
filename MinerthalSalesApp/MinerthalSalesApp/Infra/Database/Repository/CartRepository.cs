@@ -12,7 +12,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public CartRepository(IAppthalContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            //Init();
+            Init(NomeTabelaCarrinho);
         }
         private void Init(string nomeTabela)
         {

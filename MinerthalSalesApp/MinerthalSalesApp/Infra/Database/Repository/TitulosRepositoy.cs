@@ -1,4 +1,5 @@
-﻿using MinerthalSalesApp.Customs.CustomHelpers;
+﻿using Android.Media.TV;
+using MinerthalSalesApp.Customs.CustomHelpers;
 using MinerthalSalesApp.Infra.Database.Base;
 using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Database.Tables;
@@ -13,6 +14,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public TitulosRepositoy(IAppthalContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            Init(NomeTabelaTitulo);
         }
 
         private void Init(string tableName)

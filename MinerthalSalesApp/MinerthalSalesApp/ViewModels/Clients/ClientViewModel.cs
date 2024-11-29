@@ -95,6 +95,7 @@ namespace MinerthalSalesApp.ViewModels.Clients
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(Items));
                 }
+                ClientEmptyList = value.Count() <= 0;
                 GridLoadingVisible = false;
             }
         }
@@ -113,7 +114,7 @@ namespace MinerthalSalesApp.ViewModels.Clients
                 if (Items != null) Items.Clear();
 
                 Items = clientes;//new ObservableCollection<Cliente>(clientes);
-                ClientEmptyList = clientes.Count() > 0;
+
             }
             catch (Exception ex)
             {
@@ -128,14 +129,14 @@ namespace MinerthalSalesApp.ViewModels.Clients
             {
                 if (Items != null) Items.Clear();
                 var clientes = App.ClienteRepository.GetAll();
-               
+
                 if (clientes.Any())
                     Items = clientes;// new ObservableCollection<Cliente>(clientes);
                 else
                     await _alertService.ShowAlertAsync("Clientes", $"Não foi possível carregar a listagem de clientes.", "OK");
 
 
-                ClientEmptyList = clientes.Count() > 0;
+
             }
             catch (Exception ex)
             {
