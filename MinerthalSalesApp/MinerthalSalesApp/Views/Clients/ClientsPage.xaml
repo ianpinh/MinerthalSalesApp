@@ -42,7 +42,7 @@
                         WidthRequest="35" />
                 </Grid>
 
-                <Label Text="Vendedor não tem clientes cadastrados" Grid.Row="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="10,0,0,0" FontSize="15" IsVisible="{Binding ClientEmptyList}"></Label>
+                <!--<Label Text="Vendedor não tem clientes cadastrados" Grid.Row="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Padding="10,0,0,0" FontSize="15" IsVisible="{Binding Path=ClientEmptyList}"></Label>-->
 
                 <ListView
                     x:Name="ListaClientes"

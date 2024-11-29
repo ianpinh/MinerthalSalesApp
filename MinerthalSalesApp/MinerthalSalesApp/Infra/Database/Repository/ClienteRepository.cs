@@ -13,6 +13,7 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public ClienteRepository(IAppthalContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            Init(NomeTabelaCliente);
         }
         private void Init(string nomeTabelaCliente)
         {

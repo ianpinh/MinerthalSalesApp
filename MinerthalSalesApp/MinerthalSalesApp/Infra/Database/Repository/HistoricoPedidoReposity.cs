@@ -1,4 +1,5 @@
-﻿using MinerthalSalesApp.Customs.CustomHelpers;
+﻿using Android.Media.TV;
+using MinerthalSalesApp.Customs.CustomHelpers;
 using MinerthalSalesApp.Infra.Database.Base;
 using MinerthalSalesApp.Infra.Database.Repository.Interface;
 using MinerthalSalesApp.Infra.Database.Tables;
@@ -16,6 +17,10 @@ namespace MinerthalSalesApp.Infra.Database.Repository
         public HistoricoPedidoReposity(IAppthalContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            Init(NomeTabelaHistoricoPedidos);
+            InitResumoPedido_(NomeTabelaResumoPedido);
+            InitCliente(NomeTabelaCliente);
+
         }
 
         private void Init(string tableName)
