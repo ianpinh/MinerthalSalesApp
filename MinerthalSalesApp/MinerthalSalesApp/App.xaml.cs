@@ -130,8 +130,12 @@ public partial class App : Application
             {
                 //DeleteAllTables();
                 await ServicoDeCarregamentoDasBases.AtualizarBaseDeDados(Models.Enums.ApiMinertalTypes.Usuarios);
-                UpdateDatabase();
             }
+            UpdateDatabase();
+
+
+
+
         }
         catch (Exception ex)
         {
