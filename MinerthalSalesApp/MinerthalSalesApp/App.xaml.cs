@@ -120,7 +120,7 @@ public partial class App : Application
 
 
     static DateTime lastHour = DateTime.Now;
-    static int tempoAtualizacaoBanco = 30;
+    static int tempoAtualizacaoBanco = 5;
     async Task BuildDatabase()
     {
         try
