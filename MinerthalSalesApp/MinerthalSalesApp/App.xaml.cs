@@ -132,10 +132,6 @@ public partial class App : Application
                 await ServicoDeCarregamentoDasBases.AtualizarBaseDeDados(Models.Enums.ApiMinertalTypes.Usuarios);
             }
             UpdateDatabase();
-
-
-
-
         }
         catch (Exception ex)
         {

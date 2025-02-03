@@ -102,11 +102,7 @@
                         HorizontalOptions="FillAndExpand"
                         HorizontalTextAlignment="Center"
                         Text="Carregando histórico de pedidos" />
-
-
                 </Grid>
-
-
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -389,6 +385,7 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </ScrollView>
+                    <ActivityIndicator IsRunning="{Binding IsDataBusy}" IsVisible="{Binding IsDataBusy}" />
 
                 </Grid>
             </AbsoluteLayout>

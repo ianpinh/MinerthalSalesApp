@@ -22,14 +22,17 @@ namespace MinerthalSalesApp.ViewModels.Orders
             _alertService = alertService ?? throw new ArgumentNullException(nameof(alertService));
             _servicoDeCarregamentoDasBases = servicoDeCarregamentoDasBases ?? throw new ArgumentNullException(nameof(servicoDeCarregamentoDasBases));
             //Initialization = InitializeAsync();
-            Initialize();
+            //_=Initialize();
         }
 
-        public void Initialize()
+        public async Task Initialize()
         {
-            _ListarPedidos();
-            _ListarPedidosPendentes();
-            _listarHistoricoPedido();
+            var taskPedidos = Task.Run(() => { _ListarPedidos(); });
+            var taskPendentes = Task.Run(() => { _ListarPedidosPendentes(); });
+            var taskHistorico = Task.Run(() => { _listarHistoricoPedido(); });
+
+            await Task.WhenAll(taskPedidos,taskPendentes,taskHistorico);
+
         }
 
 
@@ -271,7 +274,17 @@ namespace MinerthalSalesApp.ViewModels.Orders
             }
         }
 
-
+        private bool isDataBusy = false;
+        public bool IsDataBusy
+        {
+            get => isDataBusy;
+            set
+            {
+                isDataBusy = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsDataBusy));
+            }
+        }
 
         //ICommand refreshCommand = new Command(() =>
         //{

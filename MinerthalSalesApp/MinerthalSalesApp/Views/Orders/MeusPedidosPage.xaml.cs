@@ -15,6 +15,7 @@ public partial class MeusPedidosPage : ContentPage
         _viewModel = viewModel;
         BindingContext = _viewModel;
         InitializeComponent();
+        _viewModel.IsDataBusy = true;
         ListarPedidosViewModel();
 
 
@@ -30,7 +31,7 @@ public partial class MeusPedidosPage : ContentPage
         loadingImage.IsAnimationPlaying = true;
 
 
-        ListarPedidosViewModel();
+        //ListarPedidosViewModel();
         /*Loaded +=(s, e) =>
         {
             SetInvisibelContent();
@@ -116,7 +117,8 @@ public partial class MeusPedidosPage : ContentPage
     {
         try
         {
-            _viewModel.Initialize();
+            _ = Task.Run(() => { _viewModel.Initialize(); _viewModel.IsDataBusy = false; });
+
         }
         catch (Exception ex)
         {
@@ -127,6 +129,7 @@ public partial class MeusPedidosPage : ContentPage
     [RelayCommand]
     private void AtualizarListaDePedidosPendentes()
     {
+        _viewModel.IsDataBusy = true;
         ListarPedidosViewModel();
     }
 
