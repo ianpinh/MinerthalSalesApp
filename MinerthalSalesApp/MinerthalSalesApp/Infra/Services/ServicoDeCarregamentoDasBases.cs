@@ -857,7 +857,6 @@ namespace MinerthalSalesApp.Infra.Services
         }
 
 
-
         private async Task<List<Usuario>> PesquisarMeusUsuarios()
         {
             try
