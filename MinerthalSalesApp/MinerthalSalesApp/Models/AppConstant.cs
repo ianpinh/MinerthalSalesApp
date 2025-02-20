@@ -14,19 +14,13 @@ namespace MinerthalSalesApp.Models
     {
         public async static void AddFlyoutMenusDetails(string route = default)
         {
-
             var model = new FlyoutHeaderControlViewModel();
             Shell.Current.FlyoutHeader = new FlyoutHeaderControl(model);
-
-            //var adminDashboardInfo = Shell.Current.Items.Where(f => f.Route == nameof(AdminDashboardPage)).FirstOrDefault();
-            //if (adminDashboardInfo != null) Shell.Current.Items.Remove(adminDashboardInfo);
 
             if (string.IsNullOrWhiteSpace(route))
             {
                 if (App.UserDetails.RoleID == (int)RoleDetails.Admin)
                 {
-
-
                     var flyoutItem = new FlyoutItem()
                     {
                         Title = "Dashboard Page",
@@ -82,185 +76,41 @@ namespace MinerthalSalesApp.Models
 
                     var item = Shell.Current.Items.Where(x => x.Title == flyoutItem.Title).FirstOrDefault();
 
-
-                    //if (!Shell.Current.Items.Contains(flyoutItem))
                     if (item == null)
-                    {
                         Shell.Current.Items.Add(flyoutItem);
-                    }
-                    if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                    {
-                        Shell.Current.Dispatcher.Dispatch(async () =>
-                        {
-                            await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
-                        });
-                    }
-                    else
-                    {
-                        await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
-                    }
+
+                    await Shell.Current.GoToAsync($"//{nameof(AdminDashboardPage)}");
                 }
             }
-            else if (route == "ranking")
+            else
             {
-                //var flyoutItem = new FlyoutItem()
-                //{
-                //	Title = "Ranking Page",
-                //	Route = nameof(RankingPage),
-                //	FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems,
-                //	Items =
-                //	{
-                //				new ShellContent
-                //				{
-                //					Icon = Icons.Clients,
-                //					Title = "Clientes",
-                //					ContentTemplate = new DataTemplate(typeof(RankingPage)),
-                //				},
-                //				new ShellContent
-                //				{
-                //					Icon = Icons.Products,
-                //					Title = "Produtos",
-                //					ContentTemplate = new DataTemplate(typeof(RankingPage)),
-                //				},
-                //				new ShellContent
-                //				{
-                //					Icon = Icons.Orders,
-                //					Title = "Pedidos",
-                //					ContentTemplate = new DataTemplate(typeof(RankingPage)),
-                //				},
-                //				new ShellContent
-                //				{
-                //					Icon = Icons.Search,
-                //					Title = "Busca",
-                //					ContentTemplate = new DataTemplate(typeof(RankingPage)),
-                //				},
-                //				new ShellContent
-                //				{
-                //					Icon = Icons.Ranking,
-                //					Title = "Ranking",
-                //					ContentTemplate = new DataTemplate(typeof(RankingPage)),
-                //				},
-                //   }
-                //};
-
-                //if (!Shell.Current.Items.Contains(flyoutItem))
-                //{
-                //	Shell.Current.Items.Add(flyoutItem);
-                //	if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                //	{
-                //		Shell.Current.Dispatcher.Dispatch(async () =>
-                //		{
-                //			await Shell.Current.GoToAsync($"//{nameof(RankingPage)}");
-                //		});
-                //	}
-                //	else
-                //	{
-                //		await Shell.Current.GoToAsync($"//{nameof(RankingPage)}");
-                //	}
-                //}
-
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                switch (route)
                 {
-                    Shell.Current.Dispatcher.Dispatch(async () =>
-                    {
+                    case "ranking":
                         await Shell.Current.GoToAsync($"//{nameof(RankingPage)}");
                         FecharPaginasAbertas();
-                    });
-                }
-                else
-                {
-                    //await Shell.Current.GoToAsync($"//{nameof(SharedLoadingPage)}",true,new Dictionary<string, object> { { "pagina", "RankingPage" } });
-                    await Shell.Current.GoToAsync($"//{nameof(RankingPage)}");
-                }
-
-            }
-            else if (route == "clients")
-            {
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                {
-                    Shell.Current.Dispatcher.Dispatch(async () =>
-                    {
+                        break;
+                    case "clients":
                         await Shell.Current.GoToAsync($"//{nameof(ClientsPage)}");
-                    });
-                }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(ClientsPage)}");
-                }
-            }
-            else if (route == "produts")
-            {
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                {
-                    Shell.Current.Dispatcher.Dispatch(async () =>
-                    {
+                        break;
+                    case "produts":
                         await Shell.Current.GoToAsync($"//{nameof(ProdutosPage)}");
-                    });
-                }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(ProdutosPage)}");
-                }
-            }
-            else if (route == "meusPedidos")
-            {
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                {
-                    Shell.Current.Dispatcher.Dispatch(async () =>
-                    {
+                        break;
+                    case "meusPedidos":
                         await Shell.Current.GoToAsync($"//{nameof(MeusPedidosPage)}");
-                    });
-                }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(MeusPedidosPage)}");
-                }
-            }
-            else if (route == "Pedidos")
-            {
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                {
-                    Shell.Current.Dispatcher.Dispatch(async () =>
-                    {
+                        break;
+                    case "Pedidos":
                         await Shell.Current.GoToAsync($"//{nameof(PedidoPage)}");
-                    });
-                }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(PedidoPage)}");
-                }
-            }
-            else if (route == "Pesquisa")
-            {
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                {
-                    Shell.Current.Dispatcher.Dispatch(async () =>
-                    {
+                        break;
+                    case "Pesquisa":
                         await Shell.Current.GoToAsync($"//{nameof(PesquisaPage)}");
-                    });
-                }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(PesquisaPage)}");
-                }
-            }
-            else if (route == "DadosEquipe")
-            {
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                {
-                    Shell.Current.Dispatcher.Dispatch(async () =>
-                    {
+                        break;
+                    case "DadosEquipe":
                         await Shell.Current.GoToAsync($"//{nameof(DadosEquipePage)}");
-                    });
-                }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(DadosEquipePage)}");
-                }
+                        break;
+                };
             }
-
         }
-
         private static void FecharPaginasAbertas()
         {
             try
@@ -271,26 +121,17 @@ namespace MinerthalSalesApp.Models
                 {
                     if (item != null)
                     {
-                        if (item.GetType().Equals(typeof(ClientsPage)))
-                            Shell.Current.Navigation.RemovePage(item);
+                        if (item.GetType().Equals(typeof(ClientsPage)) ||
+                            item.GetType().Equals(typeof(ProdutosPedidoPage)) ||
+                            item.GetType().Equals(typeof(CarrinhoPage)) ||
+                            item.GetType().Equals(typeof(RankingPage)) ||
+                            item.GetType().Equals(typeof(PedidoPage)) ||
+                            item.GetType().Equals(typeof(MeusPedidosPage)) ||
+                            item.GetType().Equals(typeof(DetalhePedidoPage)))
+                        {
 
-                        if (item.GetType().Equals(typeof(ProdutosPedidoPage)))
                             Shell.Current.Navigation.RemovePage(item);
-
-                        if (item.GetType().Equals(typeof(CarrinhoPage)))
-                            Shell.Current.Navigation.RemovePage(item);
-
-                        if (item.GetType().Equals(typeof(RankingPage)))
-                            Shell.Current.Navigation.RemovePage(item);
-
-                        if (item.GetType().Equals(typeof(PedidoPage)))
-                            Shell.Current.Navigation.RemovePage(item);
-
-                        if (item.GetType().Equals(typeof(MeusPedidosPage)))
-                            Shell.Current.Navigation.RemovePage(item);
-
-                        if (item.GetType().Equals(typeof(DetalhePedidoPage)))
-                            Shell.Current.Navigation.RemovePage(item);
+                        }
                     }
                 }
             }

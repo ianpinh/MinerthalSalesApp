@@ -31,7 +31,6 @@ namespace MinerthalSalesApp.ViewModels.Products
             }
         }
 
-
         public decimal Total => Items.Count;
 
         public string TotalFormatado => Total.ToString("N2", CultureInfo.CreateSpecificCulture("pt-BR"));
@@ -57,7 +56,6 @@ namespace MinerthalSalesApp.ViewModels.Products
 
         public List<Produto> FiltrarProdutos(string textoBusca)
         {
-
             var lista = App.ProdutosRepository.GetAll();
             if (!string.IsNullOrWhiteSpace(textoBusca) && lista.Any())
             {
@@ -98,7 +96,5 @@ namespace MinerthalSalesApp.ViewModels.Products
         {
             ListagemDeProdutos();
         }
-
-
     }
 }

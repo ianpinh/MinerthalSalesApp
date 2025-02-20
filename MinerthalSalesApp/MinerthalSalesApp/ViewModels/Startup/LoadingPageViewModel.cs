@@ -98,21 +98,22 @@ namespace MinerthalSalesApp.ViewModels.Startup
             Message = string.Empty;
 
             string userDetailsStr = Preferences.Get(nameof(App.UserDetails), "");
-
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
 
             if (string.IsNullOrWhiteSpace(userDetailsStr))
             {
-                if (DeviceInfo.Platform == DevicePlatform.WinUI)
-                {
-                    Shell.Current.Dispatcher.Dispatch(() =>
-                    {
-                        Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-                    });
-                }
-                else
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-                }
+                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                //if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                //{
+                //    Shell.Current.Dispatcher.Dispatch(() =>
+                //    {
+                //        Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                //    });
+                //}
+                //else
+                //{
+                //    await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+                //}
             }
             else
             {

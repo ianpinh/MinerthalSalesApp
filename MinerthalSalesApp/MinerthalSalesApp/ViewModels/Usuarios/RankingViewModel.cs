@@ -83,33 +83,28 @@ namespace MinerthalSalesApp.ViewModels.Usuarios
             try
             {
                 var lista = App.RankingRepository.GetAll();
-                if (lista.Any())
-                {
-                    var maxWin = lista.Max(x => x.PosicaoRanking);
-                    ranking = lista.Select(c => { c.PercentRanking = CalcularPercentual(maxWin, c.PosicaoRanking); return c; }).OrderByDescending(x => x.PosicaoRanking).ToList();
+                if (!lista.Any())
+                    lista = await CarregarRanking();
 
 
-                    for (var i = 0; i < ranking.Count; i++)
-                        ranking[i].Rank = i + 1;
+                var maxWin = lista.Max(x => x.PosicaoRanking);
+                ranking = lista.Select(c => { c.PercentRanking = CalcularPercentual(maxWin, c.PosicaoRanking); return c; }).OrderByDescending(x => x.PosicaoRanking).ToList();
 
+                for (var i = 0; i < ranking.Count; i++)
+                    ranking[i].Rank = i + 1;
 
-                    Items = new List<Ranking>(ranking);
-                    return ranking;
-                }
-                else
-                {
-                    await CarregarRanking();
-                    Items = new List<Ranking>(ranking);
-                    return ranking;
-                }
             }
             catch (Exception ex)
             {
                 CadastrarLogErro(ex.Message);
                 Items = new List<Ranking>(ranking);
-                return ranking;
             }
 
+            if (ranking.Any())
+            {
+                Items =  ranking.Where(x=>x.Codigo == App.UserDetails.Codigo).ToList();
+            }
+            return ranking;
         }
 
         //[RelayCommand]
@@ -182,21 +177,25 @@ namespace MinerthalSalesApp.ViewModels.Usuarios
             });
         }
 
-        async Task CarregarRanking()
+        async Task<List<Ranking>> CarregarRanking()
         {
             try
             {
+
                 await _servicoDeCarregamentoDasBases.AtualizarBaseDeDados(ApiMinertalTypes.Ranking);
                 var ranking = App.RankingRepository.GetAll();
                 CustomExceptions.LancarExcecaoQuando(ranking == null || !ranking.Any(), "Não foi possivel carregar o ranking da API.");
+                return ranking;
             }
             catch (Exception ex)
             {
                 await _alertService.ShowAlertAsync("Ranking", $"Não foi possível carregar a listagem de ranking. Erro:{ex.Message}", "OK");
+                return new List<Ranking>();
             }
         }
     }
 }
+
 
 
 
