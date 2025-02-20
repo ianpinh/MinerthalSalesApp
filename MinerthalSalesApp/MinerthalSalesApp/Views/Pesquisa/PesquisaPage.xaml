@@ -860,7 +860,7 @@
                     <VerticalStackLayout Padding="10" Spacing="20">
                         <Grid
                             Padding="10"
-                            ColumnDefinitions="*,*,*,*"
+                            ColumnDefinitions="*,*,*,*,AUTO,*"
                             RowDefinitions="35,auto">
                             <Label
                                 Grid.Row="0"
@@ -882,11 +882,21 @@
                                 Grid.Column="3"
                                 HorizontalTextAlignment="Center"
                                 Text="META" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="4"
+                                HorizontalTextAlignment="Center"
+                                Text="REALIZADO" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="5"
+                                HorizontalTextAlignment="Center"
+                                Text="%" />
 
                             <ListView
                                 Grid.Row="1"
                                 Grid.Column="0"
-                                Grid.ColumnSpan="4"
+                                Grid.ColumnSpan="6"
                                 ItemsSource="{Binding PesquisaDto.MetaMensal}"
                                 RowHeight="50"
                                 SelectionMode="None">
@@ -894,13 +904,14 @@
                                     <DataTemplate>
                                         <ViewCell>
                                             <Grid
-                                                Padding="10"
-                                                ColumnDefinitions="*,*,*,*"
-                                                RowDefinitions="50">
+                                                Padding="0"
+                                                ColumnDefinitions="*,*,*,*,*,*"
+                                                 RowDefinitions="AUTO,*">
                                                 <Label
                                                     Grid.Row="1"
                                                     Grid.Column="0"
-                                                    Padding="10,0,0,0"
+                                                    Padding="0,0,0,0"
+                                                    FontSize="12"
                                                     HorizontalTextAlignment="Center"
                                                     Text="{Binding DescricaoMes}" />
 
@@ -908,6 +919,7 @@
                                                     Grid.Row="1"
                                                     Grid.Column="1"
                                                     Padding="10,0,0,0"
+                                                    FontSize="12"
                                                     HorizontalTextAlignment="Center"
                                                     Text="{Binding Ano}" />
                                                 <Label
@@ -915,15 +927,29 @@
                                                     Grid.Column="2"
                                                     Padding="10,0,0,0"
                                                     HorizontalTextAlignment="Center"
+                                                      FontSize="12"
                                                     Text="{Binding CdRcaxxx}" />
-
-
                                                 <Label
                                                     Grid.Row="1"
                                                     Grid.Column="3"
+                                                      FontSize="12"
                                                     Padding="10,0,0,0"
                                                     HorizontalTextAlignment="Center"
                                                     Text="{Binding VlMetaMes}" />
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="4"
+                                                      FontSize="12"
+                                                    Padding="10,0,0,0"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding Realizado}" />
+                                                <Label
+                                                    Grid.Row="1"
+                                                      FontSize="12"
+                                                    Grid.Column="5"
+                                                    Padding="10,0,0,0"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding PercentualAtingido}" />
 
 
 

@@ -1,5 +1,6 @@
 ﻿using MinerthalSalesApp.Infra.Services;
 using MinerthalSalesApp.Models.Dtos;
+using Newtonsoft.Json;
 using System.Globalization;
 
 
@@ -45,6 +46,7 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
             var pedidosEmAberto = App.HistoricoPedidoReposity.PedidosEmAberto();
             var carregamentos = App.HistoricoPedidoReposity.CarregamentoDePedidos();
             var metasMensais = App.MetaMensalRepository.GetAll();
+            var historicoPedidos = App.HistoricoPedidoReposity.GetAll();
 
             PesquisaDto.TitulosaVencer = titulosAvencer;
             PesquisaDto.ClientesInadinplentes = inadimplentes;
@@ -58,6 +60,13 @@ namespace MinerthalSalesApp.ViewModels.Pesquisa
 
             if (metasMensais.Count() > 0)
                 PesquisaDto.MetaMensal = metasMensais.OrderByDescending(x => x.Ano).ToList();
+
+            if (historicoPedidos != null && historicoPedidos.Any())
+            {
+                foreach (var item in PesquisaDto.MetaMensal)
+                    item.Realizado = historicoPedidos.Count(x => x.DataPedido.Value.Year == item.Ano && x.DataPedido.Value.Month == item.NumeroMes);
+            }
+            var _metas = JsonConvert.SerializeObject(PesquisaDto.MetaMensal);
         }
 
         public PesquisaDto PesquisaDto { get; set; } = new PesquisaDto();

@@ -20,13 +20,13 @@
                         MaximumHeightRequest="120"
                         Source="Resources/Images/logo_aniversario_minertal.png"
                         VerticalOptions="CenterAndExpand">
-                        <Image.Shadow>
+                        <!--<Image.Shadow>
                             <Shadow
                                 Brush="#787ad1"
                                 Opacity="0.5"
                                 Radius="100"
                                 Offset="50,50" />
-                        </Image.Shadow>
+                        </Image.Shadow>-->
                     </Image>
                 </AbsoluteLayout>
             </ContentView>

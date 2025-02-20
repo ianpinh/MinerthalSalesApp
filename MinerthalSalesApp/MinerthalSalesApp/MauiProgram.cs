@@ -34,6 +34,8 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+        builder.Services.AddMemoryCache();
+           
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
@@ -167,34 +169,12 @@ public static class MauiProgram
         builder.Services.AddSingleton<IResumoPedidoRepository, ResumoPedidoRepository>();
         builder.Services.AddSingleton<ITitulosRepositoy, TitulosRepositoy>();
 
-
-
-
         string databaseName = "minerthal.db3";
-        var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), databaseName);
+        var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), databaseName);
+        //var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), databaseName);
         builder.Services.AddSingleton<DatabaseContext>();
         builder.Services.AddSingleton<IAppthalContext>(new AppthalContext(dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<UserRepository>());
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<AtualizacaoRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<LogRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<ClienteRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<RankingRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<FaturamentoRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<ProdutosRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<PedidoRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<CartRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<FilialRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<MeusPedidosRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<TabelaPrecoRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<VendedorRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<PlanosRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<BancoRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<ClientePlanoPagamentoRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<HistoricoPedidoReposity>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<ResumoPedidoRepository>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<TitulosRepositoy>(s, dbPath));
-        //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<VisitasRepository>(s, dbPath));
-
+        
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

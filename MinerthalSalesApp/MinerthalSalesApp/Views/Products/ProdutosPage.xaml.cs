@@ -9,12 +9,10 @@ public partial class ProdutosPage : ContentPage
 
     public ProdutosPage(ProdutosPageViewModel viewModel)
     {
+        InitializeComponent();
         _model = viewModel;
         BindingContext = _model;
-        InitializeComponent();
     }
-
-
 
     private void FiltroProduto_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -23,7 +21,6 @@ public partial class ProdutosPage : ContentPage
         ListaProdutos.ItemsSource = lst;
         LblTotalProdutos.Text = $"Produtos encontrados: {lst.Count}";
         FiltroProduto.Focus();
-
     }
 
     private void EditarProduto_Clicked(object sender, SelectedItemChangedEventArgs e)

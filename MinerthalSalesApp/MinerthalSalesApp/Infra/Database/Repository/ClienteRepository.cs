@@ -634,5 +634,40 @@ namespace MinerthalSalesApp.Infra.Database.Repository
                 throw;
             }
         }
+
+        public List<Cliente> RecuperarClienteHomePage()
+        {
+            try
+            {
+                var command = $@"SELECT * FROM {NomeTabelaCliente} ORDER BY A1Nome";
+                var retorno = _context.ExcecutarSelect(command);
+
+                if (retorno == null)
+                    return new List<Cliente>();
+
+                var lstuser = new List<Cliente>();
+                foreach (var item in retorno)
+                {
+                    lstuser.Add(new Cliente
+                    {
+                        A1Cod = item.A1Cod.ToString(),
+                        A1Nome = item.A1Nome.ToString(),
+                        A1Loja = item.A1Loja.ToString(),
+                        A1Nreduz = item.A1Nreduz.ToString(),
+                        A1Cgc = item.A1Cgc.ToString(),
+                        A1Tipo = item.A1Tipo.ToString(),
+                        A1Pessoa = item.A1Pessoa.ToString(),
+                        A1Ultcom = item.A1Ultcom.ToString(),
+                        AVencer = item.AVencer != null ? (decimal)item.AVencer : 0M,
+                        A1Atr = item.A1Atr != null ? (decimal)item.A1Atr : 0M
+                    });
+                }
+                return lstuser;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

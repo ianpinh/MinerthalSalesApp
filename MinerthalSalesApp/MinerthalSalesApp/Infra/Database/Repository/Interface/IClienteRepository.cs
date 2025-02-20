@@ -23,5 +23,6 @@ namespace MinerthalSalesApp.Infra.Database.Repository.Interface
 
         List<Cliente> RecuperarClientesInadimplentes();
         void SaveClientesVendedor(List<Cliente> details, string codigoVendedor);
+        List<Cliente> RecuperarClienteHomePage();
     }
 }

@@ -157,23 +157,24 @@ namespace MinerthalSalesApp.ViewModels.Dashboard
         async Task CarregarTelaDeClientes()
         {
 
-            var _model = new PopupViewModel { PopupMessage = "Carregando clientes..." };
-            var pop = new PopupPage(_model);
-            try
-            {
-                _popupAppService.ShowPopup(pop);
-                await Task.Delay(15);
-                await Shell.Current.GoToAsync($"//{nameof(ClientsPage)}");
-            }
-            catch (Exception ex)
-            {
-                await _alertService.ShowAlertAsync("Home", $"Erro: {ex.Message}", "OK");
-            }
-            finally
-            {
-                await Task.Delay(10);
-                _popupAppService.ClosePopup(pop);
-            }
+            await Shell.Current.GoToAsync($"//{nameof(ClientsPage)}");
+            //var _model = new PopupViewModel { PopupMessage = "Carregando clientes..." };
+            //var pop = new PopupPage(_model);
+            //try
+            //{
+            //    _popupAppService.ShowPopup(pop);
+            //  //  await Task.Delay(15);
+            //    await Shell.Current.GoToAsync($"//{nameof(ClientsPage)}");
+            //}
+            //catch (Exception ex)
+            //{
+            //    await _alertService.ShowAlertAsync("Home", $"Erro: {ex.Message}", "OK");
+            //}
+            //finally
+            //{
+            //    await Task.Delay(10);
+            //    _popupAppService.ClosePopup(pop);
+            //}
         }
 
         [RelayCommand]

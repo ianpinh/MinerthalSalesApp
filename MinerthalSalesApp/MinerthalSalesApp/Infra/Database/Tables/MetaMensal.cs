@@ -58,5 +58,30 @@ namespace MinerthalSalesApp.Infra.Database.Tables
                 _ => ""
             };
         }
+
+        decimal realizado;
+        public decimal Realizado
+        {
+            get { return realizado; }
+            set
+            {
+                realizado = value;
+                PercentualAtingido = CalcularPercentualAtingido();
+            }
+        }
+        public decimal PercentualAtingido { get; set; } = 0;
+
+        private decimal CalcularPercentualAtingido()
+        {
+            if (VlMetaMes <= 0)
+                return 0M;
+
+            if (Realizado <= 0)
+                return 0M;
+
+            var valorAtingido = Math.Round((Realizado / VlMetaMes) * 100);
+
+            return valorAtingido;
+        }
     }
 }
