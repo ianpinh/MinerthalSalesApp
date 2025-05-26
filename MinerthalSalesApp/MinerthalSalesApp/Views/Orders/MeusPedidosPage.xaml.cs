@@ -170,16 +170,16 @@ public partial class MeusPedidosPage : ContentPage
         await Task.Delay(1000);
         try
         {
-            var tramitido = await _viewModel.ReenviarPedidos();
-            if (tramitido)
+            var tramitido = _viewModel.ReenviarPedidos().GetAwaiter();
+            tramitido.OnCompleted(() =>
             {
                 var pedidoRepository = App.PedidoRepository;
                 App.PedidoRepository.DeleteAll();
 
-                Navigation.RemovePage(this);
-                await _viewModel.AtualizarPedidosTrasmitidos();
-                await Navigation.PushAsync(new MeusPedidosPage(_viewModel));
-            }
+               _= _viewModel.AtualizarPedidosTrasmitidos();
+            });
+            Navigation.RemovePage(this);
+            Navigation.PushAsync(new MeusPedidosPage(_viewModel));
         }
         catch (Exception ex)
         {

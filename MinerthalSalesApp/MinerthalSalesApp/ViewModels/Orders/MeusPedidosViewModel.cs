@@ -222,7 +222,6 @@ namespace MinerthalSalesApp.ViewModels.Orders
         }
 
         public async Task<bool> ReenviarPedidos()
-
         {
             var pedidoTransmisao = await _servicoDeCarregamentoDasBases.TransmitirPedidos();
             await _alertService.ShowAlertAsync("Enviar Pedido", $"Status: {pedidoTransmisao.Mensagem}. ", "Ok");

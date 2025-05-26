@@ -34,23 +34,33 @@ public partial class DetalhePedidoPage : ContentPage
             var pedidoId = Guid.Parse(btn.CommandParameter.ToString());
 
             var _servicoDeCarregamentoDasBases = App.ServicoDeCarregamentoDasBases;
-            var pedidoTransmisao = await _servicoDeCarregamentoDasBases.TransmitirPedidos(pedidoId);
+            var pedidoTransmisao = _servicoDeCarregamentoDasBases.TransmitirPedidos(pedidoId).GetAwaiter();
 
             pop.Close();
 
-            await DisplayAlert("Enviar Pedido", $"Status: {pedidoTransmisao.sucesso}.  Menssagem retorno: {pedidoTransmisao.Mensagem}", "Ok");
 
-            if (pedidoTransmisao.sucesso == "Sucesso")
+
+            var model = new MeusPedidosViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases);
+            pedidoTransmisao.OnCompleted(() =>
             {
-                //App.CartRepository.DeleteByPedido(pedidoId);
-                App.PedidoRepository.DeleteById(pedidoId);
+                var resultado = pedidoTransmisao.GetResult();
+                if (resultado.sucesso == "Sucesso")
+                {
+                    //App.CartRepository.DeleteByPedido(pedidoId);
+                    App.PedidoRepository.DeleteById(pedidoId);
 
-                var stack = Shell.Current.Navigation.NavigationStack;
-                FecharPaginasAbertas();
-                var model = new MeusPedidosViewModel(App.AlertService, App.ServicoDeCarregamentoDasBases);
-                await model.AtualizarPedidosTrasmitidos();
-                await Navigation.PushAsync(new MeusPedidosPage(model));
-            }
+                    var stack = Shell.Current.Navigation.NavigationStack;
+                    FecharPaginasAbertas();
+                    _ = model.AtualizarPedidosTrasmitidos();
+                    _ = DisplayAlert("Enviar Pedido", $"Status: {resultado.sucesso}.  Menssagem retorno: {resultado.Mensagem}", "Ok");
+                }
+                else
+                {
+                    _ = DisplayAlert("Enviar Pedido", $"Status: {resultado.sucesso}.  Menssagem retorno: {resultado.Mensagem}", "Ok");
+                }
+            });
+
+            await Navigation.PushAsync(new MeusPedidosPage(model));
         }
         catch (Exception ex)
         {
@@ -147,3 +157,5 @@ public partial class DetalhePedidoPage : ContentPage
         }
     }
 }
+
+

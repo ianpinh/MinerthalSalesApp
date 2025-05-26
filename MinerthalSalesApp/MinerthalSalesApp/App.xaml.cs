@@ -131,6 +131,11 @@ public partial class App : Application
                 //DeleteAllTables();
                 await ServicoDeCarregamentoDasBases.AtualizarBaseDeDados(Models.Enums.ApiMinertalTypes.Usuarios);
             }
+
+
+
+
+
             UpdateDatabase();
         }
         catch (Exception ex)
@@ -141,21 +146,29 @@ public partial class App : Application
 
     private void UpdateDatabase()
     {
+        if (!string.IsNullOrWhiteSpace(Preferences.Get(nameof(App.UserDetails), "")))
+        {
+            Thread t = new Thread(CarregarDadosApi);
+            t.Start();
+        }
+
+
         var aTimer = new System.Timers.Timer(tempoAtualizacaoBanco * 60 * 1000); //20 MINUTOS
         aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
         aTimer.Start();
     }
 
-    private static void OnTimedEvent(object source, ElapsedEventArgs e)
+    private void OnTimedEvent(object source, ElapsedEventArgs e)
     {
 
         if (!Preferences.ContainsKey(nameof(App.UserDetails)))
             Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
 
-        ServicoDeCarregamentoDasBases.AtualizarBaseDeDados().GetAwaiter().OnCompleted(() =>
+        if (!string.IsNullOrWhiteSpace(Preferences.Get(nameof(App.UserDetails), "")))
         {
-            ServicoDeCarregamentoDasBases.AtualizarBaseDeDadosVendedores();
-        });
+            Thread t = new Thread(CarregarDadosApi);
+            t.Start();
+        }
 
         TimeSpan difference = DateTime.Now - lastHour;
         if (difference.Minutes > tempoAtualizacaoBanco)
@@ -167,6 +180,14 @@ public partial class App : Application
         //    _= ServicoDeCarregamentoDasBases.AtualizarBaseDeDados();
         //}
 
+    }
+
+    private void CarregarDadosApi()
+    {
+        ServicoDeCarregamentoDasBases.AtualizarBaseDeDados().GetAwaiter().OnCompleted(() =>
+        {
+            ServicoDeCarregamentoDasBases.AtualizarBaseDeDadosVendedores();
+        });
     }
 
     private void DeleteAllTables()
